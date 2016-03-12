@@ -1,0 +1,26 @@
+apply plugin: 'java'
+apply plugin: 'jetty'
+apply plugin: 'war'
+
+ext {
+  projectName = 'iks-web'
+}
+
+dependencies {
+
+  compile project(':iks-common')
+  compile 'org.springframework:spring-webmvc:4.1.6.RELEASE'
+  compile 'javax.servlet:jstl:1.2'
+
+}
+
+// Embeded Jetty for testing
+jettyRun {
+  contextPath = "homesite"
+  httpPort = 8080
+}
+
+jettyRunWar {
+  contextPath = "homesite"
+  httpPort = 8080
+}
