@@ -14,18 +14,15 @@ import java.util.*;
 import ru.ikaynov.homesite.service.*;
 
 @Controller
-public class WelcomeController {
-  private final Logger logger = LoggerFactory.getLogger( WelcomeController.class );
-  private final HelloWorldService helloWorldService;
+public class HomeController {
+  private final Logger logger = LoggerFactory.getLogger( HomeController.class );
   @Autowired
-  public WelcomeController( HelloWorldService helloWorldService ) {
-    this.helloWorldService = helloWorldService;
-  }
+  private HomeService homeService;
   @RequestMapping( value = "/", method = RequestMethod.GET )
   public String index( Map< String, Object > model ) {
     logger.debug( "index() is executed!" );
-    model.put( "title", helloWorldService.getTitle( "" ) );
-    model.put( "msg", helloWorldService.getDesc() );
+    model.put( "title", homeService.getTitle( "" ) );
+    model.put( "msg", homeService.getDesc() );
     return "index";
   }
   @RequestMapping( value = "/hello/{name:.+}", method = RequestMethod.GET )
@@ -33,8 +30,8 @@ public class WelcomeController {
     logger.debug( "hello() is executed - $name {}", name );
     ModelAndView model = new ModelAndView();
     model.setViewName( "index" );
-    model.addObject( "title", helloWorldService.getTitle( name ) );
-    model.addObject( "msg", helloWorldService.getDesc() );
+    model.addObject( "title", homeService.getTitle( name ) );
+    model.addObject( "msg", homeService.getDesc() );
     return model;
   }
 }

@@ -3,12 +3,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Gradle + Spring MVC</title>
+    <title>Home Site</title>
 
-    <spring:url value="/resources/css/hello.css" var="coreCss"/>
-    <spring:url value="/resources/css/bootstrap.min.css" var="bootstrapCss"/>
-    <link href="${bootstrapCss}" rel="stylesheet"/>
-    <link href="${coreCss}" rel="stylesheet"/>
+    <link href="<spring:url value="/resources/css/hello.css"/>" rel="stylesheet"/>
+    <link href="<spring:url value="/resources/css/libs/bootstrap.min.css"/>" rel="stylesheet"/>
 </head>
 
 <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -73,7 +71,7 @@
 
     <hr>
     <footer>
-        <p>&copy; Mkyong.com 2015</p>
+        <p>&copy; IKaynov.ru 2016</p>
     </footer>
 </div>
 

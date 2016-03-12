@@ -6,8 +6,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 @Service
-public class HelloWorldService {
-  private static final Logger logger = LoggerFactory.getLogger( HelloWorldService.class );
+public class HomeService {
+  private static final Logger logger = LoggerFactory.getLogger( HomeService.class );
   public String getDesc() {
     logger.debug( "getDesc() is executed!" );
     return "Gradle + Spring MVC Hello World Example";
