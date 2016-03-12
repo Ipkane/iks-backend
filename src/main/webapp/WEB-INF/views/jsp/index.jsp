@@ -5,8 +5,8 @@
 <head>
     <title>Home Site</title>
 
-    <link href="<spring:url value="/resources/css/hello.css"/>" rel="stylesheet"/>
-    <link href="<spring:url value="/resources/css/libs/bootstrap.min.css"/>" rel="stylesheet"/>
+    <link href="<spring:url value="/assets/css/hello.css"/>" rel="stylesheet"/>
+    <link href="<spring:url value="/assets/css/libs/bootstrap.min.css"/>" rel="stylesheet"/>
 </head>
 
 <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -75,12 +75,8 @@
     </footer>
 </div>
 
-<spring:url value="/resources/core/js/app/hello.js" var="coreJs"/>
-<spring:url value="/resources/core/js/libs/bootstrap.min.js" var="bootstrapJs"/>
-
-<script src="${coreJs}"></script>
-<script src="${bootstrapJs}"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-
+<script src="<spring:url value="/assets/js/app/hello.js"/>"></script>
+<script src="<spring:url value="/assets/js/libs/bootstrap.min.js"/>"></script>
 </body>
 </html>
