@@ -1,4 +1,4 @@
-package com.iks.web.service;
+package com.iks.cms.web.service;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

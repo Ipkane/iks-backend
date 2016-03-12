@@ -1,6 +1,6 @@
-package com.iks.web.controller;
+package com.iks.cms.web.controller;
 
-import com.iks.web.service.*;
+import com.iks.cms.web.service.*;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
