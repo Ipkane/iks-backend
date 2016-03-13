@@ -19,6 +19,14 @@
                         <a class="navbar-brand" href="#">Project Name</a>
                     </div>
                 </div>
+                <nav>
+                    <li>
+                        <a ui-sref="home">Home</a>
+                    </li>
+                    <li>
+                        <a ui-sref="employeeList">Employees</a>
+                    </li>
+                </nav>
             </nav>
         </div>
         <div class="col-md-12" ui-view>
@@ -58,8 +66,11 @@
 
 <script src="assets/app/app.module.js"></script>
 <script src="assets/app/app.js"></script>
+<script src="assets/app/app.config.js"></script>
 <script src="assets/app/app.state.js"></script>
+<script src="assets/app/cms/core/core.service.js"></script>
 <script src="assets/app/cms/home/home.controller.js"></script>
-
+<script src="assets/app/cms/employee/list.controller.js"></script>
+<script src="assets/app/cms/employee/data.service.js"></script>
 </body>
 </html>

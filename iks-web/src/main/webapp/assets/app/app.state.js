@@ -8,10 +8,15 @@
         url        : '',
         templateUrl: 'assets/app/cms/home/home.html',
         controller : "HomeController"
+      } )
+      .state( 'employeeList', {
+        url        : '',
+        templateUrl: 'assets/app/cms/employee/list.html',
+        controller : "EmployeeListController"
       }
-  )
-  ;
-  $urlRouterProvider.otherwise( 'home' );
-}
+    )
+    ;
+    $urlRouterProvider.otherwise( 'home' );
+  }
 })
 ( angular );

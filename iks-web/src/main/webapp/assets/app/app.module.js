@@ -4,6 +4,7 @@
   angular.module( 'app', [//
     'ngRoute'
     , 'ngCookies' //
+    , 'ngResource'
     , 'ui.router'
     , 'ngMessages' //
     , 'ngSanitize' //
