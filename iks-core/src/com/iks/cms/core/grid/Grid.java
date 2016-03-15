@@ -13,4 +13,7 @@ public class Grid implements IGrid {
   public void setFields( List< IGridField > fields ) {
     this.fields = fields;
   }
+  public void addField( IGridField field ) {
+    this.fields.add( field );
+  }
 }

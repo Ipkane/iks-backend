@@ -4,9 +4,17 @@
     .controller( 'EmployeeListController', EmployeeListController )
   ;//
   function EmployeeListController( $scope, CoreService ) {
+    angular.extend($scope, {
+      grid: null
+    });
     function init() {
-      var grid = CoreService.getGrid( {
-        name: 'employee'
+      CoreService.getGrid( {
+        gridName: 'employee'
+      }, function ( response ) {
+        $scope.grid = response.data.grid;
+        CoreService.getGridData({
+          gridName: 'employee'
+        })
       } );
     }
 

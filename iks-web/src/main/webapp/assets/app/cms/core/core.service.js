@@ -6,7 +6,8 @@
   ;
   function CoreService( $resource, ApiService ) {
     return $resource( 'core/:action', {}, {
-      getGrid: ApiService.buildGetServiceMethod( 'getGrid' )
+      getGrid: ApiService.buildGetServiceMethod( 'getGrid' ),
+      getGridData: ApiService.buildGetServiceMethod( 'getGridData' )
     } );
   }
   function ApiService() {
