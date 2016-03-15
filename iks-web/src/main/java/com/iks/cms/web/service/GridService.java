@@ -24,4 +24,8 @@ public class GridService {
   public IGrid getGrid( String name ) {
     return grids.get( name );
   }
+  public List<IGridDataRow> getGridData( String name ) {
+    EmployeeGrid grid = (EmployeeGrid) grids.get( name );
+    return grid.getTestData();
+  }
 }

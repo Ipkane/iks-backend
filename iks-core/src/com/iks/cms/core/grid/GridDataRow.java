@@ -1,12 +1,15 @@
 package com.iks.cms.core.grid;
 
+import com.fasterxml.jackson.annotation.*;
+
 import java.util.*;
 
 /**
  * @author Igor Kaynov
  */
 public class GridDataRow implements IGridDataRow {
-  private Map< String, Object > data = new HashMap<>();
+  private Map< String, Object > data = new LinkedHashMap<>();
+  @JsonValue
   public Map< String, Object > getData() {
     return data;
   }

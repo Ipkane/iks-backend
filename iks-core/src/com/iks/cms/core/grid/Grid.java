@@ -6,7 +6,7 @@ import java.util.*;
  * @author Igor Kaynov
  */
 public class Grid implements IGrid {
-  private List< IGridField > fields;
+  private List< IGridField > fields = new ArrayList<>();
   public List< IGridField > getFields() {
     return fields;
   }

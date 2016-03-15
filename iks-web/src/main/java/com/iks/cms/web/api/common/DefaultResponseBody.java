@@ -41,7 +41,7 @@ public class DefaultResponseBody< TRequest extends AbstractApiRequest, TResponse
   public boolean isSuccess() {
     return success;
   }
-  @JsonProperty( "data" )
+  @JsonProperty( "success" )
   public TResponse success() {
     return response;
   }

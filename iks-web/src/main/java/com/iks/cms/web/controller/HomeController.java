@@ -20,8 +20,6 @@ public class HomeController {
   private HomeService homeService;
   @RequestMapping( value = "/", method = RequestMethod.GET )
   public String index( Map< String, Object > model ) {
-    model.put( "title", homeService.getTitle( "" ) );
-    model.put( "msg", homeService.getDesc() );
     return "index";
   }
 }
