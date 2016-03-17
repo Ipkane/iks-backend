@@ -11,24 +11,32 @@
 <body>
 <div class="container">
 
-    <div class="row">
-        <div class="col-md-12">
-            <nav class="navbar navbar-inverse">
-                <div class="container">
-                    <div class="navbar-header">
-                        <a class="navbar-brand" href="#">Project Name</a>
-                    </div>
-                </div>
-                <nav>
-                    <li>
-                        <a ui-sref="home">Home</a>
-                    </li>
-                    <li>
-                        <a ui-sref="employeeList">Employees</a>
-                    </li>
-                </nav>
-            </nav>
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <ul class="nav navbar-nav">
+                <li><a ui-sref="home">Home</a></li>
+                <li><a ui-sref="employeeList">Employees</a></li>
+            </ul>
         </div>
+    </nav>
+    <div class="row">
+        <%--<div class="col-md-12">--%>
+            <%--<nav class="navbar navbar-inverse">--%>
+                <%--<div class="container">--%>
+                    <%--<div class="navbar-header">--%>
+                        <%--<a class="navbar-brand" href="#">Project Name</a>--%>
+                    <%--</div>--%>
+                <%--</div>--%>
+                <%--<nav>--%>
+                    <%--<li>--%>
+                        <%--<a ui-sref="home">Home</a>--%>
+                    <%--</li>--%>
+                    <%--<li>--%>
+                        <%--<a ui-sref="employeeList">Employees</a>--%>
+                    <%--</li>--%>
+                <%--</nav>--%>
+            <%--</nav>--%>
+        <%--</div>--%>
         <div class="col-md-12" ui-view>
         </div>
         <div class="col-md-12">
