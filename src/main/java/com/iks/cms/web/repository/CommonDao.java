@@ -10,12 +10,12 @@ import java.util.*;
  * @author Igor Kaynov
  */
 @Repository
-public class EmployeeDao {
+public class CommonDao {
   @Autowired
   private SessionFactory sessionFactory;
-  public List getEmployees() {
+  public List selectQuery(String selectQuery) {
     try (Session session = sessionFactory.openSession()) {
-      Query query = session.createSQLQuery( "select * from employee" );
+      Query query = session.createSQLQuery( selectQuery );
       return query.list();
     }
   }

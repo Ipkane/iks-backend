@@ -77,6 +77,7 @@
 <script src="assets/app/app.config.js"></script>
 <script src="assets/app/app.state.js"></script>
 <script src="assets/app/cms/core/core.service.js"></script>
+<script src="assets/app/cms/core/core.helper.js"></script>
 <script src="assets/app/cms/home/home.controller.js"></script>
 <script src="assets/app/cms/employee/list.controller.js"></script>
 <script src="assets/app/cms/employee/data.service.js"></script>

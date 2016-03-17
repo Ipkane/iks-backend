@@ -1,26 +1,22 @@
 (function ( ng ) {
-  'use strict'
+  'use strict';
   angular.module( 'app.cms' )//
     .controller( 'EmployeeListController', EmployeeListController )
   ;//
-  function EmployeeListController( $scope, $log, CoreService ) {
+  function EmployeeListController( $scope, $log, CoreService, GridHelper ) {
     angular.extend( $scope, {
       grid : null,
-      items: [],
+      items: []
     } );
     function init() {
-      CoreService.getGrid( {
-        gridName: 'employee'
-      } ).$promise.then( function ( response ) {
-                           $scope.grid = response.success.grid;
-                           return CoreService.getGridData( {
-                             gridName: 'employee'
-                           } ).$promise;
-                         } ).then( function ( response ) {
-                                     $scope.items = response.success.items;
-                                   } ).catch( function ( response ) {
-                                                $log.debug( response );
-                                              } );
+      GridHelper.getGrid( 'employee' ).then( function ( grid ) {
+        $scope.grid = grid;
+        return GridHelper.getGridData('employee');
+      } ).then( function ( response ) {
+        $scope.items = response.success.items;
+      } ).catch( function ( response ) {
+        $log.debug( response );
+      } );
     }
 
     init();

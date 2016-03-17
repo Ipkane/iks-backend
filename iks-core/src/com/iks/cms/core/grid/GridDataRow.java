@@ -8,16 +8,16 @@ import java.util.*;
  * @author Igor Kaynov
  */
 public class GridDataRow implements IGridDataRow {
-  private Map< String, Object > data = new LinkedHashMap<>();
+  private Map< String, Object > fieldValueMap = new LinkedHashMap<>();
   @JsonValue
-  public Map< String, Object > getData() {
-    return data;
+  public Map< String, Object > getFieldValueMap() {
+    return fieldValueMap;
   }
-  public void setData( Map< String, Object > data ) {
-    this.data = data;
+  public void setFieldValueMap( Map< String, Object > data ) {
+    this.fieldValueMap = data;
   }
-  public void addData( String fieldName, Object value ) {
-    data.put( fieldName, value );
+  public void addFieldValue( String fieldName, Object value ) {
+    fieldValueMap.put( fieldName, value );
   }
   ;
 }

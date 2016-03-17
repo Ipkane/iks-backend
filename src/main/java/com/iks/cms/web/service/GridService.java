@@ -1,6 +1,7 @@
 package com.iks.cms.web.service;
 
 import com.iks.cms.core.grid.*;
+import com.iks.cms.core.query.*;
 import com.iks.cms.web.grids.*;
 import com.iks.cms.web.repository.*;
 
@@ -20,7 +21,7 @@ public class GridService {
   private static final Logger               logger = LoggerFactory.getLogger( GridService.class );
   private              Map< String, IGrid > grids  = new HashMap<>();
   @Autowired
-  private EmployeeDao employeeDao;
+  private CommonDao commonDao;
   @PostConstruct
   public void init() {
     grids.put( "employee", new EmployeeGrid() );
@@ -29,13 +30,22 @@ public class GridService {
     return grids.get( name );
   }
   public List< IGridDataRow > getGridData( String name ) {
-    List rows = employeeDao.getEmployees();
+    IGrid grid = getGrid( name );
+    GridQuery query = new GridQuery( grid );
+    String sqlQuery = query.buildSqlQuery();
+    logger.debug( sqlQuery );
+    List rows = commonDao.selectQuery( sqlQuery );
+    List< IGridDataRow > resultList = new ArrayList<>();
     for( Object rowData : rows ) {
-      Object[] data = (Object[])rowData;
-      for (Object value: data)
-      logger.debug( value.toString() );
+      GridDataRow resultItem = new GridDataRow();
+      Object[] data = ( Object[] )rowData;
+      int i = 0;
+      for( IGridField field : grid.getFields() ) {
+        resultItem.addFieldValue( field.getName(), data[i] );
+        i++;
+      }
+      resultList.add( resultItem );
     }
-    EmployeeGrid grid = ( EmployeeGrid )grids.get( name );
-    return grid.getTestData();
+    return resultList;
   }
 }
