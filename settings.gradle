@@ -1,2 +1,3 @@
 rootProject.name = 'iks-cms'
 
+include 'iks-common', 'iks-core'

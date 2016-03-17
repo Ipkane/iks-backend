@@ -8,7 +8,6 @@ import com.iks.cms.web.utils.*;
 import org.slf4j.*;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.http.*;
-import org.springframework.stereotype.*;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
@@ -16,11 +15,11 @@ import java.util.*;
 @RestController
 @RequestMapping( "/core" )
 public class CoreController {
-  private static final String REQUEST_GET_GRID = "/getGrid";
-  private static final String RESPONSE_ERROR_GET_GRID = "Couldn't get grid";
-  private static final String REQUEST_GET_GRID_DATA = "/getGridData";
+  private static final String REQUEST_GET_GRID             = "/getGrid";
+  private static final String RESPONSE_ERROR_GET_GRID      = "Couldn't get grid";
+  private static final String REQUEST_GET_GRID_DATA        = "/getGridData";
   private static final String RESPONSE_ERROR_GET_GRID_DATA = "Couldn't get grid data";
-  private final Logger logger = LoggerFactory.getLogger( CoreController.class );
+  private final        Logger logger                       = LoggerFactory.getLogger( CoreController.class );
   @Autowired
   private GridService gridService;
   @RequestMapping( value = REQUEST_GET_GRID, method = RequestMethod.GET )
