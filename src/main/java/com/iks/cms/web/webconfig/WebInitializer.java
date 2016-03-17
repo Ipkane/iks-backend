@@ -19,7 +19,7 @@ import javax.servlet.*;
 //    AnnotationConfigWebApplicationContext dispatchCtx = new AnnotationConfigWebApplicationContext();
 //    ServletRegistration.Dynamic dispatcher;
 //    dispatcher = servletContext.addServlet( "dispatcher", new DispatcherServlet( dispatchCtx ) );
-//    dispatcher.setLoadOnStartup( 1 );
+////    dispatcher.setLoadOnStartup( 1 );
 //    dispatcher.addMapping( "/" );
 //  }
 //}

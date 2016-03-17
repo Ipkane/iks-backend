@@ -1,6 +1,7 @@
 apply plugin: 'java'
 apply plugin: 'idea'
 apply plugin: 'war'
+//apply plugin: 'jetty'
 apply plugin: 'org.akhikhl.gretty'
 
 // JDK 7
@@ -17,11 +18,19 @@ ext.hibernateVersion='4.1.5.SP1'
 ext.hibernateValidatorVersion='4.3.0.Final'
 
 dependencies {
-  compile 'javax.servlet:jstl:1.2'
-
   compile 'ch.qos.logback:logback-classic:1.1.3'
+  compile 'javax.servlet:jstl:1.2'
+  compile 'org.springframework:spring-webmvc:4.1.6.RELEASE'
   //include in compile only, exclude in the war
-  providedCompile 'javax.servlet:servlet-api:2.5'
+  providedCompile 'javax.servlet:javax.servlet-api:3.1.0'
+  compile 'org.apache.commons:commons-collections4:4.0'
+  compile 'commons-io:commons-io:2.4'
+  compile 'org.apache.commons:commons-lang3:3.4'
+  compile 'com.google.guava:guava:18.0'
+  compile 'com.fasterxml.jackson.core:jackson-databind:2.4.2'
+  compile 'com.fasterxml.jackson.core:jackson-annotations:2.4.2'
+  compile 'com.fasterxml.jackson.core:jackson-core:2.4.2'
+  compile 'com.fasterxml.jackson.datatype:jackson-datatype-joda:2.4.0'
 }
 
 //Gretty Embedded Jetty
@@ -35,15 +44,15 @@ buildscript {
   }
 }
 
-subprojects {
-  apply plugin: 'java'
-  apply plugin: 'idea'
-
-  repositories {
-    mavenLocal()
-    mavenCentral()
-  }
-}
+//subprojects {
+//  apply plugin: 'java'
+//  apply plugin: 'idea'
+//
+//  repositories {
+//    mavenLocal()
+//    mavenCentral()
+//  }
+//}
 
 idea {
   project {
@@ -55,11 +64,21 @@ idea {
 // but not support non-jar WebApplicationInitializer scanning.
 // It will cause "No Spring WebApplicationInitializer types detected on classpath"
 gretty {
-  port = 8080
-  contextPath = 'spring4'
+  httpPort = 8080
+  contextPath = 'cms'
   servletContainer = 'jetty9' //tomcat7 or tomcat8
 }
 
+//// Embeded Jetty for testing
+//jettyRun {
+//  contextPath = "homesite"
+//  httpPort = 8080
+//}
+//
+//jettyRunWar {
+//  contextPath = "homesite"
+//  httpPort = 8080
+//}
 task wrapper(type: Wrapper) {
   gradleVersion = '2.11'
 }
