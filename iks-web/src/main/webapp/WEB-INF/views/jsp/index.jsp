@@ -14,8 +14,8 @@
     <nav class="navbar navbar-default">
         <div class="container-fluid">
             <ul class="nav navbar-nav">
-                <li><a ui-sref="home">Home</a></li>
-                <li><a ui-sref="employeeList">Employees</a></li>
+                <li ui-sref-active="active"><a ui-sref="home">Home</a></li>
+                <li ui-sref-active="active"><a ui-sref="employeeList">Employees</a></li>
             </ul>
         </div>
     </nav>

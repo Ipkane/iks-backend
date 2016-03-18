@@ -5,12 +5,12 @@
   function StateProviderConfiguration( $stateProvider, $urlRouterProvider ) {
     $stateProvider
       .state( 'home', {
-        url        : '',
+        url        : '/home',
         templateUrl: 'assets/app/cms/home/home.html',
         controller : "HomeController"
       } )
       .state( 'employeeList', {
-        url        : '',
+        url        : '/employees',
         templateUrl: 'view/gridView?gridName=employee',
         controller : "EmployeeListController"
       }
