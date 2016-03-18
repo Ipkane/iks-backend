@@ -1,13 +1,23 @@
 apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'war'
+apply plugin: 'org.akhikhl.gretty'
 
 ext {
   projectName = 'iks-web'
+}
+
+jar {
+  baseName = "$projectName"
+  version = "1.0"
 }
 
 dependencies {
   compile project(':iks-core')
 
   compile 'org.springframework:spring-webmvc:4.1.6.RELEASE'
+  compile 'javax.servlet:jstl:1.2'
+  providedCompile 'javax.servlet:javax.servlet-api:3.1.0'
 }
 
 sourceSets {
@@ -18,3 +28,22 @@ sourceSets {
   }
 }
 
+//Gretty Embedded Jetty
+buildscript {
+  repositories {
+    jcenter()
+  }
+
+  dependencies {
+    classpath 'org.akhikhl.gretty:gretty:+'
+  }
+}
+
+// Don't use Jetty8, even it's a servlet 3.0+ container,
+// but not support non-jar WebApplicationInitializer scanning.
+// It will cause "No Spring WebApplicationInitializer types detected on classpath"
+gretty {
+  httpPort = 8080
+  contextPath = 'cms'
+  servletContainer = 'jetty9' //tomcat7 or tomcat8
+}

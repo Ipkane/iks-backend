@@ -9,12 +9,7 @@ import org.springframework.beans.factory.annotation.*;
 import org.springframework.context.annotation.*;
 import org.springframework.jdbc.datasource.*;
 import org.springframework.orm.hibernate4.*;
-import org.springframework.orm.jpa.*;
-import org.springframework.orm.jpa.vendor.*;
-import org.springframework.transaction.*;
 import org.springframework.transaction.annotation.*;
-
-import java.util.*;
 
 import javax.sql.*;
 

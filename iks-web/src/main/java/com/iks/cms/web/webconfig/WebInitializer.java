@@ -2,13 +2,7 @@ package com.iks.cms.web.webconfig;
 
 import com.iks.cms.web.config.*;
 
-import org.springframework.web.*;
-import org.springframework.web.context.*;
-import org.springframework.web.context.support.*;
-import org.springframework.web.servlet.*;
 import org.springframework.web.servlet.support.*;
-
-import javax.servlet.*;
 
 //public class WebInitializer implements WebApplicationInitializer {
 //  @Override
