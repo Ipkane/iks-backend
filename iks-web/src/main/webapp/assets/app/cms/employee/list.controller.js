@@ -2,7 +2,7 @@
 angular.module( 'app.cms' )//
   .controller( 'EmployeeListController', EmployeeListController )
 ;//
-function EmployeeListController( $scope, $log, $uibModal, $timeout, CoreService, GridHelper ) {
+function EmployeeListController( $scope, $log, $uibModal, $timeout, CoreService, GridHelper, _ ) {
   angular.extend( $scope, {
     gridName    : null,
     grid        : null,
@@ -32,9 +32,17 @@ function EmployeeListController( $scope, $log, $uibModal, $timeout, CoreService,
         controller  : 'GridEditController',
         controllerAs: 'vm',
         backdrop    : 'static',
-        resolve     : {}
+        resolve     : {
+          selectedItem: angular.copy( $scope.selectedItem )
+        }
       }
-    ).result.then( function ( response ) {
+    ).result.then( function ( updatedItem ) {
+                     _.each( $scope.items, function ( item ) {
+                       if ( item.id == updatedItem.id ) {
+                         angular.extend( item, updatedItem );
+                       }
+                     } );
+                     angular.extend( $scope.selectedItem, updatedItem );
                    }, function () {
                      $log.info( 'Modal dismissed at: ' + new Date() );
                    } );

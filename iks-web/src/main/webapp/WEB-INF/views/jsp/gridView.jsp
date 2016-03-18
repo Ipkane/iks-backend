@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <h1>Employee list</h1>
 <div class="grid-edit-panel">
-    <div class="btn btn-success" ng-click="openEditModal()">Edit</div>
+    <div class="btn btn-primary" ng-click="openEditModal()">Edit</div>
 </div>
 <table class="table table-bordered table-hover table-condensed">
     <thead>

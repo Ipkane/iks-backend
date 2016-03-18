@@ -2,7 +2,11 @@
   'use strict';
   angular.module( 'app.cms' ) //
     .factory( 'GridHelper', GridHelper ) //
+    .factory( '_', LodashService ) //
   ;
+  function LodashService() {
+    return _;
+  }
   function GridHelper( CoreService, $q, $log ) {
     var grids = {};
     return {

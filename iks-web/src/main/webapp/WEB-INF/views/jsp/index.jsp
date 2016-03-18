@@ -50,7 +50,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script type="text/javascript" src="assets/js/lib/angular.js?timestamp=@timestamp@"></script>
 <script type="text/javascript" src="assets/js/lib/angular-route.js?timestamp=@timestamp@"></script>
-<script type="text/javascript" src="<spring:url value="/assets/js/lib/lodash.min.js?timestamp=@timestamp@"/>"></script>
+<script type="text/javascript" src="<spring:url value="/assets/js/lib/lodash.js?timestamp=@timestamp@"/>"></script>
 <script type="text/javascript" src="<spring:url value="/assets/js/lib/bootstrap.min.js?timestamp=@timestamp@"/>"></script>
 <script type="text/javascript" src="<spring:url value="/assets/js/lib/angular-file-upload-shim.min.js?timestamp=@timestamp@"/>"></script>
 <script type="text/javascript" src="<spring:url value="/assets/js/lib/angular-ui-router.js?timestamp=@timestamp@"/>"></script>
