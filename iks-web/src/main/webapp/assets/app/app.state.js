@@ -11,7 +11,7 @@
       } )
       .state( 'employeeList', {
         url        : '',
-        templateUrl: 'assets/app/cms/employee/list.html',
+        templateUrl: 'view/gridView?name=employee',
         controller : "EmployeeListController"
       }
     )

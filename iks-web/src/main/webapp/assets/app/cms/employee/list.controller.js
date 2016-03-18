@@ -3,22 +3,21 @@
   angular.module( 'app.cms' )//
     .controller( 'EmployeeListController', EmployeeListController )
   ;//
-  function EmployeeListController( $scope, $log, CoreService, GridHelper ) {
+  function EmployeeListController( $scope, $log, $timeout, CoreService, GridHelper ) {
     angular.extend( $scope, {
       grid : null,
       items: []
     } );
     function init() {
-      GridHelper.getGrid( 'employee' ).then( function ( grid ) {
-        $scope.grid = grid;
-        return GridHelper.getGridData('employee');
-      } ).then( function ( response ) {
+      if (angular.isString($scope.grid)) {
+        $scope.grid = angular.fromJson($scope.grid);
+      }
+      GridHelper.getGridData( 'employee' ).then( function ( response ) {
         $scope.items = response.success.items;
       } ).catch( function ( response ) {
         $log.debug( response );
       } );
     }
-
-    init();
+    $timeout(init, 0);
   }
 })( angular );
