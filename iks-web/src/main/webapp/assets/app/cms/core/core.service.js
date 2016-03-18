@@ -5,7 +5,7 @@
     .factory( 'CoreService', CoreService ) //
   ;
   function CoreService( $resource, ApiService ) {
-    return $resource( 'core/:action', {}, {
+    return $resource( 'api/core/:action', {}, {
       getGrid: ApiService.buildGetServiceMethod( 'getGrid' ),
       getGridData: ApiService.buildGetServiceMethod( 'getGridData' )
     } );

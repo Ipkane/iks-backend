@@ -11,7 +11,7 @@ import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping( "/core" )
+@RequestMapping( "/api/core" )
 public class CoreController {
   private static final String REQUEST_GET_GRID             = "/getGrid";
   private static final String RESPONSE_ERROR_GET_GRID      = "Couldn't get grid";

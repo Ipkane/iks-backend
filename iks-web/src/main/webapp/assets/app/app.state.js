@@ -11,7 +11,7 @@
       } )
       .state( 'employeeList', {
         url        : '',
-        templateUrl: 'view/gridView?name=employee',
+        templateUrl: 'view/gridView?gridName=employee',
         controller : "EmployeeListController"
       }
     )

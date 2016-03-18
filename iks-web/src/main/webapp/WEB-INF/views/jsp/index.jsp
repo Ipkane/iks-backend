@@ -80,6 +80,7 @@
 <script src="assets/app/cms/core/core.helper.js"></script>
 <script src="assets/app/cms/home/home.controller.js"></script>
 <script src="assets/app/cms/employee/list.controller.js"></script>
+<script src="assets/app/cms/employee/edit.controller.js"></script>
 <script src="assets/app/cms/employee/data.service.js"></script>
 </body>
 </html>

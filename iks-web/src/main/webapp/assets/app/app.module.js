@@ -6,6 +6,7 @@
     , 'ngCookies' //
     , 'ngResource'
     , 'ui.router'
+    , 'ui.bootstrap'
     , 'ngMessages' //
     , 'ngSanitize' //
     , 'app.cms'

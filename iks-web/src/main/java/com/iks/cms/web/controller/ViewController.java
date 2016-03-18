@@ -21,19 +21,28 @@ import java.util.*;
 @RequestMapping( "/view" )
 public class ViewController {
   private static final String REQUEST_GET_GRID_VIEW = "/gridView";
+  private static final String REQUEST_GET_GRID_EDIT_VIEW = "/gridEditView";
   private final        Logger logger                = LoggerFactory.getLogger( ViewController.class );
   @Autowired
   private GridService gridService;
   @RequestMapping( value = REQUEST_GET_GRID_VIEW, method = RequestMethod.GET )
-  public String index( Model model, String name ) {
+  public String gridView( Model model, String gridName ) {
     ObjectMapper objectMapper = new ObjectMapper();
-    IGrid grid = gridService.getGrid( name );
+    IGrid grid = gridService.getGrid( gridName );
+    model.addAttribute( "gridName", gridName );
     model.addAttribute( "grid", grid );
     try {
-      model.addAttribute( "gridJson", objectMapper.writeValueAsString( grid ).replace("\"", "\\\"") );
+      model.addAttribute( "gridJson", objectMapper.writeValueAsString( grid ).replace( "\"", "\\\"" ) );
     } catch( JsonProcessingException e ) {
       logger.error( "Serialization error:", e );
     }
     return "gridView";
+  }
+  @RequestMapping( value = REQUEST_GET_GRID_EDIT_VIEW, method = RequestMethod.GET )
+  public String gridEditView( Model model, String gridName, Long itemId ) {
+    IGrid grid = gridService.getGrid( gridName );
+    model.addAttribute( "gridName", gridName );
+    model.addAttribute( "grid", grid );
+    return "gridEditView";
   }
 }
