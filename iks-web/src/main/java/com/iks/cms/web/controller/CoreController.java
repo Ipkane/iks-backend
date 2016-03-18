@@ -13,11 +13,13 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping( "/api/core" )
 public class CoreController {
-  private static final String REQUEST_GET_GRID             = "/getGrid";
-  private static final String RESPONSE_ERROR_GET_GRID      = "Couldn't get grid";
-  private static final String REQUEST_GET_GRID_DATA        = "/getGridData";
-  private static final String RESPONSE_ERROR_GET_GRID_DATA = "Couldn't get grid data";
-  private final        Logger logger                       = LoggerFactory.getLogger( CoreController.class );
+  private static final String REQUEST_GET_GRID                = "/getGrid";
+  private static final String RESPONSE_ERROR_GET_GRID         = "Couldn't get grid";
+  private static final String REQUEST_GET_GRID_DATA           = "/getGridData";
+  private static final String RESPONSE_ERROR_GET_GRID_DATA    = "Couldn't get grid data";
+  private static final String REQUEST_UPDATE_GRID_DATA        = "/updateGridData";
+  private static final String RESPONSE_ERROR_UPDATE_GRID_DATA = "Couldn't update grid data";
+  private final        Logger logger                          = LoggerFactory.getLogger( CoreController.class );
   @Autowired
   private GridService gridService;
   @RequestMapping( value = REQUEST_GET_GRID, method = RequestMethod.GET )
@@ -40,6 +42,17 @@ public class CoreController {
     } catch( Exception ex ) {
       logger.error( RESPONSE_ERROR_GET_GRID_DATA, ex );
       return ApiUtils.makeErrorResponse( REQUEST_GET_GRID_DATA, RESPONSE_ERROR_GET_GRID_DATA, request );
+    }
+  }
+  @RequestMapping( value = REQUEST_UPDATE_GRID_DATA, method = RequestMethod.POST )
+  public ResponseEntity< DefaultResponseBody< ?, ? > > updateGridData( RequestGetGridData request ) {
+    try {
+      ResponseGetGridData response = new ResponseGetGridData();
+      response.setItems( gridService.getGridData( request.getGridName() ) );
+      return ApiUtils.makeResponse( REQUEST_UPDATE_GRID_DATA, request, response );
+    } catch( Exception ex ) {
+      logger.error( RESPONSE_ERROR_UPDATE_GRID_DATA, ex );
+      return ApiUtils.makeErrorResponse( REQUEST_UPDATE_GRID_DATA, RESPONSE_ERROR_UPDATE_GRID_DATA, request );
     }
   }
 }

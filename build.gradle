@@ -1,14 +1,4 @@
-apply plugin: 'java'
 apply plugin: 'idea'
-
-// JDK 7
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
-
-repositories {
-  mavenLocal()
-  mavenCentral()
-}
 
 ext.springVersion='4.1.6.RELEASE'
 ext.hibernateVersion='5.1.0.Final'
@@ -21,6 +11,10 @@ subprojects {
   repositories {
     mavenLocal()
     mavenCentral()
+  }
+
+  compileJava {
+    options.encoding = "UTF-8"
   }
 }
 
