@@ -62,6 +62,13 @@ public class AppObjService {
     }
     return resultItem;
   }
+  public void updateEditData( String appObj, IDataRow item ) {
+    IEditView editView = getEditView( appObj );
+    UpdateEditDataQuery query = new UpdateEditDataQuery( getModel( appObj ), editView, item );
+    String sqlQuery = query.buildSqlQuery();
+    logger.debug( sqlQuery );
+    commonDao.updateQuery( sqlQuery );
+  }
   public IEditView getEditView( String appObj ) {
     return getAppObj( appObj ).getEditView();
   }

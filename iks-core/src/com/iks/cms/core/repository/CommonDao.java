@@ -25,4 +25,10 @@ public class CommonDao {
       return query.uniqueResult();
     }
   }
+  public int updateQuery( String updateQuery ) {
+    try (Session session = sessionFactory.openSession()) {
+      Query query = session.createSQLQuery( updateQuery );
+      return query.executeUpdate();
+    }
+  }
 }
