@@ -8,8 +8,10 @@ import com.iks.cms.core.model.*;
  * @author Igor Kaynov
  */
 public class GridQuery {
-  private IGrid grid;
-  public GridQuery( IGrid grid ) {
+  private IGrid      grid;
+  private IDataModel model;
+  public GridQuery( IDataModel model, IGrid grid ) {
+    this.model = model;
     this.grid = grid;
   }
   public IGrid getGrid() {
@@ -20,7 +22,6 @@ public class GridQuery {
   }
   public String buildSqlQuery() {
     StringBuilder sb = new StringBuilder();
-    IDataModel model = grid.getDataModel();
     sb.append( "select " );
     boolean first = true;
     for( IGridField field : grid.getFields() ) {

@@ -1,6 +1,6 @@
 'use strict';
 angular.module( 'app.cms' )//
-  .controller( 'EmployeeListController', EmployeeListController )
+  .controller( 'AppObjListController', AppObjListController )
 ;//
 function EmployeeListController( $scope, $log, $uibModal, $timeout, CoreService, GridHelper, _ ) {
   angular.extend( $scope, {
@@ -28,7 +28,7 @@ function EmployeeListController( $scope, $log, $uibModal, $timeout, CoreService,
     $uibModal.open(
       {
         animation   : true,
-        templateUrl : 'view/gridEditView?gridName=' + $scope.gridName + "&itemId=" + $scope.selectedItem.id,
+        templateUrl : 'view/gridEditView?appObj=' + $scope.gridName,
         controller  : 'GridEditController',
         controllerAs: 'vm',
         backdrop    : 'static',

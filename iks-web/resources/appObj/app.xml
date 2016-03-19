@@ -1,0 +1,6 @@
+<root>
+  <appObj name="employee">
+    <data url="resources/appObj/employee/data.xml"/>
+    <list url="resources/appObj/employee/list.xml"/>
+  </appObj>
+</root>

@@ -7,6 +7,7 @@
   function LodashService() {
     return _;
   }
+
   function GridHelper( CoreService, $q, $log ) {
     var grids = {};
     return {
@@ -17,7 +18,7 @@
       var deferred = $q.defer();
       if ( !grids[ name ] ) {
         CoreService.getGrid( {
-          gridName: 'employee'
+          appObj: 'employee'
         }, function ( response ) {
           if ( response.isSuccess ) {
             grids[ name ] = response.success.grid;
@@ -36,7 +37,7 @@
 
     function getGridData( name ) {
       return CoreService.getGridData( {
-        gridName: name
+        appObj: name
       } ).$promise;
     }
   }

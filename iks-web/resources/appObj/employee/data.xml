@@ -1,0 +1,4 @@
+<data appObj="employee" tableName="employee">
+  <field tableField="id" name="id" label="Id"/>
+  <field tableField="fio" name="fio" label="First Name/Last Name"/>
+</data>

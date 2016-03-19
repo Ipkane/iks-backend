@@ -6,11 +6,11 @@ import com.iks.cms.web.api.common.*;
  * @author Igor Kaynov
  */
 public class RequestGetGrid extends AbstractApiRequest {
-  private String gridName;
-  public String getGridName() {
-    return gridName;
+  private String appObj;
+  public String getAppObj() {
+    return appObj;
   }
-  public void setGridName( String gridName ) {
-    this.gridName = gridName;
+  public void setAppObj( String appObj ) {
+    this.appObj = appObj;
   }
 }

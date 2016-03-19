@@ -25,6 +25,9 @@ sourceSets {
     java {
       srcDir 'src/main/java'
     }
+    resources {
+      srcDir 'resources'
+    }
   }
 }
 
@@ -49,6 +52,6 @@ gretty {
   managedClassReload=true
   interactiveMode=''
   debugPort = 5005
-  debugSuspend = false
+//  debugSuspend = false
 //  jvmArgs=['-Dspring.config.location=file:///D:/work/homesize/iks-config/dat/']
 }

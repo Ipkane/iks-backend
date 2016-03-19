@@ -1,4 +1,4 @@
-package com.iks.cms.web.repository;
+package com.iks.cms.core.repository;
 
 import org.hibernate.*;
 import org.springframework.beans.factory.annotation.*;

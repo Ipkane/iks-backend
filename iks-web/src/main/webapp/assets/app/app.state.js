@@ -11,8 +11,8 @@
       } )
       .state( 'employeeList', {
         url        : '/employees',
-        templateUrl: 'view/gridView?gridName=employee',
-        controller : "EmployeeListController"
+        templateUrl: 'view/gridView?appObj=employee',
+        controller : "AppObjListController"
       }
     )
     ;

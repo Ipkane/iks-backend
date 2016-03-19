@@ -4,6 +4,8 @@ package com.iks.cms.web.config;
 ** config data source , entity manager here
 */
 
+import com.iks.cms.xml.config.*;
+
 import org.hibernate.*;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.context.annotation.*;
@@ -19,10 +21,11 @@ import javax.sql.*;
 @Configuration
 //@EnableJpaRepositories( basePackages = { "com.makble.springmvcstart.repository" } )
 @EnableTransactionManagement
-@ComponentScan( basePackages = { "com.iks.cms.web.service", "com.iks.cms.web.repository", "com.iks.cms.web.controller" } )
+@ComponentScan( basePackages = { "com.iks.cms.core.service", "com.iks.cms.core.repository" } )
 //@EnableConfigurationProperties( { DbProperties.class } )
 @PropertySource( "classpath:application.properties" )
-public class BasicConfig {
+@Import( {XmlConfig.class})
+public class RootConfig {
   @Autowired
   private DataSource  dataSource;
   //  @Autowired

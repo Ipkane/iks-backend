@@ -10,6 +10,7 @@ import java.util.*;
  * @author Igor Kaynov
  */
 public class BaseDataModel implements IDataModel {
+  private String appObj;
   private String tableName;
   private List< IDataField > fields = new ArrayList<>();
   public List< IDataField > getFields() {
@@ -36,5 +37,11 @@ public class BaseDataModel implements IDataModel {
       }
     }
     return null;
+  }
+  public String getAppObj() {
+    return appObj;
+  }
+  public void setAppObj( String appObj ) {
+    this.appObj = appObj;
   }
 }

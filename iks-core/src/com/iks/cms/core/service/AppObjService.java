@@ -1,9 +1,10 @@
-package com.iks.cms.web.service;
+package com.iks.cms.core.service;
 
+import com.iks.cms.core.appObj.*;
 import com.iks.cms.core.grid.*;
+import com.iks.cms.core.model.*;
 import com.iks.cms.core.query.*;
-import com.iks.cms.web.grids.*;
-import com.iks.cms.web.repository.*;
+import com.iks.cms.core.repository.*;
 
 import org.slf4j.*;
 import org.springframework.beans.factory.annotation.*;
@@ -17,21 +18,20 @@ import javax.annotation.*;
  * @author Igor Kaynov
  */
 @Service
-public class GridService {
-  private static final Logger               logger = LoggerFactory.getLogger( GridService.class );
-  private              Map< String, IGrid > grids  = new HashMap<>();
+public class AppObjService {
+  private static final Logger                 logger    = LoggerFactory.getLogger( AppObjService.class );
+  private              Map< String, IAppObj > appObjMap = new HashMap<>();
   @Autowired
   private CommonDao commonDao;
-  @PostConstruct
-  public void init() {
-    grids.put( "employee", new EmployeeGrid() );
+  public IGrid getGrid( String appObj ) {
+    return appObjMap.get( appObj ).getGrid();
   }
-  public IGrid getGrid( String name ) {
-    return grids.get( name );
+  public IDataModel getModel( String appObj ) {
+    return appObjMap.get( appObj ).getDataModel();
   }
-  public List< IGridDataRow > getGridData( String name ) {
-    IGrid grid = getGrid( name );
-    GridQuery query = new GridQuery( grid );
+  public List< IGridDataRow > getGridData( String appObj ) {
+    IGrid grid = getGrid( appObj );
+    GridQuery query = new GridQuery( getModel( appObj ), grid );
     String sqlQuery = query.buildSqlQuery();
     logger.debug( sqlQuery );
     List rows = commonDao.selectQuery( sqlQuery );
@@ -47,5 +47,8 @@ public class GridService {
       resultList.add( resultItem );
     }
     return resultList;
+  }
+  public void addAppObj(IAppObj appObj) {
+    appObjMap.put( appObj.getName(), appObj );
   }
 }

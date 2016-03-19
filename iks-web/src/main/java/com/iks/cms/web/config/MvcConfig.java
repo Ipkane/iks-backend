@@ -6,7 +6,7 @@ import org.springframework.web.servlet.view.*;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan( basePackages = { "com.iks.cms.web.controller" } )
+@ComponentScan( basePackages = { "com.iks.cms.web.service",  "com.iks.cms.web.controller" } )
 public class MvcConfig extends WebMvcConfigurerAdapter {
   //  @Override
   //  public void addViewControllers( final ViewControllerRegistry registry ) {

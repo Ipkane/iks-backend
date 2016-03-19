@@ -9,5 +9,4 @@ import java.util.*;
  */
 public interface IGrid {
   List<IGridField> getFields();
-  IDataModel getDataModel();
 }
