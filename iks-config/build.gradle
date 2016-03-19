@@ -1,0 +1,33 @@
+apply plugin: 'java'
+
+ext {
+  projectName = 'iks-config'
+}
+
+jar {
+  baseName = "$projectName"
+  version = "1.0"
+}
+
+dependencies {
+  compile project(':iks-common')
+
+//  compile 'org.springframework.boot:spring-boot:1.3.3.RELEASE'
+//  compile 'org.springframework:spring-context-support:4.1.4.RELEASE'
+//  compile 'org.yaml:snakeyaml:1.13'
+//  compile 'org.springframework.boot:spring-boot-autoconfigure:1.3.3.RELEASE'
+//  compile 'org.thymeleaf:thymeleaf-spring4:2.1.4.RELEASE'
+}
+
+sourceSets {
+  main {
+    java {
+      srcDir 'src'
+//      srcDir 'dat'
+    }
+    resources {
+      srcDir 'dat'
+      srcDir 'dat2'
+    }
+  }
+}

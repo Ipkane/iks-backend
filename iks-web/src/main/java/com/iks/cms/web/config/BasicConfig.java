@@ -7,26 +7,40 @@ package com.iks.cms.web.config;
 import org.hibernate.*;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.context.annotation.*;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.core.env.*;
 import org.springframework.jdbc.datasource.*;
 import org.springframework.orm.hibernate4.*;
 import org.springframework.transaction.annotation.*;
 
+import javax.annotation.*;
 import javax.sql.*;
 
 @Configuration
 //@EnableJpaRepositories( basePackages = { "com.makble.springmvcstart.repository" } )
 @EnableTransactionManagement
 @ComponentScan( basePackages = { "com.iks.cms.web.service", "com.iks.cms.web.repository", "com.iks.cms.web.controller" } )
+//@EnableConfigurationProperties( { DbProperties.class } )
+@PropertySource( "classpath:application.properties" )
 public class BasicConfig {
   @Autowired
-  private DataSource dataSource;
+  private DataSource  dataSource;
+  //  @Autowired
+  //  private DbProperties dbProperties;
+  @Resource
+  public Environment env;
   @Bean
   public DataSource dataSource() {
     DriverManagerDataSource dataSource = new DriverManagerDataSource();
-    dataSource.setDriverClassName( "org.postgresql.Driver" );
-    dataSource.setUrl( "jdbc:postgresql://localhost:5432/cms" );
-    dataSource.setUsername( "postgres" );
-    dataSource.setPassword( "postgres" );
+    System.out.println(env.getProperty( "db.url" ));
+    dataSource.setDriverClassName( env.getProperty( "db.driver" ));
+    dataSource.setUrl( env.getProperty( "db.url" ) );
+    dataSource.setUsername( env.getProperty( "db.username" ) );
+    dataSource.setPassword( env.getProperty( "db.password" ) );
+    //    dataSource.setDriverClassName( dbProperties.getDriver() );
+    //    dataSource.setUrl( dbProperties.getUrl() );
+    //    dataSource.setUsername( dbProperties.getUsername() );
+    //    dataSource.setPassword( dbProperties.getPassword() );
     return dataSource;
   }
   @Bean
@@ -34,32 +48,32 @@ public class BasicConfig {
     return new LocalSessionFactoryBuilder( dataSource() ).buildSessionFactory();
   }
   @Bean
-  public HibernateTransactionManager hibTransMan(){
-    return new HibernateTransactionManager(sessionFactory());
+  public HibernateTransactionManager hibTransMan() {
+    return new HibernateTransactionManager( sessionFactory() );
   }
-//  @Bean
-//  public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
-//    HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
-//    vendorAdapter.setDatabase( Database.POSTGRESQL );
-//    vendorAdapter.setGenerateDdl( true );
-//    vendorAdapter.setShowSql( true );
-//    LocalContainerEntityManagerFactoryBean factory = new LocalContainerEntityManagerFactoryBean();
-//    factory.setJpaVendorAdapter( vendorAdapter );
-//    factory.setPackagesToScan( getClass().getPackage().getName() );
-//    factory.setDataSource( dataSource() );
-//    factory.setJpaProperties( jpaProperties() );
-//    return factory;
-//  }
-//  private Properties jpaProperties() {
-//    Properties properties = new Properties();
-//    properties.put( "hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect" );
-//    properties.put( "hibernate.show_sql", "false" );
-//    return properties;
-//  }
-//  @Bean
-//  public PlatformTransactionManager transactionManager() {
-//    JpaTransactionManager txManager = new JpaTransactionManager();
-//    txManager.setEntityManagerFactory( entityManagerFactory().getObject() );
-//    return txManager;
-//  }
+  //  @Bean
+  //  public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
+  //    HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
+  //    vendorAdapter.setDatabase( Database.POSTGRESQL );
+  //    vendorAdapter.setGenerateDdl( true );
+  //    vendorAdapter.setShowSql( true );
+  //    LocalContainerEntityManagerFactoryBean factory = new LocalContainerEntityManagerFactoryBean();
+  //    factory.setJpaVendorAdapter( vendorAdapter );
+  //    factory.setPackagesToScan( getClass().getPackage().getName() );
+  //    factory.setDataSource( dataSource() );
+  //    factory.setJpaProperties( jpaProperties() );
+  //    return factory;
+  //  }
+  //  private Properties jpaProperties() {
+  //    Properties properties = new Properties();
+  //    properties.put( "hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect" );
+  //    properties.put( "hibernate.show_sql", "false" );
+  //    return properties;
+  //  }
+  //  @Bean
+  //  public PlatformTransactionManager transactionManager() {
+  //    JpaTransactionManager txManager = new JpaTransactionManager();
+  //    txManager.setEntityManagerFactory( entityManagerFactory().getObject() );
+  //    return txManager;
+  //  }
 }

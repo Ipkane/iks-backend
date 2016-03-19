@@ -1,0 +1,6 @@
+(not implemented)
+db:
+  driver: org.postgresql.Driver
+  url: jdbc:postgresql://localhost:5432/cms
+  username: postgres
+  password: postgres
