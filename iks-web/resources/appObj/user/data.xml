@@ -1,0 +1,5 @@
+<data appObj="user" tableName="app_user">
+  <field tableField="id" name="id" label="Id"/>
+  <field tableField="username" name="username" label="Username"/>
+  <field tableField="password" name="password" label="Password"/>
+</data>

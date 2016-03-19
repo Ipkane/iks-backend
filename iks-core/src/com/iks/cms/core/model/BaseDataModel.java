@@ -31,12 +31,7 @@ public class BaseDataModel implements IDataModel {
   }
   @Override
   public IDataField getField( String name ) {
-    for( IDataField field : fields ) {
-      if( field.getName().equals( name ) ) {
-        return field;
-      }
-    }
-    return null;
+    return fields.stream().filter( field -> field.getName().equals( name ) ).findFirst().orElse( null );
   }
   public String getAppObj() {
     return appObj;

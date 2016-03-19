@@ -2,16 +2,15 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <div class="modal-header">
-    <h2 class="modal-title">${gridName}</h2>
+    <h2 class="modal-title">Edit ${appObj.label}</h2>
 </div>
 <div class="modal-body">
-    <form id="${gridName}" name="${gridName}" role="form" novalidate="novalidate" class="form-horizontal">
-        <c:forEach items="${grid.fields}" var="field">
+    <form id="${appObj.name}" name="${appObj.name}" role="form" novalidate="novalidate" class="form-horizontal">
+        <c:forEach items="${editView.elements}" var="element">
             <div class="form-group">
-                <label for="${field.name}" class="col-sm-4 control-label">${field.label}</label>
-
+                <label for="${element.name}" class="col-sm-4 control-label">${element.label}</label>
                 <div class="col-sm-8">
-                    <input type="text" class="form-control" id="${field.name}" placeholder="${field.label}" ng-model="selectedItem.${field.name}">
+                    <input type="text" class="form-control" id="${element.name}" placeholder="${element.label}" ng-model="selectedItem.${element.name}">
                 </div>
             </div>
         </c:forEach>

@@ -2,6 +2,7 @@ package com.iks.cms.core.service;
 
 import com.iks.cms.core.appObj.*;
 import com.iks.cms.core.grid.*;
+import com.iks.cms.core.gul.*;
 import com.iks.cms.core.model.*;
 import com.iks.cms.core.query.*;
 import com.iks.cms.core.repository.*;
@@ -48,10 +49,19 @@ public class AppObjService {
     }
     return resultList;
   }
+  public IEditView getEditView(String appObj) {
+    return getAppObj(appObj).getEditView();
+  }
   public void addAppObj(IAppObj appObj) {
     appObjMap.put( appObj.getName(), appObj );
   }
+  public IAppObj getAppObj(String appObj) {
+    return appObjMap.get( appObj );
+  }
   public void clear() {
     appObjMap.clear();
+  }
+  public Collection<IAppObj> getAppObjList() {
+    return appObjMap.values();
   }
 }

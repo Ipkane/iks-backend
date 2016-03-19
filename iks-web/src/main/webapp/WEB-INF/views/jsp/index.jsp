@@ -15,40 +15,28 @@
 </div>
 <div class="container">
 
-    <nav class="navbar navbar-default">
-        <div class="container-fluid">
-            <ul class="nav navbar-nav">
-                <li ui-sref-active="active"><a ui-sref="home">Home</a></li>
-                <li ui-sref-active="active"><a ui-sref="employeeList">Employees</a></li>
+    <%--<nav class="navbar navbar-default">--%>
+        <%--<div class="container-fluid">--%>
+            <%--<ul class="nav navbar-nav">--%>
+                <%--<li ui-sref-active="active"><a ui-sref="home">Home</a></li>--%>
+                <%--<li ui-sref-active="active"><a ui-sref="employeeList">Employees</a></li>--%>
+            <%--</ul>--%>
+        <%--</div>--%>
+    <%--</nav>--%>
+    <div class="row">
+        <div class="col-xs-2">
+            <ul>
+            <c:forEach items="${appObjList}" var="appObj">
+                <li ui-sref-active="active"><a ui-sref="appObjListView({appObj:'${appObj.name}'})">${appObj.label}</a></li>
+            </c:forEach>
             </ul>
         </div>
-    </nav>
-    <div class="row">
-        <%--<div class="col-md-12">--%>
-            <%--<nav class="navbar navbar-inverse">--%>
-                <%--<div class="container">--%>
-                    <%--<div class="navbar-header">--%>
-                        <%--<a class="navbar-brand" href="#">Project Name</a>--%>
-                    <%--</div>--%>
-                <%--</div>--%>
-                <%--<nav>--%>
-                    <%--<li>--%>
-                        <%--<a ui-sref="home">Home</a>--%>
-                    <%--</li>--%>
-                    <%--<li>--%>
-                        <%--<a ui-sref="employeeList">Employees</a>--%>
-                    <%--</li>--%>
-                <%--</nav>--%>
-            <%--</nav>--%>
-        <%--</div>--%>
-        <div class="col-md-12" ui-view>
-        </div>
-        <div class="col-md-12">
-            <footer>
-                <p>&copy; IKaynov.ru 2016</p>
-            </footer>
+        <div class="col-md-10" ui-view>
         </div>
     </div>
+    <footer>
+        <p>&copy; IKaynov.ru 2016</p>
+    </footer>
 </div>
 <!-- libs -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>

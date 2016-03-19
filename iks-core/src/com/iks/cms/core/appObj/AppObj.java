@@ -1,15 +1,18 @@
 package com.iks.cms.core.appObj;
 
 import com.iks.cms.core.grid.*;
+import com.iks.cms.core.gul.*;
 import com.iks.cms.core.model.*;
 
 /**
  * @author Igor Kaynov
  */
 public class AppObj implements IAppObj {
-  private String name;
+  private String     name;
+  private String     label;
   private IDataModel dataModel;
   private IGrid      grid;
+  private EditView   editView;
   public IDataModel getDataModel() {
     return dataModel;
   }
@@ -27,5 +30,18 @@ public class AppObj implements IAppObj {
   }
   public void setName( String name ) {
     this.name = name;
+  }
+  public String getLabel() {
+    return label;
+  }
+  public void setLabel( String label ) {
+    this.label = label;
+  }
+  @Override
+  public EditView getEditView() {
+    return editView;
+  }
+  public void setEditView( EditView editView ) {
+    this.editView = editView;
   }
 }
