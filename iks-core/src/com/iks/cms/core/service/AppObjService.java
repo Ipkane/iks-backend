@@ -13,8 +13,6 @@ import org.springframework.stereotype.*;
 
 import java.util.*;
 
-import javax.annotation.*;
-
 /**
  * @author Igor Kaynov
  */
@@ -30,15 +28,15 @@ public class AppObjService {
   public IDataModel getModel( String appObj ) {
     return appObjMap.get( appObj ).getDataModel();
   }
-  public List< IGridDataRow > getGridData( String appObj ) {
+  public List< IDataRow > getGridData( String appObj ) {
     IGrid grid = getGrid( appObj );
     GridQuery query = new GridQuery( getModel( appObj ), grid );
     String sqlQuery = query.buildSqlQuery();
     logger.debug( sqlQuery );
     List rows = commonDao.selectQuery( sqlQuery );
-    List< IGridDataRow > resultList = new ArrayList<>();
+    List< IDataRow > resultList = new ArrayList<>();
     for( Object rowData : rows ) {
-      GridDataRow resultItem = new GridDataRow();
+      DataRow resultItem = new DataRow();
       Object[] data = ( Object[] )rowData;
       int i = 0;
       for( IGridField field : grid.getFields() ) {
@@ -49,19 +47,34 @@ public class AppObjService {
     }
     return resultList;
   }
-  public IEditView getEditView(String appObj) {
-    return getAppObj(appObj).getEditView();
+  public IDataRow getEditData( String appObj, Long itemId ) {
+    IEditView editView = getEditView( appObj );
+    EditViewQuery query = new EditViewQuery( getModel( appObj ), editView );
+    query.setItemId( itemId );
+    String sqlQuery = query.buildSqlQuery();
+    logger.debug( sqlQuery );
+    Object[] row = ( Object[] )commonDao.selectSingleQuery( sqlQuery );
+    DataRow resultItem = new DataRow();
+    int i = 0;
+    for( IGulInput field : editView.getFields() ) {
+      resultItem.addFieldValue( field.getName(), row[i] );
+      i++;
+    }
+    return resultItem;
   }
-  public void addAppObj(IAppObj appObj) {
+  public IEditView getEditView( String appObj ) {
+    return getAppObj( appObj ).getEditView();
+  }
+  public void addAppObj( IAppObj appObj ) {
     appObjMap.put( appObj.getName(), appObj );
   }
-  public IAppObj getAppObj(String appObj) {
+  public IAppObj getAppObj( String appObj ) {
     return appObjMap.get( appObj );
   }
   public void clear() {
     appObjMap.clear();
   }
-  public Collection<IAppObj> getAppObjList() {
+  public Collection< IAppObj > getAppObjList() {
     return appObjMap.values();
   }
 }

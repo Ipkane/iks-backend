@@ -3,7 +3,7 @@ package com.iks.cms.core.gul;
 /**
  * @author Igor Kaynov
  */
-public class GulInput implements IGulElement {
+public class GulInput implements IGulInput {
   private String name;
   private String label;
   public String getName() {

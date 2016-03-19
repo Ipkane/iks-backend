@@ -7,7 +7,7 @@ import java.util.*;
 /**
  * @author Igor Kaynov
  */
-public class GridDataRow implements IGridDataRow {
+public class DataRow implements IDataRow {
   private Map< String, Object > fieldValueMap = new LinkedHashMap<>();
   @JsonValue
   public Map< String, Object > getFieldValueMap() {

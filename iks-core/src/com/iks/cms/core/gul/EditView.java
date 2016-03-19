@@ -7,6 +7,7 @@ import java.util.*;
  */
 public class EditView implements IEditView {
   private List< IGulElement > elements = new ArrayList<>();
+  private List< IGulInput >   fields   = new ArrayList<>();
   public List< IGulElement > getElements() {
     return elements;
   }
@@ -15,5 +16,12 @@ public class EditView implements IEditView {
   }
   public void addElement( IGulElement element ) {
     elements.add( element );
+    if( element instanceof IGulInput ) {
+      fields.add( ( IGulInput )element );
+    }
+  }
+  @Override
+  public List< IGulInput > getFields() {
+    return fields;
   }
 }

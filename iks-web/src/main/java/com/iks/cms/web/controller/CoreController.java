@@ -17,6 +17,8 @@ public class CoreController {
 //  private static final String RESPONSE_ERROR_GET_GRID         = "Couldn't get grid";
   private static final String REQUEST_GET_GRID_DATA           = "/getGridData";
   private static final String RESPONSE_ERROR_GET_GRID_DATA    = "Couldn't get grid data";
+  private static final String REQUEST_GET_EDIT_DATA           = "/getEditData";
+  private static final String RESPONSE_ERROR_GET_EDIT_DATA    = "Couldn't get edit data";
   private static final String REQUEST_UPDATE_GRID_DATA        = "/updateGridData";
   private static final String RESPONSE_ERROR_UPDATE_GRID_DATA = "Couldn't update grid data";
   private final        Logger logger                          = LoggerFactory.getLogger( CoreController.class );
@@ -42,6 +44,17 @@ public class CoreController {
     } catch( Exception ex ) {
       logger.error( RESPONSE_ERROR_GET_GRID_DATA, ex );
       return ApiUtils.makeErrorResponse( REQUEST_GET_GRID_DATA, RESPONSE_ERROR_GET_GRID_DATA, request );
+    }
+  }
+  @RequestMapping( value = REQUEST_GET_EDIT_DATA, method = RequestMethod.GET )
+  public ResponseEntity< DefaultResponseBody< ?, ? > > getEditData( RequestGetEditData request ) {
+    try {
+      ResponseGetEditData response = new ResponseGetEditData();
+      response.setItem( appObjService.getEditData( request.getAppObj(), request.getItemId() ) );
+      return ApiUtils.makeResponse( REQUEST_GET_EDIT_DATA, request, response );
+    } catch( Exception ex ) {
+      logger.error( RESPONSE_ERROR_GET_EDIT_DATA, ex );
+      return ApiUtils.makeErrorResponse( REQUEST_GET_EDIT_DATA, RESPONSE_ERROR_GET_EDIT_DATA, request );
     }
   }
   @RequestMapping( value = REQUEST_UPDATE_GRID_DATA, method = RequestMethod.POST )
