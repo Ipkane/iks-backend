@@ -1,0 +1,25 @@
+apply plugin: 'java'
+
+ext {
+  projectName = 'iks-xml'
+}
+
+jar {
+  baseName = "$projectName"
+  version = "1.0"
+}
+
+dependencies {
+  compile project(':iks-core')
+}
+
+sourceSets {
+  main {
+    java {
+      srcDir 'src'
+    }
+    resources {
+      srcDir 'resources'
+    }
+  }
+}
