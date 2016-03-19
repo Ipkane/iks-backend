@@ -24,15 +24,19 @@ public class ParseService {
   @Autowired
   private AppObjService appObjService;
   @PostConstruct
-  public void init() {
+  private void init() {
+    loadApp();
+    //    AppObj employeeAppObj = new AppObj();
+    //    employeeAppObj.setName( "employee" );
+    //    IDataModel model = parseDataModel( "resources/appObj/employee/data.xml" );
+    //    IGrid grid = parseGrid( "resources/appObj/employee/list.xml" );
+    //    employeeAppObj.setDataModel( model );
+    //    employeeAppObj.setGrid( grid );
+    //    appObjService.addAppObj( employeeAppObj );
+  }
+  public void loadApp() {
+    appObjService.clear();
     parseApp( "resources/appObj/app.xml" );
-//    AppObj employeeAppObj = new AppObj();
-//    employeeAppObj.setName( "employee" );
-//    IDataModel model = parseDataModel( "resources/appObj/employee/data.xml" );
-//    IGrid grid = parseGrid( "resources/appObj/employee/list.xml" );
-//    employeeAppObj.setDataModel( model );
-//    employeeAppObj.setGrid( grid );
-//    appObjService.addAppObj( employeeAppObj );
   }
   private void parseApp( String fileName ) {
     AppParser parser = new AppParser();
@@ -43,22 +47,22 @@ public class ParseService {
       logger.error( "Data model parse exception: ", e );
     }
   }
-//  private IDataModel parseDataModel( String fileName ) {
-//    DataParser parser = new DataParser();
-//    try {
-//      return parser.parse( fileName );
-//    } catch( Exception e ) {
-//      logger.error( "Data model parse exception: ", e );
-//    }
-//    return null;
-//  }
-//  private IGrid parseGrid( String fileName ) {
-//    GridParser parser = new GridParser();
-//    try {
-//      return parser.parse( fileName );
-//    } catch( Exception e ) {
-//      logger.error( "Data model parse exception: ", e );
-//    }
-//    return null;
-//  }
+  //  private IDataModel parseDataModel( String fileName ) {
+  //    DataParser parser = new DataParser();
+  //    try {
+  //      return parser.parse( fileName );
+  //    } catch( Exception e ) {
+  //      logger.error( "Data model parse exception: ", e );
+  //    }
+  //    return null;
+  //  }
+  //  private IGrid parseGrid( String fileName ) {
+  //    GridParser parser = new GridParser();
+  //    try {
+  //      return parser.parse( fileName );
+  //    } catch( Exception e ) {
+  //      logger.error( "Data model parse exception: ", e );
+  //    }
+  //    return null;
+  //  }
 }

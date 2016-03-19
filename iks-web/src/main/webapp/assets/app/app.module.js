@@ -1,6 +1,7 @@
 (function () {
   'use strict';
   angular.module( 'app.cms', [] );
+  angular.module( 'app.dev', [] );
   angular.module( 'app', [//
     'ngRoute'
     , 'ngCookies' //
@@ -9,6 +10,7 @@
     , 'ui.bootstrap'
     , 'ngMessages' //
     , 'ngSanitize' //
-    , 'app.cms'
+    , 'app.cms',
+    , 'app.dev'
   ] );
 })();

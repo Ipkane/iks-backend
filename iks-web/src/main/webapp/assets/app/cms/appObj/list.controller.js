@@ -2,7 +2,7 @@
 angular.module( 'app.cms' )//
   .controller( 'AppObjListController', AppObjListController )
 ;//
-function EmployeeListController( $scope, $log, $uibModal, $timeout, CoreService, GridHelper, _ ) {
+function AppObjListController( $scope, $log, $uibModal, $timeout, CoreService, GridHelper, _ ) {
   angular.extend( $scope, {
     gridName    : null,
     grid        : null,

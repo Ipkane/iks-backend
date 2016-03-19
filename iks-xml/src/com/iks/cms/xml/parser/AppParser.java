@@ -18,6 +18,7 @@ public class AppParser extends CommonParser {
     Document doc = parseFile( fileName );
     return parseRoot( doc );
   }
+  // app
   private List< IAppObj > parseRoot( Document doc ) throws Exception {
     Element root = doc.getDocumentElement();
     List< IAppObj > appObjList = new ArrayList<>();
@@ -31,6 +32,7 @@ public class AppParser extends CommonParser {
     }
     return appObjList;
   }
+  // appObj
   private IAppObj parseAppObj( Element appObjElement ) throws Exception {
     AppObjParser appObjParser = new AppObjParser();
     return appObjParser.parse( appObjElement );

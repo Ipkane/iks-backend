@@ -33,6 +33,7 @@ public class GridParser extends CommonParser {
     }
     return grid;
   }
+  // field
   private IGridField parseField( Element fieldElement ) {
     GridField field = new GridField();
     field.setName( fieldElement.getAttribute( "name" ) );

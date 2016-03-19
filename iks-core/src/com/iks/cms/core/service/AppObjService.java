@@ -51,4 +51,7 @@ public class AppObjService {
   public void addAppObj(IAppObj appObj) {
     appObjMap.put( appObj.getName(), appObj );
   }
+  public void clear() {
+    appObjMap.clear();
+  }
 }

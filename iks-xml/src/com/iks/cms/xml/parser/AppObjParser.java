@@ -20,6 +20,7 @@ public class AppObjParser extends CommonParser {
   public IAppObj parse( Element root ) throws Exception {
     return parseRoot( root );
   }
+  //appObj
   private IAppObj parseRoot( Element root ) throws Exception {
     AppObj appObj = new AppObj();
     appObj.setName( root.getAttribute( "name" ) );
@@ -42,10 +43,12 @@ public class AppObjParser extends CommonParser {
     }
     return appObj;
   }
+  // data
   private IDataModel parseDataModel( Element modelElement ) throws Exception {
     DataParser dataParser = new DataParser();
     return dataParser.parse( modelElement.getAttribute( "url" ) );
   }
+  //list
   private IGrid parseGrid( Element gridElement ) throws Exception {
     GridParser dataParser = new GridParser();
     return dataParser.parse( gridElement.getAttribute( "url" ) );
