@@ -3,6 +3,7 @@ package com.iks.cms.xml.parser;
 import com.iks.cms.core.appObj.*;
 import com.iks.cms.core.data.*;
 import com.iks.cms.core.grid.*;
+import com.iks.cms.core.gul.*;
 import com.iks.cms.core.model.*;
 
 import org.slf4j.*;
@@ -24,6 +25,7 @@ public class AppObjParser extends CommonParser {
   private IAppObj parseRoot( Element root ) throws Exception {
     AppObj appObj = new AppObj();
     appObj.setName( root.getAttribute( "name" ) );
+    appObj.setLabel( root.getAttribute( "label" ) );
     NodeList fieldList = root.getChildNodes();
     for( int i = 0; i < fieldList.getLength(); i++ ) {
       Node node = fieldList.item( i );
@@ -35,6 +37,9 @@ public class AppObjParser extends CommonParser {
             break;
           case "list":
             appObj.setGrid( parseGrid( childElement ) );
+            break;
+          case "edit":
+            appObj.setEditView( parseEditView( childElement ) );
             break;
           default:
             throw new Exception( "Wrong element " + childElement.getTagName() );
@@ -52,5 +57,10 @@ public class AppObjParser extends CommonParser {
   private IGrid parseGrid( Element gridElement ) throws Exception {
     GridParser dataParser = new GridParser();
     return dataParser.parse( gridElement.getAttribute( "url" ) );
+  }
+  //edit
+  private EditView parseEditView( Element editElement ) throws Exception {
+    EditViewParser dataParser = new EditViewParser();
+    return dataParser.parse( editElement.getAttribute( "url" ) );
   }
 }

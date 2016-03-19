@@ -1,0 +1,4 @@
+<editView appObj="employee">
+  <field name="id" label="Employee Id"/>
+  <field name="fio" label="First/Last Name Name"/>
+</editView>

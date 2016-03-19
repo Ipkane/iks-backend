@@ -2,7 +2,9 @@ package com.iks.cms.web.controller;
 
 import com.fasterxml.jackson.core.*;
 import com.fasterxml.jackson.databind.*;
+import com.iks.cms.core.appObj.*;
 import com.iks.cms.core.grid.*;
+import com.iks.cms.core.gul.*;
 import com.iks.cms.core.service.*;
 
 import org.slf4j.*;
@@ -18,11 +20,11 @@ public class ViewController {
   private static final String REQUEST_GET_GRID_EDIT_VIEW = "/gridEditView";
   private final        Logger logger                     = LoggerFactory.getLogger( ViewController.class );
   @Autowired
-  private AppObjService gridService;
+  private AppObjService appObjService;
   @RequestMapping( value = REQUEST_GET_GRID_VIEW, method = RequestMethod.GET )
   public String gridView( Model model, String appObj ) {
     ObjectMapper objectMapper = new ObjectMapper();
-    IGrid grid = gridService.getGrid( appObj );
+    IGrid grid = appObjService.getGrid( appObj );
     model.addAttribute( "gridName", appObj );
     model.addAttribute( "grid", grid );
     try {
@@ -34,9 +36,9 @@ public class ViewController {
   }
   @RequestMapping( value = REQUEST_GET_GRID_EDIT_VIEW, method = RequestMethod.GET )
   public String gridEditView( Model model, String appObj, Long itemId ) {
-    IGrid grid = gridService.getGrid( appObj );
-    model.addAttribute( "gridName", appObj );
-    model.addAttribute( "grid", grid );
-    return "gridEditView";
+    IEditView editView = appObjService.getEditView( appObj );
+    model.addAttribute( "editView", editView );
+    model.addAttribute( "appObj", appObjService.getAppObj( appObj ) );
+    return "editView";
   }
 }

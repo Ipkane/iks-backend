@@ -2,22 +2,36 @@
 angular.module( 'app.cms' )//
   .controller( 'GridEditController', GridEditController )
 ;//
-function GridEditController( $scope, $log, $uibModalInstance, selectedItem, CoreService ) {
+function GridEditController( $scope, $log, payload, $uibModalInstance, CoreService ) {
   angular.extend( $scope, {
-    selectedItem: selectedItem
+    selectedItem: null
   } );
-  $scope.save   = function () {
-    CoreService.updateGridData( { item: selectedItem }, function ( response ) {
+  function init() {
+    CoreService.getEditData( payload, function ( response ) {
       if ( response.isSuccess ) {
-        $uibModalInstance.close( $scope.selectedItem );
+        $scope.selectedItem = response.success.item;
       } else {
         $log.error( response );
       }
-    }, function ( response ) {
-      $log.error( response );
     } );
+  };
+  $scope.save   = function () {
+    CoreService.updateEditData(
+      angular.extend( angular.copy( payload ), { item: $scope.selectedItem } ),
+      function ( response ) {
+        if ( response.isSuccess ) {
+          $uibModalInstance.close( $scope.selectedItem );
+        } else {
+          $log.error( response );
+        }
+      }, function ( response ) {
+        $log.error( response );
+      }
+    )
+    ;
   };
   $scope.cancel = function () {
     $uibModalInstance.dismiss( 'Cancel' );
-  }
+  };
+  init();
 }

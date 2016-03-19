@@ -1,7 +1,7 @@
 apply plugin: 'idea'
 
 ext.springVersion='4.1.6.RELEASE'
-ext.hibernateVersion='4.3.11.Final'
+ext.hibernateVersion='5.1.0.Final'
 ext.hibernateValidatorVersion='4.3.2.Final'
 
 subprojects {

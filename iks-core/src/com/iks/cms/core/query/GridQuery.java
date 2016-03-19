@@ -29,10 +29,10 @@ public class GridQuery {
       if( !first ) {
         sb.append( "," );
       }
-      sb.append( dataField.getTableField() ).append( " as " ).append( dataField.getName() );
+      sb.append("\"").append( dataField.getTableField() ).append("\"").append( " as " ).append( dataField.getName() );
       first = false;
     }
-    sb.append( " from " ).append( model.getTableName() );
+    sb.append( " from " ).append("\"").append( model.getTableName() ).append("\"");
     return sb.toString();
   }
 }

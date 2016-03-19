@@ -13,13 +13,28 @@ function AppObjListController( $scope, $log, $uibModal, $timeout, CoreService, G
     if ( angular.isString( $scope.grid ) ) {
       $scope.grid = angular.fromJson( $scope.grid );
     }
+    reload();
+  }
+
+  function reload() {
     GridHelper.getGridData( $scope.gridName ).then( function ( response ) {
-      $scope.items = response.success.items;
+      $scope.items          = response.success.items;
+      var foundSelectedItem = false;
+      if ( $scope.selectedItem ) {
+        _.each( $scope.items, function ( item ) {
+          if ( item.id == $scope.selectedItem.id ) {
+            $scope.selectedItem = item;
+            foundSelectedItem   = true;
+          }
+        } );
+        if ( !foundSelectedItem ) {
+          $scope.selectedItem = null;
+        }
+      }
     } ).catch( function ( response ) {
       $log.debug( response );
     } );
-  }
-
+  };
   $scope.selectItem    = function ( item ) {
     $scope.selectedItem = item;
   };
@@ -33,16 +48,11 @@ function AppObjListController( $scope, $log, $uibModal, $timeout, CoreService, G
         controllerAs: 'vm',
         backdrop    : 'static',
         resolve     : {
-          selectedItem: angular.copy( $scope.selectedItem )
+          payload: { appObj: $scope.gridName, itemId: $scope.selectedItem.id }
         }
       }
     ).result.then( function ( updatedItem ) {
-                     _.each( $scope.items, function ( item ) {
-                       if ( item.id == updatedItem.id ) {
-                         angular.extend( item, updatedItem );
-                       }
-                     } );
-                     angular.extend( $scope.selectedItem, updatedItem );
+                     reload();
                    }, function () {
                      $log.info( 'Modal dismissed at: ' + new Date() );
                    } );

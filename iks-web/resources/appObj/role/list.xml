@@ -1,0 +1,6 @@
+<gridView appObj="role">
+  <table>
+    <field name="id" label="Role Id"/>
+    <field name="name" label="Name"/>
+  </table>
+</gridView>
