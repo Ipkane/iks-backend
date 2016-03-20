@@ -35,10 +35,10 @@ function AppObjListController( $scope, $log, $uibModal, $timeout, CoreService, G
       $log.debug( response );
     } );
   };
-  $scope.selectItem    = function ( item ) {
+  $scope.selectItem      = function ( item ) {
     $scope.selectedItem = item;
   };
-  $scope.openEditModal = function () {
+  $scope.openEditModal   = function () {
     // open modal
     $uibModal.open(
       {
@@ -54,8 +54,53 @@ function AppObjListController( $scope, $log, $uibModal, $timeout, CoreService, G
     ).result.then( function ( updatedItem ) {
                      reload();
                    }, function () {
-                     $log.info( 'Modal dismissed at: ' + new Date() );
+                   } );
+  };
+  $scope.openAddModal    = function () {
+    // open modal
+    $uibModal.open(
+      {
+        animation   : true,
+        templateUrl : 'view/gridEditView?appObj=' + $scope.gridName,
+        controller  : 'GridEditController',
+        controllerAs: 'vm',
+        backdrop    : 'static',
+        resolve     : {
+          payload: { appObj: $scope.gridName, itemId: null, isNew: true }
+        }
+      }
+    ).result.then( function ( updatedItem ) {
+                     reload();
+                   }, function () {
+                   } );
+  };
+  $scope.openDeleteModal = function () {
+    // open modal
+    $uibModal.open(
+      {
+        animation   : true,
+        templateUrl : 'assets/app/cms/common/templates/confirm-modal.html',
+        controller  : 'ConfirmModalController',
+        controllerAs: 'vm',
+        backdrop    : 'static',
+        resolve     : {
+          title    : function () {
+            return "Confirm deletion"
+          },
+          message  : function () {
+            return "Are you sure, you want to delete item " + $scope.selectedItem.id
+          },
+          onConfirm: function () {
+            return function() {
+              return CoreService.deleteItem( { appObj: $scope.gridName, itemId: $scope.selectedItem.id } ).$promise;
+            }
+          }
+        }
+      }
+    ).result.then( function () {
+                     reload();
+                   }, function () {
                    } );
   };
   $timeout( init, 0 );
-}
+};

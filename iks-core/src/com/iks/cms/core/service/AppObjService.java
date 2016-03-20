@@ -62,9 +62,23 @@ public class AppObjService {
     }
     return resultItem;
   }
-  public void updateEditData( String appObj, IDataRow item ) {
+  public void createNewItem( String appObj, IDataRow item ) {
     IEditView editView = getEditView( appObj );
-    UpdateEditDataQuery query = new UpdateEditDataQuery( getModel( appObj ), editView, item );
+    CreateItemQuery query = new CreateItemQuery( getModel( appObj ), editView, item );
+    String sqlQuery = query.buildSqlQuery();
+    logger.debug( sqlQuery );
+    commonDao.updateQuery( sqlQuery );
+  }
+  public void updateItem( String appObj, IDataRow item ) {
+    IEditView editView = getEditView( appObj );
+    UpdateItemQuery query = new UpdateItemQuery( getModel( appObj ), editView, item );
+    String sqlQuery = query.buildSqlQuery();
+    logger.debug( sqlQuery );
+    commonDao.updateQuery( sqlQuery );
+  }
+  public void deleteItem( String appObj, Long itemId ) {
+    IEditView editView = getEditView( appObj );
+    DeleteItemQuery query = new DeleteItemQuery( getModel( appObj ), editView, itemId );
     String sqlQuery = query.buildSqlQuery();
     logger.debug( sqlQuery );
     commonDao.updateQuery( sqlQuery );

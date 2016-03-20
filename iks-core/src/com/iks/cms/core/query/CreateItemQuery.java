@@ -5,28 +5,23 @@ import com.iks.cms.core.grid.*;
 import com.iks.cms.core.gul.*;
 import com.iks.cms.core.model.*;
 
-import java.util.*;
-
 /**
  * @author Igor Kaynov
  */
-public class UpdateEditDataQuery {
+public class CreateItemQuery {
   private IEditView  editView;
   private IDataModel model;
   private IDataRow   item;
-  private Long       itemId;
-  public UpdateEditDataQuery( IDataModel model, IEditView editView, IDataRow item ) {
+  public CreateItemQuery( IDataModel model, IEditView editView, IDataRow item ) {
     this.model = model;
     this.editView = editView;
     setItem( item );
   }
   public String buildSqlQuery() {
-    if( itemId == null ) {
-      throw new IllegalArgumentException( "Item id is null" );
-    }
     StringBuilder sb = new StringBuilder();
-    sb.append( "update " ).append( "\"" ).append( model.getTableName() ).append( "\"" ).append( " set " );
+    sb.append( "insert into " ).append( "\"" ).append( model.getTableName() ).append( "\"" ).append( " (" );
     boolean first = true;
+    StringBuilder values = new StringBuilder(  );
     for( IGulInput field : editView.getFields() ) {
       IDataField dataField = model.getField( field.getName() );
       if( dataField.getName().equals( "id" ) ) {
@@ -34,11 +29,13 @@ public class UpdateEditDataQuery {
       }
       if( !first ) {
         sb.append( "," );
+        values.append(",");
       }
-      sb.append( "\"" ).append( dataField.getTableField() ).append( "\"" ).append( "=" ).append( "'" ).append( item.getFieldValue( dataField.getName() ) ).append( "'" );
+      sb.append( "\"" ).append( dataField.getTableField() ).append( "\"" );
+      values.append( "'" ).append( item.getFieldValue( dataField.getName() ) ).append( "'" );
       first = false;
     }
-    sb.append( " where id=" ).append( itemId );
+    sb.append(") values (").append(values).append(")");
     return sb.toString();
   }
   public IDataRow getItem() {
@@ -46,6 +43,5 @@ public class UpdateEditDataQuery {
   }
   public void setItem( IDataRow item ) {
     this.item = item;
-    itemId = Long.valueOf( item.getFieldValue( "id" ).toString() );
   }
 }
