@@ -3,6 +3,7 @@ package com.iks.cms.xml.parser;
 import com.iks.cms.core.data.*;
 import com.iks.cms.core.model.*;
 
+import org.apache.commons.lang3.*;
 import org.slf4j.*;
 import org.w3c.dom.*;
 import org.xml.sax.*;
@@ -40,6 +41,12 @@ public class DataParser extends CommonParser {
     field.setName( fieldElement.getAttribute( "name" ) );
     field.setLabel( fieldElement.getAttribute( "label" ) );
     field.setTableField( fieldElement.getAttribute( "tableField" ) );
+    if( fieldElement.hasAttribute( "primary" ) ) {
+      field.setIsPrimaryKey( BooleanUtils.toBoolean( fieldElement.getAttribute( "primary" ) ) );
+    }
+    if( fieldElement.hasAttribute( "required" ) ) {
+      field.setRequired( BooleanUtils.toBoolean( fieldElement.getAttribute( "required" ) ) );
+    }
     return field;
   }
 }

@@ -9,4 +9,6 @@ public interface IDataField {
   String getLabel();
 
   String getTableField();
+
+  boolean isRequired();
 }

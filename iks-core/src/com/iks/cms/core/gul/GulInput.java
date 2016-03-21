@@ -6,6 +6,7 @@ package com.iks.cms.core.gul;
 public class GulInput implements IGulInput {
   private String name;
   private String label;
+  private boolean required = false;
   public String getName() {
     return name;
   }
@@ -17,5 +18,11 @@ public class GulInput implements IGulInput {
   }
   public void setLabel( String label ) {
     this.label = label;
+  }
+  public boolean isRequired() {
+    return required;
+  }
+  public void setRequired( boolean required ) {
+    this.required = required;
   }
 }

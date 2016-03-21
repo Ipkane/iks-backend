@@ -14,6 +14,7 @@ import org.w3c.dom.*;
  */
 public class AppObjParser extends CommonParser {
   private static final Logger logger = LoggerFactory.getLogger( AppObjParser.class );
+  private AppObj appObj;
   public IAppObj parse( String fileName ) throws Exception {
     Document doc = parseFile( fileName );
     return parseRoot( doc.getDocumentElement() );
@@ -23,17 +24,18 @@ public class AppObjParser extends CommonParser {
   }
   //appObj
   private IAppObj parseRoot( Element root ) throws Exception {
-    AppObj appObj = new AppObj();
+    appObj = new AppObj();
     appObj.setName( root.getAttribute( "name" ) );
     appObj.setLabel( root.getAttribute( "label" ) );
     NodeList fieldList = root.getChildNodes();
+    appObj.setDataModel( parseDataModel( ( Element )root.getElementsByTagName( "data" ).item( 0 ) ) );
     for( int i = 0; i < fieldList.getLength(); i++ ) {
       Node node = fieldList.item( i );
       if( node.getNodeType() == Node.ELEMENT_NODE ) {
         Element childElement = ( Element )node;
         switch( childElement.getTagName() ) {
           case "data":
-            appObj.setDataModel( parseDataModel( childElement ) );
+            // we parse data before other elements
             break;
           case "list":
             appObj.setGrid( parseGrid( childElement ) );
@@ -55,12 +57,12 @@ public class AppObjParser extends CommonParser {
   }
   //list
   private IGrid parseGrid( Element gridElement ) throws Exception {
-    GridParser dataParser = new GridParser();
+    GridParser dataParser = new GridParser(appObj.getDataModel());
     return dataParser.parse( gridElement.getAttribute( "url" ) );
   }
   //edit
   private EditView parseEditView( Element editElement ) throws Exception {
-    EditViewParser dataParser = new EditViewParser();
+    EditViewParser dataParser = new EditViewParser(appObj.getDataModel());
     return dataParser.parse( editElement.getAttribute( "url" ) );
   }
 }

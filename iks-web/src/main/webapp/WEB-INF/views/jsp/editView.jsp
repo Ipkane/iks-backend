@@ -5,13 +5,14 @@
     <h2 class="modal-title">Edit ${appObj.label}</h2>
 </div>
 <div class="modal-body">
-    <form id="${appObj.name}" name="${appObj.name}" role="form" novalidate="novalidate" class="form-horizontal">
+    <form id="${appObj.name}Form" name="${appObj.name}Form" role="form" novalidate="novalidate" class="form-horizontal">
         <c:forEach items="${editView.elements}" var="element">
             <div class="form-group">
                 <label for="${element.name}" class="col-sm-4 control-label">${element.label}</label>
 
                 <div class="col-sm-8">
-                    <input type="text" class="form-control" id="${element.name}" placeholder="${element.label}" ng-model="selectedItem.${element.name}">
+                    <input type="text" class="form-control" id="${element.name}" placeholder="${element.label}" ng-model="selectedItem.${element.name}"
+                            ng-required="${element.required}">
                 </div>
             </div>
         </c:forEach>
@@ -29,7 +30,7 @@
 <div class="modal-footer">
     <div class="row">
         <div class="col-xs-3 col-xs-offset-3">
-            <button type="submit" class="btn btn-danger" ng-click="save()">Save</button>
+            <button type="submit" class="btn btn-danger" ng-click="save(${appObj.name}Form.$valid)">Save</button>
         </div>
         <div class="col-xs-3">
             <button class="btn btn-success" ng-click="cancel()">Cancel</button>

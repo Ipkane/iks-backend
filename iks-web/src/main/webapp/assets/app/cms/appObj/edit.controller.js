@@ -16,18 +16,22 @@ function GridEditController( $scope, $log, payload, $uibModalInstance, CoreServi
       }
     } );
   };
-  $scope.save     = function () {
+  $scope.save     = function (isValid) {
+    if (!isValid) {
+      $scope.addAlert("Form is invalid");
+      return;
+    }
     CoreService.updateEditData(
       angular.extend( angular.copy( payload ), { item: $scope.selectedItem } ),
       function ( response ) {
         if ( response.isSuccess ) {
           $uibModalInstance.close( $scope.selectedItem );
         } else {
-          $log.error( response );
+          $log.debug( response );
           $scope.addAlert(response.failure.message);
         }
       }, function ( response ) {
-        $log.error( response );
+        $log.debug( response );
       }
     )
     ;
