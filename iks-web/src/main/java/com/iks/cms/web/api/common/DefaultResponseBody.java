@@ -17,7 +17,7 @@ public class DefaultResponseBody< TRequest extends AbstractApiRequest, TResponse
   @JsonIgnore
   private String     message;
   @JsonIgnore
-  private String     developerMessage;
+  private AbstractApiResponse     error;
   @JsonIgnore
   private boolean success = true;
   public DefaultResponseBody( String apiEndpoint, TRequest request, TResponse response ) {
@@ -25,13 +25,13 @@ public class DefaultResponseBody< TRequest extends AbstractApiRequest, TResponse
     this.request = request;
     this.response = response;
   }
-  public DefaultResponseBody( String apiEndpoint, TRequest request, HttpStatus status, String message, String developerMessage ) {
+  public DefaultResponseBody( String apiEndpoint, TRequest request, HttpStatus status, String message, AbstractApiResponse error ) {
     this.success = false;
     this.apiEndpoint = apiEndpoint;
     this.request = request;
     this.status = status;
     this.message = message;
-    this.developerMessage = developerMessage;
+    this.error = error;
   }
   @JsonProperty( "inResponseTo" )
   public CInResponseTo inResponseTo() {
@@ -47,7 +47,7 @@ public class DefaultResponseBody< TRequest extends AbstractApiRequest, TResponse
   }
   @JsonProperty( "failure" )
   public ErrorInfo failure() {
-    return isSuccess() ? null : new ErrorInfo( status, message, developerMessage );
+    return isSuccess() ? null : new ErrorInfo( status, message, error );
   }
   @SuppressWarnings( "unused" )
   private class CInResponseTo {
@@ -65,15 +65,16 @@ public class DefaultResponseBody< TRequest extends AbstractApiRequest, TResponse
       return apiEndpoint;
     }
   }
+
   @SuppressWarnings( "unused" )
   private class ErrorInfo {
-    private HttpStatus status;
-    private String     message;
-    private String     developerMessage;
-    ErrorInfo( HttpStatus status, String message, String developerMessage ) {
+    private HttpStatus          status;
+    private String              message;
+    private AbstractApiResponse error;
+    ErrorInfo( HttpStatus status, String message, AbstractApiResponse error ) {
       this.status = status;
       this.message = message;
-      this.developerMessage = developerMessage;
+      this.error = error;
     }
     public String getStatus() {
       return status == null ? VALUE_UNKNOWN : status.toString();
@@ -84,8 +85,8 @@ public class DefaultResponseBody< TRequest extends AbstractApiRequest, TResponse
     public String getMessage() {
       return message;
     }
-    public String getDeveloperMessage() {
-      return developerMessage;
+    public AbstractApiResponse getError() {
+      return error;
     }
   }
 }

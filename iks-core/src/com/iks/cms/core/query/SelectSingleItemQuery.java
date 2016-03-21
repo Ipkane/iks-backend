@@ -23,11 +23,11 @@ public class SelectSingleItemQuery extends CommonDaoQuery {
     this.editView = editView;
     this.itemId = itemId;
   }
-  public DataRow executeQuery( SessionFactory sessionFactory ) {
+  public DataItem executeQuery( SessionFactory sessionFactory ) {
     String sqlQuery = buildSqlQuery();
     logger.debug( sqlQuery );
     Object[] row = ( Object[] )selectSingleQuery( sessionFactory, sqlQuery );
-    DataRow resultItem = new DataRow();
+    DataItem resultItem = new DataItem();
     int i = 0;
     for( IGulInput field : editView.getFields() ) {
       resultItem.addFieldValue( field.getName(), row[i] );

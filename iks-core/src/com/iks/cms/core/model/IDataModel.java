@@ -1,6 +1,7 @@
 package com.iks.cms.core.model;
 
 import com.iks.cms.core.data.*;
+import com.iks.cms.core.grid.*;
 
 import java.util.*;
 
@@ -11,4 +12,5 @@ public interface IDataModel {
   IDataField getField(String name);
   List<IDataField> getFields();
   String getTableName();
+  boolean validate( IDataItem item );
 }

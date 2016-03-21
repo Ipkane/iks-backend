@@ -1,5 +1,6 @@
 package com.iks.cms.web.controller;
 
+import com.iks.cms.core.exception.*;
 import com.iks.cms.core.service.*;
 import com.iks.cms.web.api.common.*;
 import com.iks.cms.web.api.grid.*;
@@ -72,6 +73,10 @@ public class CoreController {
         appObjService.updateItem( request.getAppObj(), request.getItem() );
       }
       return ApiUtils.makeResponse( REQUEST_UPDATE_EDIT_DATA, request, new ResponseEmpty() );
+    } catch( ValidationException ex ) {
+      logger.error( RESPONSE_ERROR_UPDATE_EDIT_DATA, ex );
+      ResponseValidationException response = new ResponseValidationException( ex );
+      return ApiUtils.makeClientErrorResponse( REQUEST_UPDATE_EDIT_DATA, RESPONSE_ERROR_UPDATE_EDIT_DATA, response, request );
     } catch( Exception ex ) {
       logger.error( RESPONSE_ERROR_UPDATE_EDIT_DATA, ex );
       return ApiUtils.makeErrorResponse( REQUEST_UPDATE_EDIT_DATA, RESPONSE_ERROR_UPDATE_EDIT_DATA, request );

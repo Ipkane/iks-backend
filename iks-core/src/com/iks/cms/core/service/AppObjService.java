@@ -1,6 +1,7 @@
 package com.iks.cms.core.service;
 
 import com.iks.cms.core.appObj.*;
+import com.iks.cms.core.exception.*;
 import com.iks.cms.core.grid.*;
 import com.iks.cms.core.gul.*;
 import com.iks.cms.core.model.*;
@@ -28,20 +29,28 @@ public class AppObjService {
   public IDataModel getModel( String appObj ) {
     return appObjMap.get( appObj ).getDataModel();
   }
-  public List< IDataRow > getGridData( String appObj ) {
+  public List< IDataItem > getGridData( String appObj ) {
     GridQuery query = new GridQuery( getModel( appObj ), getGrid( appObj ) );
     return query.executeQuery( commonDao.getSessionFactory() );
   }
-  public IDataRow getEditData( String appObj, Long itemId ) {
+  public IDataItem getEditData( String appObj, Long itemId ) {
     SelectSingleItemQuery query = new SelectSingleItemQuery( getModel( appObj ), getEditView( appObj ), itemId );
     return query.executeQuery( commonDao.getSessionFactory() );
   }
-  public void createNewItem( String appObj, IDataRow item ) {
+  public void createNewItem( String appObj, IDataItem item ) throws ValidationException {
+    IDataModel model = getModel( appObj );
+    if( !model.validate( item ) ) {
+      throw new ValidationException( item.getErrors() );
+    }
     CreateItemQuery query = new CreateItemQuery( getModel( appObj ), getEditView( appObj ), item );
-    query.executeQuery( commonDao.getSessionFactory());
+    query.executeQuery( commonDao.getSessionFactory() );
   }
-  public void updateItem( String appObj, IDataRow item ) {
-    UpdateItemQuery query = new UpdateItemQuery( getModel( appObj ), getEditView( appObj ), item );
+  public void updateItem( String appObj, IDataItem item ) throws ValidationException {
+    IDataModel model = getModel( appObj );
+    if( !model.validate( item ) ) {
+      throw new ValidationException( item.getErrors() );
+    }
+    UpdateItemQuery query = new UpdateItemQuery( model, getEditView( appObj ), item );
     query.executeQuery( commonDao.getSessionFactory() );
   }
   public void deleteItem( String appObj, Long itemId ) {

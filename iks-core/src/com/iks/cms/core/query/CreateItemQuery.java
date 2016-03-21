@@ -17,8 +17,8 @@ public class CreateItemQuery extends CommonDaoQuery {
   private static final Logger logger = LoggerFactory.getLogger( SelectSingleItemQuery.class );
   private IEditView  editView;
   private IDataModel model;
-  private IDataRow   item;
-  public CreateItemQuery( IDataModel model, IEditView editView, IDataRow item ) {
+  private IDataItem  item;
+  public CreateItemQuery( IDataModel model, IEditView editView, IDataItem item ) {
     this.model = model;
     this.editView = editView;
     setItem( item );
@@ -41,10 +41,10 @@ public class CreateItemQuery extends CommonDaoQuery {
     }
     return sb.toString();
   }
-  public IDataRow getItem() {
+  public IDataItem getItem() {
     return item;
   }
-  public void setItem( IDataRow item ) {
+  public void setItem( IDataItem item ) {
     this.item = item;
   }
 }

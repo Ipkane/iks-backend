@@ -10,8 +10,6 @@ import com.iks.cms.core.sql.query.*;
 import org.hibernate.*;
 import org.slf4j.*;
 
-import java.util.*;
-
 /**
  * @author Igor Kaynov
  */
@@ -19,9 +17,9 @@ public class UpdateItemQuery extends CommonDaoQuery {
   private static final Logger logger = LoggerFactory.getLogger( SelectSingleItemQuery.class );
   private IEditView  editView;
   private IDataModel model;
-  private IDataRow   item;
+  private IDataItem  item;
   private Long       itemId;
-  public UpdateItemQuery( IDataModel model, IEditView editView, IDataRow item ) {
+  public UpdateItemQuery( IDataModel model, IEditView editView, IDataItem item ) {
     this.model = model;
     this.editView = editView;
     setItem( item );
@@ -49,10 +47,10 @@ public class UpdateItemQuery extends CommonDaoQuery {
     sb.addCriteria( new MatchCriteria( idColumn, itemId, MatchType.Eq ) );
     return sb.toString();
   }
-  public IDataRow getItem() {
+  public IDataItem getItem() {
     return item;
   }
-  public void setItem( IDataRow item ) {
+  public void setItem( IDataItem item ) {
     this.item = item;
     itemId = Long.valueOf( item.getFieldValue( "id" ).toString() );
   }

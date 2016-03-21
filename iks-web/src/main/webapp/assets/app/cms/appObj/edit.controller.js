@@ -5,30 +5,36 @@ angular.module( 'app.cms' )//
 function GridEditController( $scope, $log, payload, $uibModalInstance, CoreService ) {
   angular.extend( $scope, {
     alerts      : [],
-    selectedItem: null
+    selectedItem: {}
   } );
   function init() {
     CoreService.getEditData( payload, function ( response ) {
       if ( response.isSuccess ) {
-        $scope.selectedItem = response.success.item;
+        $scope.selectedItem = response.success.item || {};
       } else {
         $log.error( response );
       }
     } );
   };
-  $scope.save     = function (isValid) {
-    if (!isValid) {
-      $scope.addAlert("Form is invalid");
-      return;
-    }
+  $scope.save       = function ( isValid ) {
+    //if (!isValid) {
+    //  //$log.debug($scope.employeeForm);
+    //  $scope.addAlert("Form is invalid");
+    //  return;
+    //}
     CoreService.updateEditData(
       angular.extend( angular.copy( payload ), { item: $scope.selectedItem } ),
       function ( response ) {
         if ( response.isSuccess ) {
           $uibModalInstance.close( $scope.selectedItem );
         } else {
-          $log.debug( response );
-          $scope.addAlert(response.failure.message);
+          if ( response.failure.status == '400' ) {
+            _.each(response.failure.error.errors, function(error) {
+              $scope.addAlert(error.message);
+            });
+          } else {
+            $scope.addAlert( response.failure.message );
+          }
         }
       }, function ( response ) {
         $log.debug( response );
@@ -36,17 +42,17 @@ function GridEditController( $scope, $log, payload, $uibModalInstance, CoreServi
     )
     ;
   };
-  $scope.cancel   = function () {
+  $scope.cancel     = function () {
     $uibModalInstance.dismiss( 'Cancel' );
   };
-  $scope.addAlert = function ( msg, params ) {
+  $scope.addAlert   = function ( msg, params ) {
     $scope.alerts.push( {
       type   : 'danger',
       message: msg,
-      params: params
+      params : params
     } )
   };
-  $scope.closeAlert = function(index) {
+  $scope.closeAlert = function ( index ) {
     $scope.alerts.splice( index, 1 );
   };
   init();

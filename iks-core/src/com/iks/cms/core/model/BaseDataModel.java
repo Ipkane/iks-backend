@@ -3,6 +3,10 @@ package com.iks.cms.core.model;
 import com.google.common.collect.*;
 
 import com.iks.cms.core.data.*;
+import com.iks.cms.core.exception.*;
+import com.iks.cms.core.grid.*;
+
+import org.apache.commons.lang3.*;
 
 import java.util.*;
 
@@ -38,5 +42,18 @@ public class BaseDataModel implements IDataModel {
   }
   public void setAppObj( String appObj ) {
     this.appObj = appObj;
+  }
+  @Override
+  public boolean validate( IDataItem item ) {
+    DataItem dataItem = ( DataItem )item;
+    boolean valid = true;
+    for( IDataField dataField : fields ) {
+      Object value = dataItem.getFieldValue( dataField.getName() );
+      if( dataField.isRequired() && ( value == null || StringUtils.trimToNull( value.toString() ) == null ) ) {
+        dataItem.addError( new FieldError( dataField.getName(), dataField.getLabel() + " is required" ) );
+        valid = false;
+      }
+    }
+    return valid;
   }
 }

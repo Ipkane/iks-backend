@@ -28,13 +28,13 @@ public class GridQuery extends CommonDaoQuery {
   public void setGrid( IGrid grid ) {
     this.grid = grid;
   }
-  public List< IDataRow > executeQuery( SessionFactory sessionFactory ) {
+  public List< IDataItem > executeQuery( SessionFactory sessionFactory ) {
     String sqlQuery = buildSqlQuery();
     logger.debug( sqlQuery );
     List rows = selectQuery( sessionFactory, sqlQuery );
-    List< IDataRow > resultList = new ArrayList<>();
+    List< IDataItem > resultList = new ArrayList<>();
     for( Object rowData : rows ) {
-      DataRow resultItem = new DataRow();
+      DataItem resultItem = new DataItem();
       Object[] data = ( Object[] )rowData;
       int i = 0;
       for( IGridField field : grid.getFields() ) {
