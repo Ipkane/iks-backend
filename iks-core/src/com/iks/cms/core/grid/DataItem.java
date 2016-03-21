@@ -10,6 +10,7 @@ import java.util.*;
  */
 public class DataItem implements IDataItem {
   private Map< String, Object > fieldValueMap = new LinkedHashMap<>();
+  @JsonIgnore
   private List< IValidationError >        errors        = new ArrayList<>();
   @JsonValue
   @JsonAnyGetter
@@ -28,6 +29,7 @@ public class DataItem implements IDataItem {
   public Object getFieldValue( String fieldName ) {
     return fieldValueMap.get( fieldName );
   }
+  @JsonIgnore
   public List< IValidationError > getErrors() {
     return errors;
   }

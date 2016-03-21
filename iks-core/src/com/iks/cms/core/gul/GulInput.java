@@ -7,6 +7,7 @@ public class GulInput implements IGulInput {
   private String name;
   private String label;
   private boolean required = false;
+  private boolean readonly=false;
   public String getName() {
     return name;
   }
@@ -24,5 +25,11 @@ public class GulInput implements IGulInput {
   }
   public void setRequired( boolean required ) {
     this.required = required;
+  }
+  public boolean isReadonly() {
+    return readonly;
+  }
+  public void setReadonly( boolean readonly ) {
+    this.readonly = readonly;
   }
 }

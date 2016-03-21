@@ -12,7 +12,7 @@
 
                 <div class="col-sm-8">
                     <input type="text" class="form-control" id="${element.name}" placeholder="${element.label}" ng-model="selectedItem.${element.name}"
-                            ng-required="${element.required}">
+                            ng-required="${element.required}" ng-readonly="${element.readonly}">
                 </div>
             </div>
         </c:forEach>
