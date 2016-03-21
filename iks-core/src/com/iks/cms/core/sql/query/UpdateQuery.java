@@ -21,22 +21,11 @@ public class UpdateQuery extends SqlQuery {
   public String toString() {
     StringBuilder sql = new StringBuilder( "update " );
     sql.append( table.getName() ).append( " set " );
-    appendList( sql, updateColumns, "", ", " );
-    appendList( sql, criterias, " where ", " and " );
+    appendList( sql, updateColumns, "", ", ", " " );
+    appendList( sql, criterias, " where ", " and ", " " );
     return sql.toString();
   }
   public void setTable( Table table ) {
     this.table = table;
-  }
-  private static class UpdateColumn {
-    private Column column;
-    private Object value;
-    public UpdateColumn( Column column, Object value ) {
-      this.column = column;
-      this.value = value;
-    }
-    public String toString() {
-      return column.getName() + "=" + "'" + value + "'";
-    }
   }
 }

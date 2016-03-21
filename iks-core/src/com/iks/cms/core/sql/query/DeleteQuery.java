@@ -17,7 +17,7 @@ public class DeleteQuery extends SqlQuery {
   public String toString() {
     StringBuilder sql = new StringBuilder( "delete from " );
     sql.append( table.getName() );
-    appendList( sql, criterias, " where ", " and " );
+    appendList( sql, criterias, " where ", " and ", "" );
     return sql.toString();
   }
   public void setTable( Table table ) {

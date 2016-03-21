@@ -4,9 +4,10 @@ package com.iks.cms.core.sql;
  * @author Igor Kaynov
  */
 public class Column {
-  private String tableAlias;
-  private String name;
-  private String alias;
+  private String     tableAlias;
+  private String     name;
+  private String     alias;
+  private ColumnType type = ColumnType.String;
   public Column( String name ) {
     this.name = name;
   }
@@ -34,5 +35,11 @@ public class Column {
       sb.append( " as " ).append( alias );
     }
     return sb.toString();
+  }
+  public ColumnType getType() {
+    return type;
+  }
+  public void setType( ColumnType type ) {
+    this.type = type;
   }
 }

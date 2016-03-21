@@ -37,11 +37,8 @@ public class AppObjService {
     return query.executeQuery( commonDao.getSessionFactory() );
   }
   public void createNewItem( String appObj, IDataRow item ) {
-    IEditView editView = getEditView( appObj );
-    CreateItemQuery query = new CreateItemQuery( getModel( appObj ), editView, item );
-    String sqlQuery = query.buildSqlQuery();
-    logger.debug( sqlQuery );
-    commonDao.updateQuery( sqlQuery );
+    CreateItemQuery query = new CreateItemQuery( getModel( appObj ), getEditView( appObj ), item );
+    query.executeQuery( commonDao.getSessionFactory());
   }
   public void updateItem( String appObj, IDataRow item ) {
     UpdateItemQuery query = new UpdateItemQuery( getModel( appObj ), getEditView( appObj ), item );

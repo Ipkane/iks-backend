@@ -4,11 +4,17 @@ import com.iks.cms.core.data.*;
 import com.iks.cms.core.grid.*;
 import com.iks.cms.core.gul.*;
 import com.iks.cms.core.model.*;
+import com.iks.cms.core.sql.*;
+import com.iks.cms.core.sql.query.*;
+
+import org.hibernate.*;
+import org.slf4j.*;
 
 /**
  * @author Igor Kaynov
  */
-public class CreateItemQuery {
+public class CreateItemQuery extends CommonDaoQuery {
+  private static final Logger logger = LoggerFactory.getLogger( SelectSingleItemQuery.class );
   private IEditView  editView;
   private IDataModel model;
   private IDataRow   item;
@@ -17,25 +23,22 @@ public class CreateItemQuery {
     this.editView = editView;
     setItem( item );
   }
-  public String buildSqlQuery() {
-    StringBuilder sb = new StringBuilder();
-    sb.append( "insert into " ).append( model.getTableName() ).append( " (" );
-    boolean first = true;
-    StringBuilder values = new StringBuilder(  );
+  public void executeQuery( SessionFactory sessionFactory ) {
+    String sqlQuery = buildSqlQuery();
+    logger.debug( sqlQuery );
+    updateQuery( sessionFactory, sqlQuery );
+  }
+  private String buildSqlQuery() {
+    InsertQuery sb = new InsertQuery();
+    Table table = new Table( model.getTableName() );
+    sb.setTable( table );
     for( IGulInput field : editView.getFields() ) {
       IDataField dataField = model.getField( field.getName() );
       if( dataField.getName().equals( "id" ) ) {
         continue;
       }
-      if( !first ) {
-        sb.append( "," );
-        values.append(",");
-      }
-      sb.append( dataField.getTableField() );
-      values.append( "'" ).append( item.getFieldValue( dataField.getName() ) ).append( "'" );
-      first = false;
+      sb.addUpdateColumn( new Column( table, dataField.getTableField() ), item.getFieldValue( dataField.getName() ) );
     }
-    sb.append(") values (").append(values).append(")");
     return sb.toString();
   }
   public IDataRow getItem() {

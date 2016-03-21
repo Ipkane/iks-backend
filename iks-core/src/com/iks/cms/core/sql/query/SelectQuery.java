@@ -58,19 +58,19 @@ public class SelectQuery  extends SqlQuery {
   }
   @Override
   public String toString() {
-    StringBuilder sql = new StringBuilder( "select " );
+    StringBuilder sql = new StringBuilder( "select" );
     if( columns.size() == 0 ) {
       sql.append( "*" );
     } else {
-      appendList( sql, columns, "", ", " );
+      appendList( sql, columns, " ", ", ", "" );
     }
-    appendList( sql, tables, " from ", ", " );
-    appendList( sql, joins, " join ", " join " );
-    appendList( sql, leftJoins, " left join ", " left join " );
-    appendList( sql, criterias, " where ", " and " );
-    appendList( sql, groupBys, " group by ", ", " );
-    appendList( sql, havings, " having ", " and " );
-    appendList( sql, orderBys, " order by ", ", " );
+    appendList( sql, tables, " from ", ", ", "" );
+    appendList( sql, joins, " join ", " join ", "" );
+    appendList( sql, leftJoins, " left join ", " left join ", "" );
+    appendList( sql, criterias, " where ", " and ", "" );
+    appendList( sql, groupBys, " group by ", ", ", "" );
+    appendList( sql, havings, " having ", " and ", "" );
+    appendList( sql, orderBys, " order by ", ", ", "" );
     return sql.toString();
   }
   public SelectQuery addCriteria( ICriteria criteria ) {
