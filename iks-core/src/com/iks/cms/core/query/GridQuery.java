@@ -49,9 +49,10 @@ public class GridQuery extends CommonDaoQuery {
     SelectQuery sb = new SelectQuery();
     Table table = new Table( model.getTableName(), "t" );
     sb.from( table );
+    sb.orderBy( table.getColumn( model.getPrimaryFieldName(), null ) );
     for( IGridField field : grid.getFields() ) {
       IDataField dataField = model.getField( field.getName() );
-      sb.addColumn( new Column( table, dataField.getTableField(), dataField.getName() ) );
+      sb.addColumn( table.getColumn( dataField.getTableField(), dataField.getName() ) );
     }
     return sb.toString();
   }

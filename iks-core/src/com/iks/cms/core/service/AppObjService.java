@@ -85,7 +85,7 @@ public class AppObjService {
         GulReferenceField referenceField = ( GulReferenceField )field;
         ManyToOne dataField = ( ManyToOne )model.getField( field.getName() );
         List< String > referencedFields = Arrays.asList( dataField.getReferenceField(), referenceField.getDisplayField() );
-        ModelQuery query = new ModelQuery( getModel( appObj ) );
+        ModelQuery query = new ModelQuery( getModel( dataField.getAppObj() ) );
         query.setFields( referencedFields );
         List< IDataItem > items = query.executeQuery( commonDao.getSessionFactory() );
         List< SelectOption > options = new ArrayList<>( items.size() );
