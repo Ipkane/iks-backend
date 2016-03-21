@@ -19,7 +19,7 @@ public class CreateItemQuery {
   }
   public String buildSqlQuery() {
     StringBuilder sb = new StringBuilder();
-    sb.append( "insert into " ).append( "\"" ).append( model.getTableName() ).append( "\"" ).append( " (" );
+    sb.append( "insert into " ).append( model.getTableName() ).append( " (" );
     boolean first = true;
     StringBuilder values = new StringBuilder(  );
     for( IGulInput field : editView.getFields() ) {
@@ -31,7 +31,7 @@ public class CreateItemQuery {
         sb.append( "," );
         values.append(",");
       }
-      sb.append( "\"" ).append( dataField.getTableField() ).append( "\"" );
+      sb.append( dataField.getTableField() );
       values.append( "'" ).append( item.getFieldValue( dataField.getName() ) ).append( "'" );
       first = false;
     }

@@ -10,50 +10,47 @@ import com.iks.cms.core.sql.query.*;
 import org.hibernate.*;
 import org.slf4j.*;
 
-import java.util.*;
-
 /**
  * @author Igor Kaynov
  */
-public class UpdateItemQuery extends CommonDaoQuery {
+public class SelectSingleItemQuery extends CommonDaoQuery {
   private static final Logger logger = LoggerFactory.getLogger( SelectSingleItemQuery.class );
   private IEditView  editView;
   private IDataModel model;
-  private IDataRow   item;
   private Long       itemId;
-  public UpdateItemQuery( IDataModel model, IEditView editView, IDataRow item ) {
+  public SelectSingleItemQuery( IDataModel model, IEditView editView, Long itemId ) {
     this.model = model;
     this.editView = editView;
-    setItem( item );
+    this.itemId = itemId;
   }
-  public void executeQuery( SessionFactory sessionFactory ) {
+  public DataRow executeQuery( SessionFactory sessionFactory ) {
     String sqlQuery = buildSqlQuery();
     logger.debug( sqlQuery );
-    updateQuery( sessionFactory, sqlQuery );
+    Object[] row = ( Object[] )selectSingleQuery( sessionFactory, sqlQuery );
+    DataRow resultItem = new DataRow();
+    int i = 0;
+    for( IGulInput field : editView.getFields() ) {
+      resultItem.addFieldValue( field.getName(), row[i] );
+      i++;
+    }
+    return resultItem;
   }
   private String buildSqlQuery() {
-    if( itemId == null ) {
-      throw new IllegalArgumentException( "Item id is null" );
-    }
-    UpdateQuery sb = new UpdateQuery();
-    Table table = new Table( model.getTableName() );
-    sb.setTable( table );
+    SelectQuery sb = new SelectQuery();
+    Table table = new Table( model.getTableName(), "t" );
+    sb.from( table );
     for( IGulInput field : editView.getFields() ) {
       IDataField dataField = model.getField( field.getName() );
-      if( dataField.getName().equals( "id" ) ) {
-        continue;
-      }
-      sb.addUpdateColumn( new Column( table, dataField.getTableField() ), item.getFieldValue( dataField.getName() ) );
+      sb.addColumn( new Column( table, dataField.getTableField(), dataField.getName() ) );
     }
     Column idColumn = new Column( table, "id" );
     sb.addCriteria( new MatchCriteria( idColumn, itemId, MatchType.Eq ) );
     return sb.toString();
   }
-  public IDataRow getItem() {
-    return item;
+  public Long getItemId() {
+    return itemId;
   }
-  public void setItem( IDataRow item ) {
-    this.item = item;
-    itemId = Long.valueOf( item.getFieldValue( "id" ).toString() );
+  public void setItemId( Long itemId ) {
+    this.itemId = itemId;
   }
 }

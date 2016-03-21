@@ -29,38 +29,12 @@ public class AppObjService {
     return appObjMap.get( appObj ).getDataModel();
   }
   public List< IDataRow > getGridData( String appObj ) {
-    IGrid grid = getGrid( appObj );
-    GridQuery query = new GridQuery( getModel( appObj ), grid );
-    String sqlQuery = query.buildSqlQuery();
-    logger.debug( sqlQuery );
-    List rows = commonDao.selectQuery( sqlQuery );
-    List< IDataRow > resultList = new ArrayList<>();
-    for( Object rowData : rows ) {
-      DataRow resultItem = new DataRow();
-      Object[] data = ( Object[] )rowData;
-      int i = 0;
-      for( IGridField field : grid.getFields() ) {
-        resultItem.addFieldValue( field.getName(), data[i] );
-        i++;
-      }
-      resultList.add( resultItem );
-    }
-    return resultList;
+    GridQuery query = new GridQuery( getModel( appObj ), getGrid( appObj ) );
+    return query.executeQuery( commonDao.getSessionFactory() );
   }
   public IDataRow getEditData( String appObj, Long itemId ) {
-    IEditView editView = getEditView( appObj );
-    EditViewQuery query = new EditViewQuery( getModel( appObj ), editView );
-    query.setItemId( itemId );
-    String sqlQuery = query.buildSqlQuery();
-    logger.debug( sqlQuery );
-    Object[] row = ( Object[] )commonDao.selectSingleQuery( sqlQuery );
-    DataRow resultItem = new DataRow();
-    int i = 0;
-    for( IGulInput field : editView.getFields() ) {
-      resultItem.addFieldValue( field.getName(), row[i] );
-      i++;
-    }
-    return resultItem;
+    SelectSingleItemQuery query = new SelectSingleItemQuery( getModel( appObj ), getEditView( appObj ), itemId );
+    return query.executeQuery( commonDao.getSessionFactory() );
   }
   public void createNewItem( String appObj, IDataRow item ) {
     IEditView editView = getEditView( appObj );
@@ -70,18 +44,12 @@ public class AppObjService {
     commonDao.updateQuery( sqlQuery );
   }
   public void updateItem( String appObj, IDataRow item ) {
-    IEditView editView = getEditView( appObj );
-    UpdateItemQuery query = new UpdateItemQuery( getModel( appObj ), editView, item );
-    String sqlQuery = query.buildSqlQuery();
-    logger.debug( sqlQuery );
-    commonDao.updateQuery( sqlQuery );
+    UpdateItemQuery query = new UpdateItemQuery( getModel( appObj ), getEditView( appObj ), item );
+    query.executeQuery( commonDao.getSessionFactory() );
   }
   public void deleteItem( String appObj, Long itemId ) {
-    IEditView editView = getEditView( appObj );
-    DeleteItemQuery query = new DeleteItemQuery( getModel( appObj ), editView, itemId );
-    String sqlQuery = query.buildSqlQuery();
-    logger.debug( sqlQuery );
-    commonDao.updateQuery( sqlQuery );
+    DeleteItemQuery query = new DeleteItemQuery( getModel( appObj ), getEditView( appObj ), itemId );
+    query.executeQuery( commonDao.getSessionFactory() );
   }
   public IEditView getEditView( String appObj ) {
     return getAppObj( appObj ).getEditView();

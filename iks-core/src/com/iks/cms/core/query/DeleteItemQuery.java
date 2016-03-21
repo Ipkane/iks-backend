@@ -4,11 +4,17 @@ import com.iks.cms.core.data.*;
 import com.iks.cms.core.grid.*;
 import com.iks.cms.core.gul.*;
 import com.iks.cms.core.model.*;
+import com.iks.cms.core.sql.*;
+import com.iks.cms.core.sql.query.*;
+
+import org.hibernate.*;
+import org.slf4j.*;
 
 /**
  * @author Igor Kaynov
  */
-public class DeleteItemQuery {
+public class DeleteItemQuery extends CommonDaoQuery {
+  private static final Logger logger = LoggerFactory.getLogger( SelectSingleItemQuery.class );
   private IEditView  editView;
   private IDataModel model;
   private Long       itemId;
@@ -17,13 +23,20 @@ public class DeleteItemQuery {
     this.editView = editView;
     this.itemId = itemId;
   }
-  public String buildSqlQuery() {
+  public void executeQuery( SessionFactory sessionFactory ) {
+    String sqlQuery = buildSqlQuery();
+    logger.debug( sqlQuery );
+    updateQuery( sessionFactory, sqlQuery );
+  }
+  private String buildSqlQuery() {
     if( itemId == null ) {
       throw new IllegalArgumentException( "Item id is null" );
     }
-    StringBuilder sb = new StringBuilder();
-    sb.append( "delete from " ).append( "\"" ).append( model.getTableName() ).append( "\"" );
-    sb.append( " where id=" ).append( itemId );
+    DeleteQuery sb = new DeleteQuery();
+    Table table = new Table( model.getTableName() );
+    sb.setTable( table );
+    Column idColumn = new Column( table, "id" );
+    sb.addCriteria( new MatchCriteria( idColumn, itemId, MatchType.Eq ) );
     return sb.toString();
   }
 }
