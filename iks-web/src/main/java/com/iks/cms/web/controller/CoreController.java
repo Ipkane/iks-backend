@@ -53,11 +53,7 @@ public class CoreController {
   public ResponseEntity< DefaultResponseBody< ?, ? > > getEditData( RequestGetEditData request ) {
     try {
       ResponseGetEditData response = new ResponseGetEditData();
-      if( request.getItemId() == null ) {
-        // todo get new item
-      } else {
-        response.setItem( appObjService.getEditData( request.getAppObj(), request.getItemId() ) );
-      }
+      response.setItem( appObjService.getEditData( request.getAppObj(), request.getItemId() ) );
       return ApiUtils.makeResponse( REQUEST_GET_EDIT_DATA, request, response );
     } catch( Exception ex ) {
       logger.error( RESPONSE_ERROR_GET_EDIT_DATA, ex );
@@ -68,7 +64,7 @@ public class CoreController {
   public ResponseEntity< DefaultResponseBody< ?, ? > > updateEditData( @RequestBody RequestUpdateEditData request ) {
     try {
       if( request.isNew() ) {
-        appObjService.createNewItem( request.getAppObj(), request.getItem() );
+        appObjService.saveNewItem( request.getAppObj(), request.getItem() );
       } else {
         appObjService.updateItem( request.getAppObj(), request.getItem() );
       }

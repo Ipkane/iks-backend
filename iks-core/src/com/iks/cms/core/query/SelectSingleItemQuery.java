@@ -29,8 +29,8 @@ public class SelectSingleItemQuery extends CommonDaoQuery {
     Object[] row = ( Object[] )selectSingleQuery( sessionFactory, sqlQuery );
     DataItem resultItem = new DataItem();
     int i = 0;
-    for( IGulInput field : editView.getFields() ) {
-      resultItem.addFieldValue( field.getName(), row[i] );
+    for( IGulInputField field : editView.getFields() ) {
+      resultItem.addFieldValue( field.getName(), row[i] == null ? null : row[i].toString() );
       i++;
     }
     return resultItem;
@@ -39,7 +39,7 @@ public class SelectSingleItemQuery extends CommonDaoQuery {
     SelectQuery sb = new SelectQuery();
     Table table = new Table( model.getTableName(), "t" );
     sb.from( table );
-    for( IGulInput field : editView.getFields() ) {
+    for( IGulInputField field : editView.getFields() ) {
       IDataField dataField = model.getField( field.getName() );
       sb.addColumn( new Column( table, dataField.getTableField(), dataField.getName() ) );
     }

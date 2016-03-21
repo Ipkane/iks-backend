@@ -24,7 +24,7 @@ public class ColumnValue {
   public String toString() {
     switch( type ) {
       case String:
-        String valueStr = StringUtils.trimToNull( value.toString() );
+        String valueStr = value == null ? null : StringUtils.trimToNull( value.toString() );
         return valueStr == null ? null : "'" + valueStr + "'";
       default:
         return value.toString();

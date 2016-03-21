@@ -2,5 +2,6 @@
   <table>
     <field name="id"/>
     <field name="fio" label="First/Last Name Name"/>
+    <field name="gender"/>
   </table>
 </gridView>

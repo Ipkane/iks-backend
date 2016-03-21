@@ -1,6 +1,7 @@
 package com.iks.cms.core.service;
 
 import com.iks.cms.core.appObj.*;
+import com.iks.cms.core.data.*;
 import com.iks.cms.core.exception.*;
 import com.iks.cms.core.grid.*;
 import com.iks.cms.core.gul.*;
@@ -33,11 +34,26 @@ public class AppObjService {
     GridQuery query = new GridQuery( getModel( appObj ), getGrid( appObj ) );
     return query.executeQuery( commonDao.getSessionFactory() );
   }
-  public IDataItem getEditData( String appObj, Long itemId ) {
-    SelectSingleItemQuery query = new SelectSingleItemQuery( getModel( appObj ), getEditView( appObj ), itemId );
-    return query.executeQuery( commonDao.getSessionFactory() );
+  public List< IDataItem > getModelData( String appObj, List< String > fields ) {
+    ModelQuery query = new ModelQuery( getModel( appObj ) );
+    return query.setFields( fields ).executeQuery( commonDao.getSessionFactory() );
   }
-  public void createNewItem( String appObj, IDataItem item ) throws ValidationException {
+  public IDataItem getEditData( String appObj, Long itemId ) {
+    if( itemId == null ) {
+      return createNewItem( appObj, getEditView( appObj ) );
+    } else {
+      SelectSingleItemQuery query = new SelectSingleItemQuery( getModel( appObj ), getEditView( appObj ), itemId );
+      return query.executeQuery( commonDao.getSessionFactory() );
+    }
+  }
+  public IDataItem createNewItem( String appObj, IEditView editView ) {
+    DataItem dataItem = new DataItem();
+    for( IGulInputField field : editView.getFields() ) {
+      dataItem.addFieldValue( field.getName(), field.getDefaultValue() );
+    }
+    return dataItem;
+  }
+  public void saveNewItem( String appObj, IDataItem item ) throws ValidationException {
     IDataModel model = getModel( appObj );
     if( !model.validate( item ) ) {
       throw new ValidationException( item.getErrors() );
@@ -59,6 +75,27 @@ public class AppObjService {
   }
   public IEditView getEditView( String appObj ) {
     return getAppObj( appObj ).getEditView();
+  }
+  public Map< String, List< SelectOption > > getEdiViewOptionsMap( String appObj ) {
+    Map< String, List< SelectOption > > optionsMap = new HashMap<>();
+    IDataModel model = getModel( appObj );
+    IEditView editView = getEditView( appObj );
+    for( IGulInputField field : editView.getFields() ) {
+      if( field.getType() == GulConstant.REFERENCE_SELECT_TYPE ) {
+        GulReferenceField referenceField = ( GulReferenceField )field;
+        ManyToOne dataField = ( ManyToOne )model.getField( field.getName() );
+        List< String > referencedFields = Arrays.asList( dataField.getReferenceField(), referenceField.getDisplayField() );
+        ModelQuery query = new ModelQuery( getModel( appObj ) );
+        query.setFields( referencedFields );
+        List< IDataItem > items = query.executeQuery( commonDao.getSessionFactory() );
+        List< SelectOption > options = new ArrayList<>( items.size() );
+        for( IDataItem item : items ) {
+          options.add( new SelectOption( item.getFieldValue( dataField.getReferenceField() ).toString(), item.getFieldValue( referenceField.getDisplayField() ).toString() ) );
+        }
+        optionsMap.put( field.getName(), options );
+      }
+    }
+    return optionsMap;
   }
   public void addAppObj( IAppObj appObj ) {
     appObjMap.put( appObj.getName(), appObj );

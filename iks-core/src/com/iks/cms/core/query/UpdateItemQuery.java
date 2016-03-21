@@ -36,7 +36,7 @@ public class UpdateItemQuery extends CommonDaoQuery {
     UpdateQuery sb = new UpdateQuery();
     Table table = new Table( model.getTableName() );
     sb.setTable( table );
-    for( IGulInput field : editView.getFields() ) {
+    for( IGulInputField field : editView.getFields() ) {
       IDataField dataField = model.getField( field.getName() );
       if( dataField.getName().equals( "id" ) ) {
         continue;

@@ -38,6 +38,7 @@ public class ViewController {
   public String gridEditView( Model model, String appObj, Long itemId ) {
     IEditView editView = appObjService.getEditView( appObj );
     model.addAttribute( "editView", editView );
+    model.addAttribute( "optionsMap", appObjService.getEdiViewOptionsMap( appObj ) );
     model.addAttribute( "appObj", appObjService.getAppObj( appObj ) );
     return "editView";
   }

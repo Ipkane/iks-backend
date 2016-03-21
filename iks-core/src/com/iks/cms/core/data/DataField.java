@@ -11,7 +11,6 @@ public class DataField implements IDataField {
   private String name;
   private String label;
   private String tableField;
-  private boolean isPrimaryKey = false;
   private boolean required = false;
   @Override
   public String getName() {
@@ -36,12 +35,6 @@ public class DataField implements IDataField {
   }
   public void setTableField( String tableField ) {
     this.tableField = tableField;
-  }
-  public boolean isPrimaryKey() {
-    return isPrimaryKey;
-  }
-  public void setIsPrimaryKey( boolean isPrimaryKey ) {
-    this.isPrimaryKey = isPrimaryKey;
   }
   public boolean isRequired() {
     return required;

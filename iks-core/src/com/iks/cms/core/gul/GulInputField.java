@@ -3,11 +3,12 @@ package com.iks.cms.core.gul;
 /**
  * @author Igor Kaynov
  */
-public class GulInput implements IGulInput {
+public class GulInputField implements IGulInputField {
   private String name;
   private String label;
-  private boolean required = false;
-  private boolean readonly=false;
+  private boolean required     = false;
+  private boolean readonly     = false;
+  private Object  defaultValue = null;
   public String getName() {
     return name;
   }
@@ -31,5 +32,15 @@ public class GulInput implements IGulInput {
   }
   public void setReadonly( boolean readonly ) {
     this.readonly = readonly;
+  }
+  public String getType() {
+    return GulConstant.INPUT_TYPE;
+  }
+  public void setDefaultValue( Object defaultValue ) {
+    this.defaultValue = defaultValue;
+  }
+  @Override
+  public Object getDefaultValue() {
+    return defaultValue;
   }
 }

@@ -34,6 +34,10 @@ public class BaseDataModel implements IDataModel {
     this.tableName = tableName;
   }
   @Override
+  public String getPrimaryFieldName() {
+    return FieldConstant.DEFAULT_PRIMARY_FIELD;
+  }
+  @Override
   public IDataField getField( String name ) {
     return fields.stream().filter( field -> field.getName().equals( name ) ).findFirst().orElse( null );
   }
