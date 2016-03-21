@@ -9,12 +9,22 @@
         <c:forEach items="${editView.elements}" var="element">
             <div class="form-group">
                 <label for="${element.name}" class="col-sm-4 control-label">${element.label}</label>
+
                 <div class="col-sm-8">
                     <input type="text" class="form-control" id="${element.name}" placeholder="${element.label}" ng-model="selectedItem.${element.name}">
                 </div>
             </div>
         </c:forEach>
     </form>
+    <div class="row">
+        <!-- Alerts -->
+        <div class="col-xs-12">
+            <uib-alert ng-repeat="alert in alerts" type="{{ alert.type }}" close="closeAlert( $index )">
+                <%--<span translate="{{ alert.message }}" translate-values="{{ alert.params }}"></span>--%>
+                    <span>{{ alert.message }}</span>
+            </uib-alert>
+        </div>
+    </div>
 </div>
 <div class="modal-footer">
     <div class="row">

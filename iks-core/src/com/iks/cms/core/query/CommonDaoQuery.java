@@ -1,37 +1,29 @@
-package com.iks.cms.core.repository;
+package com.iks.cms.core.query;
 
 import org.hibernate.*;
-import org.springframework.beans.factory.annotation.*;
-import org.springframework.stereotype.*;
 
 import java.util.*;
 
 /**
  * @author Igor Kaynov
  */
-@Repository
-public class CommonDao {
-  @Autowired
-  private SessionFactory sessionFactory;
-  public List selectQuery( String selectQuery ) {
+public abstract class CommonDaoQuery {
+  public List selectQuery( SessionFactory sessionFactory, String selectQuery ) {
     try (Session session = sessionFactory.openSession()) {
       Query query = session.createSQLQuery( selectQuery );
       return query.list();
     }
   }
-  public Object selectSingleQuery( String selectQuery ) {
+  public Object selectSingleQuery( SessionFactory sessionFactory, String selectQuery ) {
     try (Session session = sessionFactory.openSession()) {
       Query query = session.createSQLQuery( selectQuery );
       return query.uniqueResult();
     }
   }
-  public int updateQuery( String updateQuery ) {
+  public int updateQuery( SessionFactory sessionFactory, String updateQuery ) {
     try (Session session = sessionFactory.openSession()) {
       Query query = session.createSQLQuery( updateQuery );
       return query.executeUpdate();
     }
-  }
-  public SessionFactory getSessionFactory() {
-    return sessionFactory;
   }
 }

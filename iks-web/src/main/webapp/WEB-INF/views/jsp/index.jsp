@@ -16,19 +16,19 @@
 <div class="container">
 
     <%--<nav class="navbar navbar-default">--%>
-        <%--<div class="container-fluid">--%>
-            <%--<ul class="nav navbar-nav">--%>
-                <%--<li ui-sref-active="active"><a ui-sref="home">Home</a></li>--%>
-                <%--<li ui-sref-active="active"><a ui-sref="employeeList">Employees</a></li>--%>
-            <%--</ul>--%>
-        <%--</div>--%>
+    <%--<div class="container-fluid">--%>
+    <%--<ul class="nav navbar-nav">--%>
+    <%--<li ui-sref-active="active"><a ui-sref="home">Home</a></li>--%>
+    <%--<li ui-sref-active="active"><a ui-sref="employeeList">Employees</a></li>--%>
+    <%--</ul>--%>
+    <%--</div>--%>
     <%--</nav>--%>
     <div class="row">
         <div class="col-xs-2">
             <ul>
-            <c:forEach items="${appObjList}" var="appObj">
-                <li ui-sref-active="active"><a ui-sref="appObjListView({appObj:'${appObj.name}'})">${appObj.label}</a></li>
-            </c:forEach>
+                <c:forEach items="${appObjList}" var="appObj">
+                    <li ui-sref-active="active"><a ui-sref="appObjListView({appObj:'${appObj.name}'})">${appObj.label}</a></li>
+                </c:forEach>
             </ul>
         </div>
         <div class="col-md-10" ui-view>
@@ -73,6 +73,7 @@
 <script src="assets/app/cms/core/core.service.js"></script>
 <script src="assets/app/cms/core/core.helper.js"></script>
 <script src="assets/app/cms/home/home.controller.js"></script>
+<script src="assets/app/cms/common/confirm.controller.js"></script>
 <script src="assets/app/cms/appObj/list.controller.js"></script>
 <script src="assets/app/cms/appObj/edit.controller.js"></script>
 <script src="assets/app/cms/appObj/data.service.js"></script>

@@ -9,7 +9,8 @@
       getGrid       : ApiService.buildGetServiceMethod( 'getGrid' ),
       getGridData   : ApiService.buildGetServiceMethod( 'getGridData' ),
       getEditData   : ApiService.buildGetServiceMethod( 'getEditData' ),
-      updateEditData: ApiService.buildPostServiceMethod( 'updateEditData' )
+      updateEditData: ApiService.buildPostServiceMethod( 'updateEditData' ),
+      deleteItem    : ApiService.buildPostServiceMethod( 'deleteItem' )
     } );
   }
 

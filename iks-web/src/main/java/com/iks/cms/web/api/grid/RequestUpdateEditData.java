@@ -9,6 +9,7 @@ import com.iks.cms.web.api.common.*;
 public class RequestUpdateEditData extends AbstractApiRequest {
   private String  appObj;
   private DataRow item;
+  private boolean isNew = false;
   public String getAppObj() {
     return appObj;
   }
@@ -20,5 +21,11 @@ public class RequestUpdateEditData extends AbstractApiRequest {
   }
   public void setItem( DataRow item ) {
     this.item = item;
+  }
+  public boolean isNew() {
+    return isNew;
+  }
+  public void setIsNew( boolean isNew ) {
+    this.isNew = isNew;
   }
 }
