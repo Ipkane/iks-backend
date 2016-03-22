@@ -5,6 +5,7 @@ import com.google.common.collect.*;
 import com.iks.cms.core.data.*;
 import com.iks.cms.core.exception.*;
 import com.iks.cms.core.grid.*;
+import com.iks.cms.core.validation.*;
 
 import org.apache.commons.lang3.*;
 
@@ -16,7 +17,8 @@ import java.util.*;
 public class BaseDataModel implements IDataModel {
   private String appObj;
   private String tableName;
-  private List< IDataField > fields = new ArrayList<>();
+  private List< IDataField > fields     = new ArrayList<>();
+  private List< IValidator > validators = new ArrayList<>();
   public List< IDataField > getFields() {
     return fields;
   }
@@ -51,13 +53,20 @@ public class BaseDataModel implements IDataModel {
   public boolean validate( IDataItem item ) {
     DataItem dataItem = ( DataItem )item;
     boolean valid = true;
-    for( IDataField dataField : fields ) {
-      Object value = dataItem.getFieldValue( dataField.getName() );
-      if( dataField.isRequired() && ( value == null || StringUtils.trimToNull( value.toString() ) == null ) ) {
-        dataItem.addError( new FieldError( dataField.getName(), dataField.getLabel() + " is required" ) );
+    for (IValidator validator: getAllValidators()) {
+      if (!validator.validate( this, item )) {
+        dataItem.addError(validator.getError());
         valid = false;
       }
     }
     return valid;
+  }
+  protected List< IValidator > getAllValidators() {
+    List< IValidator > validators = new ArrayList<>();
+    validators.addAll( this.validators );
+    for( IDataField dataField : fields ) {
+      validators.addAll( dataField.getValidators() );
+    }
+    return validators;
   }
 }

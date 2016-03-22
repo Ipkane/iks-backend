@@ -1,3 +1,7 @@
+.nav {
+  list-style: none;
+}
+
 input.form-control.ng-invalid {
   border-color: red;
 }
@@ -19,4 +23,16 @@ input.form-control.ng-invalid {
   border: 1px solid #eee;
   border-left-width: 5px;
   border-radius: 3px;
+}
+
+.sidebar-nav {
+
+}
+
+.sidebar-nav .nav > li > a {
+  display: block;
+  padding: 4px 20px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #767676;
 }

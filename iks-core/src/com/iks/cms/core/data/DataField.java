@@ -1,6 +1,11 @@
 package com.iks.cms.core.data;
 
+import com.iks.cms.core.validation.*;
+
 import org.apache.commons.lang3.*;
+
+import java.util.*;
+import java.util.stream.*;
 
 import javax.xml.crypto.*;
 
@@ -11,7 +16,8 @@ public class DataField implements IDataField {
   private String name;
   private String label;
   private String tableField;
-  private boolean required = false;
+  private boolean            required   = false;
+  private List< IValidator > validators = new ArrayList<>();
   @Override
   public String getName() {
     return StringUtils.defaultIfBlank( name, tableField );
@@ -41,5 +47,28 @@ public class DataField implements IDataField {
   }
   public void setRequired( boolean required ) {
     this.required = required;
+    if( required ) {
+      addValidator( new RequiredValidator( name ) );
+    } else {
+      removeValidator( RequiredValidator.class );
+    }
+  }
+  @Override
+  public List< IValidator > getValidators() {
+    return validators;
+  }
+  public void setValidators( List< IValidator > validators ) {
+    this.validators = validators;
+  }
+  public void addValidator( IValidator newValidator ) {
+    for( IValidator validator : validators ) {
+      if( validator.getClass().isAssignableFrom( newValidator.getClass() ) ) {
+        return;
+      }
+    }
+    this.validators.add( newValidator );
+  }
+  public < T extends IValidator > void removeValidator( Class< T > validatorClass ) {
+    validators.removeIf( validator -> validator.getClass().isAssignableFrom( validatorClass ) );
   }
 }
