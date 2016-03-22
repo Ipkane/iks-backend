@@ -1,11 +1,11 @@
 <editView appObj="employee">
   <field name="id" readonly="true"/>
   <field name="fio" label="First/Last Name Name"/>
-  <field name="gender">
-    <options>
-      <option value="male">Male</option>
-      <option value="female">Female</option>
-    </options>
-  </field>
+  <selectField name="gender">
+    <!--<options>-->
+      <!--<option value="male">Male</option>-->
+      <!--<option value="female">Female</option>-->
+    <!--</options>-->
+  </selectField>
   <referenceSelectField name="user" displayField="username"/>
 </editView>

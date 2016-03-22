@@ -18,12 +18,10 @@
                         <label for="${element.name}" class="control-label">${element.label}</label>
                         <c:choose>
                             <c:when test="${element.type == 'input'}">
-                                <input type="text" class="form-control" id="${element.name}" ng-model="filter.item.${element.name}"
-                                       ng-required="${element.required}" ng-readonly="${element.readonly}">
+                                <input type="text" class="form-control" id="${element.name}" ng-model="filter.item.${element.name}">
                             </c:when>
                             <c:when test="${element.type == 'select'}">
-                                <select type="text" class="form-control" id="${element.name}" ng-model="filter.item.${element.name}"
-                                        ng-required="${element.required}" ng-readonly="${element.readonly}">
+                                <select type="text" class="form-control" id="${element.name}" ng-model="filter.item.${element.name}">
                                     <c:if test="${!element.required}">
                                         <option value=""></option>
                                     </c:if>
@@ -33,8 +31,7 @@
                                 </select>
                             </c:when>
                             <c:when test="${element.type == 'referenceSelect'}">
-                                <select type="text" class="form-control" id="${element.name}" ng-model="filter.item.${element.name}"
-                                        ng-required="${element.required}" ng-readonly="${element.readonly}">
+                                <select type="text" class="form-control" id="${element.name}" ng-model="filter.item.${element.name}">
                                     <c:if test="${!element.required}">
                                         <option value=""></option>
                                     </c:if>

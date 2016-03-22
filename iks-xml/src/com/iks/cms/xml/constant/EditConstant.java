@@ -13,6 +13,7 @@ public interface EditConstant {
   String DISPLAY_FIELD_ATTR     = "displayField";
   // element names
   String FIELD                  = "field";
+  String SELECT_FIELD                  = "selectField";
   String REFERENCE_FIELD        = "referenceField";
   String REFERENCE_SELECT_FIELD = "referenceSelectField";
   String OPTIONS                = "options";

@@ -13,7 +13,7 @@ import org.w3c.dom.*;
  */
 public abstract class GulParser extends CommonParser {
   protected abstract IDataModel getModel();
-  protected void parseGulContainer( IGulContainer gulContainer, Element element) throws Exception {
+  protected void parseGulContainer( IGulContainer gulContainer, Element element ) throws Exception {
     NodeList fieldList = element.getChildNodes();
     for( int i = 0; i < fieldList.getLength(); i++ ) {
       Node node = fieldList.item( i );
@@ -22,6 +22,9 @@ public abstract class GulParser extends CommonParser {
         switch( fieldElement.getTagName() ) {
           case EditConstant.FIELD:
             gulContainer.addElement( parseField( fieldElement ) );
+            break;
+          case EditConstant.SELECT_FIELD:
+            gulContainer.addElement( parseSelectField( fieldElement ) );
             break;
           case EditConstant.REFERENCE_SELECT_FIELD:
             gulContainer.addElement( parseReferenceSelectField( fieldElement ) );
@@ -34,14 +37,18 @@ public abstract class GulParser extends CommonParser {
   }
   // field
   private IGulElement parseField( Element fieldElement ) {
-    GulInputField field;
-    if( fieldElement.getElementsByTagName( EditConstant.OPTIONS ).getLength() > 0 ) {
-      field = new GulSelect();
-      fillSelectOptions( ( GulSelect )field, fieldElement );
-    } else {
-      field = new GulInputField();
-    }
+    GulInputField field = new GulInputField();
     fillInputField( field, fieldElement );
+    return field;
+  }
+  //selectField
+  private IGulElement parseSelectField( Element fieldElement ) {
+    GulSelect field = new GulSelect();
+    fillInputField( field, fieldElement );
+    SelectField dataField = ( SelectField )getModel().getField( field.getName() );
+    field.setOptions( dataField.getOptions() );
+    // take options from model
+//    fillSelectOptions( field, fieldElement );
     return field;
   }
   private void fillInputField( GulInputField field, Element fieldElement ) {

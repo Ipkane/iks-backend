@@ -48,7 +48,7 @@ public class ParseService {
     }
   }
   //  private IDataModel parseDataModel( String fileName ) {
-  //    DataParser parser = new DataParser();
+  //    ModelParser parser = new ModelParser();
   //    try {
   //      return parser.parse( fileName );
   //    } catch( Exception e ) {

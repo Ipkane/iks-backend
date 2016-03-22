@@ -15,5 +15,8 @@ public interface ModelConstant {
   String REFERENCE_FIELD_ATTR = "referenceField";
   // element names
   String FIELD                = "field";
+  String SELECT_FIELD         = "selectField";
   String MANY_TO_ONE          = "manyToOne";
+  String OPTIONS              = "options";
+  String OPTION               = "option";
 }

@@ -1,7 +1,6 @@
 package com.iks.cms.xml.parser;
 
 import com.iks.cms.core.appObj.*;
-import com.iks.cms.core.grid.*;
 import com.iks.cms.core.gul.*;
 import com.iks.cms.core.model.*;
 
@@ -51,7 +50,7 @@ public class AppObjParser extends CommonParser {
   }
   // data
   private IDataModel parseDataModel( Element modelElement ) throws Exception {
-    DataParser dataParser = new DataParser();
+    ModelParser dataParser = new ModelParser();
     return dataParser.parse( modelElement.getAttribute( "url" ) );
   }
   //list

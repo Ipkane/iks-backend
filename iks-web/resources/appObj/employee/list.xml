@@ -2,7 +2,7 @@
   <filter>
     <field name="id"/>
     <field name="fio"/>
-    <field name="gender"/>
+    <selectField name="gender"/>
   </filter>
   <table>
     <field name="id"/>
