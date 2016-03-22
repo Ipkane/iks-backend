@@ -28,11 +28,3 @@ input.form-control.ng-invalid {
 .sidebar-nav {
 
 }
-
-.sidebar-nav .nav > li > a {
-  display: block;
-  padding: 4px 20px;
-  font-size: 13px;
-  font-weight: 500;
-  color: #767676;
-}

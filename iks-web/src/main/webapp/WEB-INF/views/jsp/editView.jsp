@@ -59,10 +59,10 @@
 <div class="modal-footer">
     <div class="row">
         <div class="col-xs-3 col-xs-offset-3">
-            <button type="submit" class="btn btn-danger" ng-click="save(${appObj.name}Form.$valid)">Save</button>
+            <button type="submit" class="btn btn-danger btn-block" ng-click="save(${appObj.name}Form.$valid)">Save</button>
         </div>
         <div class="col-xs-3">
-            <button class="btn btn-success" ng-click="cancel()">Cancel</button>
+            <button class="btn btn-success btn-block" ng-click="cancel()">Cancel</button>
         </div>
     </div>
 </div>

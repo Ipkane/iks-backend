@@ -26,7 +26,7 @@
     <div class="row">
         <div class="col-xs-2">
             <nav class="sidebar-nav">
-                <ul class="nav">
+                <ul class="nav nav-pills nav-stacked">
                     <c:forEach items="${appObjList}" var="appObj">
                         <li ui-sref-active="active"><a ui-sref="appObjListView({appObj:'${appObj.name}'})">${appObj.label}</a></li>
                     </c:forEach>
