@@ -25,11 +25,14 @@ public class Table {
   public String getName() {
     return name;
   }
+  public Column getColumn( String fieldName ) {
+    return getColumn( fieldName, null );
+  }
   public Column getColumn( String fieldName, String fieldAlias ) {
     Column column = columns.get( fieldName );
     if( column == null ) {
       column = new Column( this, fieldName, fieldAlias );
-      columns.put( fieldName, new Column( this, fieldName, fieldAlias ) );
+      columns.put( fieldName, column );
     }
     return column;
   }

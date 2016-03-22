@@ -1,7 +1,6 @@
 package com.iks.cms.xml.parser;
 
 import com.iks.cms.core.appObj.*;
-import com.iks.cms.core.data.*;
 import com.iks.cms.core.grid.*;
 import com.iks.cms.core.gul.*;
 import com.iks.cms.core.model.*;
@@ -38,7 +37,7 @@ public class AppObjParser extends CommonParser {
             // we parse data before other elements
             break;
           case "list":
-            appObj.setGrid( parseGrid( childElement ) );
+            appObj.setGridView( parseGridView( childElement ) );
             break;
           case "edit":
             appObj.setEditView( parseEditView( childElement ) );
@@ -56,13 +55,13 @@ public class AppObjParser extends CommonParser {
     return dataParser.parse( modelElement.getAttribute( "url" ) );
   }
   //list
-  private IGrid parseGrid( Element gridElement ) throws Exception {
-    GridParser dataParser = new GridParser(appObj.getDataModel());
+  private IGridView parseGridView( Element gridElement ) throws Exception {
+    GridViewParser dataParser = new GridViewParser( appObj.getDataModel() );
     return dataParser.parse( gridElement.getAttribute( "url" ) );
   }
   //edit
   private EditView parseEditView( Element editElement ) throws Exception {
-    EditViewParser dataParser = new EditViewParser(appObj.getDataModel());
+    EditViewParser dataParser = new EditViewParser( appObj.getDataModel() );
     return dataParser.parse( editElement.getAttribute( "url" ) );
   }
 }

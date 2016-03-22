@@ -31,9 +31,9 @@ public class Column {
       sb.append( tableAlias ).append( '.' );
     }
     sb.append( name );
-    if( alias != null ) {
-      sb.append( " as " ).append( alias );
-    }
+//    if( alias != null ) {
+//      sb.append( " as " ).append( alias );
+//    }
     return sb.toString();
   }
   public ColumnType getType() {

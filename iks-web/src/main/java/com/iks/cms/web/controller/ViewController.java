@@ -24,11 +24,11 @@ public class ViewController {
   @RequestMapping( value = REQUEST_GET_GRID_VIEW, method = RequestMethod.GET )
   public String gridView( Model model, String appObj ) {
     ObjectMapper objectMapper = new ObjectMapper();
-    IGrid grid = appObjService.getGrid( appObj );
+    IGridView gridView = appObjService.getGridView( appObj );
     model.addAttribute( "gridName", appObj );
-    model.addAttribute( "grid", grid );
+    model.addAttribute( "gridView", gridView );
     try {
-      model.addAttribute( "gridJson", objectMapper.writeValueAsString( grid ).replace( "\"", "\\\"" ) );
+      model.addAttribute( "gridJson", objectMapper.writeValueAsString( gridView.getGrid() ).replace( "\"", "\\\"" ) );
     } catch( JsonProcessingException e ) {
       logger.error( "Serialization error:", e );
     }

@@ -13,11 +13,11 @@
                 <div class="col-sm-8">
                     <c:choose>
                         <c:when test="${element.type == 'input'}">
-                            <input type="text" class="form-control" id="${element.name}" placeholder="${element.label}" ng-model="selectedItem.${element.name}"
+                            <input type="text" class="form-control" id="${element.name}" ng-model="selectedItem.${element.name}"
                                    ng-required="${element.required}" ng-readonly="${element.readonly}">
                         </c:when>
                         <c:when test="${element.type == 'select'}">
-                            <select type="text" class="form-control" id="${element.name}" placeholder="${element.label}" ng-model="selectedItem.${element.name}"
+                            <select type="text" class="form-control" id="${element.name}" ng-model="selectedItem.${element.name}"
                                     ng-required="${element.required}" ng-readonly="${element.readonly}">
                                 <c:if test="${!element.required}">
                                     <option value=""></option>
@@ -28,7 +28,7 @@
                             </select>
                         </c:when>
                         <c:when test="${element.type == 'referenceSelect'}">
-                            <select type="text" class="form-control" id="${element.name}" placeholder="${element.label}" ng-model="selectedItem.${element.name}"
+                            <select type="text" class="form-control" id="${element.name}" ng-model="selectedItem.${element.name}"
                                     ng-required="${element.required}" ng-readonly="${element.readonly}">
                                 <c:if test="${!element.required}">
                                     <option value=""></option>

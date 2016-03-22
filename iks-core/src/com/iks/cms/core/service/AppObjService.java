@@ -21,7 +21,7 @@ import java.util.*;
 @Service
 public class AppObjService {
   private static final Logger                 logger    = LoggerFactory.getLogger( AppObjService.class );
-  private              Map< String, IAppObj > appObjMap = new HashMap<>();
+  private              Map< String, IAppObj > appObjMap = new LinkedHashMap<>();
   @Autowired
   private CommonDao commonDao;
   public IGrid getGrid( String appObj ) {
@@ -30,8 +30,11 @@ public class AppObjService {
   public IDataModel getModel( String appObj ) {
     return appObjMap.get( appObj ).getDataModel();
   }
-  public List< IDataItem > getGridData( String appObj ) {
+  public List< IDataItem > getGridData( String appObj, Map< String, Object > filter ) {
     GridQuery query = new GridQuery( getModel( appObj ), getGrid( appObj ) );
+    if( filter != null ) {
+      query.setFilter( filter );
+    }
     return query.executeQuery( commonDao.getSessionFactory() );
   }
   public List< IDataItem > getModelData( String appObj, List< String > fields ) {
@@ -75,6 +78,9 @@ public class AppObjService {
   }
   public IEditView getEditView( String appObj ) {
     return getAppObj( appObj ).getEditView();
+  }
+  public IGridView getGridView( String appObj ) {
+    return getAppObj( appObj ).getGridView();
   }
   public Map< String, List< SelectOption > > getEdiViewOptionsMap( String appObj ) {
     Map< String, List< SelectOption > > optionsMap = new HashMap<>();

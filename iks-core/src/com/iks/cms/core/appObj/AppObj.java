@@ -11,7 +11,7 @@ public class AppObj implements IAppObj {
   private String     name;
   private String     label;
   private IDataModel dataModel;
-  private IGrid      grid;
+  private IGridView  gridView;
   private EditView   editView;
   public IDataModel getDataModel() {
     return dataModel;
@@ -20,10 +20,7 @@ public class AppObj implements IAppObj {
     this.dataModel = dataModel;
   }
   public IGrid getGrid() {
-    return grid;
-  }
-  public void setGrid( IGrid grid ) {
-    this.grid = grid;
+    return gridView.getGrid();
   }
   public String getName() {
     return name;
@@ -43,5 +40,11 @@ public class AppObj implements IAppObj {
   }
   public void setEditView( EditView editView ) {
     this.editView = editView;
+  }
+  public IGridView getGridView() {
+    return gridView;
+  }
+  public void setGridView( IGridView gridView ) {
+    this.gridView = gridView;
   }
 }

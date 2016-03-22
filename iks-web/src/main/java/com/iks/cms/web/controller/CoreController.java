@@ -38,11 +38,11 @@ public class CoreController {
   //      return ApiUtils.makeErrorResponse( REQUEST_GET_GRID, RESPONSE_ERROR_GET_GRID, request );
   //    }
   //  }
-  @RequestMapping( value = REQUEST_GET_GRID_DATA, method = RequestMethod.GET )
-  public ResponseEntity< DefaultResponseBody< ?, ? > > getGridData( RequestGetGridData request ) {
+  @RequestMapping( value = REQUEST_GET_GRID_DATA, method = RequestMethod.POST )
+  public ResponseEntity< DefaultResponseBody< ?, ? > > getGridData( @RequestBody RequestGetGridData request ) {
     try {
       ResponseGetGridData response = new ResponseGetGridData();
-      response.setItems( appObjService.getGridData( request.getAppObj() ) );
+      response.setItems( appObjService.getGridData( request.getAppObj(), request.getFilter() ) );
       return ApiUtils.makeResponse( REQUEST_GET_GRID_DATA, request, response );
     } catch( Exception ex ) {
       logger.error( RESPONSE_ERROR_GET_GRID_DATA, ex );

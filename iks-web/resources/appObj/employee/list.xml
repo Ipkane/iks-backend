@@ -1,4 +1,9 @@
 <gridView appObj="employee">
+  <filter>
+    <field name="id"/>
+    <field name="fio"/>
+    <field name="gender"/>
+  </filter>
   <table>
     <field name="id"/>
     <field name="fio" label="First/Last Name Name"/>

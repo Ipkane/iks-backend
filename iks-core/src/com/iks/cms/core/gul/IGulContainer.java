@@ -7,4 +7,5 @@ import java.util.*;
  */
 public interface IGulContainer extends IGulElement {
   List<IGulElement> getElements();
+  void addElement(IGulElement element);
 }
