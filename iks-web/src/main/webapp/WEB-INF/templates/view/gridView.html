@@ -10,8 +10,8 @@
     <div class="btn btn-success" ng-click="refresh()">Refresh</div>
   </div>
   <div data-th-if="${gridView.filterPanel != null}" class="panel-body grid-filter-panel" ng-show="showFilterPanel">
-    <div th:include="${gridView.filterPanel.templatePath} :: ${gridView.filterPanel.templateName} ">
-    </div>
+    <th:block th:include="${gridView.filterPanel.templatePath} :: ${gridView.filterPanel.templateName} ">
+    </th:block>
   </div>
   <table class="table table-bordered table-hover table-condensed">
     <thead>

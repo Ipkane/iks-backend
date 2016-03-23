@@ -1,5 +1,5 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-<div th:fragment="template">
+<th:block th:fragment="template">
   <div class="row">
     <form data-th-id="|${appObj.name}Form|" role="form" novalidate="novalidate" class="form">
       <div class="col-xs-4" data-th-each="element : ${gridView.filterPanel.elements}">
@@ -17,5 +17,5 @@
       <div class="btn btn-primary" ng-click="search()">Search</div>
     </div>
   </div>
-</div>
+</th:block>
 </html>
