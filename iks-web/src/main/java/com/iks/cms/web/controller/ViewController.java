@@ -27,6 +27,7 @@ public class ViewController {
     IGridView gridView = appObjService.getGridView( appObj );
     model.addAttribute( "gridName", appObj );
     model.addAttribute( "gridView", gridView );
+    model.addAttribute( "appObj", appObjService.getAppObj( appObj ) );
     try {
       model.addAttribute( "gridJson", objectMapper.writeValueAsString( gridView.getGrid() ).replace( "\"", "\\\"" ) );
     } catch( JsonProcessingException e ) {
