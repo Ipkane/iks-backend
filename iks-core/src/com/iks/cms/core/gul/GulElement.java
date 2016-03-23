@@ -1,5 +1,9 @@
 package com.iks.cms.core.gul;
 
+import com.iks.cms.core.model.*;
+
+import org.w3c.dom.*;
+
 /**
  * @author Igor Kaynov
  */
@@ -25,5 +29,10 @@ public abstract class GulElement implements IGulElement {
   @Override
   public String getTemplateName() {
     return getTag();
+  }
+  @Override
+  public void parse( IDataModel model, Element xmlElement ) throws Exception {
+    setTag( xmlElement.getTagName() );
+    setId( xmlElement.getAttribute( GulConstant.LABEL_ATTR ) );
   }
 }

@@ -1,5 +1,9 @@
 package com.iks.cms.core.gul;
 
+import com.iks.cms.core.model.*;
+
+import org.w3c.dom.*;
+
 /**
  * @author Igor Kaynov
  */
@@ -8,4 +12,5 @@ public interface IGulElement {
   String getTemplateName();
   String getId();
   String getTag();
+  void parse(IDataModel model, Element xmlElement) throws Exception;
 }

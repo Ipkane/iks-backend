@@ -1,6 +1,10 @@
 package com.iks.cms.core.gul.form;
 
+import com.iks.cms.core.data.*;
 import com.iks.cms.core.gul.*;
+import com.iks.cms.core.model.*;
+
+import org.w3c.dom.*;
 
 import java.util.*;
 
@@ -17,5 +21,11 @@ public class GulSelect extends GulTextbox {
   }
   public void addOption( SelectOption option ) {
     options.add( option );
+  }
+  @Override
+  public void parse( IDataModel model, Element xmlElement ) throws Exception {
+    super.parse( model, xmlElement );
+    SelectField dataField = ( SelectField )model.getField( getName() );
+    setOptions( dataField.getOptions() );
   }
 }

@@ -6,7 +6,6 @@ import com.iks.cms.core.grid.*;
 import com.iks.cms.core.gul.*;
 import com.iks.cms.core.model.*;
 import com.iks.cms.xml.constant.*;
-import com.iks.cms.xml.parser.gul.*;
 
 import org.slf4j.*;
 import org.w3c.dom.*;
@@ -62,7 +61,7 @@ public class GridViewParser {
   }
   private IFilterPanel parseFilterPanel( Element filterElement ) throws Exception {
     FilterPanel filterPanel = new FilterPanel();
-    GulContainerParser.getInstance().parse(model, filterPanel,filterElement );
+    filterPanel.parse(model, filterElement );
     return filterPanel;
   }
   protected IDataModel getModel() {

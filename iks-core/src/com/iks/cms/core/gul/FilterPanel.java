@@ -1,6 +1,9 @@
 package com.iks.cms.core.gul;
 
 import com.iks.cms.core.gul.form.*;
+import com.iks.cms.core.model.*;
+
+import org.w3c.dom.*;
 
 import java.util.*;
 
@@ -29,5 +32,9 @@ public class FilterPanel extends GulContainer implements IFilterPanel {
   @Override
   public String getTemplateName() {
     return "filterPanel";
+  }
+  @Override
+  public void parse( IDataModel model, Element xmlElement ) throws Exception {
+    super.parse( model, xmlElement );
   }
 }

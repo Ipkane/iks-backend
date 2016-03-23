@@ -2,7 +2,6 @@ package com.iks.cms.xml.parser;
 
 import com.iks.cms.core.appObj.*;
 import com.iks.cms.core.model.*;
-import com.iks.cms.xml.parser.gul.*;
 
 import org.slf4j.*;
 import org.w3c.dom.*;
@@ -23,7 +22,7 @@ public class EditViewParser {
   private EditView parseRoot( Document doc ) throws Exception {
     Element root = doc.getDocumentElement();
     EditView editView = new EditView();
-    GulContainerParser.getInstance().parse(model, editView, root );
+    editView.parse(model, root );
     return editView;
   }
   protected IDataModel getModel() {

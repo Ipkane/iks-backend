@@ -1,6 +1,11 @@
 package com.iks.cms.core.gul.form;
 
+import com.iks.cms.core.data.*;
 import com.iks.cms.core.gul.*;
+import com.iks.cms.core.model.*;
+
+import org.apache.commons.lang3.*;
+import org.w3c.dom.*;
 
 /**
  * @author Igor Kaynov
@@ -49,5 +54,24 @@ public class GulTextbox extends GulElement implements IGulInputField {
   @Override
   public String getTemplateName() {
     return getTag();
+  }
+  @Override
+  public void parse( IDataModel model, Element xmlElement ) throws Exception {
+    super.parse( model, xmlElement );
+    setName( xmlElement.getAttribute( GulConstant.NAME_ATTR ) );
+    DataField dataField = ( DataField )model.getField( getName() );
+    if( xmlElement.hasAttribute( GulConstant.LABEL_ATTR ) ) {
+      setLabel( xmlElement.getAttribute( GulConstant.LABEL_ATTR ) );
+    } else {
+      setLabel( dataField.getLabel() );
+    }
+    if( xmlElement.hasAttribute( GulConstant.REQUIRED_ATTR ) ) {
+      setRequired( BooleanUtils.toBoolean( xmlElement.getAttribute( GulConstant.REQUIRED_ATTR ) ) );
+    } else {
+      setRequired( dataField.isRequired() );
+    }
+    if( xmlElement.hasAttribute( GulConstant.READONLY_ATTR ) ) {
+      setReadonly( BooleanUtils.toBoolean( xmlElement.getAttribute( GulConstant.READONLY_ATTR ) ) );
+    }
   }
 }
