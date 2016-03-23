@@ -1,0 +1,21 @@
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<div th:fragment="template">
+  <div class="row">
+    <form data-th-id="|${appObj.name}Form|" role="form" novalidate="novalidate" class="form">
+      <div class="col-xs-4" data-th-each="element : ${gridView.filterPanel.elements}">
+        <div class="form-group">
+          <label data-th-for="${element.name}" class="control-label" data-th-text="${element.label}">Label</label>
+
+          <div th:include="${element.templatePath} :: ${element.templateName}">
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="btn btn-primary" ng-click="search()">Search</div>
+    </div>
+  </div>
+</div>
+</html>

@@ -1,5 +1,6 @@
 package com.iks.cms.xml.parser;
 
+import com.iks.cms.core.appObj.*;
 import com.iks.cms.core.data.*;
 import com.iks.cms.core.grid.*;
 import com.iks.cms.core.gul.*;

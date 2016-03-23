@@ -12,6 +12,7 @@ jar {
 dependencies {
   compile project(':iks-common')
   compile project(':iks-config')
+  compile project(':iks-gul')
 
   compile 'org.springframework.data:spring-data-jpa:1.3.0.RELEASE'
   compile "org.springframework:spring-jdbc:$springVersion"

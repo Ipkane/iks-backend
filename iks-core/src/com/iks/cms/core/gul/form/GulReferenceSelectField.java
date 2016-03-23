@@ -1,11 +1,13 @@
-package com.iks.cms.core.gul;
+package com.iks.cms.core.gul.form;
+
+import com.iks.cms.core.gul.*;
 
 import java.util.*;
 
 /**
  * @author Igor Kaynov
  */
-public class GulSelect extends GulInputField implements IGulInputField {
+public class GulReferenceSelectField extends GulReferenceField {
   private List< SelectOption > options = new ArrayList<>();
   public List< SelectOption > getOptions() {
     return options;
@@ -13,10 +15,11 @@ public class GulSelect extends GulInputField implements IGulInputField {
   public void setOptions( List< SelectOption > options ) {
     this.options = options;
   }
-  public void addOption(SelectOption option) {
+  public void addOption( SelectOption option ) {
     options.add( option );
   }
+  @Override
   public String getType() {
-    return GulConstant.SELECT_TYPE;
+    return GulConstant.REFERENCE_SELECT_TYPE;
   }
 }

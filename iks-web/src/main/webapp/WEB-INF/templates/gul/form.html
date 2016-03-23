@@ -1,0 +1,17 @@
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<div th:fragment="input">
+  <input type="text" class="form-control" data-th-id="${element.name}" data-th-attr="ng-model = |selectedItem.${element.name}|"/>
+</div>
+<div th:fragment="select">
+  <select type="text" class="form-control" data-th-id="${element.name}" data-th-attr="ng-model = |filter.item.${element.name}|">
+    <option data-th-if="${!element.required}" value=""></option>
+    <option data-th-value="${option.value}" data-th-each="option : ${element.options}" data-th-text="${option.label}">Option Label</option>
+  </select>
+</div>
+<!--<div th:fragment="referenceSelect">-->
+  <!--<select type="text" class="form-control" data-th-id="${element.name}" data-th-attr="ng-model = |filter.item.${element.name}|">-->
+    <!--<option data-th-if="${!element.required}" value=""></option>-->
+    <!--<option data-th-value="${option.value}" data-th-each="option : ${optionsMap[element.name]}" data-th-text="${option.label}">Option label</option>-->
+  <!--</select>-->
+<!--</div>-->
+</html>

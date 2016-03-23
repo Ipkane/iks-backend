@@ -1,0 +1,22 @@
+apply plugin: 'java'
+
+ext {
+  projectName = 'iks-gul'
+}
+
+jar {
+  baseName = "$projectName"
+  version = "1.0"
+}
+
+dependencies {
+  compile project(':iks-common')
+}
+
+sourceSets {
+  main {
+    java {
+      srcDir 'src'
+    }
+  }
+}

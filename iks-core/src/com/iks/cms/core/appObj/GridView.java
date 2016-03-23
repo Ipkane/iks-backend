@@ -1,6 +1,7 @@
-package com.iks.cms.core.gul;
+package com.iks.cms.core.appObj;
 
 import com.iks.cms.core.grid.*;
+import com.iks.cms.core.gul.*;
 
 /**
  * @author Igor Kaynov
@@ -19,5 +20,9 @@ public class GridView extends GulContainer implements IGridView {
   }
   public void setFilterPanel( IFilterPanel filterPanel ) {
     this.filterPanel = filterPanel;
+  }
+  @Override
+  public String getTemplatePath() {
+    return "view/gridView";
   }
 }

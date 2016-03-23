@@ -1,0 +1,30 @@
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<h1 data-th-text="${appObj.label}">Title</h1>
+
+<div class="panel panel-default">
+  <div class="panel-heading grid-edit-panel">
+    <div class="btn btn-primary" ng-click="openAddModal()">New</div>
+    <div class="btn btn-primary" ng-click="openEditModal()" ng-disabled="!selectedItem">Edit</div>
+    <div class="btn btn-primary" ng-click="openDeleteModal()" ng-disabled="!selectedItem">Delete</div>
+    <div class="btn btn-success" ng-click="toggleFilterPanel()" th:attr="ng-disabled = |${gridView.filterPanel == null}| ">Filter</div>
+    <div class="btn btn-success" ng-click="refresh()">Refresh</div>
+  </div>
+  <div data-th-if="${gridView.filterPanel != null}" class="panel-body grid-filter-panel" ng-show="showFilterPanel">
+    <div th:include="${gridView.filterPanel.templatePath} :: ${gridView.filterPanel.templateName} ">
+    </div>
+  </div>
+  <table class="table table-bordered table-hover table-condensed">
+    <thead>
+    <th data-name="${field.name}" data-th-each="field : ${gridView.grid.fields}" data-th-text="${field.label}">
+      Value
+    </th>
+    </thead>
+    <tbody>
+    <tr ng-repeat="item in items" ng-click="selectItem(item)" ng-class="{'success': item == selectedItem}">
+      <td ng-repeat="field in grid.fields"> {{ item[field.name] }}</td>
+    </tr>
+    </tbody>
+  </table>
+  <div data-th-attr="ng-init = |gridName='${gridName}'; grid = '${gridJson}'|" style="display: none"></div>
+</div>
+</html>

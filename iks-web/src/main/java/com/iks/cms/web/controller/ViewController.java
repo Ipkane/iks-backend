@@ -3,8 +3,6 @@ package com.iks.cms.web.controller;
 import com.fasterxml.jackson.core.*;
 import com.fasterxml.jackson.databind.*;
 import com.iks.cms.core.appObj.*;
-import com.iks.cms.core.grid.*;
-import com.iks.cms.core.gul.*;
 import com.iks.cms.core.service.*;
 
 import org.slf4j.*;
@@ -33,7 +31,7 @@ public class ViewController {
     } catch( JsonProcessingException e ) {
       logger.error( "Serialization error:", e );
     }
-    return "gridView";
+    return gridView.getTemplatePath();
   }
   @RequestMapping( value = REQUEST_GET_GRID_EDIT_VIEW, method = RequestMethod.GET )
   public String gridEditView( Model model, String appObj, Long itemId ) {
@@ -41,6 +39,6 @@ public class ViewController {
     model.addAttribute( "editView", editView );
     model.addAttribute( "optionsMap", appObjService.getEdiViewOptionsMap( appObj ) );
     model.addAttribute( "appObj", appObjService.getAppObj( appObj ) );
-    return "editView";
+    return editView.getTemplatePath();
   }
 }
