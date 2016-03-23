@@ -7,7 +7,7 @@ import java.util.*;
 /**
  * @author Igor Kaynov
  */
-public class GulSelect extends GulInputField implements IGulInputField {
+public class GulSelectField extends GulInputField {
   private List< SelectOption > options = new ArrayList<>();
   public List< SelectOption > getOptions() {
     return options;

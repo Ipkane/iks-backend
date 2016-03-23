@@ -6,4 +6,5 @@ package com.iks.cms.core.gul;
 public interface IGulElement {
   String getTemplatePath();
   String getTemplateName();
+  String getId();
 }

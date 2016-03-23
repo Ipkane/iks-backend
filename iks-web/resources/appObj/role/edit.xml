@@ -1,3 +1,4 @@
+<?xml version="1.0"?>
 <editView appObj="role">
   <field name="id" readonly="true"/>
   <field name="name"/>

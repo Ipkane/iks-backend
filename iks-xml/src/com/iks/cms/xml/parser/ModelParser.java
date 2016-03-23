@@ -12,10 +12,10 @@ import org.w3c.dom.*;
 /**
  * @author Igor Kaynov
  */
-public class ModelParser extends CommonParser {
+public class ModelParser {
   private static final Logger logger = LoggerFactory.getLogger( ModelParser.class );
   public IDataModel parse( String fileName ) throws Exception {
-    Document doc = parseFile( fileName );
+    Document doc = ParserUtils.parseFile( fileName );
     return parseRoot( doc );
   }
   private IDataModel parseRoot( Document doc ) throws Exception {

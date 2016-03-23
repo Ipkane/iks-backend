@@ -12,10 +12,10 @@ import java.util.*;
 /**
  * @author Igor Kaynov
  */
-public class AppParser extends CommonParser {
+public class AppParser {
   private static final Logger logger = LoggerFactory.getLogger( AppParser.class );
   public List< IAppObj > parse( String fileName ) throws Exception {
-    Document doc = parseFile( fileName );
+    Document doc = ParserUtils.parseFile( fileName );
     return parseRoot( doc );
   }
   // app

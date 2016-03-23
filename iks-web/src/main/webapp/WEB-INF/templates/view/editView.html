@@ -5,8 +5,6 @@
 <div class="modal-body">
   <form data-th-id="|${appObj.name}Form|" role="form" novalidate="novalidate" class="form-horizontal">
     <div class="form-group" data-th-each="element : ${editView.elements}">
-      <label data-th-for="${element.name}" class="col-sm-4 control-label" data-th-text="${element.label}">Label</label>
-
       <div class="col-sm-8">
         <div  th:include="${element.templatePath} :: ${element.templateName}" th:with="itemName='selectedItem'">
         </div>

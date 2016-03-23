@@ -5,6 +5,7 @@ package com.iks.cms.xml.constant;
  */
 public interface EditConstant {
   // attributes
+  String ID_ATTR                = "id";
   String NAME_ATTR              = "name";
   String LABEL_ATTR             = "label";
   String READONLY_ATTR          = "readonly";
@@ -13,9 +14,10 @@ public interface EditConstant {
   String DISPLAY_FIELD_ATTR     = "displayField";
   // element names
   String FIELD                  = "field";
-  String SELECT_FIELD                  = "selectField";
+  String SELECT_FIELD           = "selectField";
   String REFERENCE_FIELD        = "referenceField";
   String REFERENCE_SELECT_FIELD = "referenceSelectField";
+  String BUTTON                 = "button";
   String OPTIONS                = "options";
   String OPTION                 = "option";
 }

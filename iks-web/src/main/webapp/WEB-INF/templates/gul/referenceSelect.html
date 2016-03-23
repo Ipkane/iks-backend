@@ -1,5 +1,6 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <th:block th:fragment="referenceSelect" th:if="${element.type == 'referenceSelect'}">
+  <label data-th-for="${element.name}" class="control-label" data-th-text="${element.label}">Label</label>
   <select type="text" class="form-control" data-th-id="${element.name}" data-th-attr="ng-model = |${itemName}.${element.name}|,ng-readonly = |${element.readonly}|"
       th:required="${element.required}">
     <option data-th-if="${!element.required}" value=""></option>

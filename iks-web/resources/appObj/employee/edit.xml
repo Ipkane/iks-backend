@@ -1,3 +1,4 @@
+<?xml version="1.0"?>
 <editView appObj="employee">
   <field name="id" readonly="true"/>
   <field name="fio" label="First/Last Name Name"/>
@@ -8,4 +9,5 @@
     <!--</options>-->
   </selectField>
   <referenceSelectField name="user" displayField="username"/>
+  <button id="helloWorld" label="Hello world"/>
 </editView>

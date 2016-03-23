@@ -9,11 +9,11 @@ import org.w3c.dom.*;
 /**
  * @author Igor Kaynov
  */
-public class AppObjParser extends CommonParser {
+public class AppObjParser {
   private static final Logger logger = LoggerFactory.getLogger( AppObjParser.class );
   private AppObj appObj;
   public IAppObj parse( String fileName ) throws Exception {
-    Document doc = parseFile( fileName );
+    Document doc = ParserUtils.parseFile( fileName );
     return parseRoot( doc.getDocumentElement() );
   }
   public IAppObj parse( Element root ) throws Exception {

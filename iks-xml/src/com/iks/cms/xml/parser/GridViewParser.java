@@ -6,6 +6,7 @@ import com.iks.cms.core.grid.*;
 import com.iks.cms.core.gul.*;
 import com.iks.cms.core.model.*;
 import com.iks.cms.xml.constant.*;
+import com.iks.cms.xml.parser.gul.*;
 
 import org.slf4j.*;
 import org.w3c.dom.*;
@@ -13,14 +14,14 @@ import org.w3c.dom.*;
 /**
  * @author Igor Kaynov
  */
-public class GridViewParser extends GulParser {
+public class GridViewParser {
   private static final Logger logger = LoggerFactory.getLogger( GridViewParser.class );
   private IDataModel model;
   public GridViewParser( IDataModel model ) {
     this.model = model;
   }
   public IGridView parse( String fileName ) throws Exception {
-    Document doc = parseFile( fileName );
+    Document doc = ParserUtils.parseFile( fileName );
     return parseRoot( doc );
   }
   private IGridView parseRoot( Document doc ) throws Exception {
@@ -61,10 +62,9 @@ public class GridViewParser extends GulParser {
   }
   private IFilterPanel parseFilterPanel( Element filterElement ) throws Exception {
     FilterPanel filterPanel = new FilterPanel();
-    parseGulContainer( filterPanel, filterElement );
+    ContainerParser.getInstance().parse(model, filterPanel,filterElement );
     return filterPanel;
   }
-  @Override
   protected IDataModel getModel() {
     return model;
   }

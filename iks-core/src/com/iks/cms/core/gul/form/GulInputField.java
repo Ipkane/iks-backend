@@ -5,7 +5,7 @@ import com.iks.cms.core.gul.*;
 /**
  * @author Igor Kaynov
  */
-public class GulInputField implements IGulInputField {
+public class GulInputField extends GulElement implements IGulInputField {
   private String name;
   private String label;
   private boolean required     = false;
