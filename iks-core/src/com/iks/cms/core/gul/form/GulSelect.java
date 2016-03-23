@@ -1,4 +1,6 @@
-package com.iks.cms.core.gul;
+package com.iks.cms.core.gul.form;
+
+import com.iks.cms.core.gul.*;
 
 import java.util.*;
 
@@ -13,7 +15,7 @@ public class GulSelect extends GulInputField implements IGulInputField {
   public void setOptions( List< SelectOption > options ) {
     this.options = options;
   }
-  public void addOption(SelectOption option) {
+  public void addOption( SelectOption option ) {
     options.add( option );
   }
   public String getType() {

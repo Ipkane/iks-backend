@@ -1,4 +1,6 @@
-package com.iks.cms.core.gul;
+package com.iks.cms.core.gul.form;
+
+import com.iks.cms.core.gul.*;
 
 /**
  * @author Igor Kaynov
@@ -42,5 +44,13 @@ public class GulInputField implements IGulInputField {
   @Override
   public Object getDefaultValue() {
     return defaultValue;
+  }
+  @Override
+  public String getTemplatePath() {
+    return "gul/form";
+  }
+  @Override
+  public String getTemplateName() {
+    return getType();
   }
 }

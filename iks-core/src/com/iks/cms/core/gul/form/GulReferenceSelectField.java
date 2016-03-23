@@ -1,4 +1,6 @@
-package com.iks.cms.core.gul;
+package com.iks.cms.core.gul.form;
+
+import com.iks.cms.core.gul.*;
 
 import java.util.*;
 
@@ -13,11 +15,15 @@ public class GulReferenceSelectField extends GulReferenceField {
   public void setOptions( List< SelectOption > options ) {
     this.options = options;
   }
-  public void addOption(SelectOption option) {
+  public void addOption( SelectOption option ) {
     options.add( option );
   }
   @Override
   public String getType() {
     return GulConstant.REFERENCE_SELECT_TYPE;
+  }
+  @Override
+  public String getTemplatePath() {
+    return "gul/referenceSelect";
   }
 }

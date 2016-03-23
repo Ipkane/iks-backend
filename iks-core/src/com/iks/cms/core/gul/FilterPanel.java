@@ -1,5 +1,7 @@
 package com.iks.cms.core.gul;
 
+import com.iks.cms.core.gul.form.*;
+
 import java.util.*;
 
 /**
@@ -19,5 +21,9 @@ public class FilterPanel extends GulContainer implements IFilterPanel {
     if( element instanceof IGulInputField ) {
       fields.add( ( IGulInputField )element );
     }
+  }
+  @Override
+  public String getTemplatePath() {
+    return "gul/filterPanel";
   }
 }

@@ -1,6 +1,7 @@
-package com.iks.cms.core.gul;
+package com.iks.cms.core.appObj;
 
 import com.iks.cms.core.grid.*;
+import com.iks.cms.core.gul.*;
 
 /**
  * @author Igor Kaynov

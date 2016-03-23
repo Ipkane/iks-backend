@@ -1,0 +1,13 @@
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<th:block th:fragment="input">
+  <input type="text" class="form-control" data-th-id="${element.name}" data-th-attr="ng-model = |${itemName}.${element.name}|,ng-readonly = |${element.readonly}|"
+         th:required="${element.required}"/>
+</th:block>
+<th:block th:fragment="select">
+  <select type="text" class="form-control" data-th-id="${element.name}" data-th-attr="ng-model = |${itemName}.${element.name}|, ng-readonly = |${element.readonly}|"
+          th:required="${element.required}">
+    <option data-th-if="${!element.required}" value=""></option>
+    <option data-th-value="${option.value}" data-th-each="option : ${element.options}" data-th-text="${option.label}">Option Label</option>
+  </select>
+</th:block>
+</html>

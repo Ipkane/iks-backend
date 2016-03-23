@@ -17,6 +17,8 @@ dependencies {
 
   compile 'org.springframework:spring-webmvc:4.1.6.RELEASE'
   compile 'javax.servlet:jstl:1.2'
+  compile 'org.thymeleaf:thymeleaf:2.1.4.RELEASE'
+  compile 'org.thymeleaf:thymeleaf-spring4:2.1.4.RELEASE'
   providedCompile 'javax.servlet:javax.servlet-api:3.1.0'
 }
 
@@ -52,6 +54,6 @@ gretty {
 //  managedClassReload=true
   interactiveMode=''
   debugPort = 5005
-//  debugSuspend = false
+  debugSuspend = false
 //  jvmArgs=['-Dspring.config.location=file:///D:/work/homesize/iks-config/dat/']
 }

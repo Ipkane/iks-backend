@@ -1,0 +1,35 @@
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<div class="modal-header">
+  <h2 class="modal-title" data-th-text="|Edit ${appObj.label}|">Edit Item</h2>
+</div>
+<div class="modal-body">
+  <form data-th-id="|${appObj.name}Form|" role="form" novalidate="novalidate" class="form-horizontal">
+    <div class="form-group" data-th-each="element : ${editView.elements}">
+      <label data-th-for="${element.name}" class="col-sm-4 control-label" data-th-text="${element.label}">Label</label>
+
+      <div class="col-sm-8">
+        <div  th:include="${element.templatePath} :: ${element.templateName}" th:with="itemName='selectedItem'">
+        </div>
+      </div>
+    </div>
+  </form>
+  <div class="row">
+    <!-- Alerts -->
+    <div class="col-xs-12">
+      <uib-alert ng-repeat="alert in alerts" type="{{ alert.type }}" close="closeAlert( $index )">
+        <span>{{ alert.message }}</span>
+      </uib-alert>
+    </div>
+  </div>
+</div>
+<div class="modal-footer">
+  <div class="row">
+    <div class="col-xs-3 col-xs-offset-3">
+      <button type="submit" class="btn btn-danger btn-block" data-th-attr="ng-click = |save(${appObj.name}Form.$valid)|">Save</button>
+    </div>
+    <div class="col-xs-3">
+      <button class="btn btn-success btn-block" ng-click="cancel()">Cancel</button>
+    </div>
+  </div>
+</div>
+</html>
