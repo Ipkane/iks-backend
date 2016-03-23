@@ -7,11 +7,11 @@ import com.iks.cms.web.api.common.*;
  * @author Igor Kaynov
  */
 public class ResponseGetEditData extends AbstractApiResponse {
-  private IDataRow item;
-  public IDataRow getItem() {
+  private IDataItem item;
+  public IDataItem getItem() {
     return item;
   }
-  public void setItem( IDataRow item ) {
+  public void setItem( IDataItem item ) {
     this.item = item;
   }
 }

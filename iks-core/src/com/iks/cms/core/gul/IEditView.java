@@ -6,5 +6,5 @@ import java.util.*;
  * @author Igor Kaynov
  */
 public interface IEditView extends IGulContainer {
-  List< IGulInput > getFields();
+  List< IGulInputField > getFields();
 }

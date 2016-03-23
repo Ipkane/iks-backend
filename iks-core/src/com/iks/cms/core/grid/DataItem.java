@@ -1,14 +1,17 @@
 package com.iks.cms.core.grid;
 
 import com.fasterxml.jackson.annotation.*;
+import com.iks.cms.core.exception.*;
 
 import java.util.*;
 
 /**
  * @author Igor Kaynov
  */
-public class DataRow implements IDataRow {
+public class DataItem implements IDataItem {
   private Map< String, Object > fieldValueMap = new LinkedHashMap<>();
+  @JsonIgnore
+  private List< IValidationError >        errors        = new ArrayList<>();
   @JsonValue
   @JsonAnyGetter
   public Map< String, Object > getFieldValueMap() {
@@ -26,5 +29,17 @@ public class DataRow implements IDataRow {
   public Object getFieldValue( String fieldName ) {
     return fieldValueMap.get( fieldName );
   }
-
+  @JsonIgnore
+  public List< IValidationError > getErrors() {
+    return errors;
+  }
+  public void setErrors( List< IValidationError > errors ) {
+    this.errors = errors;
+  }
+  public void addError(IValidationError error) {
+    errors.add( error );
+  }
+  public void cleanErrors() {
+    errors.clear();
+  };
 }

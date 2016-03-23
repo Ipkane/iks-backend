@@ -1,5 +1,6 @@
 package com.iks.cms.web.controller;
 
+import com.iks.cms.core.exception.*;
 import com.iks.cms.core.service.*;
 import com.iks.cms.web.api.common.*;
 import com.iks.cms.web.api.grid.*;
@@ -37,11 +38,11 @@ public class CoreController {
   //      return ApiUtils.makeErrorResponse( REQUEST_GET_GRID, RESPONSE_ERROR_GET_GRID, request );
   //    }
   //  }
-  @RequestMapping( value = REQUEST_GET_GRID_DATA, method = RequestMethod.GET )
-  public ResponseEntity< DefaultResponseBody< ?, ? > > getGridData( RequestGetGridData request ) {
+  @RequestMapping( value = REQUEST_GET_GRID_DATA, method = RequestMethod.POST )
+  public ResponseEntity< DefaultResponseBody< ?, ? > > getGridData( @RequestBody RequestGetGridData request ) {
     try {
       ResponseGetGridData response = new ResponseGetGridData();
-      response.setItems( appObjService.getGridData( request.getAppObj() ) );
+      response.setItems( appObjService.getGridData( request.getAppObj(), request.getFilter() ) );
       return ApiUtils.makeResponse( REQUEST_GET_GRID_DATA, request, response );
     } catch( Exception ex ) {
       logger.error( RESPONSE_ERROR_GET_GRID_DATA, ex );
@@ -52,11 +53,7 @@ public class CoreController {
   public ResponseEntity< DefaultResponseBody< ?, ? > > getEditData( RequestGetEditData request ) {
     try {
       ResponseGetEditData response = new ResponseGetEditData();
-      if( request.getItemId() == null ) {
-        // todo get new item
-      } else {
-        response.setItem( appObjService.getEditData( request.getAppObj(), request.getItemId() ) );
-      }
+      response.setItem( appObjService.getEditData( request.getAppObj(), request.getItemId() ) );
       return ApiUtils.makeResponse( REQUEST_GET_EDIT_DATA, request, response );
     } catch( Exception ex ) {
       logger.error( RESPONSE_ERROR_GET_EDIT_DATA, ex );
@@ -67,11 +64,15 @@ public class CoreController {
   public ResponseEntity< DefaultResponseBody< ?, ? > > updateEditData( @RequestBody RequestUpdateEditData request ) {
     try {
       if( request.isNew() ) {
-        appObjService.createNewItem( request.getAppObj(), request.getItem() );
+        appObjService.saveNewItem( request.getAppObj(), request.getItem() );
       } else {
         appObjService.updateItem( request.getAppObj(), request.getItem() );
       }
       return ApiUtils.makeResponse( REQUEST_UPDATE_EDIT_DATA, request, new ResponseEmpty() );
+    } catch( ValidationException ex ) {
+      logger.error( RESPONSE_ERROR_UPDATE_EDIT_DATA, ex );
+      ResponseValidationException response = new ResponseValidationException( ex );
+      return ApiUtils.makeClientErrorResponse( REQUEST_UPDATE_EDIT_DATA, RESPONSE_ERROR_UPDATE_EDIT_DATA, response, request );
     } catch( Exception ex ) {
       logger.error( RESPONSE_ERROR_UPDATE_EDIT_DATA, ex );
       return ApiUtils.makeErrorResponse( REQUEST_UPDATE_EDIT_DATA, RESPONSE_ERROR_UPDATE_EDIT_DATA, request );

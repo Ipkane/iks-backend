@@ -1,0 +1,4 @@
+<editView appObj="role">
+  <field name="id" readonly="true"/>
+  <field name="name"/>
+</editView>

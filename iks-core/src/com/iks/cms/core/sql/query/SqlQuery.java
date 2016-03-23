@@ -14,7 +14,7 @@ public abstract class SqlQuery {
       } else {
         sql.append( sep );
       }
-      sql.append( s.toString() );
+      sql.append( s == null ? null : s.toString() );
       first = false;
     }
     if (end != null) {

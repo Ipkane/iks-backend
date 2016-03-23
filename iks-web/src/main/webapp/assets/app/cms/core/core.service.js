@@ -7,7 +7,7 @@
   function CoreService( $resource, ApiService ) {
     return $resource( 'api/core/:action', {}, {
       getGrid       : ApiService.buildGetServiceMethod( 'getGrid' ),
-      getGridData   : ApiService.buildGetServiceMethod( 'getGridData' ),
+      getGridData   : ApiService.buildPostServiceMethod( 'getGridData' ),
       getEditData   : ApiService.buildGetServiceMethod( 'getEditData' ),
       updateEditData: ApiService.buildPostServiceMethod( 'updateEditData' ),
       deleteItem    : ApiService.buildPostServiceMethod( 'deleteItem' )

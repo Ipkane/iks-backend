@@ -1,8 +1,6 @@
 package com.iks.cms.xml.parser;
 
 import com.iks.cms.core.appObj.*;
-import com.iks.cms.core.data.*;
-import com.iks.cms.core.grid.*;
 import com.iks.cms.core.gul.*;
 import com.iks.cms.core.model.*;
 
@@ -14,6 +12,7 @@ import org.w3c.dom.*;
  */
 public class AppObjParser extends CommonParser {
   private static final Logger logger = LoggerFactory.getLogger( AppObjParser.class );
+  private AppObj appObj;
   public IAppObj parse( String fileName ) throws Exception {
     Document doc = parseFile( fileName );
     return parseRoot( doc.getDocumentElement() );
@@ -23,20 +22,21 @@ public class AppObjParser extends CommonParser {
   }
   //appObj
   private IAppObj parseRoot( Element root ) throws Exception {
-    AppObj appObj = new AppObj();
+    appObj = new AppObj();
     appObj.setName( root.getAttribute( "name" ) );
     appObj.setLabel( root.getAttribute( "label" ) );
     NodeList fieldList = root.getChildNodes();
+    appObj.setDataModel( parseDataModel( ( Element )root.getElementsByTagName( "data" ).item( 0 ) ) );
     for( int i = 0; i < fieldList.getLength(); i++ ) {
       Node node = fieldList.item( i );
       if( node.getNodeType() == Node.ELEMENT_NODE ) {
         Element childElement = ( Element )node;
         switch( childElement.getTagName() ) {
           case "data":
-            appObj.setDataModel( parseDataModel( childElement ) );
+            // we parse data before other elements
             break;
           case "list":
-            appObj.setGrid( parseGrid( childElement ) );
+            appObj.setGridView( parseGridView( childElement ) );
             break;
           case "edit":
             appObj.setEditView( parseEditView( childElement ) );
@@ -50,17 +50,17 @@ public class AppObjParser extends CommonParser {
   }
   // data
   private IDataModel parseDataModel( Element modelElement ) throws Exception {
-    DataParser dataParser = new DataParser();
+    ModelParser dataParser = new ModelParser();
     return dataParser.parse( modelElement.getAttribute( "url" ) );
   }
   //list
-  private IGrid parseGrid( Element gridElement ) throws Exception {
-    GridParser dataParser = new GridParser();
+  private IGridView parseGridView( Element gridElement ) throws Exception {
+    GridViewParser dataParser = new GridViewParser( appObj.getDataModel() );
     return dataParser.parse( gridElement.getAttribute( "url" ) );
   }
   //edit
   private EditView parseEditView( Element editElement ) throws Exception {
-    EditViewParser dataParser = new EditViewParser();
+    EditViewParser dataParser = new EditViewParser( appObj.getDataModel() );
     return dataParser.parse( editElement.getAttribute( "url" ) );
   }
 }

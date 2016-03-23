@@ -1,4 +1,4 @@
 <data appObj="role" tableName="app_role">
   <field tableField="id" name="id" label="Id"/>
-  <field tableField="name" name="name" label="Name"/>
+  <field tableField="name" name="name" label="Name" required="true"/>
 </data>

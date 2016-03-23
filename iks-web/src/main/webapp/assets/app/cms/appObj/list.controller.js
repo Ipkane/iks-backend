@@ -4,6 +4,9 @@ angular.module( 'app.cms' )//
 ;//
 function AppObjListController( $scope, $log, $uibModal, $timeout, CoreService, GridHelper, _ ) {
   angular.extend( $scope, {
+    filter      : {
+      item: {}
+    },
     gridName    : null,
     grid        : null,
     selectedItem: null,
@@ -17,7 +20,7 @@ function AppObjListController( $scope, $log, $uibModal, $timeout, CoreService, G
   }
 
   function reload() {
-    GridHelper.getGridData( $scope.gridName ).then( function ( response ) {
+    GridHelper.getGridData( $scope.gridName, $scope.filter.item ).then( function ( response ) {
       $scope.items          = response.success.items;
       var foundSelectedItem = false;
       if ( $scope.selectedItem ) {
@@ -34,6 +37,15 @@ function AppObjListController( $scope, $log, $uibModal, $timeout, CoreService, G
     } ).catch( function ( response ) {
       $log.debug( response );
     } );
+  };
+  $scope.toggleFilterPanel = function() {
+    $scope.showFilterPanel = !$scope.showFilterPanel;
+  };
+  $scope.search          = function () {
+    reload();
+  };
+  $scope.refresh = function() {
+    reload();
   };
   $scope.selectItem      = function ( item ) {
     $scope.selectedItem = item;
@@ -91,7 +103,7 @@ function AppObjListController( $scope, $log, $uibModal, $timeout, CoreService, G
             return "Are you sure, you want to delete item " + $scope.selectedItem.id
           },
           onConfirm: function () {
-            return function() {
+            return function () {
               return CoreService.deleteItem( { appObj: $scope.gridName, itemId: $scope.selectedItem.id } ).$promise;
             }
           }

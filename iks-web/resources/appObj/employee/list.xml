@@ -1,6 +1,12 @@
 <gridView appObj="employee">
+  <filter>
+    <field name="id"/>
+    <field name="fio"/>
+    <selectField name="gender"/>
+  </filter>
   <table>
-    <field name="id" label="Employee Id"/>
+    <field name="id"/>
     <field name="fio" label="First/Last Name Name"/>
+    <field name="gender"/>
   </table>
 </gridView>

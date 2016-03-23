@@ -1,4 +1,11 @@
 <data appObj="employee" tableName="employee">
-  <field tableField="id" name="id" label="Id"/>
-  <field tableField="fio" name="fio" label="First Name/Last Name"/>
+  <field tableField="id" name="id" label="Id" primary="true"/>
+  <field tableField="fio" name="fio" label="First Name/Last Name" required="true"/>
+  <selectField tableField="gender" name="gender" label="Sex">
+    <options>
+      <option value="male">Male</option>
+      <option value="female">Female</option>
+    </options>
+  </selectField>
+  <manyToOne name="user" appObj="user" tableField="user_id" referenceField="id"/>
 </data>

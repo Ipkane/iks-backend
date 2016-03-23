@@ -6,6 +6,7 @@ import com.iks.cms.core.model.*;
 import com.iks.cms.core.sql.*;
 import com.iks.cms.core.sql.query.*;
 
+import org.apache.commons.lang3.*;
 import org.hibernate.*;
 import org.slf4j.*;
 
@@ -18,6 +19,7 @@ public class GridQuery extends CommonDaoQuery {
   private static final Logger logger = LoggerFactory.getLogger( GridQuery.class );
   private IGrid      grid;
   private IDataModel model;
+  private Map< String, Object > filter = new HashMap<>();
   public GridQuery( IDataModel model, IGrid grid ) {
     this.model = model;
     this.grid = grid;
@@ -28,13 +30,13 @@ public class GridQuery extends CommonDaoQuery {
   public void setGrid( IGrid grid ) {
     this.grid = grid;
   }
-  public List< IDataRow > executeQuery( SessionFactory sessionFactory ) {
+  public List< IDataItem > executeQuery( SessionFactory sessionFactory ) {
     String sqlQuery = buildSqlQuery();
     logger.debug( sqlQuery );
     List rows = selectQuery( sessionFactory, sqlQuery );
-    List< IDataRow > resultList = new ArrayList<>();
+    List< IDataItem > resultList = new ArrayList<>();
     for( Object rowData : rows ) {
-      DataRow resultItem = new DataRow();
+      DataItem resultItem = new DataItem();
       Object[] data = ( Object[] )rowData;
       int i = 0;
       for( IGridField field : grid.getFields() ) {
@@ -49,10 +51,25 @@ public class GridQuery extends CommonDaoQuery {
     SelectQuery sb = new SelectQuery();
     Table table = new Table( model.getTableName(), "t" );
     sb.from( table );
+    sb.orderBy( table.getColumn( model.getPrimaryFieldName(), null ) );
     for( IGridField field : grid.getFields() ) {
       IDataField dataField = model.getField( field.getName() );
-      sb.addColumn( new Column( table, dataField.getTableField(), dataField.getName() ) );
+      sb.addColumn( table.getColumn( dataField.getTableField(), dataField.getName() ) );
+    }
+    for( Map.Entry< String, Object > entry : filter.entrySet() ) {
+      // todo add like filter
+      if (entry.getValue() == null || StringUtils.trimToNull( entry.getValue().toString()) == null ) {
+        continue;
+      }
+      sb.addCriteria( new MatchCriteria( table.getColumn( entry.getKey() ), entry.getValue() ) );
     }
     return sb.toString();
+  }
+  public Map< String, Object > getFilter() {
+    return filter;
+  }
+  public GridQuery setFilter( Map< String, Object > filter ) {
+    this.filter = filter;
+    return this;
   }
 }

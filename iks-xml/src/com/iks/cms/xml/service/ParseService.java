@@ -48,7 +48,7 @@ public class ParseService {
     }
   }
   //  private IDataModel parseDataModel( String fileName ) {
-  //    DataParser parser = new DataParser();
+  //    ModelParser parser = new ModelParser();
   //    try {
   //      return parser.parse( fileName );
   //    } catch( Exception e ) {
@@ -57,7 +57,7 @@ public class ParseService {
   //    return null;
   //  }
   //  private IGrid parseGrid( String fileName ) {
-  //    GridParser parser = new GridParser();
+  //    GridViewParser parser = new GridViewParser();
   //    try {
   //      return parser.parse( fileName );
   //    } catch( Exception e ) {

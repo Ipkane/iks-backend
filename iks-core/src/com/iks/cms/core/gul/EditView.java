@@ -5,23 +5,16 @@ import java.util.*;
 /**
  * @author Igor Kaynov
  */
-public class EditView implements IEditView {
-  private List< IGulElement > elements = new ArrayList<>();
-  private List< IGulInput >   fields   = new ArrayList<>();
-  public List< IGulElement > getElements() {
-    return elements;
-  }
-  public void setElements( List< IGulElement > elements ) {
-    this.elements = elements;
-  }
+public class EditView extends GulContainer implements IEditView {
+  private List< IGulInputField > fields   = new ArrayList<>();
   public void addElement( IGulElement element ) {
-    elements.add( element );
-    if( element instanceof IGulInput ) {
-      fields.add( ( IGulInput )element );
+    super.addElement( element );
+    if( element instanceof IGulInputField ) {
+      fields.add( ( IGulInputField )element );
     }
   }
   @Override
-  public List< IGulInput > getFields() {
+  public List< IGulInputField > getFields() {
     return fields;
   }
 }

@@ -7,8 +7,8 @@ import com.iks.cms.web.api.common.*;
  * @author Igor Kaynov
  */
 public class RequestUpdateEditData extends AbstractApiRequest {
-  private String  appObj;
-  private DataRow item;
+  private String   appObj;
+  private DataItem item;
   private boolean isNew = false;
   public String getAppObj() {
     return appObj;
@@ -16,10 +16,10 @@ public class RequestUpdateEditData extends AbstractApiRequest {
   public void setAppObj( String appObj ) {
     this.appObj = appObj;
   }
-  public DataRow getItem() {
+  public DataItem getItem() {
     return item;
   }
-  public void setItem( DataRow item ) {
+  public void setItem( DataItem item ) {
     this.item = item;
   }
   public boolean isNew() {

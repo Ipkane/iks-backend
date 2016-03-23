@@ -11,5 +11,6 @@ public interface IAppObj {
   String getName();
   IDataModel getDataModel();
   IGrid getGrid();
+  IGridView getGridView();
   IEditView getEditView();
 }
