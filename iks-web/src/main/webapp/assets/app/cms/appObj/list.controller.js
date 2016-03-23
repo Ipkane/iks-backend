@@ -3,6 +3,7 @@ angular.module( 'app.cms' )//
   .controller( 'AppObjListController', AppObjListController )
 ;//
 function AppObjListController( $scope, $log, $uibModal, $timeout, CoreService, GridHelper, _ ) {
+  var vm = this;
   angular.extend( $scope, {
     filter      : {
       item: {}
@@ -10,6 +11,8 @@ function AppObjListController( $scope, $log, $uibModal, $timeout, CoreService, G
     gridName    : null,
     grid        : null,
     selectedItem: null,
+    orderBy     : 'id',
+    orderAsc    : true,
     items       : []
   } );
   function init() {
@@ -20,7 +23,7 @@ function AppObjListController( $scope, $log, $uibModal, $timeout, CoreService, G
   }
 
   function reload() {
-    GridHelper.getGridData( $scope.gridName, $scope.filter.item ).then( function ( response ) {
+    GridHelper.getGridData( $scope.gridName, $scope.filter.item, ($scope.orderAsc ? '' : '-') + $scope.orderBy ).then( function ( response ) {
       $scope.items          = response.success.items;
       var foundSelectedItem = false;
       if ( $scope.selectedItem ) {
@@ -38,19 +41,19 @@ function AppObjListController( $scope, $log, $uibModal, $timeout, CoreService, G
       $log.debug( response );
     } );
   };
-  $scope.toggleFilterPanel = function() {
+  $scope.toggleFilterPanel = function () {
     $scope.showFilterPanel = !$scope.showFilterPanel;
   };
-  $scope.search          = function () {
+  $scope.search            = function () {
     reload();
   };
-  $scope.refresh = function() {
+  $scope.refresh           = function () {
     reload();
   };
-  $scope.selectItem      = function ( item ) {
+  $scope.selectItem        = function ( item ) {
     $scope.selectedItem = item;
   };
-  $scope.openEditModal   = function () {
+  $scope.openEditModal     = function () {
     // open modal
     $uibModal.open(
       {
@@ -68,7 +71,7 @@ function AppObjListController( $scope, $log, $uibModal, $timeout, CoreService, G
                    }, function () {
                    } );
   };
-  $scope.openAddModal    = function () {
+  $scope.openAddModal      = function () {
     // open modal
     $uibModal.open(
       {
@@ -86,7 +89,7 @@ function AppObjListController( $scope, $log, $uibModal, $timeout, CoreService, G
                    }, function () {
                    } );
   };
-  $scope.openDeleteModal = function () {
+  $scope.openDeleteModal   = function () {
     // open modal
     $uibModal.open(
       {
@@ -113,6 +116,21 @@ function AppObjListController( $scope, $log, $uibModal, $timeout, CoreService, G
                      reload();
                    }, function () {
                    } );
+  };
+  $scope.setOrderBy        = function ( fieldName ) {
+    if ( fieldName == $scope.orderBy ) {
+      $scope.orderAsc = !$scope.orderAsc;
+    } else {
+      $scope.orderAsc = true;
+    }
+    $scope.orderBy = fieldName;
+    $scope.items = _.orderBy( $scope.items, [ $scope.orderBy ], [ $scope.orderAsc ? 'asc' : 'desc' ] );
+  };
+  vm.getHeaderClass = function(fieldName) {
+    if (fieldName == $scope.orderBy) {
+      return $scope.orderAsc ? 'asc' : 'desc';
+    }
+    return null;
   };
   $timeout( init, 0 );
 };

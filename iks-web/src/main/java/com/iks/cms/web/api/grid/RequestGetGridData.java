@@ -10,6 +10,7 @@ import java.util.*;
 public class RequestGetGridData extends AbstractApiRequest {
   private String                appObj;
   private Map< String, Object > filter;
+  private String orderBy;
   public String getAppObj() {
     return appObj;
   }
@@ -21,5 +22,11 @@ public class RequestGetGridData extends AbstractApiRequest {
   }
   public void setFilter( Map< String, Object > filter ) {
     this.filter = filter;
+  }
+  public String getOrderBy() {
+    return orderBy;
+  }
+  public void setOrderBy( String orderBy ) {
+    this.orderBy = orderBy;
   }
 }

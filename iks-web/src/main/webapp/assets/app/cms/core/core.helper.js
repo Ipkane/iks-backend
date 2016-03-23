@@ -35,10 +35,11 @@
       return deferred.promise;
     }
 
-    function getGridData( name, filter ) {
+    function getGridData( name, filter, orderBy ) {
       return CoreService.getGridData( {
         appObj: name,
-        filter: filter
+        filter: filter,
+        orderBy: orderBy
       } ).$promise;
     }
   }

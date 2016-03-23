@@ -42,7 +42,7 @@ public class CoreController {
   public ResponseEntity< DefaultResponseBody< ?, ? > > getGridData( @RequestBody RequestGetGridData request ) {
     try {
       ResponseGetGridData response = new ResponseGetGridData();
-      response.setItems( appObjService.getGridData( request.getAppObj(), request.getFilter() ) );
+      response.setItems( appObjService.getGridData( request.getAppObj(), request.getFilter(), request.getOrderBy() ) );
       return ApiUtils.makeResponse( REQUEST_GET_GRID_DATA, request, response );
     } catch( Exception ex ) {
       logger.error( RESPONSE_ERROR_GET_GRID_DATA, ex );

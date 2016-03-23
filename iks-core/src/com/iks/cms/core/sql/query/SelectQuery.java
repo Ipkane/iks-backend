@@ -13,7 +13,7 @@ public class SelectQuery  extends SqlQuery {
   private List< String >    joins     = new ArrayList<>();
   private List< String >    leftJoins = new ArrayList<>();
   private List< ICriteria > criterias = new ArrayList<>();
-  private List< Column >    orderBys  = new ArrayList<>();
+  private List< ColumnOrder >    orderBys  = new ArrayList<>();
   private List< Column >    groupBys  = new ArrayList<>();
   private List< String >    havings   = new ArrayList<>();
   public SelectQuery() {
@@ -52,8 +52,8 @@ public class SelectQuery  extends SqlQuery {
     leftJoins.add( join );
     return this;
   }
-  public SelectQuery orderBy( Column column ) {
-    orderBys.add( column );
+  public SelectQuery orderBy( ColumnOrder columnOrder ) {
+    orderBys.add( columnOrder );
     return this;
   }
   @Override

@@ -19,7 +19,9 @@ public class GridQuery extends CommonDaoQuery {
   private static final Logger logger = LoggerFactory.getLogger( GridQuery.class );
   private IGrid      grid;
   private IDataModel model;
-  private Map< String, Object > filter = new HashMap<>();
+  private String     orderBy;
+  private boolean               orderAsc = true;
+  private Map< String, Object > filter   = new HashMap<>();
   public GridQuery( IDataModel model, IGrid grid ) {
     this.model = model;
     this.grid = grid;
@@ -51,17 +53,21 @@ public class GridQuery extends CommonDaoQuery {
     SelectQuery sb = new SelectQuery();
     Table table = new Table( model.getTableName(), "t" );
     sb.from( table );
-    sb.orderBy( table.getColumn( model.getPrimaryFieldName(), null ) );
     for( IGridField field : grid.getFields() ) {
       IDataField dataField = model.getField( field.getName() );
       sb.addColumn( table.getColumn( dataField.getTableField(), dataField.getName() ) );
     }
     for( Map.Entry< String, Object > entry : filter.entrySet() ) {
       // todo add like filter
-      if (entry.getValue() == null || StringUtils.trimToNull( entry.getValue().toString()) == null ) {
+      if( entry.getValue() == null || StringUtils.trimToNull( entry.getValue().toString() ) == null ) {
         continue;
       }
       sb.addCriteria( new MatchCriteria( table.getColumn( entry.getKey() ), entry.getValue() ) );
+    }
+    if( orderBy != null ) {
+      sb.orderBy( new ColumnOrder( table.getColumn( orderBy ), orderAsc ? EColumnOrder.ASC : EColumnOrder.DESC ) );
+    } else {
+      sb.orderBy( new ColumnOrder( table.getColumn( model.getPrimaryFieldName(), null ), EColumnOrder.ASC ) );
     }
     return sb.toString();
   }
@@ -71,5 +77,17 @@ public class GridQuery extends CommonDaoQuery {
   public GridQuery setFilter( Map< String, Object > filter ) {
     this.filter = filter;
     return this;
+  }
+  public String getOrderBy() {
+    return orderBy;
+  }
+  public void setOrderBy( String orderBy ) {
+    this.orderBy = orderBy;
+  }
+  public boolean isOrderAsc() {
+    return orderAsc;
+  }
+  public void setOrderAsc( boolean orderAsc ) {
+    this.orderAsc = orderAsc;
   }
 }

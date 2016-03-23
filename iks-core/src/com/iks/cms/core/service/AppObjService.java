@@ -31,10 +31,20 @@ public class AppObjService {
   public IDataModel getModel( String appObj ) {
     return appObjMap.get( appObj ).getDataModel();
   }
-  public List< IDataItem > getGridData( String appObj, Map< String, Object > filter ) {
+  public List< IDataItem > getGridData( String appObj, Map< String, Object > filter, String orderBy ) {
     GridQuery query = new GridQuery( getModel( appObj ), getGrid( appObj ) );
     if( filter != null ) {
       query.setFilter( filter );
+    }
+    if( orderBy != null ) {
+      boolean orderAsc = true;
+      String orderField = orderBy;
+      if( orderBy.substring( 0, 1 ).equals( "-" ) ) {
+        orderField = orderBy.substring( 1, orderBy.length() );
+        orderAsc = false;
+      }
+      query.setOrderBy( orderField );
+      query.setOrderAsc( orderAsc );
     }
     return query.executeQuery( commonDao.getSessionFactory() );
   }

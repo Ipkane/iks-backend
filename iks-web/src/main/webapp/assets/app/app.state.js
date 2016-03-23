@@ -19,7 +19,7 @@
         templateUrl: function ($stateParams){
           return 'view/gridView?appObj=' + $stateParams.appObj;
         },
-        controller : "AppObjListController"
+        controller : "AppObjListController as vm"
       } )
     ;
     $urlRouterProvider.otherwise( 'home' );

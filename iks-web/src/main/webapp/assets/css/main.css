@@ -6,6 +6,14 @@ input.form-control.ng-invalid {
   border-color: red;
 }
 
+.grid-table {
+  table-layout: fixed;
+}
+
+.grid-table th, .grid-table td {
+  cursor: default;
+}
+
 .grid-filter-panel {
 }
 
