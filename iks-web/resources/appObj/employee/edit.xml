@@ -1,13 +1,23 @@
 <?xml version="1.0"?>
 <editView appObj="employee">
-  <field name="id" readonly="true"/>
-  <field name="fio" label="First/Last Name Name"/>
-  <selectField name="gender">
+  <textbox name="id" readonly="true"/>
+  <textbox name="fio" label="First/Last Name Name"/>
+  <select name="gender">
     <!--<options>-->
       <!--<option value="male">Male</option>-->
       <!--<option value="female">Female</option>-->
     <!--</options>-->
-  </selectField>
-  <referenceSelectField name="user" displayField="username"/>
-  <button id="helloWorld" label="Hello world"/>
+  </select>
+  <referenceSelect name="user" displayField="username"/>
+  <hbox>
+    <button id="button1" label="Button 1"/>
+    <button id="button2" label="Button 2"/>
+    <button id="button3" label="Button 3"/>
+    <vbox>
+      <button id="button4" label="Button 4"/>
+      <button id="button5" label="Button 5"/>
+      <button id="button6" label="Button 6"/>
+    </vbox>
+  </hbox>
+
 </editView>

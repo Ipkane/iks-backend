@@ -23,7 +23,7 @@ public class EditViewParser {
   private EditView parseRoot( Document doc ) throws Exception {
     Element root = doc.getDocumentElement();
     EditView editView = new EditView();
-    ContainerParser.getInstance().parse(model, editView, root );
+    GulContainerParser.getInstance().parse(model, editView, root );
     return editView;
   }
   protected IDataModel getModel() {

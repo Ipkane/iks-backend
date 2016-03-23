@@ -84,7 +84,7 @@ public class ModelParser {
     for( int i = 0; i < optionsList.getLength(); i++ ) {
       Element optionElement = ( Element )optionsList.item( i );
       SelectOption option = new SelectOption();
-      option.setValue( optionElement.getAttribute( EditConstant.OPTION_VALUE_ATTR ) );
+      option.setValue( optionElement.getAttribute( ModelConstant.OPTION_VALUE_ATTR ) );
       option.setLabel( optionElement.getTextContent() );
       field.addOption( option );
     }

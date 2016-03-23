@@ -8,6 +8,5 @@ import com.iks.cms.core.gul.*;
 public interface IGulInputField extends IGulElement {
   String getName();
   String getLabel();
-  String getType();
   Object getDefaultValue();
 }

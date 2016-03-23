@@ -1,0 +1,8 @@
+.hbox {
+  width: 100%;
+}
+
+.hbox-element {
+  display: inline-block;
+  vertical-align: top;
+}

@@ -5,7 +5,7 @@ import com.iks.cms.core.gul.*;
 /**
  * @author Igor Kaynov
  */
-public class GulInputField extends GulElement implements IGulInputField {
+public class GulTextbox extends GulElement implements IGulInputField {
   private String name;
   private String label;
   private boolean required     = false;
@@ -35,9 +35,6 @@ public class GulInputField extends GulElement implements IGulInputField {
   public void setReadonly( boolean readonly ) {
     this.readonly = readonly;
   }
-  public String getType() {
-    return GulConstant.INPUT_TYPE;
-  }
   public void setDefaultValue( Object defaultValue ) {
     this.defaultValue = defaultValue;
   }
@@ -51,6 +48,6 @@ public class GulInputField extends GulElement implements IGulInputField {
   }
   @Override
   public String getTemplateName() {
-    return getType();
+    return getTag();
   }
 }

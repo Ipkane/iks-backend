@@ -4,20 +4,19 @@ import com.iks.cms.core.data.*;
 import com.iks.cms.core.gul.*;
 import com.iks.cms.core.gul.form.*;
 import com.iks.cms.core.model.*;
-import com.iks.cms.xml.constant.*;
 
 import org.w3c.dom.*;
 
 /**
  * @author Igor Kaynov
  */
-public class SelectFieldParser<T extends GulSelectField> extends InputFieldParser<T> {
-  private static SelectFieldParser instance;
-  protected SelectFieldParser() {
+public class GulSelectFieldParser<T extends GulSelect > extends GulTextboxParser<T> {
+  private static GulSelectFieldParser instance;
+  protected GulSelectFieldParser() {
   }
-  public static SelectFieldParser getInstance() {
+  public static GulSelectFieldParser getInstance() {
     if( instance == null ) {
-      instance = new SelectFieldParser();
+      instance = new GulSelectFieldParser();
     }
     return instance;
   }
@@ -27,13 +26,13 @@ public class SelectFieldParser<T extends GulSelectField> extends InputFieldParse
     SelectField dataField = ( SelectField )model.getField( gulElement.getName() );
     gulElement.setOptions( dataField.getOptions() );
   }
-  private void fillSelectOptions( GulSelectField select, Element fieldElement ) {
-    Element optionsElement = ( Element )fieldElement.getElementsByTagName( EditConstant.OPTIONS ).item( 0 );
-    NodeList optionsList = optionsElement.getElementsByTagName( EditConstant.OPTION );
+  private void fillSelectOptions( GulSelect select, Element fieldElement ) {
+    Element optionsElement = ( Element )fieldElement.getElementsByTagName( GulConstant.OPTIONS ).item( 0 );
+    NodeList optionsList = optionsElement.getElementsByTagName( GulConstant.OPTION );
     for( int i = 0; i < optionsList.getLength(); i++ ) {
       Element optionElement = ( Element )optionsList.item( i );
       SelectOption option = new SelectOption();
-      option.setValue( optionElement.getAttribute( EditConstant.OPTION_VALUE_ATTR ) );
+      option.setValue( optionElement.getAttribute( GulConstant.OPTION_VALUE_ATTR ) );
       option.setLabel( optionElement.getTextContent() );
       select.addOption( option );
     }

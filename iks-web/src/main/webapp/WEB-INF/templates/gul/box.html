@@ -1,0 +1,20 @@
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<th:block th:fragment="box">
+  <th:block th:include="::vbox" th:if="${element.orient=='vertical'}"/>
+  <th:block th:include="::hbox" th:if="${element.orient=='horizontal'}"/>
+</th:block>
+<th:block th:fragment="vbox">
+  <div class="vbox" th:if="${element.orient == 'vertical'}">
+    <div th:each="childElement : ${element.elements}">
+      <th:block th:include="${childElement.templatePath} :: ${childElement.templateName}" th:with="element=${childElement}"></th:block>
+    </div>
+  </div>
+</th:block>
+<th:block th:fragment="hbox">
+  <div class="hbox" th:if="${element.orient == 'horizontal'}">
+    <div class="hbox-element" th:each="childElement : ${element.elements}">
+      <th:block th:include="${childElement.templatePath} :: ${childElement.templateName}" th:with="element=${childElement}"></th:block>
+    </div>
+  </div>
+</th:block>
+</html>

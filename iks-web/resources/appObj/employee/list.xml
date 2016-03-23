@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <gridView appObj="employee">
   <filter>
-    <field name="id"/>
-    <field name="fio"/>
-    <selectField name="gender"/>
+    <textbox name="id"/>
+    <textbox name="fio"/>
+    <select name="gender"/>
   </filter>
   <table>
     <field name="id"/>

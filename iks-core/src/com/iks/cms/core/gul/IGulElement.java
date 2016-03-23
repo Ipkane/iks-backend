@@ -7,4 +7,5 @@ public interface IGulElement {
   String getTemplatePath();
   String getTemplateName();
   String getId();
+  String getTag();
 }

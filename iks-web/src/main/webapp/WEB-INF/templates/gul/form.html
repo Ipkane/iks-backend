@@ -1,16 +1,20 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-<th:block th:fragment="input">
-  <label data-th-for="${element.name}" class="control-label" data-th-text="${element.label}">Label</label>
-  <input type="text" class="form-control" data-th-id="${element.name}" data-th-attr="ng-model = |${itemName}.${element.name}|,ng-readonly = |${element.readonly}|"
-         th:required="${element.required}"/>
+<th:block th:fragment="textbox">
+  <div class="form-group">
+    <label data-th-for="${element.name}" class="control-label" data-th-text="${element.label}">Label</label>
+    <input type="text" class="form-control" data-th-id="${element.name}" data-th-attr="ng-model = |${itemName}.${element.name}|,ng-readonly = |${element.readonly}|"
+           th:required="${element.required}"/>
+  </div>
 </th:block>
 <th:block th:fragment="select">
-  <label data-th-for="${element.name}" class="control-label" data-th-text="${element.label}">Label</label>
-  <select type="text" class="form-control" data-th-id="${element.name}" data-th-attr="ng-model = |${itemName}.${element.name}|, ng-readonly = |${element.readonly}|"
-          th:required="${element.required}">
-    <option data-th-if="${!element.required}" value=""></option>
-    <option data-th-value="${option.value}" data-th-each="option : ${element.options}" data-th-text="${option.label}">Option Label</option>
-  </select>
+  <div class="form-group">
+    <label data-th-for="${element.name}" class="control-label" data-th-text="${element.label}">Label</label>
+    <select type="text" class="form-control" data-th-id="${element.name}" data-th-attr="ng-model = |${itemName}.${element.name}|, ng-readonly = |${element.readonly}|"
+            th:required="${element.required}">
+      <option data-th-if="${!element.required}" value=""></option>
+      <option data-th-value="${option.value}" data-th-each="option : ${element.options}" data-th-text="${option.label}">Option Label</option>
+    </select>
+  </div>
 </th:block>
 <th:block th:fragment="button">
   <button th:id="${element.id}" th:text="${element.label}" class="btn btn-default"></button>

@@ -3,13 +3,17 @@
   <h2 class="modal-title" data-th-text="|Edit ${appObj.label}|">Edit Item</h2>
 </div>
 <div class="modal-body">
-  <form data-th-id="|${appObj.name}Form|" role="form" novalidate="novalidate" class="form-horizontal">
-    <div class="form-group" data-th-each="element : ${editView.elements}">
-      <div class="col-sm-8">
-        <div  th:include="${element.templatePath} :: ${element.templateName}" th:with="itemName='selectedItem'">
-        </div>
-      </div>
-    </div>
+  <form data-th-id="|${appObj.name}Form|" role="form" novalidate="novalidate" class="form">
+    <!--<div class="form-group" data-th-each="element : ${editView.elements}">-->
+    <!--<div class="col-sm-8">-->
+    <!--<div  th:include="${element.templatePath} :: ${element.templateName}" th:with="itemName='selectedItem'">-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--</div>-->
+    <th:block th:each="element : ${editView.elements}">
+      <th:block th:include="${element.templatePath} :: ${element.templateName}" th:with="itemName='selectedItem'">
+      </th:block>
+    </th:block>
   </form>
   <div class="row">
     <!-- Alerts -->

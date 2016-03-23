@@ -62,7 +62,7 @@ public class GridViewParser {
   }
   private IFilterPanel parseFilterPanel( Element filterElement ) throws Exception {
     FilterPanel filterPanel = new FilterPanel();
-    ContainerParser.getInstance().parse(model, filterPanel,filterElement );
+    GulContainerParser.getInstance().parse(model, filterPanel,filterElement );
     return filterPanel;
   }
   protected IDataModel getModel() {

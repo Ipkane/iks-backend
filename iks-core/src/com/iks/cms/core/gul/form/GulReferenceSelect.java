@@ -7,7 +7,7 @@ import java.util.*;
 /**
  * @author Igor Kaynov
  */
-public class GulReferenceSelectField extends GulReferenceField {
+public class GulReferenceSelect extends GulReferenceField {
   private List< SelectOption > options = new ArrayList<>();
   public List< SelectOption > getOptions() {
     return options;
@@ -17,10 +17,6 @@ public class GulReferenceSelectField extends GulReferenceField {
   }
   public void addOption( SelectOption option ) {
     options.add( option );
-  }
-  @Override
-  public String getType() {
-    return GulConstant.REFERENCE_SELECT_TYPE;
   }
   @Override
   public String getTemplatePath() {

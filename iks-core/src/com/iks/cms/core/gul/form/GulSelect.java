@@ -7,7 +7,7 @@ import java.util.*;
 /**
  * @author Igor Kaynov
  */
-public class GulSelectField extends GulInputField {
+public class GulSelect extends GulTextbox {
   private List< SelectOption > options = new ArrayList<>();
   public List< SelectOption > getOptions() {
     return options;
@@ -17,8 +17,5 @@ public class GulSelectField extends GulInputField {
   }
   public void addOption( SelectOption option ) {
     options.add( option );
-  }
-  public String getType() {
-    return GulConstant.SELECT_TYPE;
   }
 }

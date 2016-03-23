@@ -26,4 +26,8 @@ public class FilterPanel extends GulContainer implements IFilterPanel {
   public String getTemplatePath() {
     return "gul/filterPanel";
   }
+  @Override
+  public String getTemplateName() {
+    return "filterPanel";
+  }
 }
