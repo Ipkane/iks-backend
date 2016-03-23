@@ -22,4 +22,8 @@ public class GulReferenceSelectField extends GulReferenceField {
   public String getType() {
     return GulConstant.REFERENCE_SELECT_TYPE;
   }
+  @Override
+  public String getTemplatePath() {
+    return "gul/referenceSelect";
+  }
 }

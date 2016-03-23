@@ -8,19 +8,7 @@
       <label data-th-for="${element.name}" class="col-sm-4 control-label" data-th-text="${element.label}">Label</label>
 
       <div class="col-sm-8">
-        <div data-th-if="${element.type == 'input'}" th:include="${element.templatePath} :: ${element.templateName}">
-        </div>
-        <div data-th-if="${element.type == 'select'}">
-          <select type="text" class="form-control" data-th-id="${element.name}" data-th-attr="ng-model = |selectedItem.${element.name}|">
-            <option data-th-if="${!element.required}" value=""></option>
-            <option data-th-value="${option.value}" data-th-each="option : ${element.options}" data-th-text="${option.label}">Option Label</option>
-          </select>
-        </div>
-        <div data-th-if="${element.type == 'referenceSelect'}">
-          <select type="text" class="form-control" data-th-id="${element.name}" data-th-attr="ng-model = |selectedItem.${element.name}|">
-            <option data-th-if="${!element.required}" value=""></option>
-            <option data-th-value="${option.value}" data-th-each="option : ${optionsMap[element.name]}" data-th-text="${option.label}">Option label</option>
-          </select>
+        <div  th:include="${element.templatePath} :: ${element.templateName}" th:with="itemName='selectedItem'">
         </div>
       </div>
     </div>

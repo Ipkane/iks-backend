@@ -1,0 +1,8 @@
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<div th:fragment="referenceSelect" th:if="${element.type == 'referenceSelect'}">
+  <select type="text" class="form-control" data-th-id="${element.name}" data-th-attr="ng-model = |${itemName}.${element.name}|">
+    <option data-th-if="${!element.required}" value=""></option>
+    <option data-th-value="${option.value}" data-th-each="option : ${optionsMap[element.name]}" data-th-text="${option.label}">Option label</option>
+  </select>
+</div>
+</html>

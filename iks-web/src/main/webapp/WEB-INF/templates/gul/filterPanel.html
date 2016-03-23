@@ -6,7 +6,7 @@
         <div class="form-group">
           <label data-th-for="${element.name}" class="control-label" data-th-text="${element.label}">Label</label>
 
-          <div th:include="${element.templatePath} :: ${element.templateName}">
+          <div th:include="${element.templatePath} :: ${element.templateName}" th:with="itemName='filter.item'">
           </div>
         </div>
       </div>
