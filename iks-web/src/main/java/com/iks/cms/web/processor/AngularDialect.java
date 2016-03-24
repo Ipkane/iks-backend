@@ -16,11 +16,12 @@ public class AngularDialect extends AbstractDialect {
   @Override
   public Set< IProcessor > getProcessors() {
     final Set< IProcessor > processors = new HashSet<>();
-    processors.add( new CommonNgAttrProcessor("sref", "ui-sref") );
-    processors.add( new CommonNgAttrProcessor("init") );
-    processors.add( new CommonNgAttrProcessor("click") );
-    processors.add( new CommonNgAttrProcessor("model") );
-    processors.add( new CommonNgAttrProcessor("readonly") );
+    processors.add( new CommonNgAttrProcessor( "sref", "ui-sref" ) );
+    processors.add( new CommonNgAttrProcessor( "init" ) );
+    processors.add( new CommonNgAttrProcessor( "click" ) );
+    processors.add( new CommonNgAttrProcessor( "model" ) );
+    processors.add( new CommonNgAttrProcessor( "readonly" ) );
+    processors.add( new CommonNgAttrProcessor( "disabled" ) );
     return processors;
   }
 }

@@ -58,20 +58,20 @@ public class GulTextbox extends GulElement implements IGulInputField {
   @Override
   public void parse( IDataModel model, Element xmlElement ) throws Exception {
     super.parse( model, xmlElement );
-    setName( xmlElement.getAttribute( GulConstant.NAME_ATTR ) );
+    setName( xmlElement.getAttribute( GulConstant.ATTR_NAME ) );
     DataField dataField = ( DataField )model.getField( getName() );
-    if( xmlElement.hasAttribute( GulConstant.LABEL_ATTR ) ) {
-      setLabel( xmlElement.getAttribute( GulConstant.LABEL_ATTR ) );
+    if( xmlElement.hasAttribute( GulConstant.ATTR_LABEL ) ) {
+      setLabel( xmlElement.getAttribute( GulConstant.ATTR_LABEL ) );
     } else {
       setLabel( dataField.getLabel() );
     }
-    if( xmlElement.hasAttribute( GulConstant.REQUIRED_ATTR ) ) {
-      setRequired( BooleanUtils.toBoolean( xmlElement.getAttribute( GulConstant.REQUIRED_ATTR ) ) );
+    if( xmlElement.hasAttribute( GulConstant.ATTR_REQUIRED ) ) {
+      setRequired( BooleanUtils.toBoolean( xmlElement.getAttribute( GulConstant.ATTR_REQUIRED ) ) );
     } else {
       setRequired( dataField.isRequired() );
     }
-    if( xmlElement.hasAttribute( GulConstant.READONLY_ATTR ) ) {
-      setReadonly( BooleanUtils.toBoolean( xmlElement.getAttribute( GulConstant.READONLY_ATTR ) ) );
+    if( xmlElement.hasAttribute( GulConstant.ATTR_READONLY ) ) {
+      setReadonly( BooleanUtils.toBoolean( xmlElement.getAttribute( GulConstant.ATTR_READONLY ) ) );
     }
   }
 }

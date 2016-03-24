@@ -5,12 +5,12 @@
   <select name="gender">
   </select>
   <referenceSelect name="user" displayField="username"/>
-  <hbox>
+  <hbox pack="end">
     <button id="button1" label="Button 1"/>
     <button id="button2" label="Button 2"/>
     <button id="button3" label="Button 3"/>
-    <vbox>
-      <button id="button4" label="Button 4"/>
+    <vbox pack="end">
+      <button id="button4" label="Button 4" style="width: 150px"/>
       <button id="button5" label="Button 5"/>
       <button id="button6" label="Button 6"/>
     </vbox>

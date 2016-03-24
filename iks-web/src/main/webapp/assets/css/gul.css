@@ -1,8 +1,34 @@
-.hbox {
-  width: 100%;
+.box {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+  align-content: flex-start;
 }
 
-.hbox-element {
-  display: inline-block;
-  vertical-align: top;
+.hbox {
+  width: 100%;
+  flex-direction: row;
+  flex-wrap: nowrap;
+}
+
+.vbox {
+  height: 100%;
+  flex-direction: column;
+}
+
+.hbox.pack-start, .vbox.pack-start {
+  align-items: flex-start;
+}
+
+.hbox.pack-center, .vbox.pack-center {
+  justify-content: center;
+}
+
+.hbox.pack-end, .vbox.pack-end {
+  justify-content: flex-end;
 }

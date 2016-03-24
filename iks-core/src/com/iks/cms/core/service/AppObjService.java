@@ -99,7 +99,7 @@ public class AppObjService {
     IDataModel model = getModel( appObj );
     IEditView editView = getEditView( appObj );
     for( IGulInputField field : editView.getFields() ) {
-      if( field.getTag() == GulConstant.REFERENCE_SELECT ) {
+      if( Objects.equals( field.getTag(), GulConstant.REFERENCE_SELECT ) ) {
         GulReferenceField referenceField = ( GulReferenceField )field;
         ManyToOne dataField = ( ManyToOne )model.getField( field.getName() );
         List< String > referencedFields = Arrays.asList( dataField.getReferenceField(), referenceField.getDisplayField() );
