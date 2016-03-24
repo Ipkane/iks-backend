@@ -9,18 +9,18 @@ import com.iks.cms.core.gul.panel.*;
  * @author Igor Kaynov
  */
 public class GridView extends GulContainer implements IGridView {
-  private IGrid        grid;
-  private IFilterPanel filterPanel;
+  private IGrid           grid;
+  private IGulFilterPanel filterPanel;
   public IGrid getGrid() {
     return grid;
   }
   public void setGrid( IGrid grid ) {
     this.grid = grid;
   }
-  public IFilterPanel getFilterPanel() {
+  public IGulFilterPanel getFilterPanel() {
     return filterPanel;
   }
-  public void setFilterPanel( IFilterPanel filterPanel ) {
+  public void setFilterPanel( IGulFilterPanel filterPanel ) {
     this.filterPanel = filterPanel;
   }
   @Override

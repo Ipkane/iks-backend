@@ -8,6 +8,5 @@ import java.util.*;
 /**
  * @author Igor Kaynov
  */
-public interface IEditView extends IGulContainer {
-  List< IGulInputField > getFields();
+public interface IEditView extends IFieldContainer {
 }

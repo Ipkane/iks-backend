@@ -3,6 +3,7 @@ package com.iks.cms.core.gul.element;
 import com.google.common.base.*;
 
 import com.iks.cms.core.gul.*;
+import com.iks.cms.core.gul.container.*;
 import com.iks.cms.core.model.*;
 
 import org.w3c.dom.*;
@@ -13,10 +14,11 @@ import java.util.*;
  * @author Igor Kaynov
  */
 public abstract class GulElement implements IGulElement {
-  protected String id;
-  private   String style;
-  private   String cssClass;
-  private   int    flex;
+  protected String      id;
+  private   String      style;
+  private   String      cssClass;
+  private   int         flex;
+  private   IGulContainer parent;
   @Override
   public String getId() {
     return id;
@@ -26,6 +28,7 @@ public abstract class GulElement implements IGulElement {
   }
   @Override
   public abstract String getTemplatePath();
+
   @Override
   public abstract String getTag();
   @Override
@@ -76,5 +79,13 @@ public abstract class GulElement implements IGulElement {
   }
   public void setCssClass( String cssClass ) {
     this.cssClass = cssClass;
+  }
+  @Override
+  public IGulContainer getParent() {
+    return parent;
+  }
+  @Override
+  public void setParent( IGulContainer parent ) {
+    this.parent = parent;
   }
 }

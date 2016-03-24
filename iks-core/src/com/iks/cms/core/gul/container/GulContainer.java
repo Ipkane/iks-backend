@@ -18,9 +18,13 @@ public abstract class GulContainer extends GulElement implements IGulContainer {
     return elements;
   }
   public void setElements( List< IGulElement > elements ) {
-    this.elements = elements;
+    this.elements.clear();
+    for( IGulElement element : elements ) {
+      addElement( element );
+    }
   }
   public void addElement( IGulElement element ) {
+    element.setParent(this);
     elements.add( element );
   }
   @Override
@@ -32,8 +36,8 @@ public abstract class GulContainer extends GulElement implements IGulContainer {
       if( node.getNodeType() == Node.ELEMENT_NODE ) {
         Element xmlElement = ( Element )node;
         IGulElement gulElement = GulFactory.createElement( xmlElement.getTagName() );
-        gulElement.parse( model, xmlElement );
         addElement( gulElement );
+        gulElement.parse( model, xmlElement );
       }
     }
   }

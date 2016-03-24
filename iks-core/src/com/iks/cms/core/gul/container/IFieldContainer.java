@@ -7,6 +7,8 @@ import java.util.*;
 /**
  * @author Igor Kaynov
  */
-public interface IFieldContainer {
+public interface IFieldContainer extends IGulContainer {
   List<IGulInputField > getFields();
+  void addField(IGulInputField field);
+  void removeField(IGulInputField field);
 }

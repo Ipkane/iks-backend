@@ -1,5 +1,6 @@
 package com.iks.cms.core.gul.element;
 
+import com.iks.cms.core.gul.container.*;
 import com.iks.cms.core.model.*;
 
 import org.w3c.dom.*;
@@ -12,5 +13,7 @@ public interface IGulElement {
   String getTemplateName();
   String getId();
   String getTag();
+  IGulContainer getParent() ;
+  void setParent(IGulContainer parent);
   void parse(IDataModel model, Element xmlElement) throws Exception;
 }

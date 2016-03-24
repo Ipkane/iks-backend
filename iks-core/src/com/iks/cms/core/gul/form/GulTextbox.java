@@ -11,27 +11,13 @@ import org.w3c.dom.*;
 /**
  * @author Igor Kaynov
  */
-public class GulTextbox extends GulElement implements IGulInputField {
-  private String name;
-  private String label;
+public class GulTextbox extends AbstractGulField implements IGulInputField {
   private boolean required     = false;
   private boolean readonly     = false;
   private Object  defaultValue = null;
   @Override
   public String getTag() {
     return GulConstant.TEXTBOX;
-  }
-  public String getName() {
-    return name;
-  }
-  public void setName( String name ) {
-    this.name = name;
-  }
-  public String getLabel() {
-    return label;
-  }
-  public void setLabel( String label ) {
-    this.label = label;
   }
   public boolean isRequired() {
     return required;

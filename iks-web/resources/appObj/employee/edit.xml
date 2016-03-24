@@ -1,10 +1,12 @@
 <?xml version="1.0"?>
 <editView appObj="employee">
-  <textbox name="id" readonly="true"/>
-  <textbox name="fio" label="First/Last Name Name"/>
-  <select name="gender">
-  </select>
-  <referenceSelect name="user" displayField="username"/>
+  <vbox>
+    <textbox name="id" readonly="true"/>
+    <textbox name="fio" label="First/Last Name Name"/>
+    <select name="gender">
+    </select>
+    <referenceSelect name="user" displayField="username"/>
+  </vbox>
   <hbox pack="end">
     <button id="button1" label="Button 1"/>
     <spacer flex="1"/>

@@ -37,7 +37,7 @@ public class GridViewParser {
             gridView.setGrid( grid );
             break;
           case ListConstant.FILTER:
-            IFilterPanel filterPanel = parseFilterPanel( element );
+            IGulFilterPanel filterPanel = parseFilterPanel( element );
             gridView.setFilterPanel( filterPanel );
             break;
           default:
@@ -59,8 +59,8 @@ public class GridViewParser {
     }
     return grid;
   }
-  private IFilterPanel parseFilterPanel( Element filterElement ) throws Exception {
-    FilterPanel filterPanel = new FilterPanel();
+  private IGulFilterPanel parseFilterPanel( Element filterElement ) throws Exception {
+    GulFilterPanel filterPanel = new GulFilterPanel();
     filterPanel.parse(model, filterElement );
     return filterPanel;
   }
