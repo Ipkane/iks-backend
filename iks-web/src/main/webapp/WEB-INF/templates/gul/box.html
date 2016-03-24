@@ -12,4 +12,11 @@
 <th:block th:fragment="hbox">
   <th:block th:include="gul/box :: box"/>
 </th:block>
+<th:block th:fragment="fieldbox">
+  <div class="box fieldbox" th:classappend="${element.cssClass}">
+    <div class="hbox" th:each="childElement : ${element.elements}">
+      <th:block th:include="${childElement.templatePath} :: ${childElement.templateName}" th:with="element=${childElement}"></th:block>
+    </div>
+  </div>
+</th:block>
 </html>

@@ -11,13 +11,31 @@
 }
 
 .hbox {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+  align-content: flex-start;
   width: 100%;
   flex-direction: row;
   flex-wrap: nowrap;
 }
 
 .vbox {
-  height: 100%;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+  align-content: flex-start;
+  /*height: 100%;*/
   flex-direction: column;
 }
 
@@ -51,4 +69,13 @@
 
 .hbox.align-baseline, .vbox.align-baseline {
   align-items: baseline;
+}
+
+.fieldbox > .hbox {
+  margin-bottom: 10px;
+}
+
+.hbox > label {
+  width: 150px;
+  margin-right: 10px;
 }

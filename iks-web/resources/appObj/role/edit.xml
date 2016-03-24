@@ -1,5 +1,7 @@
 <?xml version="1.0"?>
 <editView appObj="role">
-  <textbox name="id" readonly="true"/>
-  <textbox name="name"/>
+  <fieldbox>
+    <textbox name="id" readonly="true"/>
+    <textbox name="name"/>
+  </fieldbox>
 </editView>

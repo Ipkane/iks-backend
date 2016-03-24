@@ -1,6 +1,8 @@
 <?xml version="1.0"?>
 <editView appObj="user">
-  <textbox name="id" readonly="true"/>
-  <textbox name="username"/>
-  <textbox name="password"/>
+  <fieldbox>
+    <textbox name="id" readonly="true"/>
+    <textbox name="username"/>
+    <textbox name="password"/>
+  </fieldbox>
 </editView>
