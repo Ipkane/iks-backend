@@ -32,3 +32,23 @@
 .hbox.pack-end, .vbox.pack-end {
   justify-content: flex-end;
 }
+
+.hbox.align-start, .vbox.align-start {
+  align-items: flex-start;
+}
+
+.hbox.align-center, .vbox.align-center {
+  align-items: center;
+}
+
+.hbox.align-end, .vbox.align-end {
+  align-items: flex-end;
+}
+
+.hbox.align-stretch, .vbox.align-stretch {
+  align-items: stretch;
+}
+
+.hbox.align-baseline, .vbox.align-baseline {
+  align-items: baseline;
+}

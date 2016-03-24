@@ -16,6 +16,7 @@ public interface GulConstant {
   String ATTR_STYLE         = "style";
   String ATTR_FLEX          = "flex";
   String ATTR_PACK          = "pack";
+  String ATTR_ALIGN          = "align";
   String ATTR_CSS_CLASS     = "cssClass";
   // element names
   String TEXTBOX            = "textbox";

@@ -3,6 +3,7 @@ package com.iks.cms.core.gul.form;
 import com.iks.cms.core.gul.*;
 import com.iks.cms.core.model.*;
 
+import org.apache.commons.lang3.*;
 import org.w3c.dom.*;
 
 import java.util.*;
@@ -11,8 +12,9 @@ import java.util.*;
  * @author Igor Kaynov
  */
 public class GulBox extends GulContainer {
-  private String      orient = "horizontal";
-  private EGulBoxPack pack   = EGulBoxPack.START;
+  private String       orient = "horizontal";
+  private EGulBoxPack  pack   = EGulBoxPack.START;
+  private EGulBoxAlign align  = EGulBoxAlign.START;
   public String getTemplatePath() {
     return "gul/box";
   }
@@ -28,7 +30,7 @@ public class GulBox extends GulContainer {
     if( xmlElement.hasAttribute( GulConstant.ATTR_ORIENT ) ) {
       setOrient( xmlElement.getAttribute( GulConstant.ATTR_ORIENT ) );
     }
-    String packAttr = xmlElement.getAttribute( GulConstant.ATTR_PACK );
+    String packAttr = StringUtils.trimToNull( xmlElement.getAttribute( GulConstant.ATTR_PACK ));
     if( packAttr != null ) {
       EGulBoxPack value = EGulBoxPack.getByValue( packAttr );
       if( value == null ) {
@@ -36,12 +38,21 @@ public class GulBox extends GulContainer {
       }
       setPack( value );
     }
+    String alignAttr = StringUtils.trimToNull( xmlElement.getAttribute( GulConstant.ATTR_ALIGN ) );
+    if( alignAttr != null ) {
+      EGulBoxAlign value = EGulBoxAlign.getByValue( alignAttr );
+      if( value == null ) {
+        throw new Exception( "Wrong " + GulConstant.ATTR_ALIGN + " attribute " + alignAttr );
+      }
+      setAlign( value );
+    }
   }
   @Override
   public List< String > getCssClasses() {
     List< String > cssClasses = super.getCssClasses();
     cssClasses.add( Objects.equals( orient, "horizontal" ) ? "hbox" : "vbox" );
     cssClasses.add( "pack-" + pack.getValue() );
+    cssClasses.add( "align-" + align.getValue() );
     return cssClasses;
   }
   public String getPack() {
@@ -49,5 +60,11 @@ public class GulBox extends GulContainer {
   }
   public void setPack( EGulBoxPack pack ) {
     this.pack = pack;
+  }
+  public EGulBoxAlign getAlign() {
+    return align;
+  }
+  public void setAlign( EGulBoxAlign align ) {
+    this.align = align;
   }
 }
