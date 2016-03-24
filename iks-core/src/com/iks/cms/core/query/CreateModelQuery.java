@@ -1,6 +1,5 @@
 package com.iks.cms.core.query;
 
-import com.iks.cms.core.appObj.*;
 import com.iks.cms.core.data.*;
 import com.iks.cms.core.grid.*;
 import com.iks.cms.core.gul.form.*;
@@ -14,38 +13,35 @@ import org.slf4j.*;
 /**
  * @author Igor Kaynov
  */
-public class CreateItemQuery extends CommonDaoQuery {
-  private static final Logger logger = LoggerFactory.getLogger( SelectEditViewQuery.class );
-  private IEditView  editView;
-  private IDataModel model;
-  private IDataItem  item;
-  public CreateItemQuery( IDataModel model, IEditView editView, IDataItem item ) {
-    this.model = model;
-    this.editView = editView;
+public class CreateModelQuery<T extends CreateModelQuery> extends CommonModelQuery<T> {
+  private static final Logger logger = LoggerFactory.getLogger( CreateModelQuery.class );
+  protected IDataItem item;
+  public CreateModelQuery( IDataModel model, IDataItem item ) {
+    super( model );
     setItem( item );
-  }
-  public void executeQuery( SessionFactory sessionFactory ) {
-    String sqlQuery = buildSqlQuery();
-    logger.debug( sqlQuery );
-    updateQuery( sessionFactory, sqlQuery );
-  }
-  private String buildSqlQuery() {
-    InsertQuery sb = new InsertQuery();
-    Table table = new Table( model.getTableName() );
-    sb.setTable( table );
-    for( IGulInputField field : editView.getFields() ) {
-      IDataField dataField = model.getField( field.getName() );
-      if( dataField.getName().equals( "id" ) ) {
-        continue;
-      }
-      sb.addUpdateColumn( new Column( table, dataField.getTableField() ), item.getFieldValue( dataField.getName() ) );
-    }
-    return sb.toString();
   }
   public IDataItem getItem() {
     return item;
   }
   public void setItem( IDataItem item ) {
     this.item = item;
+  }
+  public void executeQuery( SessionFactory sessionFactory ) {
+    String sqlQuery = buildSqlQuery().toString();
+    logger.debug( sqlQuery );
+    updateQuery( sessionFactory, sqlQuery );
+  }
+  protected InsertQuery buildSqlQuery() {
+    InsertQuery sb = new InsertQuery();
+    Table table = new Table( model.getTableName() );
+    sb.setTable( table );
+    for( IDataField field : getFields() ) {
+      IDataField dataField = model.getField( field.getName() );
+      if( dataField.getName().equals( model.getPrimaryFieldName() ) ) {
+        continue;
+      }
+      sb.addUpdateColumn( new Column( table, dataField.getTableField() ), item.getFieldValue( dataField.getName() ) );
+    }
+    return sb;
   }
 }

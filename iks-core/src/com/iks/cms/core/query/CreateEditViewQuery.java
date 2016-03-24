@@ -1,6 +1,7 @@
 package com.iks.cms.core.query;
 
 import com.iks.cms.core.appObj.*;
+import com.iks.cms.core.grid.*;
 import com.iks.cms.core.gul.form.*;
 import com.iks.cms.core.model.*;
 
@@ -9,15 +10,15 @@ import org.slf4j.*;
 /**
  * @author Igor Kaynov
  */
-public class SelectEditViewQuery extends SelectModelQuery< SelectEditViewQuery > {
+public class CreateEditViewQuery extends CreateModelQuery<CreateEditViewQuery > {
   private static final Logger logger = LoggerFactory.getLogger( SelectEditViewQuery.class );
-  private IEditView editView;
-  public SelectEditViewQuery( IDataModel model, IEditView editView, Long itemId ) {
-    super( model );
-    this.editView = editView;
+  private IEditView  editView;
+
+  public CreateEditViewQuery( IDataModel model, IEditView editView, IDataItem item ) {
+    super(model, item);
     for( IGulInputField field : editView.getFields() ) {
       addField( field.getName() );
     }
-    addFilter( model.getPrimaryFieldName(), itemId );
+    this.editView = editView;
   }
 }

@@ -34,7 +34,7 @@ public class AppObjService {
   public List< IDataItem > getGridData( String appObj, Map< String, Object > filter, String orderBy ) {
     SelectGridQuery query = new SelectGridQuery( getModel( appObj ), getGrid( appObj ) );
     if( filter != null ) {
-      query.setFilter( filter );
+      query.setFilters( filter );
     }
     if( orderBy != null ) {
       boolean orderAsc = true;
@@ -50,7 +50,8 @@ public class AppObjService {
   }
   public List< IDataItem > getModelData( String appObj, List< String > fields ) {
     SelectModelQuery query = new SelectModelQuery( getModel( appObj ) );
-    return query.setFields( fields ).executeQuery( commonDao.getSessionFactory() );
+    query.setFields( fields );
+    return query.executeQuery( commonDao.getSessionFactory() );
   }
   public IDataItem getEditData( String appObj, Long itemId ) {
     if( itemId == null ) {
@@ -72,7 +73,7 @@ public class AppObjService {
     if( !model.validate( item ) ) {
       throw new ValidationException( item.getErrors() );
     }
-    CreateItemQuery query = new CreateItemQuery( getModel( appObj ), getEditView( appObj ), item );
+    CreateEditViewQuery query = new CreateEditViewQuery( getModel( appObj ), getEditView( appObj ), item );
     query.executeQuery( commonDao.getSessionFactory() );
   }
   public void updateItem( String appObj, IDataItem item ) throws ValidationException {
@@ -80,11 +81,11 @@ public class AppObjService {
     if( !model.validate( item ) ) {
       throw new ValidationException( item.getErrors() );
     }
-    UpdateItemQuery query = new UpdateItemQuery( model, getEditView( appObj ), item );
+    UpdateEditViewQuery query = new UpdateEditViewQuery( model, getEditView( appObj ), item );
     query.executeQuery( commonDao.getSessionFactory() );
   }
   public void deleteItem( String appObj, Long itemId ) {
-    DeleteItemQuery query = new DeleteItemQuery( getModel( appObj ), getEditView( appObj ), itemId );
+    DeleteEditViewQuery query = new DeleteEditViewQuery( getModel( appObj ), getEditView( appObj ), itemId );
     query.executeQuery( commonDao.getSessionFactory() );
   }
   public IEditView getEditView( String appObj ) {
