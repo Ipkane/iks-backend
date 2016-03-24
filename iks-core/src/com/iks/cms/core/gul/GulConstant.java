@@ -16,7 +16,7 @@ public interface GulConstant {
   String ATTR_STYLE         = "style";
   String ATTR_FLEX          = "flex";
   String ATTR_PACK          = "pack";
-  String ATTR_ALIGN          = "align";
+  String ATTR_ALIGN         = "align";
   String ATTR_CSS_CLASS     = "cssClass";
   // element names
   String TEXTBOX            = "textbox";
@@ -26,8 +26,14 @@ public interface GulConstant {
   String BUTTON             = "button";
   String OPTIONS            = "options";
   String OPTION             = "option";
+  String SPACER             = "spacer";
   // container
   String BOX                = "box";
   String HBOX               = "hbox";
   String VBOX               = "vbox";
+  String FIELDBOX           = "fieldbox";
+  // custom
+  String FILTER_PANEL       = "filterPanel";
+  String GRID_VIEW          = "gridView";
+  String EDIT_VIEW          = "editView";
 }

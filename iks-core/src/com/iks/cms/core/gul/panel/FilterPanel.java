@@ -1,5 +1,8 @@
-package com.iks.cms.core.gul;
+package com.iks.cms.core.gul.panel;
 
+import com.iks.cms.core.gul.*;
+import com.iks.cms.core.gul.container.*;
+import com.iks.cms.core.gul.element.*;
 import com.iks.cms.core.gul.form.*;
 import com.iks.cms.core.model.*;
 
@@ -12,6 +15,10 @@ import java.util.*;
  */
 public class FilterPanel extends GulContainer implements IFilterPanel {
   private List< IGulInputField > fields = new ArrayList<>();
+  @Override
+  public String getTag() {
+    return GulConstant.FILTER_PANEL;
+  }
   @Override
   public List< IGulInputField > getFields() {
     return fields;

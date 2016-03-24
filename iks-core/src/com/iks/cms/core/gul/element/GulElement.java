@@ -1,7 +1,8 @@
-package com.iks.cms.core.gul;
+package com.iks.cms.core.gul.element;
 
 import com.google.common.base.*;
 
+import com.iks.cms.core.gul.*;
 import com.iks.cms.core.model.*;
 
 import org.w3c.dom.*;
@@ -15,7 +16,6 @@ public abstract class GulElement implements IGulElement {
   protected String id;
   private   String style;
   private   String cssClass;
-  private   String tag;
   private   int    flex;
   @Override
   public String getId() {
@@ -27,12 +27,7 @@ public abstract class GulElement implements IGulElement {
   @Override
   public abstract String getTemplatePath();
   @Override
-  public String getTag() {
-    return tag;
-  }
-  public void setTag( String tag ) {
-    this.tag = tag;
-  }
+  public abstract String getTag();
   @Override
   public String getTemplateName() {
     return getTag();
@@ -58,7 +53,6 @@ public abstract class GulElement implements IGulElement {
   }
   @Override
   public void parse( IDataModel model, Element xmlElement ) throws Exception {
-    setTag( xmlElement.getTagName() );
     setId( xmlElement.getAttribute( GulConstant.ATTR_LABEL ) );
     if( xmlElement.hasAttribute( GulConstant.ATTR_STYLE ) ) {
       setStyle( xmlElement.getAttribute( GulConstant.ATTR_STYLE ) );

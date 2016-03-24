@@ -1,4 +1,4 @@
-package com.iks.cms.core.gul.form;
+package com.iks.cms.core.gul.container;
 
 import com.iks.cms.core.gul.*;
 import com.iks.cms.core.model.*;
@@ -17,6 +17,10 @@ public class GulBox extends GulContainer {
   private EGulBoxAlign align  = EGulBoxAlign.START;
   public String getTemplatePath() {
     return "gul/box";
+  }
+  @Override
+  public String getTag() {
+    return GulConstant.BOX;
   }
   public String getOrient() {
     return orient;

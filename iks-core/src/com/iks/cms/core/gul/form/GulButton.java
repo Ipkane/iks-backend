@@ -1,6 +1,7 @@
 package com.iks.cms.core.gul.form;
 
 import com.iks.cms.core.gul.*;
+import com.iks.cms.core.gul.element.*;
 import com.iks.cms.core.model.*;
 
 import org.w3c.dom.*;
@@ -13,6 +14,10 @@ public class GulButton extends GulElement {
   @Override
   public String getTemplatePath() {
     return "gul/form";
+  }
+  @Override
+  public String getTag() {
+    return GulConstant.BUTTON;
   }
   public String getLabel() {
     return label;

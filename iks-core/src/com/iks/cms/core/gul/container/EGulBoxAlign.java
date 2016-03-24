@@ -1,4 +1,4 @@
-package com.iks.cms.core.gul.form;
+package com.iks.cms.core.gul.container;
 
 /**
  * @author Igor Kaynov

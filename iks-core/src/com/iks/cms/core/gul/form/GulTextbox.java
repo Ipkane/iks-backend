@@ -2,6 +2,7 @@ package com.iks.cms.core.gul.form;
 
 import com.iks.cms.core.data.*;
 import com.iks.cms.core.gul.*;
+import com.iks.cms.core.gul.element.*;
 import com.iks.cms.core.model.*;
 
 import org.apache.commons.lang3.*;
@@ -16,6 +17,10 @@ public class GulTextbox extends GulElement implements IGulInputField {
   private boolean required     = false;
   private boolean readonly     = false;
   private Object  defaultValue = null;
+  @Override
+  public String getTag() {
+    return GulConstant.TEXTBOX;
+  }
   public String getName() {
     return name;
   }

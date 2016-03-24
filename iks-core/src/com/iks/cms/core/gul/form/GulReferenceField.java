@@ -17,6 +17,10 @@ public class GulReferenceField extends GulTextbox {
     this.displayField = displayField;
   }
   @Override
+  public String getTag() {
+    return GulConstant.REFERENCE_FIELD;
+  }
+  @Override
   public void parse( IDataModel model,Element xmlElement ) throws Exception {
     super.parse( model, xmlElement );
     setDisplayField( xmlElement.getAttribute( GulConstant.ATTR_DISPLAY_FIELD ) );

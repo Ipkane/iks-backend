@@ -12,6 +12,10 @@ import java.util.*;
  */
 public class GulReferenceSelect extends GulReferenceField {
   private List< SelectOption > options = new ArrayList<>();
+  @Override
+  public String getTag() {
+    return GulConstant.REFERENCE_SELECT;
+  }
   public List< SelectOption > getOptions() {
     return options;
   }

@@ -1,4 +1,4 @@
-package com.iks.cms.core.gul;
+package com.iks.cms.core.gul.element;
 
 import com.iks.cms.core.model.*;
 

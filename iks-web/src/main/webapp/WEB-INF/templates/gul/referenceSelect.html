@@ -1,12 +1,10 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:ng="">
 <th:block th:fragment="referenceSelect" th:if="${element.type == 'referenceSelect'}">
-  <div class="form-group">
-    <label data-th-for="${element.name}" class="control-label" data-th-text="${element.label}">Label</label>
-    <select type="text" class="form-control" data-th-id="${element.name}" ng:model="|${itemName}.${element.name}|"
-            ng:readonly="|${element.readonly}|" th:required="${element.required}" th:styleappend="${element.style}">
-      <option data-th-if="${!element.required}" value=""></option>
-      <option data-th-value="${option.value}" data-th-each="option : ${optionsMap[element.name]}" data-th-text="${option.label}">Option label</option>
-    </select>
-  </div>
+  <label data-th-for="${element.name}" class="control-label" data-th-text="${element.label}">Label</label>
+  <select type="text" class="form-control" data-th-id="${element.name}" ng:model="|${itemName}.${element.name}|"
+          ng:readonly="|${element.readonly}|" th:required="${element.required}" th:styleappend="${element.style}">
+    <option data-th-if="${!element.required}" value=""></option>
+    <option data-th-value="${option.value}" data-th-each="option : ${optionsMap[element.name]}" data-th-text="${option.label}">Option label</option>
+  </select>
 </th:block>
 </html>

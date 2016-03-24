@@ -1,6 +1,6 @@
 package com.iks.cms.core.gul.form;
 
-import com.iks.cms.core.gul.*;
+import com.iks.cms.core.gul.element.*;
 
 /**
  * @author Igor Kaynov

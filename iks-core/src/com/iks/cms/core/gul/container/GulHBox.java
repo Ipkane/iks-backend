@@ -1,5 +1,6 @@
-package com.iks.cms.core.gul.form;
+package com.iks.cms.core.gul.container;
 
+import com.iks.cms.core.gul.*;
 import com.iks.cms.core.model.*;
 
 import org.w3c.dom.*;
@@ -11,6 +12,10 @@ public class GulHBox extends GulBox {
   public GulHBox() {
     super();
     this.setOrient( "horizontal" );
+  }
+  @Override
+  public String getTag() {
+    return GulConstant.HBOX;
   }
   @Override
   public void parse( IDataModel model, Element xmlElement ) throws Exception {

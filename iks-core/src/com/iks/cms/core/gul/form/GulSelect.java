@@ -12,6 +12,10 @@ import java.util.*;
  * @author Igor Kaynov
  */
 public class GulSelect extends GulTextbox {
+  @Override
+  public String getTag() {
+    return GulConstant.SELECT;
+  }
   private List< SelectOption > options = new ArrayList<>();
   public List< SelectOption > getOptions() {
     return options;

@@ -1,4 +1,6 @@
-package com.iks.cms.core.gul;
+package com.iks.cms.core.gul.panel;
+
+import com.iks.cms.core.gul.container.*;
 
 /**
  * @author Igor Kaynov

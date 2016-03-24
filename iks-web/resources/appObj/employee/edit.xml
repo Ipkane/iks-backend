@@ -7,7 +7,9 @@
   <referenceSelect name="user" displayField="username"/>
   <hbox pack="end">
     <button id="button1" label="Button 1"/>
+    <spacer flex="1"/>
     <button id="button2" label="Button 2"/>
+    <spacer flex="2"/>
     <button id="button3" label="Button 3"/>
     <vbox pack="end" align="stretch">
       <button id="button4" label="Button 4" style="width: 150px"/>
@@ -15,5 +17,4 @@
       <button id="button6" label="Button 6"/>
     </vbox>
   </hbox>
-
 </editView>

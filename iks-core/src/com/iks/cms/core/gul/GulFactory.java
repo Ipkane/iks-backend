@@ -1,5 +1,7 @@
 package com.iks.cms.core.gul;
 
+import com.iks.cms.core.gul.container.*;
+import com.iks.cms.core.gul.element.*;
 import com.iks.cms.core.gul.form.*;
 
 /**
@@ -22,6 +24,10 @@ public class GulFactory {
         return new GulHBox();
       case GulConstant.VBOX:
         return new GulVBox();
+      case GulConstant.SPACER:
+        return new GulSpacer();
+      case GulConstant.FIELDBOX:
+        return new GulFieldbox();
       default:
         throw new Exception( "Couldn't parse element " + tagName );
     }
