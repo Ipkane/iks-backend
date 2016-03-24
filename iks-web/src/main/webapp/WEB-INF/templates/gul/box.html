@@ -1,4 +1,4 @@
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:ng="">
 <th:block th:fragment="box">
   <th:block th:include="::vbox" th:if="${element.orient=='vertical'}"/>
   <th:block th:include="::hbox" th:if="${element.orient=='horizontal'}"/>

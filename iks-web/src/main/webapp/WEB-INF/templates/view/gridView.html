@@ -1,4 +1,4 @@
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:ng="">
 <h1 data-th-text="${appObj.label}">Title</h1>
 
 <div class="panel panel-default">
@@ -27,6 +27,6 @@
     </tr>
     </tbody>
   </table>
-  <div data-th-attr="ng-init = |gridName='${gridName}'; grid = '${gridJson}'|" style="display: none"></div>
+  <div ng:init="|gridName='${gridName}'; grid = '${gridJson}'|" style="display: none"></div>
 </div>
 </html>

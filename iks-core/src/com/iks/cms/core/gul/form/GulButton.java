@@ -5,8 +5,6 @@ import com.iks.cms.core.model.*;
 
 import org.w3c.dom.*;
 
-import java.util.*;
-
 /**
  * @author Igor Kaynov
  */
