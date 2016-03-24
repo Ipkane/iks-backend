@@ -32,7 +32,7 @@ public class AppObjService {
     return appObjMap.get( appObj ).getDataModel();
   }
   public List< IDataItem > getGridData( String appObj, Map< String, Object > filter, String orderBy ) {
-    GridQuery query = new GridQuery( getModel( appObj ), getGrid( appObj ) );
+    SelectGridQuery query = new SelectGridQuery( getModel( appObj ), getGrid( appObj ) );
     if( filter != null ) {
       query.setFilter( filter );
     }
@@ -49,15 +49,15 @@ public class AppObjService {
     return query.executeQuery( commonDao.getSessionFactory() );
   }
   public List< IDataItem > getModelData( String appObj, List< String > fields ) {
-    ModelQuery query = new ModelQuery( getModel( appObj ) );
+    SelectModelQuery query = new SelectModelQuery( getModel( appObj ) );
     return query.setFields( fields ).executeQuery( commonDao.getSessionFactory() );
   }
   public IDataItem getEditData( String appObj, Long itemId ) {
     if( itemId == null ) {
       return createNewItem( appObj, getEditView( appObj ) );
     } else {
-      SelectSingleItemQuery query = new SelectSingleItemQuery( getModel( appObj ), getEditView( appObj ), itemId );
-      return query.executeQuery( commonDao.getSessionFactory() );
+      SelectEditViewQuery query = new SelectEditViewQuery( getModel( appObj ), getEditView( appObj ), itemId );
+      return query.executeSingleQuery( commonDao.getSessionFactory() );
     }
   }
   public IDataItem createNewItem( String appObj, IEditView editView ) {
@@ -102,7 +102,7 @@ public class AppObjService {
         GulReferenceField referenceField = ( GulReferenceField )field;
         ManyToOne dataField = ( ManyToOne )model.getField( field.getName() );
         List< String > referencedFields = Arrays.asList( dataField.getReferenceField(), referenceField.getDisplayField() );
-        ModelQuery query = new ModelQuery( getModel( dataField.getAppObj() ) );
+        SelectModelQuery query = new SelectModelQuery( getModel( dataField.getAppObj() ) );
         query.setFields( referencedFields );
         List< IDataItem > items = query.executeQuery( commonDao.getSessionFactory() );
         List< SelectOption > options = new ArrayList<>( items.size() );

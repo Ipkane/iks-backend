@@ -11,26 +11,20 @@ import org.hibernate.*;
 import org.slf4j.*;
 
 import java.util.*;
+import java.util.stream.*;
 
 /**
  * @author Igor Kaynov
  */
-public class GridQuery extends CommonDaoQuery {
-  private static final Logger logger = LoggerFactory.getLogger( GridQuery.class );
-  private IGrid      grid;
+public class SelectModelQuery extends CommonDaoQuery {
+  private static final Logger logger = LoggerFactory.getLogger( SelectModelQuery.class );
   private IDataModel model;
   private String     orderBy;
   private boolean               orderAsc = true;
+  private List< IDataField >    fields   = new ArrayList<>();
   private Map< String, Object > filter   = new HashMap<>();
-  public GridQuery( IDataModel model, IGrid grid ) {
+  public SelectModelQuery( IDataModel model ) {
     this.model = model;
-    this.grid = grid;
-  }
-  public IGrid getGrid() {
-    return grid;
-  }
-  public void setGrid( IGrid grid ) {
-    this.grid = grid;
   }
   public List< IDataItem > executeQuery( SessionFactory sessionFactory ) {
     String sqlQuery = buildSqlQuery();
@@ -38,24 +32,33 @@ public class GridQuery extends CommonDaoQuery {
     List rows = selectQuery( sessionFactory, sqlQuery );
     List< IDataItem > resultList = new ArrayList<>();
     for( Object rowData : rows ) {
-      DataItem resultItem = new DataItem();
-      Object[] data = ( Object[] )rowData;
-      int i = 0;
-      for( IGridField field : grid.getFields() ) {
-        resultItem.addFieldValue( field.getName(), data[i] );
-        i++;
-      }
-      resultList.add( resultItem );
+      resultList.add( parseResult( rowData ) );
     }
     return resultList;
   }
-  private String buildSqlQuery() {
+  public IDataItem  executeSingleQuery( SessionFactory sessionFactory ) {
+    String sqlQuery = buildSqlQuery();
+    logger.debug( sqlQuery );
+    Object row = selectSingleQuery( sessionFactory, sqlQuery );
+    return parseResult( row );
+  }
+  protected IDataItem parseResult(Object rawData) {
+    DataItem resultItem = new DataItem();
+    Object[] data = ( Object[] )rawData;
+    int i = 0;
+    for( IDataField field : getFields() ) {
+      String value = data[i] == null ? null : data[i].toString();
+      resultItem.addFieldValue( field.getName(), value );
+      i++;
+    }
+    return resultItem;
+  }
+  protected String buildSqlQuery() {
     SelectQuery sb = new SelectQuery();
     Table table = new Table( model.getTableName(), "t" );
     sb.from( table );
-    for( IGridField field : grid.getFields() ) {
-      IDataField dataField = model.getField( field.getName() );
-      sb.addColumn( table.getColumn( dataField.getTableField(), dataField.getName() ) );
+    for( IDataField field : getFields() ) {
+      sb.addColumn( new Column( table, field.getTableField(), field.getName() ) );
     }
     for( Map.Entry< String, Object > entry : filter.entrySet() ) {
       // todo add like filter
@@ -71,11 +74,16 @@ public class GridQuery extends CommonDaoQuery {
     }
     return sb.toString();
   }
-  public Map< String, Object > getFilter() {
-    return filter;
+  public List< IDataField > getFields() {
+    return fields.size() == 0 ? model.getFields() : fields;
   }
-  public GridQuery setFilter( Map< String, Object > filter ) {
-    this.filter = filter;
+  public SelectModelQuery setFields( List< String > fieldsList ) {
+    this.fields.clear();
+    this.fields.addAll( fieldsList.stream().map( model::getField ).collect( Collectors.toList() ) );
+    return this;
+  }
+  public SelectModelQuery addField( String field ) {
+    this.fields.add( model.getField( field ) );
     return this;
   }
   public String getOrderBy() {
@@ -89,5 +97,16 @@ public class GridQuery extends CommonDaoQuery {
   }
   public void setOrderAsc( boolean orderAsc ) {
     this.orderAsc = orderAsc;
+  }
+  public Map< String, Object > getFilter() {
+    return filter;
+  }
+  public SelectModelQuery setFilter( Map< String, Object > filter ) {
+    this.filter = filter;
+    return this;
+  }
+  public SelectModelQuery addFilter(String fieldName, Object value) {
+    this.filter.put( fieldName, value );
+    return this;
   }
 }

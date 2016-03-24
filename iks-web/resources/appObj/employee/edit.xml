@@ -3,10 +3,6 @@
   <textbox name="id" readonly="true"/>
   <textbox name="fio" label="First/Last Name Name"/>
   <select name="gender">
-    <!--<options>-->
-      <!--<option value="male">Male</option>-->
-      <!--<option value="female">Female</option>-->
-    <!--</options>-->
   </select>
   <referenceSelect name="user" displayField="username"/>
   <hbox>

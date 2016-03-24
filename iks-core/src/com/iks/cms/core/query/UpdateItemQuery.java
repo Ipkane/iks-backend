@@ -15,7 +15,7 @@ import org.slf4j.*;
  * @author Igor Kaynov
  */
 public class UpdateItemQuery extends CommonDaoQuery {
-  private static final Logger logger = LoggerFactory.getLogger( SelectSingleItemQuery.class );
+  private static final Logger logger = LoggerFactory.getLogger( SelectEditViewQuery.class );
   private IEditView  editView;
   private IDataModel model;
   private IDataItem  item;
