@@ -1,5 +1,6 @@
 package com.iks.cms.core.gul.container;
 
+import com.iks.cms.core.data.*;
 import com.iks.cms.core.gul.form.*;
 import com.iks.cms.core.model.*;
 
@@ -37,7 +38,12 @@ public abstract class GulFieldContainer extends GulContainer implements IFieldCo
   public void parse( Element xmlElement ) throws Exception {
     super.parse( xmlElement );
     for (IGulInputField field: fields) {
-      field.applyModel( model.getField( field.getName() ) );
+      if (field.getName() != null) {
+        IDataField dataField = model.getField( field.getName() );
+        if (dataField != null) {
+          field.applyModel( model.getField( field.getName() ) );
+        }
+      }
     }
   }
 }

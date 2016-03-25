@@ -82,8 +82,11 @@ input.form-control.ng-invalid {
 
 }
 
-.form-control {
+.hbox > .form-control {
   display: inline-block;
-  width: auto;
   flex: 1;
+}
+
+.vbox > .form-control {
+  align-self: stretch;
 }

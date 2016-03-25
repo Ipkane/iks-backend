@@ -19,6 +19,8 @@ public interface GulConstant {
   String ATTR_ALIGN         = "align";
   String ATTR_CSS_CLASS     = "cssClass";
   String ATTR_SRC           = "src";
+  String ATTR_VALUE         = "value";
+  String ATTR_CONTROL       = "control";
   // element names
   String TEXTBOX            = "textbox";
   String SELECT             = "select";
@@ -30,11 +32,18 @@ public interface GulConstant {
   String SPACER             = "spacer";
   String SCRIPT             = "script";
   String MARKUP             = "markup";
+  String LABEL              = "label";
   // container
   String BOX                = "box";
   String HBOX               = "hbox";
   String VBOX               = "vbox";
   String FIELDBOX           = "fieldbox";
+  // grid
+  String GRID               = "grid";
+  String ROWS               = "rows";
+  String ROW                = "row";
+  String COLUMNS            = "columns";
+  String COLUMN             = "column";
   // custom
   String FILTER_PANEL       = "filterPanel";
   String GRID_VIEW          = "gridView";

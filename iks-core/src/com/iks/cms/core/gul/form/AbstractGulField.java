@@ -37,7 +37,9 @@ public abstract class AbstractGulField extends GulElement implements IGulInputFi
   @Override
   public void parse( Element xmlElement ) throws Exception {
     super.parse(xmlElement );
-    setName( xmlElement.getAttribute( GulConstant.ATTR_NAME ) );
+    if( xmlElement.hasAttribute( GulConstant.ATTR_NAME ) ) {
+      setName( xmlElement.getAttribute( GulConstant.ATTR_NAME ) );
+    }
     if( xmlElement.hasAttribute( GulConstant.ATTR_LABEL ) ) {
       setLabel( xmlElement.getAttribute( GulConstant.ATTR_LABEL ) );
     }

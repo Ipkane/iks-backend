@@ -3,40 +3,26 @@
   <fieldbox>
     <textbox name="id" readonly="true"/>
     <textbox id="fio" name="fio" label="First/Last Name Name"/>
-    <select name="gender">
-    </select>
+    <select name="gender"/>
     <referenceSelect name="user" displayField="username"/>
   </fieldbox>
-  <hbox pack="end">
-    <button id="button1" label="Button 1"/>
-    <spacer flex="1"/>
-    <button id="button2" label="Button 2"/>
-    <spacer flex="2"/>
-    <button id="button3" label="Button 3"/>
-    <vbox pack="end" align="stretch">
-      <button id="button4" label="Button 4" style="width: 150px"/>
-      <button id="button5" label="Button 5"/>
-      <button id="button6" label="Button 6"/>
-    </vbox>
-  </hbox>
-  <markup>
-    <![CDATA[
-      <div style="background-color:green">
-      Hello, <span style="background-color:red">world</span>!</div>
-      ]]>
-  </markup>
-  <script>
-    <![CDATA[
-      $('#button1').click(function() {
-        console.log("Button 1 clicked");
-        <!--$('#fio').val('Test fio');-->
-
-        <!--var formScope = angular.element($('#employeeForm')).scope();-->
-        formScope.$apply(function() {
-          formScope.selectedItem.fio = 'Test fio';
-        });
-      });
-
-            ]]>
-  </script>
+  <grid style="width: 80%">
+    <columns>
+      <column style="width: 200px"/>
+      <column flex="2"/>
+    </columns>
+    <rows>
+      <row>
+        <label control="doctitle" value="Document Title:"/>
+        <textbox id="doctitle" flex="1"/>
+      </row>
+      <row>
+        <label control="docpath" value="Path:"/>
+        <hbox flex="1">
+          <textbox id="docpath" flex="1"/>
+          <button label="Browse..."/>
+        </hbox>
+      </row>
+    </rows>
+  </grid>
 </editView>
