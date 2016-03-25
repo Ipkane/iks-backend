@@ -15,5 +15,5 @@ public interface IGulElement {
   String getTag();
   IGulContainer getParent() ;
   void setParent(IGulContainer parent);
-  void parse(IDataModel model, Element xmlElement) throws Exception;
+  void parse(Element xmlElement) throws Exception;
 }

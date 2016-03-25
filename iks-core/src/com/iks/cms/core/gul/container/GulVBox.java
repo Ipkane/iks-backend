@@ -18,8 +18,8 @@ public class GulVBox extends GulBox {
     return GulConstant.VBOX;
   }
   @Override
-  public void parse( IDataModel model, Element xmlElement ) throws Exception {
-    super.parse( model, xmlElement );
+  public void parse( Element xmlElement ) throws Exception {
+    super.parse( xmlElement );
     setOrient( "vertical" );
   }
 }

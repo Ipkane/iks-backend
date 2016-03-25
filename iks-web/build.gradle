@@ -50,7 +50,7 @@ gretty {
   httpPort = 8080
   contextPath = 'cms'
   servletContainer = 'jetty9' //tomcat7 or tomcat8
-  managedClassReload=true
+//  managedClassReload=true
   interactiveMode=''
   debugPort = 5005
 //  debugSuspend = false

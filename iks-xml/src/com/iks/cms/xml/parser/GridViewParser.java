@@ -60,8 +60,8 @@ public class GridViewParser {
     return grid;
   }
   private IGulFilterPanel parseFilterPanel( Element filterElement ) throws Exception {
-    GulFilterPanel filterPanel = new GulFilterPanel();
-    filterPanel.parse(model, filterElement );
+    GulFilterPanel filterPanel = new GulFilterPanel(model);
+    filterPanel.parse(filterElement );
     return filterPanel;
   }
   protected IDataModel getModel() {

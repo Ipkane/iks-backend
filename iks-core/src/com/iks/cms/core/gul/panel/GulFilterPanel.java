@@ -14,6 +14,9 @@ import java.util.*;
  * @author Igor Kaynov
  */
 public class GulFilterPanel extends GulFieldContainer implements IGulFilterPanel {
+  public GulFilterPanel( IDataModel model ) {
+    super( model );
+  }
   @Override
   public String getTag() {
     return GulConstant.FILTER_PANEL;
@@ -25,9 +28,5 @@ public class GulFilterPanel extends GulFieldContainer implements IGulFilterPanel
   @Override
   public String getTemplateName() {
     return "filterPanel";
-  }
-  @Override
-  public void parse( IDataModel model, Element xmlElement ) throws Exception {
-    super.parse( model, xmlElement );
   }
 }

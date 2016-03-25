@@ -27,9 +27,13 @@ public class GulSelect extends GulTextbox {
     options.add( option );
   }
   @Override
-  public void parse( IDataModel model, Element xmlElement ) throws Exception {
-    super.parse( model, xmlElement );
-    SelectField dataField = ( SelectField )model.getField( getName() );
-    setOptions( dataField.getOptions() );
+  public void parse( Element xmlElement ) throws Exception {
+    super.parse( xmlElement );
+  }
+  public void applyModel( IDataField dataField ) {
+    super.applyModel( dataField );
+    if( options.size() == 0 && dataField instanceof SelectField ) {
+      setOptions( ( ( SelectField )dataField ).getOptions() );
+    }
   }
 }

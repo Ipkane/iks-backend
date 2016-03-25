@@ -21,8 +21,8 @@ public class GulHtml extends GulElement {
     return "markup";
   }
   @Override
-  public void parse( IDataModel model, Element xmlElement ) throws Exception {
-    super.parse( model, xmlElement );
+  public void parse( Element xmlElement ) throws Exception {
+    super.parse( xmlElement );
     setContent( xmlElement.getTextContent() );
   }
 }

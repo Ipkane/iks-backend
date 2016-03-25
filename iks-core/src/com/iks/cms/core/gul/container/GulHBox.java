@@ -18,8 +18,8 @@ public class GulHBox extends GulBox {
     return GulConstant.HBOX;
   }
   @Override
-  public void parse( IDataModel model, Element xmlElement ) throws Exception {
-    super.parse( model, xmlElement );
+  public void parse( Element xmlElement ) throws Exception {
+    super.parse( xmlElement );
     setOrient( "horizontal" );
   }
 }

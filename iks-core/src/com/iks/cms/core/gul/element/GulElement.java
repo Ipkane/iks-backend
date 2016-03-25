@@ -56,7 +56,7 @@ public abstract class GulElement implements IGulElement {
     this.flex = flex;
   }
   @Override
-  public void parse( IDataModel model, Element xmlElement ) throws Exception {
+  public void parse( Element xmlElement ) throws Exception {
     setId( xmlElement.getAttribute( GulConstant.ATTR_ID ) );
     if( xmlElement.hasAttribute( GulConstant.ATTR_STYLE ) ) {
       setStyle( xmlElement.getAttribute( GulConstant.ATTR_STYLE ) );

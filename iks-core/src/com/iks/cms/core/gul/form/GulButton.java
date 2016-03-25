@@ -26,8 +26,8 @@ public class GulButton extends GulElement {
     this.label = label;
   }
   @Override
-  public void parse( IDataModel model, Element xmlElement ) throws Exception {
-    super.parse( model, xmlElement );
+  public void parse( Element xmlElement ) throws Exception {
+    super.parse( xmlElement );
     setLabel( xmlElement.getAttribute( GulConstant.ATTR_LABEL ) );
   }
 }

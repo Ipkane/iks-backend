@@ -30,7 +30,7 @@ public class GulReferenceSelect extends GulReferenceField {
     return "gul/referenceSelect";
   }
   @Override
-  public void parse( IDataModel model,Element xmlElement ) throws Exception {
-    super.parse( model, xmlElement );
+  public void parse( Element xmlElement ) throws Exception {
+    super.parse( xmlElement );
   }
 }

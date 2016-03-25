@@ -16,8 +16,8 @@ public class GulScript extends GulElement {
     return "script";
   }
   @Override
-  public void parse( IDataModel model, Element xmlElement ) throws Exception {
-    super.parse( model, xmlElement );
+  public void parse( Element xmlElement ) throws Exception {
+    super.parse( xmlElement );
     setText( xmlElement.getTextContent() );
     if( xmlElement.hasAttribute( GulConstant.ATTR_SRC ) ) {
       setSrc( xmlElement.getAttribute( GulConstant.ATTR_SRC ) );

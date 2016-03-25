@@ -29,8 +29,8 @@ public class GulBox extends GulContainer {
     this.orient = orient;
   }
   @Override
-  public void parse( IDataModel model, Element xmlElement ) throws Exception {
-    super.parse( model, xmlElement );
+  public void parse( Element xmlElement ) throws Exception {
+    super.parse(xmlElement );
     if( xmlElement.hasAttribute( GulConstant.ATTR_ORIENT ) ) {
       setOrient( xmlElement.getAttribute( GulConstant.ATTR_ORIENT ) );
     }

@@ -47,22 +47,18 @@ public class GulTextbox extends AbstractGulField implements IGulInputField {
     return getTag();
   }
   @Override
-  public void parse( IDataModel model, Element xmlElement ) throws Exception {
-    super.parse( model, xmlElement );
-    setName( xmlElement.getAttribute( GulConstant.ATTR_NAME ) );
-    DataField dataField = ( DataField )model.getField( getName() );
-    if( xmlElement.hasAttribute( GulConstant.ATTR_LABEL ) ) {
-      setLabel( xmlElement.getAttribute( GulConstant.ATTR_LABEL ) );
-    } else {
-      setLabel( dataField.getLabel() );
-    }
+  public void parse( Element xmlElement ) throws Exception {
+    super.parse(xmlElement );
     if( xmlElement.hasAttribute( GulConstant.ATTR_REQUIRED ) ) {
       setRequired( BooleanUtils.toBoolean( xmlElement.getAttribute( GulConstant.ATTR_REQUIRED ) ) );
-    } else {
-      setRequired( dataField.isRequired() );
     }
     if( xmlElement.hasAttribute( GulConstant.ATTR_READONLY ) ) {
       setReadonly( BooleanUtils.toBoolean( xmlElement.getAttribute( GulConstant.ATTR_READONLY ) ) );
     }
+  }
+  @Override
+  public void applyModel( IDataField dataField ) {
+    super.applyModel( dataField );
+//    setRequired( dataField.isRequired() );
   }
 }

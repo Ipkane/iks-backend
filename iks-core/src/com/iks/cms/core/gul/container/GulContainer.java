@@ -30,12 +30,12 @@ public abstract class GulContainer extends GulElement implements IGulContainer {
     }
   }
   public void addElement( IGulElement element ) {
-    element.setParent(this);
     elements.add( element );
+    element.setParent(this);
   }
   @Override
-  public void parse( IDataModel model, Element parentXmlElement ) throws Exception {
-    super.parse( model, parentXmlElement );
+  public void parse( Element parentXmlElement ) throws Exception {
+    super.parse( parentXmlElement );
     NodeList fieldList = parentXmlElement.getChildNodes();
     for( int i = 0; i < fieldList.getLength(); i++ ) {
       Node node = fieldList.item( i );
@@ -43,7 +43,7 @@ public abstract class GulContainer extends GulElement implements IGulContainer {
         Element xmlElement = ( Element )node;
         IGulElement gulElement = GulFactory.createElement( xmlElement.getTagName() );
         addElement( gulElement );
-        gulElement.parse( model, xmlElement );
+        gulElement.parse( xmlElement );
       }
     }
   }

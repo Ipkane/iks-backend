@@ -21,8 +21,8 @@ public class EditViewParser {
   }
   private EditView parseRoot( Document doc ) throws Exception {
     Element root = doc.getDocumentElement();
-    EditView editView = new EditView();
-    editView.parse(model, root );
+    EditView editView = new EditView(model);
+    editView.parse( root );
     return editView;
   }
   protected IDataModel getModel() {

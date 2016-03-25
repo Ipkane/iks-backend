@@ -1,5 +1,6 @@
 package com.iks.cms.core.gul.form;
 
+import com.iks.cms.core.data.*;
 import com.iks.cms.core.gul.container.*;
 import com.iks.cms.core.gul.element.*;
 
@@ -10,5 +11,6 @@ public interface IGulInputField extends IGulElement {
   String getName();
   String getLabel();
   Object getDefaultValue();
+  void applyModel(IDataField dataField);
 //  IFieldContainer getFieldContainer();
 }
