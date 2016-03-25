@@ -49,7 +49,7 @@ public class GridViewParser {
   }
   private Grid parseTable( Element tableElement ) {
     Grid grid = new Grid();
-    NodeList fieldList = tableElement.getElementsByTagName( ListConstant.FIELD );
+    NodeList fieldList = tableElement.getElementsByTagName( ListConstant.COLUMN );
     for( int i = 0; i < fieldList.getLength(); i++ ) {
       Node node = fieldList.item( i );
       if( node.getNodeType() == Node.ELEMENT_NODE ) {

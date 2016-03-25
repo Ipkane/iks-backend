@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<grammar xmlns="http://relaxng.org/ns/structure/1.0" ns="http://com.iks.org/schema/model/1.0">
+  <start>
+    <element name="data">
+      <attribute name="appObj">
+        <text/>
+      </attribute>
+      <attribute name="tableName">
+        <text/>
+      </attribute>
+      <oneOrMore>
+        <element name="field">
+          <attribute name="tableField"></attribute>
+          <attribute name="name"></attribute>
+          <attribute name="label"></attribute>
+          <optional>
+            <attribute name="required"></attribute>
+          </optional>
+        </element>
+      </oneOrMore>
+    </element>
+  </start>
+</grammar>

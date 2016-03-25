@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
-<gridView appObj="employee">
+<gridView appObj="employee" xmlns="http://com.iks.org/schema/list/1.0">
   <table>
-    <field name="id" label="User Id"/>
-    <field name="username" label="Username"/>
+    <column name="id" label="User Id"/>
+    <column name="username" label="Username"/>
   </table>
 </gridView>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<grammar xmlns="http://relaxng.org/ns/structure/1.0" ns="http://com.iks.org/schema/list/1.0">
+  <start>
+    <element name="gridView">
+      <attribute name="appObj">
+        <text/>
+      </attribute>
+      <element name="table">
+        <element name="column"></element>
+      </element>
+      <optional>
+        <element name="filter"></element>
+      </optional>
+    </element>
+  </start>
+</grammar>

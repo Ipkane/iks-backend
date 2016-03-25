@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<data appObj="role" tableName="app_role">
+<data appObj="role" tableName="app_role" xmlns="http://com.iks.org/schema/model/1.0">
   <field tableField="id" name="id" label="Id"/>
   <field tableField="name" name="name" label="Name" required="true"/>
 </data>

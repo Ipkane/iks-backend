@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<gridView appObj="employee">
+<gridView appObj="employee" xmlns="http://com.iks.org/schema/list/1.0">
   <filter>
     <hbox>
       <textbox name="id"/>
@@ -8,8 +8,8 @@
     </hbox>
   </filter>
   <table>
-    <field name="id"/>
-    <field name="fio" label="First/Last Name Name"/>
-    <field name="gender"/>
+    <column name="id"/>
+    <column name="fio" label="First/Last Name Name"/>
+    <column name="gender"/>
   </table>
 </gridView>
