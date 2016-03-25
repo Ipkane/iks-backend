@@ -30,6 +30,8 @@ public class GulFactory {
         return new GulFieldbox();
       case GulConstant.SCRIPT:
         return new GulScript();
+      case GulConstant.MARKUP:
+        return new GulHtml();
       default:
         throw new Exception( "Couldn't parse element " + tagName );
     }

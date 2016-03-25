@@ -2,7 +2,9 @@
 angular.module( 'app.cms' )//
   .controller( 'GridEditController', GridEditController )
 ;//
+var formScope;
 function GridEditController( $scope, $log, payload, $uibModalInstance, CoreService ) {
+  formScope = $scope;
   angular.extend( $scope, {
     alerts      : [],
     selectedItem: {}

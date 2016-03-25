@@ -18,11 +18,25 @@
       <button id="button5" label="Button 5"/>
       <button id="button6" label="Button 6"/>
     </vbox>
-    <script>
+  </hbox>
+  <markup>
+    <![CDATA[
+      <div style="background-color:green">
+      Hello, <span style="background-color:red">world</span>!</div>
+      ]]>
+  </markup>
+  <script>
+    <![CDATA[
       $('#button1').click(function() {
         console.log("Button 1 clicked");
-        $('#fio').val('Test fio');
+        <!--$('#fio').val('Test fio');-->
+
+        <!--var formScope = angular.element($('#employeeForm')).scope();-->
+        formScope.$apply(function() {
+          formScope.selectedItem.fio = 'Test fio';
+        });
       });
-    </script>
-  </hbox>
+
+            ]]>
+  </script>
 </editView>

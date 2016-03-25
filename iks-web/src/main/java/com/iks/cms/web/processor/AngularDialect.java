@@ -22,6 +22,7 @@ public class AngularDialect extends AbstractDialect {
     processors.add( new CommonNgAttrProcessor( "model" ) );
     processors.add( new CommonNgAttrProcessor( "readonly" ) );
     processors.add( new CommonNgAttrProcessor( "disabled" ) );
+    processors.add( new CommonNgAttrProcessor( "controller" ) );
     return processors;
   }
 }
