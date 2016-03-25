@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<grammar xmlns="http://relaxng.org/ns/structure/1.0" ns="http://com.iks.org/schema/edit/1.0">
-  <start>
-    <element name="editView">
-      <attribute name="appObj"><text/></attribute>
-    </element>
-  </start>
-</grammar>

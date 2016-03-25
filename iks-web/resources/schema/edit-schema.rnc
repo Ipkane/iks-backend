@@ -1,0 +1,14 @@
+default namespace = "http://com.iks.org/schema/edit/1.0"
+
+start =
+  element editView {
+    attribute appObj { xsd:NCName }
+  }
+textbox =
+  element textbox {
+    attribute flex { xsd:integer }?,
+    attribute id { xsd:NCName }?,
+    attribute label { text }?,
+    attribute name { xsd:NCName }?,
+    attribute readonly { xsd:boolean }?
+  }
