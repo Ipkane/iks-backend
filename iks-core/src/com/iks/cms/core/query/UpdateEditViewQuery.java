@@ -17,7 +17,9 @@ public class UpdateEditViewQuery extends UpdateModelQuery<UpdateEditViewQuery > 
     super( model, item );
     this.editView = editView;
     for( IGulInputField field : editView.getFields() ) {
-      addField( field.getName() );
+      if (field.getName() != null) {
+        addField( field.getName() );
+      }
     }
     setItem( item );
   }

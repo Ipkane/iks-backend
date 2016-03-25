@@ -17,7 +17,7 @@ public abstract class GulElement implements IGulElement {
   protected String        id;
   private   String        style;
   private   String        cssClass;
-  private   int           flex;
+  private   String        flex;
   private   IGulContainer parent;
   @Override
   public String getId() {
@@ -38,7 +38,7 @@ public abstract class GulElement implements IGulElement {
   }
   public String getStyle() {
     StringBuilder sb = new StringBuilder();
-    if( flex > 0 ) {
+    if( flex != null ) {
       sb.append( "flex:" + flex );
     }
     if( style != null ) {
@@ -49,10 +49,10 @@ public abstract class GulElement implements IGulElement {
   public void setStyle( String style ) {
     this.style = style;
   }
-  public int getFlex() {
+  public String getFlex() {
     return flex;
   }
-  public void setFlex( int flex ) {
+  public void setFlex( String flex ) {
     this.flex = flex;
   }
   @Override
@@ -62,7 +62,7 @@ public abstract class GulElement implements IGulElement {
       setStyle( xmlElement.getAttribute( GulConstant.ATTR_STYLE ) );
     }
     if( xmlElement.hasAttribute( GulConstant.ATTR_FLEX ) ) {
-      setFlex( Integer.valueOf( xmlElement.getAttribute( GulConstant.ATTR_FLEX ) ) );
+      setFlex( xmlElement.getAttribute( GulConstant.ATTR_FLEX ) );
     }
     if( xmlElement.hasAttribute( GulConstant.ATTR_CSS_CLASS ) ) {
       setCssClass( xmlElement.getAttribute( GulConstant.ATTR_CSS_CLASS ) );

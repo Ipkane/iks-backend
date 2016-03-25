@@ -5,6 +5,7 @@ import org.thymeleaf.dom.*;
 import org.thymeleaf.processor.*;
 import org.thymeleaf.processor.attr.*;
 import org.thymeleaf.standard.expression.*;
+import org.thymeleaf.util.*;
 
 /**
  * @author Igor Kaynov
@@ -30,7 +31,9 @@ public class CommonNgAttrProcessor extends AbstractAttrProcessor {
     final IStandardExpression expression = parser.parseExpression( configuration, arguments, attributeValue );
     final String result = String.valueOf(expression.execute( configuration, arguments ));
     element.removeAttribute(attributeName);
-    element.setAttribute( attrName, result );
+    if ( !StringUtils.isEmpty(result)) {
+      element.setAttribute( attrName, result );
+    }
     return ProcessorResult.OK;
   }
 }

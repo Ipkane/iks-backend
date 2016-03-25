@@ -84,7 +84,7 @@ input.form-control.ng-invalid {
 
 .hbox > .form-control {
   display: inline-block;
-  flex: 1;
+  flex: 1 0 0;
 }
 
 .vbox > .form-control {

@@ -17,6 +17,7 @@ public class CreateEditViewQuery extends CreateModelQuery<CreateEditViewQuery > 
   public CreateEditViewQuery( IDataModel model, IEditView editView, IDataItem item ) {
     super(model, item);
     for( IGulInputField field : editView.getFields() ) {
+
       addField( field.getName() );
     }
     this.editView = editView;

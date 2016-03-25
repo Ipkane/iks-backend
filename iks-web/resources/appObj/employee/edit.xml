@@ -8,7 +8,7 @@
   </fieldbox>
   <grid style="width: 80%">
     <columns>
-      <column style="width: 200px"/>
+      <column flex="1"/>
       <column flex="2"/>
     </columns>
     <rows>
@@ -19,9 +19,10 @@
       <row>
         <label control="docpath" value="Path:"/>
         <hbox flex="1">
-          <textbox id="docpath" flex="1"/>
+          <textbox id="docpath"/>
           <button label="Browse..."/>
         </hbox>
+        <label value="Hello"/>
       </row>
     </rows>
   </grid>
