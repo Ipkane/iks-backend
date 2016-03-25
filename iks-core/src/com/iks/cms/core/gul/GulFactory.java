@@ -28,6 +28,8 @@ public class GulFactory {
         return new GulSpacer();
       case GulConstant.FIELDBOX:
         return new GulFieldbox();
+      case GulConstant.SCRIPT:
+        return new GulScript();
       default:
         throw new Exception( "Couldn't parse element " + tagName );
     }

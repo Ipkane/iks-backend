@@ -1,9 +1,12 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:ng="">
+<th:block th:fragment="container">
+  <th:block th:each="childElement : ${element.elements}">
+    <th:block th:include="${childElement.templatePath} :: ${childElement.templateName}" th:with="element=${childElement}"></th:block>
+  </th:block>
+</th:block>
 <th:block th:fragment="box">
   <div class="box" th:classappend="${element.cssClass}">
-    <th:block th:each="childElement : ${element.elements}">
-      <th:block th:include="${childElement.templatePath} :: ${childElement.templateName}" th:with="element=${childElement}"></th:block>
-    </th:block>
+    <th:block th:include="gul/box :: container"/>
   </div>
 </th:block>
 <th:block th:fragment="vbox">
@@ -15,7 +18,7 @@
 <th:block th:fragment="fieldbox">
   <div class="box fieldbox" th:classappend="${element.cssClass}">
     <div class="hbox" th:each="childElement : ${element.elements}">
-      <th:block th:include="${childElement.templatePath} :: ${childElement.templateName}" th:with="element=${childElement}"></th:block>
+      <th:block th:include="gul/element :: element" th:with="element=${childElement}"></th:block>
     </div>
   </div>
 </th:block>

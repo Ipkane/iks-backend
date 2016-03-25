@@ -14,10 +14,10 @@ import java.util.*;
  * @author Igor Kaynov
  */
 public abstract class GulElement implements IGulElement {
-  protected String      id;
-  private   String      style;
-  private   String      cssClass;
-  private   int         flex;
+  protected String        id;
+  private   String        style;
+  private   String        cssClass;
+  private   int           flex;
   private   IGulContainer parent;
   @Override
   public String getId() {
@@ -27,8 +27,9 @@ public abstract class GulElement implements IGulElement {
     this.id = id;
   }
   @Override
-  public abstract String getTemplatePath();
-
+  public String getTemplatePath() {
+    return "gul/element";
+  }
   @Override
   public abstract String getTag();
   @Override
@@ -56,7 +57,7 @@ public abstract class GulElement implements IGulElement {
   }
   @Override
   public void parse( IDataModel model, Element xmlElement ) throws Exception {
-    setId( xmlElement.getAttribute( GulConstant.ATTR_LABEL ) );
+    setId( xmlElement.getAttribute( GulConstant.ATTR_ID ) );
     if( xmlElement.hasAttribute( GulConstant.ATTR_STYLE ) ) {
       setStyle( xmlElement.getAttribute( GulConstant.ATTR_STYLE ) );
     }

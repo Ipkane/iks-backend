@@ -12,7 +12,13 @@ import java.util.*;
  * @author Igor Kaynov
  */
 public abstract class GulContainer extends GulElement implements IGulContainer {
-  private List< IGulElement > elements = new ArrayList<>();
+  protected List< IGulElement > elements = new ArrayList<>();
+//  protected IGulContainer root;
+  public GulContainer() {
+    super();
+//    root = this;
+//    elements.add( root );
+  }
   @Override
   public List< IGulElement > getElements() {
     return elements;
@@ -41,4 +47,10 @@ public abstract class GulContainer extends GulElement implements IGulContainer {
       }
     }
   }
+//  public IGulContainer getRoot() {
+//      return root;
+//    }
+//  public void setRoot( IGulContainer root ) {
+//    this.root = root;
+//  }
 }

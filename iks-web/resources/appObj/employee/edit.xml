@@ -2,7 +2,7 @@
 <editView appObj="employee">
   <fieldbox>
     <textbox name="id" readonly="true"/>
-    <textbox name="fio" label="First/Last Name Name"/>
+    <textbox id="fio" name="fio" label="First/Last Name Name"/>
     <select name="gender">
     </select>
     <referenceSelect name="user" displayField="username"/>
@@ -18,5 +18,11 @@
       <button id="button5" label="Button 5"/>
       <button id="button6" label="Button 6"/>
     </vbox>
+    <script>
+      $('#button1').click(function() {
+        console.log("Button 1 clicked");
+        $('#fio').val('Test fio');
+      });
+    </script>
   </hbox>
 </editView>

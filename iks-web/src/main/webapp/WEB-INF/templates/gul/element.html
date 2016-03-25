@@ -1,5 +1,15 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:ng="">
+<th:block th:fragment="element">
+  <th:block th:include="${element.templatePath} :: ${element.templateName}"></th:block>
+</th:block>
 <th:block th:fragment="spacer">
   <div th:id="${element.id}" th:classappend="${element.cssClass}" th:styleappend="${element.style}"></div>
+</th:block>
+<th:block th:fragment="script">
+  <script th:inline="javascript" th:utext="${element.text}">
+  </script>
+</th:block>
+<th:block th:fragment="button">
+  <button th:id="${element.id}" th:text="${element.label}" class="btn btn-default"  th:classappend="${element.cssClass}" th:styleappend="${element.style}"></button>
 </th:block>
 </html>

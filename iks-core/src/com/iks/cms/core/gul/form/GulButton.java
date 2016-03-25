@@ -13,7 +13,7 @@ public class GulButton extends GulElement {
   private String label;
   @Override
   public String getTemplatePath() {
-    return "gul/form";
+    return "gul/element";
   }
   @Override
   public String getTag() {
