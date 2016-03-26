@@ -1,18 +1,18 @@
 <?xml version="1.0"?>
 <root>
   <appObj name="employee" label="Employees">
-    <data url="resources/appObj/employee/data.xml"/>
-    <list url="resources/appObj/employee/list.xml"/>
-    <edit url="resources/appObj/employee/edit.xml"/>
+    <data url="iks-web/resources/appObj/employee/data.xml"/>
+    <list url="iks-web/resources/appObj/employee/list.xml"/>
+    <edit url="iks-web/resources/appObj/employee/edit.xml"/>
   </appObj>
   <appObj name="user" label="Users">
-    <data url="resources/appObj/user/data.xml"/>
-    <list url="resources/appObj/user/list.xml"/>
-    <edit url="resources/appObj/user/edit.xml"/>
+    <data url="iks-web/resources/appObj/user/data.xml"/>
+    <list url="iks-web/resources/appObj/user/list.xml"/>
+    <edit url="iks-web/resources/appObj/user/edit.xml"/>
   </appObj>
   <appObj name="role" label="Roles">
-    <data url="resources/appObj/role/data.xml"/>
-    <list url="resources/appObj/role/list.xml"/>
-    <edit url="resources/appObj/role/edit.xml"/>
+    <data url="iks-web/resources/appObj/role/data.xml"/>
+    <list url="iks-web/resources/appObj/role/list.xml"/>
+    <edit url="iks-web/resources/appObj/role/edit.xml"/>
   </appObj>
 </root>

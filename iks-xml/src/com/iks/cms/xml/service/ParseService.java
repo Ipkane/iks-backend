@@ -7,6 +7,7 @@ import com.iks.cms.core.model.*;
 import com.iks.cms.core.service.*;
 import com.iks.cms.xml.parser.*;
 
+import org.apache.catalina.core.*;
 import org.slf4j.*;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.stereotype.*;
@@ -33,7 +34,7 @@ public class ParseService {
   public void loadApp() throws Exception {
     try {
       appObjService.clear();
-      parseApp( "resources/appObj/app.xml" );
+      parseApp( "iks-web/resources/appObj/app.xml" );
     } catch( Exception e ) {
       logger.error( "Error loading app: ", e );
       throw e;

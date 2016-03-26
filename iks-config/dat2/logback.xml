@@ -1,25 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
+  <property name="CONSOLE_LOG_PATTERN"
+            value="%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(%5p) %clr(%-50.50logger{49}:%L){faint} %clr(:){faint} %m%n%wex"/>
+
+  <conversionRule conversionWord="clr" converterClass="org.springframework.boot.logging.logback.ColorConverter"/>
+  <conversionRule conversionWord="wex" converterClass="org.springframework.boot.logging.logback.WhitespaceThrowableProxyConverter"/>
 
   <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
     <layout class="ch.qos.logback.classic.PatternLayout">
 
-      <Pattern>
-        %d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n
-      </Pattern>
-
+      <!--<Pattern>-->
+      <!--&lt;!&ndash;%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n&ndash;&gt;-->
+      <!--</Pattern>-->
+      <pattern>${CONSOLE_LOG_PATTERN}</pattern>
     </layout>
   </appender>
 
-  <logger name="org.springframework" level="debug" additivity="false">
-    <appender-ref ref="STDOUT"/>
-  </logger>
+  <logger name="org.springframework" level="info"/>
+  <logger name="com.iks.cms" level="debug"/>
+  <logger name="org.eclipse.jetty" level="info"/>
+  <logger name="o.s.b.factory.support" level="info"/>
 
-  <logger name="com.iks.cms" level="debug" additivity="false">
-    <appender-ref ref="STDOUT"/>
-  </logger>
-
-  <root level="debug">
+  <root level="info">
     <appender-ref ref="STDOUT"/>
   </root>
 

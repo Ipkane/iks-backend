@@ -14,22 +14,25 @@ public class CommonDao {
   @Autowired
   private SessionFactory sessionFactory;
   public List selectQuery( String selectQuery ) {
-    try (Session session = sessionFactory.openSession()) {
-      Query query = session.createSQLQuery( selectQuery );
-      return query.list();
-    }
+    Session session = getSession();
+    Query query = session.createSQLQuery( selectQuery );
+    session.close();
+    return query.list();
   }
   public Object selectSingleQuery( String selectQuery ) {
-    try (Session session = sessionFactory.openSession()) {
-      Query query = session.createSQLQuery( selectQuery );
-      return query.uniqueResult();
-    }
+    Session session = getSession();
+    Query query = session.createSQLQuery( selectQuery );
+    session.close();
+    return query.uniqueResult();
   }
   public int updateQuery( String updateQuery ) {
-    try (Session session = sessionFactory.openSession()) {
-      Query query = session.createSQLQuery( updateQuery );
-      return query.executeUpdate();
-    }
+    Session session = getSession();
+    Query query = session.createSQLQuery( updateQuery );
+    session.close();
+    return query.executeUpdate();
+  }
+  public Session getSession() {
+    return sessionFactory.openSession();
   }
   public SessionFactory getSessionFactory() {
     return sessionFactory;

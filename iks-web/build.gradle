@@ -1,7 +1,7 @@
 apply plugin: 'java'
 apply plugin: 'idea'
 apply plugin: 'war'
-apply plugin: 'org.akhikhl.gretty'
+//apply plugin: 'org.akhikhl.gretty'
 
 ext {
   projectName = 'iks-web'
@@ -17,8 +17,8 @@ dependencies {
   compile project(':iks-core')
   compile project(':iks-gul')
 
-  compile 'javax.servlet:jstl:1.2'
-  providedCompile 'javax.servlet:javax.servlet-api:3.1.0'
+//  compile 'javax.servlet:jstl:1.2'
+//  providedCompile 'javax.servlet:javax.servlet-api:3.1.0'
 }
 
 sourceSets {
@@ -39,20 +39,8 @@ buildscript {
   }
 
   dependencies {
-    classpath 'org.akhikhl.gretty:gretty:+'
+    classpath("org.springframework.boot:spring-boot-gradle-plugin:1.3.3.RELEASE")
   }
 }
+apply plugin: 'spring-boot'
 
-// Don't use Jetty8, even it's a servlet 3.0+ container,
-// but not support non-jar WebApplicationInitializer scanning.
-// It will cause "No Spring WebApplicationInitializer types detected on classpath"
-gretty {
-  httpPort = 8080
-  contextPath = 'cms'
-  servletContainer = 'jetty9' //tomcat7 or tomcat8
-//  managedClassReload=true
-  interactiveMode=''
-  debugPort = 5005
-  debugSuspend = false
-//  jvmArgs=['-Dspring.config.location=file:///D:/work/homesize/iks-config/dat/']
-}

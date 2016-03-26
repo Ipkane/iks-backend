@@ -5,10 +5,12 @@ package com.iks.cms.web.config;
 */
 
 import com.fasterxml.jackson.databind.*;
+import com.iks.cms.config.properties.*;
 import com.iks.cms.xml.config.*;
 
 import org.hibernate.*;
 import org.springframework.beans.factory.annotation.*;
+import org.springframework.boot.context.properties.*;
 import org.springframework.context.annotation.*;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.*;
@@ -23,28 +25,28 @@ import javax.sql.*;
 //@EnableJpaRepositories( basePackages = { "com.makble.springmvcstart.repository" } )
 @EnableTransactionManagement
 @ComponentScan( basePackages = { "com.iks.cms.core.service", "com.iks.cms.core.repository" } )
-//@EnableConfigurationProperties( { DbProperties.class } )
-@PropertySource( "classpath:application.properties" )
-@Import( {XmlConfig.class})
+@EnableConfigurationProperties( { DbProperties.class } )
+//@PropertySource( "classpath:application.properties" )
+@Import( { XmlConfig.class } )
 public class RootConfig {
-  @Autowired
-  private DataSource  dataSource;
   //  @Autowired
-  //  private DbProperties dbProperties;
+  //  private DataSource  dataSource;
+  @Autowired
+  private DbProperties dbProperties;
   @Resource
-  public Environment env;
+  public  Environment  env;
   @Bean
   public DataSource dataSource() {
     DriverManagerDataSource dataSource = new DriverManagerDataSource();
-    System.out.println(env.getProperty( "db.url" ));
-    dataSource.setDriverClassName( env.getProperty( "db.driver" ));
-    dataSource.setUrl( env.getProperty( "db.url" ) );
-    dataSource.setUsername( env.getProperty( "db.username" ) );
-    dataSource.setPassword( env.getProperty( "db.password" ) );
-    //    dataSource.setDriverClassName( dbProperties.getDriver() );
-    //    dataSource.setUrl( dbProperties.getUrl() );
-    //    dataSource.setUsername( dbProperties.getUsername() );
-    //    dataSource.setPassword( dbProperties.getPassword() );
+    //    System.out.println(env.getProperty( "db.url" ));
+    //    dataSource.setDriverClassName( env.getProperty( "db.driver" ));
+    //    dataSource.setUrl( env.getProperty( "db.url" ) );
+    //    dataSource.setUsername( env.getProperty( "db.username" ) );
+    //    dataSource.setPassword( env.getProperty( "db.password" ) );
+    dataSource.setDriverClassName( dbProperties.getDriver() );
+    dataSource.setUrl( dbProperties.getUrl() );
+    dataSource.setUsername( dbProperties.getUsername() );
+    dataSource.setPassword( dbProperties.getPassword() );
     return dataSource;
   }
   @Bean
@@ -82,7 +84,7 @@ public class RootConfig {
   //  }
   @Bean
   public ObjectMapper objectMapper() {
-    ObjectMapper mapper = new ObjectMapper(  );
+    ObjectMapper mapper = new ObjectMapper();
     mapper.configure( SerializationFeature.FAIL_ON_EMPTY_BEANS, false );
     return mapper;
   }

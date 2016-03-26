@@ -1,10 +1,11 @@
 package com.iks.cms.config.properties;
 
+import org.springframework.boot.context.properties.*;
 
 /**
  * @author Igor Kaynov
  */
-//@ConfigurationProperties( "db" )
+@ConfigurationProperties( "db" )
 public class DbProperties {
   private String driver;
   private String url;

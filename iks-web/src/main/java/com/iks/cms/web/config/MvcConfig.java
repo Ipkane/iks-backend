@@ -26,28 +26,28 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
   //  public void configureDefaultServletHandling( final DefaultServletHandlerConfigurer configurer ) {
   //    configurer.enable();
   //  }
-  @Bean( name = "templateResolver" )
-  public ITemplateResolver templateResolver() {
-    ServletContextTemplateResolver templateResolver = new ServletContextTemplateResolver();
-    templateResolver.setPrefix( "/WEB-INF/templates/" );
-    templateResolver.setSuffix( ".html" );
-    templateResolver.setTemplateMode( "HTML5" );
-    templateResolver.setCacheable( false );
-    return templateResolver;
-  }
-  @Bean( name = "templateEngine" )
-  public SpringTemplateEngine templateEngine() {
-    SpringTemplateEngine engine = new SpringTemplateEngine();
-    engine.setTemplateResolver( templateResolver() );
-    engine.addDialect( new AngularDialect() );
-    return engine;
-  }
-  @Bean
-  public ViewResolver viewResolver() {
-    ThymeleafViewResolver viewResolver = new ThymeleafViewResolver();
-    viewResolver.setTemplateEngine( templateEngine() );
-    return viewResolver;
-  }
+//  @Bean( name = "templateResolver" )
+//  public ITemplateResolver templateResolver() {
+//    ServletContextTemplateResolver templateResolver = new ServletContextTemplateResolver();
+////    templateResolver.setPrefix( "resources/templates/" );
+//    templateResolver.setSuffix( ".html" );
+//    templateResolver.setTemplateMode( "HTML5" );
+//    templateResolver.setCacheable( false );
+//    return templateResolver;
+//  }
+//  @Bean( name = "templateEngine" )
+//  public SpringTemplateEngine templateEngine() {
+//    SpringTemplateEngine engine = new SpringTemplateEngine();
+//    engine.setTemplateResolver( templateResolver() );
+//    engine.addDialect( new AngularDialect() );
+//    return engine;
+//  }
+//  @Bean
+//  public ViewResolver viewResolver() {
+//    ThymeleafViewResolver viewResolver = new ThymeleafViewResolver();
+//    viewResolver.setTemplateEngine( templateEngine() );
+//    return viewResolver;
+//  }
   @Override
   public void addResourceHandlers( ResourceHandlerRegistry registry ) {
     registry.addResourceHandler( "/assets/**" ).addResourceLocations( "/assets/" );
