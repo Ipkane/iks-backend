@@ -1,14 +1,12 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:ng="">
 <th:block th:fragment="tabbox">
   <uib-tabset th:id="${element.id}" th:styleappend="${element.style}" th:classappend="${element.cssClass}">
-    <uib-tab th:each="tab,tabStat : ${element.tabs.elements}" th:attr="heading=${tab.label},index=${tabStat.index}">
-      <th:block th:if="${#lists.size(element.tabpanels.elements) > tabStat.index}" th:with="element=${element.tabpanels.elements[tabStat.index]}">
-        <th:block th:include="${element.templatePath} :: ${element.templateName}"/>
-      </th:block>
+    <uib-tab th:each="tab,tabStat : ${element.tabs}" th:attr="heading=${tab.label},index=${tabStat.index}">
+      <th:block th:include="gul/tab :: tab" th:with="element=${tab}"></th:block>
     </uib-tab>
   </uib-tabset>
 </th:block>
-<th:block th:fragment="tabpanel">
+<th:block th:fragment="tab">
   <div class="vbox" th:id="${element.id}" th:styleappend="${element.style}" th:classappend="${element.cssClass}">
     <th:block th:include="gul/box :: container"></th:block>
   </div>

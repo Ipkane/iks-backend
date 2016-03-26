@@ -27,19 +27,15 @@
   <!--</rows>-->
   <!--</grid>-->
   <tabbox style="width: 50%">
-    <tabs>
-      <tab label="Tab 1"/>
-      <tab label="Tab 2"/>
-    </tabs>
-    <tabpanels>
-      <tabpanel>
+    <tab label="Tab 1">
+      <hbox>
         <textbox id="docpath"/>
         <button label="Browse..."/>
-      </tabpanel>
-      <tabpanel>
-        <label control="doctitle" value="Document Title:"/>
-        <textbox id="doctitle" flex="1"/>
-      </tabpanel>
-    </tabpanels>
+      </hbox>
+    </tab>
+    <tab label="Tab 2">
+      <label control="doctitle" value="Document Title:"/>
+      <textbox id="doctitle" flex="1"/>
+    </tab>
   </tabbox>
 </editView>

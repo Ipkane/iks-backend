@@ -14,8 +14,7 @@ import java.util.stream.*;
  * @author Igor Kaynov
  */
 public class GulTabbox extends GulContainer {
-  private GulTabs      tabs;
-  private GulTabpanels tabpanels;
+  private List< GulTab > tabs = new ArrayList<>();
   @Override
   public String getTag() {
     return GulConstant.TABBOX;
@@ -28,23 +27,15 @@ public class GulTabbox extends GulContainer {
   public void parse( Element xmlElement ) throws Exception {
     super.parse( xmlElement );
     for( IGulElement element : elements ) {
-      if( element instanceof GulTabs ) {
-        tabs = ( GulTabs )element;
-      } else if( element instanceof GulTabpanels ) {
-        tabpanels = ( GulTabpanels )element;
+      if( element instanceof GulTab ) {
+        tabs.add( ( GulTab )element );
       }
     }
   }
-  public GulTabs getTabs() {
+  public List<GulTab> getTabs() {
     return tabs;
   }
-  public void setTabs( GulTabs tabs ) {
-    this.tabs = tabs;
-  }
-  public GulTabpanels getTabpanels() {
-    return tabpanels;
-  }
-  public void setTabpanels( GulTabpanels tabpanels ) {
-    this.tabpanels = tabpanels;
+  public void setTabs(GulTab tab) {
+    tabs.add( tab );
   }
 }
