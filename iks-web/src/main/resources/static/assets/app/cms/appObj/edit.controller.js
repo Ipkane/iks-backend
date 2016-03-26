@@ -10,7 +10,7 @@ function GridEditController( $scope, $log, payload, $uibModalInstance, CoreServi
     selectedItem: {}
   } );
   function init() {
-    CoreService.getEditData( payload, function ( response ) {
+    CoreService.getEditData( { appObj: payload.appObj, itemId: payload.itemId }, function ( response ) {
       if ( response.isSuccess ) {
         $scope.selectedItem = response.success.item || {};
       } else {
@@ -25,15 +25,15 @@ function GridEditController( $scope, $log, payload, $uibModalInstance, CoreServi
     //  return;
     //}
     CoreService.updateEditData(
-      angular.extend( angular.copy( payload ), { item: $scope.selectedItem } ),
+      { appObj: payload.appObj, item: $scope.selectedItem, isNew: payload.isNew } ,
       function ( response ) {
         if ( response.isSuccess ) {
           $uibModalInstance.close( $scope.selectedItem );
         } else {
           if ( response.failure.status == '400' ) {
-            _.each(response.failure.error.errors, function(error) {
-              $scope.addAlert(error.message);
-            });
+            _.each( response.failure.error.errors, function ( error ) {
+              $scope.addAlert( error.message );
+            } );
           } else {
             $scope.addAlert( response.failure.message );
           }

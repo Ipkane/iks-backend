@@ -9,9 +9,10 @@ import java.util.*;
  * @author Igor Kaynov
  */
 public class DataItem implements IDataItem {
-  private Map< String, Object > fieldValueMap = new LinkedHashMap<>();
+  @JsonInclude( JsonInclude.Include.NON_NULL )
+  private Map< String, Object >    fieldValueMap = new LinkedHashMap<>();
   @JsonIgnore
-  private List< IValidationError >        errors        = new ArrayList<>();
+  private List< IValidationError > errors        = new ArrayList<>();
   @JsonValue
   @JsonAnyGetter
   public Map< String, Object > getFieldValueMap() {

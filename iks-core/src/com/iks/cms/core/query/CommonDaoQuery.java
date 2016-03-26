@@ -10,20 +10,29 @@ import java.util.*;
 public abstract class CommonDaoQuery {
   public List selectQuery( SessionFactory sessionFactory, String selectQuery ) {
     Session session = sessionFactory.openSession();
-    Query query = session.createSQLQuery( selectQuery );
-    session.close();
-    return query.list();
+    try {
+      Query query = session.createSQLQuery( selectQuery );
+      return query.list();
+    } finally {
+      session.close();
+    }
   }
   public Object selectSingleQuery( SessionFactory sessionFactory, String selectQuery ) {
     Session session = sessionFactory.openSession();
-    Query query = session.createSQLQuery( selectQuery );
-    session.close();
-    return query.uniqueResult();
+    try {
+      Query query = session.createSQLQuery( selectQuery );
+      return query.uniqueResult();
+    } finally {
+      session.close();
+    }
   }
   public int updateQuery( SessionFactory sessionFactory, String updateQuery ) {
     Session session = sessionFactory.openSession();
-    Query query = session.createSQLQuery( updateQuery );
-    session.close();
-    return query.executeUpdate();
+    try {
+      Query query = session.createSQLQuery( updateQuery );
+      return query.executeUpdate();
+    } finally {
+      session.close();
+    }
   }
 }
