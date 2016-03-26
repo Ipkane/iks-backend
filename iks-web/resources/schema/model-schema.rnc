@@ -2,16 +2,16 @@ default namespace = "http://com.iks.org/schema/model/1.0"
 
 start =
   element data {
-    attribute appObj { xsd:NCName },
-    attribute tableName { xsd:NCName },
-    element field {
+    attribute appObj { xsd:NCName }
+    & attribute tableName { xsd:NCName }
+    & element field {
       attribute label { text },
       attribute name { xsd:NCName },
       attribute primary { xsd:boolean }?,
       attribute required { xsd:boolean }?,
       attribute tableField { xsd:NCName }
-    }*,
-    element selectField {
+    }*
+    & element selectField {
       attribute label { text },
       attribute name { xsd:NCName },
       attribute tableField { xsd:NCName },
@@ -21,8 +21,8 @@ start =
           text
         }+
       }
-    }*,
-    element manyToOne {
+    }*
+    & element manyToOne {
       attribute appObj { xsd:NCName },
       attribute name { xsd:NCName },
       attribute referenceField { xsd:NCName },

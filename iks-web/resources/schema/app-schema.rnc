@@ -1,0 +1,18 @@
+default namespace = "http://com.iks.org/schema/app/1.0"
+
+start = app
+app = element app {
+    element appObj{
+      attribute name { xsd:NCName }
+      & attribute label { text }
+      & element data {
+        attribute url { xsd:anyURI }
+      }
+      & element list {
+        attribute url { xsd:anyURI }
+      }
+      & element edit {
+        attribute url { xsd:anyURI }
+      }
+    }+
+  }

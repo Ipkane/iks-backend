@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<root>
+<app xmlns="http://com.iks.org/schema/app/1.0">
   <appObj name="employee" label="Employees">
     <data url="iks-web/resources/appObj/employee/data.xml"/>
     <list url="iks-web/resources/appObj/employee/list.xml"/>
@@ -15,4 +15,4 @@
     <list url="iks-web/resources/appObj/role/list.xml"/>
     <edit url="iks-web/resources/appObj/role/edit.xml"/>
   </appObj>
-</root>
+</app>

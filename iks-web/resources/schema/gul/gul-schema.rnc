@@ -1,0 +1,20 @@
+#default namespace = "http://com.iks.org/schema/gul/1.0"
+
+gul.element = textbox | tabbox | tab
+
+textbox = element textbox {
+  attribute flex { xsd:integer }?,
+  attribute id { xsd:NCName }?,
+  attribute label { text }?,
+  attribute name { xsd:NCName }?,
+  attribute readonly { xsd:boolean }?,
+  attribute value { text }
+}
+
+tabbox = element tabbox {
+  tab+
+}
+
+tab = element tab {
+  attribute label { text }
+}

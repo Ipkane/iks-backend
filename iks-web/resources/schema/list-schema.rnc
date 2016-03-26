@@ -7,8 +7,8 @@ start =
       element hbox {
         element textbox {
           attribute name { xsd:NCName }
-        }+,
-        element select {
+        }+
+        & element select {
           attribute name { xsd:NCName }
         }+
       }
