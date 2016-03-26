@@ -26,8 +26,14 @@ public class AppParser {
     for( int i = 0; i < fieldList.getLength(); i++ ) {
       Node node = fieldList.item( i );
       if( node.getNodeType() == Node.ELEMENT_NODE ) {
-        Element appObjElement = ( Element )node;
-        appObjList.add( parseAppObj( appObjElement ) );
+        try {
+          Element appObjElement = ( Element )node;
+          IAppObj appObj = parseAppObj( appObjElement );
+          appObjList.add( appObj );
+          logger.debug( "Parsed appObj {}", appObj.getName() );
+        } catch(Exception e) {
+          logger.error("Error parsing app obj: ", e);
+        }
       }
     }
     return appObjList;

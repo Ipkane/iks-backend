@@ -4,6 +4,7 @@ import com.iks.cms.core.gul.container.*;
 import com.iks.cms.core.gul.element.*;
 import com.iks.cms.core.gul.form.*;
 import com.iks.cms.core.gul.grid.*;
+import com.iks.cms.core.gul.tab.*;
 
 /**
  * @author Igor Kaynov
@@ -45,6 +46,16 @@ public class GulFactory {
         return new GulColumns();
       case GulConstant.COLUMN:
         return new GulColumn();
+      case GulConstant.TABBOX:
+        return new GulTabbox();
+      case GulConstant.TABS:
+        return new GulTabs();
+      case GulConstant.TAB:
+        return new GulTab();
+      case GulConstant.TABPANELS:
+        return new GulTabpanels();
+      case GulConstant.TABPANEL:
+        return new GulTabpanel();
       default:
         throw new Exception( "Couldn't parse element " + tagName );
     }

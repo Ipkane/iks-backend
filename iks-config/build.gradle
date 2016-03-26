@@ -11,10 +11,10 @@ jar {
   version = "1.0"
 }
 
-repositories {
-  mavenCentral()
-  maven { url "https://repository.jboss.org/nexus/content/repositories/releases" }
-}
+//repositories {
+//  mavenCentral()
+//  maven { url "https://repository.jboss.org/nexus/content/repositories/releases" }
+//}
 
 dependencies {
   compile project(':iks-common')

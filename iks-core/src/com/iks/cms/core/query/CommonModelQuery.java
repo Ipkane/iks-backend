@@ -24,6 +24,9 @@ public class CommonModelQuery< T extends CommonModelQuery > extends CommonDaoQue
     return ( T )this;
   }
   public T addField( String field ) {
+    if( field == null ) {
+      return ( T )this;
+    }
     this.fields.add( model.getField( field ) );
     return ( T )this;
   }

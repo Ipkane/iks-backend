@@ -44,6 +44,12 @@ public interface GulConstant {
   String ROW                = "row";
   String COLUMNS            = "columns";
   String COLUMN             = "column";
+  // tab
+  String TABBOX             = "tabbox";
+  String TABS               = "tabs";
+  String TAB                = "tab";
+  String TABPANELS          = "tabpanels";
+  String TABPANEL           = "tabpanel";
   // custom
   String FILTER_PANEL       = "filterPanel";
   String GRID_VIEW          = "gridView";
