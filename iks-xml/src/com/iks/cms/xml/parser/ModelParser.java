@@ -12,10 +12,10 @@ import org.w3c.dom.*;
 /**
  * @author Igor Kaynov
  */
-public class ModelParser extends CommonParser {
+public class ModelParser {
   private static final Logger logger = LoggerFactory.getLogger( ModelParser.class );
   public IDataModel parse( String fileName ) throws Exception {
-    Document doc = parseFile( fileName );
+    Document doc = ParserUtils.parseFile( fileName );
     return parseRoot( doc );
   }
   private IDataModel parseRoot( Document doc ) throws Exception {
@@ -84,7 +84,7 @@ public class ModelParser extends CommonParser {
     for( int i = 0; i < optionsList.getLength(); i++ ) {
       Element optionElement = ( Element )optionsList.item( i );
       SelectOption option = new SelectOption();
-      option.setValue( optionElement.getAttribute( EditConstant.OPTION_VALUE_ATTR ) );
+      option.setValue( optionElement.getAttribute( ModelConstant.OPTION_VALUE_ATTR ) );
       option.setLabel( optionElement.getTextContent() );
       field.addOption( option );
     }

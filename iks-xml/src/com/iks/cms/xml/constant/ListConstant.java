@@ -12,7 +12,7 @@ public interface ListConstant {
   String OPTION_VALUE_ATTR  = "value";
   String DISPLAY_FIELD_ATTR = "displayField";
   // element names
-  String FIELD              = "field";
+  String COLUMN             = "column";
   String TABLE              = "table";
   String FILTER             = "filter";
 }

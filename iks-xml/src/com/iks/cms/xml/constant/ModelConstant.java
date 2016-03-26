@@ -13,6 +13,7 @@ public interface ModelConstant {
   String TABLE_NAME_ATTR      = "tableName";
   String APP_OBJ_ATTR         = "appObj";
   String REFERENCE_FIELD_ATTR = "referenceField";
+  String OPTION_VALUE_ATTR    = "value";
   // element names
   String FIELD                = "field";
   String SELECT_FIELD         = "selectField";

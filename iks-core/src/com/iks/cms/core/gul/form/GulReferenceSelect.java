@@ -1,14 +1,21 @@
 package com.iks.cms.core.gul.form;
 
 import com.iks.cms.core.gul.*;
+import com.iks.cms.core.model.*;
+
+import org.w3c.dom.*;
 
 import java.util.*;
 
 /**
  * @author Igor Kaynov
  */
-public class GulReferenceSelectField extends GulReferenceField {
+public class GulReferenceSelect extends GulReferenceField {
   private List< SelectOption > options = new ArrayList<>();
+  @Override
+  public String getTag() {
+    return GulConstant.REFERENCE_SELECT;
+  }
   public List< SelectOption > getOptions() {
     return options;
   }
@@ -19,11 +26,11 @@ public class GulReferenceSelectField extends GulReferenceField {
     options.add( option );
   }
   @Override
-  public String getType() {
-    return GulConstant.REFERENCE_SELECT_TYPE;
-  }
-  @Override
   public String getTemplatePath() {
     return "gul/referenceSelect";
+  }
+  @Override
+  public void parse( Element xmlElement ) throws Exception {
+    super.parse( xmlElement );
   }
 }

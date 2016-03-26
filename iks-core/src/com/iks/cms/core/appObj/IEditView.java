@@ -1,6 +1,6 @@
 package com.iks.cms.core.appObj;
 
-import com.iks.cms.core.gul.*;
+import com.iks.cms.core.gul.container.*;
 import com.iks.cms.core.gul.form.*;
 
 import java.util.*;
@@ -8,6 +8,5 @@ import java.util.*;
 /**
  * @author Igor Kaynov
  */
-public interface IEditView extends IGulContainer {
-  List< IGulInputField > getFields();
+public interface IEditView extends IFieldContainer {
 }

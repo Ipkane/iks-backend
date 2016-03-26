@@ -1,6 +1,8 @@
 package com.iks.cms.core.gul.form;
 
-import com.iks.cms.core.gul.*;
+import com.iks.cms.core.data.*;
+import com.iks.cms.core.gul.container.*;
+import com.iks.cms.core.gul.element.*;
 
 /**
  * @author Igor Kaynov
@@ -8,6 +10,7 @@ import com.iks.cms.core.gul.*;
 public interface IGulInputField extends IGulElement {
   String getName();
   String getLabel();
-  String getType();
   Object getDefaultValue();
+  void applyModel(IDataField dataField);
+//  IFieldContainer getFieldContainer();
 }

@@ -32,9 +32,9 @@ public class AppObjService {
     return appObjMap.get( appObj ).getDataModel();
   }
   public List< IDataItem > getGridData( String appObj, Map< String, Object > filter, String orderBy ) {
-    GridQuery query = new GridQuery( getModel( appObj ), getGrid( appObj ) );
+    SelectGridQuery query = new SelectGridQuery( getModel( appObj ), getGrid( appObj ) );
     if( filter != null ) {
-      query.setFilter( filter );
+      query.setFilters( filter );
     }
     if( orderBy != null ) {
       boolean orderAsc = true;
@@ -49,15 +49,16 @@ public class AppObjService {
     return query.executeQuery( commonDao.getSessionFactory() );
   }
   public List< IDataItem > getModelData( String appObj, List< String > fields ) {
-    ModelQuery query = new ModelQuery( getModel( appObj ) );
-    return query.setFields( fields ).executeQuery( commonDao.getSessionFactory() );
+    SelectModelQuery query = new SelectModelQuery( getModel( appObj ) );
+    query.setFields( fields );
+    return query.executeQuery( commonDao.getSessionFactory() );
   }
   public IDataItem getEditData( String appObj, Long itemId ) {
     if( itemId == null ) {
       return createNewItem( appObj, getEditView( appObj ) );
     } else {
-      SelectSingleItemQuery query = new SelectSingleItemQuery( getModel( appObj ), getEditView( appObj ), itemId );
-      return query.executeQuery( commonDao.getSessionFactory() );
+      SelectEditViewQuery query = new SelectEditViewQuery( getModel( appObj ), getEditView( appObj ), itemId );
+      return query.executeSingleQuery( commonDao.getSessionFactory() );
     }
   }
   public IDataItem createNewItem( String appObj, IEditView editView ) {
@@ -72,7 +73,7 @@ public class AppObjService {
     if( !model.validate( item ) ) {
       throw new ValidationException( item.getErrors() );
     }
-    CreateItemQuery query = new CreateItemQuery( getModel( appObj ), getEditView( appObj ), item );
+    CreateEditViewQuery query = new CreateEditViewQuery( getModel( appObj ), getEditView( appObj ), item );
     query.executeQuery( commonDao.getSessionFactory() );
   }
   public void updateItem( String appObj, IDataItem item ) throws ValidationException {
@@ -80,11 +81,11 @@ public class AppObjService {
     if( !model.validate( item ) ) {
       throw new ValidationException( item.getErrors() );
     }
-    UpdateItemQuery query = new UpdateItemQuery( model, getEditView( appObj ), item );
+    UpdateEditViewQuery query = new UpdateEditViewQuery( model, getEditView( appObj ), item );
     query.executeQuery( commonDao.getSessionFactory() );
   }
   public void deleteItem( String appObj, Long itemId ) {
-    DeleteItemQuery query = new DeleteItemQuery( getModel( appObj ), getEditView( appObj ), itemId );
+    DeleteEditViewQuery query = new DeleteEditViewQuery( getModel( appObj ), getEditView( appObj ), itemId );
     query.executeQuery( commonDao.getSessionFactory() );
   }
   public IEditView getEditView( String appObj ) {
@@ -98,11 +99,11 @@ public class AppObjService {
     IDataModel model = getModel( appObj );
     IEditView editView = getEditView( appObj );
     for( IGulInputField field : editView.getFields() ) {
-      if( field.getType() == GulConstant.REFERENCE_SELECT_TYPE ) {
+      if( Objects.equals( field.getTag(), GulConstant.REFERENCE_SELECT ) ) {
         GulReferenceField referenceField = ( GulReferenceField )field;
         ManyToOne dataField = ( ManyToOne )model.getField( field.getName() );
         List< String > referencedFields = Arrays.asList( dataField.getReferenceField(), referenceField.getDisplayField() );
-        ModelQuery query = new ModelQuery( getModel( dataField.getAppObj() ) );
+        SelectModelQuery query = new SelectModelQuery( getModel( dataField.getAppObj() ) );
         query.setFields( referencedFields );
         List< IDataItem > items = query.executeQuery( commonDao.getSessionFactory() );
         List< SelectOption > options = new ArrayList<>( items.size() );

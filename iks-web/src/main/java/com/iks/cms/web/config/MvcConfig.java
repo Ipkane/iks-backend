@@ -1,6 +1,7 @@
 package com.iks.cms.web.config;
 
 import com.fasterxml.jackson.databind.*;
+import com.iks.cms.web.processor.*;
 
 import org.springframework.context.annotation.*;
 import org.springframework.context.annotation.Configuration;
@@ -38,6 +39,7 @@ public class MvcConfig extends WebMvcConfigurerAdapter {
   public SpringTemplateEngine templateEngine() {
     SpringTemplateEngine engine = new SpringTemplateEngine();
     engine.setTemplateResolver( templateResolver() );
+    engine.addDialect( new AngularDialect() );
     return engine;
   }
   @Bean

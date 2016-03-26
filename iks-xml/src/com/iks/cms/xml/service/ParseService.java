@@ -25,44 +25,23 @@ public class ParseService {
   private AppObjService appObjService;
   @PostConstruct
   private void init() {
-    loadApp();
-    //    AppObj employeeAppObj = new AppObj();
-    //    employeeAppObj.setName( "employee" );
-    //    IDataModel model = parseDataModel( "resources/appObj/employee/data.xml" );
-    //    IGrid grid = parseGrid( "resources/appObj/employee/list.xml" );
-    //    employeeAppObj.setDataModel( model );
-    //    employeeAppObj.setGrid( grid );
-    //    appObjService.addAppObj( employeeAppObj );
-  }
-  public void loadApp() {
-    appObjService.clear();
-    parseApp( "resources/appObj/app.xml" );
-  }
-  private void parseApp( String fileName ) {
-    AppParser parser = new AppParser();
     try {
-      List< IAppObj > appObjList = parser.parse( fileName );
-      appObjList.forEach( appObjService::addAppObj );
+      loadApp();
     } catch( Exception e ) {
-      logger.error( "Data model parse exception: ", e );
     }
   }
-  //  private IDataModel parseDataModel( String fileName ) {
-  //    ModelParser parser = new ModelParser();
-  //    try {
-  //      return parser.parse( fileName );
-  //    } catch( Exception e ) {
-  //      logger.error( "Data model parse exception: ", e );
-  //    }
-  //    return null;
-  //  }
-  //  private IGrid parseGrid( String fileName ) {
-  //    GridViewParser parser = new GridViewParser();
-  //    try {
-  //      return parser.parse( fileName );
-  //    } catch( Exception e ) {
-  //      logger.error( "Data model parse exception: ", e );
-  //    }
-  //    return null;
-  //  }
+  public void loadApp() throws Exception {
+    try {
+      appObjService.clear();
+      parseApp( "resources/appObj/app.xml" );
+    } catch( Exception e ) {
+      logger.error( "Error loading app: ", e );
+      throw e;
+    }
+  }
+  private void parseApp( String fileName ) throws Exception {
+    AppParser parser = new AppParser();
+    List< IAppObj > appObjList = parser.parse( fileName );
+    appObjList.forEach( appObjService::addAppObj );
+  }
 }

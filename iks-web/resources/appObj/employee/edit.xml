@@ -1,11 +1,29 @@
-<editView appObj="employee">
-  <field name="id" readonly="true"/>
-  <field name="fio" label="First/Last Name Name"/>
-  <selectField name="gender">
-    <!--<options>-->
-      <!--<option value="male">Male</option>-->
-      <!--<option value="female">Female</option>-->
-    <!--</options>-->
-  </selectField>
-  <referenceSelectField name="user" displayField="username"/>
+<?xml version="1.0"?>
+<editView appObj="employee" xmlns="http://com.iks.org/schema/edit/1.0">
+  <fieldbox>
+    <textbox name="id" readonly="true"/>
+    <textbox id="fio" name="fio" label="First/Last Name Name"/>
+    <select name="gender"/>
+    <referenceSelect name="user" displayField="username"/>
+  </fieldbox>
+  <grid style="width: 80%">
+    <columns>
+      <column flex="1"/>
+      <column flex="2"/>
+    </columns>
+    <rows>
+      <row>
+        <label control="doctitle" value="Document Title:"/>
+        <textbox id="doctitle" flex="1"/>
+      </row>
+      <row>
+        <label control="docpath" value="Path:"/>
+        <hbox flex="1">
+          <textbox id="docpath"/>
+          <button label="Browse..."/>
+        </hbox>
+        <label value="Hello"/>
+      </row>
+    </rows>
+  </grid>
 </editView>

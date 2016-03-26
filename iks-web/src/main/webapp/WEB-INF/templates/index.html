@@ -1,11 +1,13 @@
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:ng="">
 <head>
   <title>CMS</title>
 
-  <link th:href="@{assets/css/main.css}" rel="stylesheet"/>
-  <link th:href="@{assets/css/dev.css}" rel="stylesheet"/>
   <link th:href="@{assets/css/bootstrap.min.css}" rel="stylesheet"/>
   <link th:href="@{assets/css/bootstrap-theme.min.css}" rel="stylesheet"/>
+  <link th:href="@{assets/css/gul.css}" rel="stylesheet"/>
+  <link th:href="@{assets/css/main.css}" rel="stylesheet"/>
+  <link th:href="@{assets/css/dev.css}" rel="stylesheet"/>
 </head>
 <body ng-app="app">
 <div class="dev-panel" ng-controller="DevPanelController">
@@ -17,7 +19,7 @@
       <nav class="sidebar-nav">
         <ul class="nav nav-pills nav-stacked">
           <li data-th-each="appObj : ${appObjList}" ui-sref-active="active">
-            <a data-th-attr="ui-sref = |appObjListView({appObj:'${appObj.name}'}) |" data-th-text="${appObj.label}">Link</a>
+            <a ng:sref="|appObjListView({appObj:'${appObj.name}'}) |" data-th-text="${appObj.label}">Link</a>
           </li>
         </ul>
       </nav>

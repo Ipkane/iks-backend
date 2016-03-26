@@ -34,7 +34,7 @@ public class ViewController {
     return gridView.getTemplatePath();
   }
   @RequestMapping( value = REQUEST_GET_GRID_EDIT_VIEW, method = RequestMethod.GET )
-  public String gridEditView( Model model, String appObj, Long itemId ) {
+  public String editView( Model model, String appObj, Long itemId ) {
     IEditView editView = appObjService.getEditView( appObj );
     model.addAttribute( "editView", editView );
     model.addAttribute( "optionsMap", appObjService.getEdiViewOptionsMap( appObj ) );

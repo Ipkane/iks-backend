@@ -1,5 +1,8 @@
-<editView appObj="user">
-  <field name="id" readonly="true"/>
-  <field name="username"/>
-  <field name="password"/>
+<?xml version="1.0"?>
+<editView appObj="user" xmlns="http://com.iks.org/schema/edit/1.0">
+  <fieldbox>
+    <textbox name="id" readonly="true"/>
+    <textbox name="username"/>
+    <textbox name="password"/>
+  </fieldbox>
 </editView>

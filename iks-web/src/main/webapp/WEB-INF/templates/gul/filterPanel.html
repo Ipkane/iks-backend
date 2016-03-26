@@ -1,15 +1,17 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-<th:block th:fragment="template">
+<th:block th:fragment="filterPanel">
   <div class="row">
-    <form data-th-id="|${appObj.name}Form|" role="form" novalidate="novalidate" class="form">
-      <div class="col-xs-4" data-th-each="element : ${gridView.filterPanel.elements}">
-        <div class="form-group">
-          <label data-th-for="${element.name}" class="control-label" data-th-text="${element.label}">Label</label>
-
-          <div th:include="${element.templatePath} :: ${element.templateName}" th:with="itemName='filter.item'">
-          </div>
-        </div>
-      </div>
+    <form data-th-id="|${appObj.name}Form|" role="form" novalidate="novalidate" class="form-inline">
+      <!--<div class="col-xs-4" data-th-each="element : ${gridView.filterPanel.elements}">-->
+      <!--<div class="form-group">-->
+      <!--<div th:include="${element.templatePath} :: ${element.templateName}" th:with="itemName='filter.item'">-->
+      <!--</div>-->
+      <!--</div>-->
+      <!--</div>-->
+      <th:block th:each="element : ${gridView.filterPanel.elements}">
+          <th:block th:include="${element.templatePath} :: ${element.templateName}" th:with="itemName='filter.item'">
+          </th:block>
+      </th:block>
     </form>
   </div>
   <div class="row">

@@ -1,12 +1,15 @@
-<gridView appObj="employee">
+<?xml version="1.0"?>
+<gridView appObj="employee" xmlns="http://com.iks.org/schema/list/1.0">
   <filter>
-    <field name="id"/>
-    <field name="fio"/>
-    <selectField name="gender"/>
+    <hbox>
+      <textbox name="id"/>
+      <textbox name="fio"/>
+      <select name="gender"/>
+    </hbox>
   </filter>
   <table>
-    <field name="id"/>
-    <field name="fio" label="First/Last Name Name"/>
-    <field name="gender"/>
+    <column name="id"/>
+    <column name="fio" label="First/Last Name Name"/>
+    <column name="gender"/>
   </table>
 </gridView>

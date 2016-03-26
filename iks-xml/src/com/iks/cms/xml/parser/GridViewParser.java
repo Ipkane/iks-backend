@@ -3,7 +3,7 @@ package com.iks.cms.xml.parser;
 import com.iks.cms.core.appObj.*;
 import com.iks.cms.core.data.*;
 import com.iks.cms.core.grid.*;
-import com.iks.cms.core.gul.*;
+import com.iks.cms.core.gul.panel.*;
 import com.iks.cms.core.model.*;
 import com.iks.cms.xml.constant.*;
 
@@ -13,14 +13,14 @@ import org.w3c.dom.*;
 /**
  * @author Igor Kaynov
  */
-public class GridViewParser extends GulParser {
+public class GridViewParser {
   private static final Logger logger = LoggerFactory.getLogger( GridViewParser.class );
   private IDataModel model;
   public GridViewParser( IDataModel model ) {
     this.model = model;
   }
   public IGridView parse( String fileName ) throws Exception {
-    Document doc = parseFile( fileName );
+    Document doc = ParserUtils.parseFile( fileName );
     return parseRoot( doc );
   }
   private IGridView parseRoot( Document doc ) throws Exception {
@@ -37,7 +37,7 @@ public class GridViewParser extends GulParser {
             gridView.setGrid( grid );
             break;
           case ListConstant.FILTER:
-            IFilterPanel filterPanel = parseFilterPanel( element );
+            IGulFilterPanel filterPanel = parseFilterPanel( element );
             gridView.setFilterPanel( filterPanel );
             break;
           default:
@@ -49,7 +49,7 @@ public class GridViewParser extends GulParser {
   }
   private Grid parseTable( Element tableElement ) {
     Grid grid = new Grid();
-    NodeList fieldList = tableElement.getElementsByTagName( ListConstant.FIELD );
+    NodeList fieldList = tableElement.getElementsByTagName( ListConstant.COLUMN );
     for( int i = 0; i < fieldList.getLength(); i++ ) {
       Node node = fieldList.item( i );
       if( node.getNodeType() == Node.ELEMENT_NODE ) {
@@ -59,12 +59,11 @@ public class GridViewParser extends GulParser {
     }
     return grid;
   }
-  private IFilterPanel parseFilterPanel( Element filterElement ) throws Exception {
-    FilterPanel filterPanel = new FilterPanel();
-    parseGulContainer( filterPanel, filterElement );
+  private IGulFilterPanel parseFilterPanel( Element filterElement ) throws Exception {
+    GulFilterPanel filterPanel = new GulFilterPanel(model);
+    filterPanel.parse(filterElement );
     return filterPanel;
   }
-  @Override
   protected IDataModel getModel() {
     return model;
   }

@@ -1,13 +1,15 @@
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-<th:block th:fragment="input">
-  <input type="text" class="form-control" data-th-id="${element.name}" data-th-attr="ng-model = |${itemName}.${element.name}|,ng-readonly = |${element.readonly}|"
-         th:required="${element.required}"/>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:ng="">
+<th:block th:fragment="textbox">
+    <label data-th-for="${element.name}" class="control-label" data-th-text="${element.label}">Label</label>
+    <input type="text" class="form-control" data-th-id="${element.id}" th:name="${element.name}" ng:model="${element.name} ? |${itemName}.${element.name}| : ''" ng:readonly="|${element.readonly}|"
+           th:required="${element.required}" th:classappend="${element.cssClass}" th:styleappend="${element.style}"/>
 </th:block>
 <th:block th:fragment="select">
-  <select type="text" class="form-control" data-th-id="${element.name}" data-th-attr="ng-model = |${itemName}.${element.name}|, ng-readonly = |${element.readonly}|"
-          th:required="${element.required}">
-    <option data-th-if="${!element.required}" value=""></option>
-    <option data-th-value="${option.value}" data-th-each="option : ${element.options}" data-th-text="${option.label}">Option Label</option>
-  </select>
+    <label data-th-for="${element.name}" class="control-label" data-th-text="${element.label}">Label</label>
+    <select type="text" class="form-control" data-th-id="${element.id}" th:name="${element.name}" ng:model="${element.name} ? |${itemName}.${element.name}| : ''" ng:readonly="${element.readonly}"
+            th:required="${element.required}" th:classappend="${element.cssClass}" th:styleappend="${element.style}">
+      <option data-th-if="${!element.required}" value=""></option>
+      <option data-th-value="${option.value}" data-th-each="option : ${element.options}" data-th-text="${option.label}">Option Label</option>
+    </select>
 </th:block>
 </html>
