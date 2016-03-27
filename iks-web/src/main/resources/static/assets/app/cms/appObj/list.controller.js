@@ -142,5 +142,9 @@ function AppObjListController( $scope, $log, $uibModal, $timeout, CoreService, G
     }
     return null;
   };
+  $scope.clearFilter = function() {
+    $scope.filter.item = {};
+    reload();
+  };
   $timeout( init, 0 );
 };
