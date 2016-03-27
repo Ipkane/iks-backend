@@ -5,28 +5,35 @@ start =
   element data {
     attribute appObj { xsd:NCName }
     & attribute tableName { xsd:NCName }
-    & element field {
-      labelAttr,
-      nameAttr,
-      attribute primary { xsd:boolean }?,
-      attribute required { xsd:boolean }?,
-      attribute tableField { xsd:NCName }
-    }*
-    & element selectField {
-      labelAttr,
-      nameAttr,
-      attribute tableField { xsd:NCName },
-      element options {
-        element option {
-          valueAttr,
-          text
-        }+
-      }
-    }*
-    & element manyToOne {
-      attribute appObj { xsd:NCName },
-      nameAttr,
-      attribute referenceField { xsd:NCName },
-      attribute tableField { xsd:NCName }
-    }*
+    & dataField*
   }
+
+dataField = field | selectField | manyToOne
+
+dataFieldType =
+  nameAttr
+  & labelAttr?
+  & attribute tableField { xsd:NCName }?
+
+field = element field {
+  dataFieldType
+  & attribute type { "string" | "boolean" | "integer" | "float" }?
+  & attribute primary { xsd:boolean }?
+  & attribute required { xsd:boolean }?
+}
+
+selectField = element selectField {
+  dataFieldType
+  & element options {
+    element option {
+      valueAttr,
+      text
+    }+
+  }
+}
+
+manyToOne = element manyToOne {
+  dataFieldType
+  & attribute appObj { xsd:NCName }
+  & attribute referenceField { xsd:NCName }
+}

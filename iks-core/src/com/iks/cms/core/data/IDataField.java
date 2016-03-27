@@ -7,7 +7,7 @@ import java.util.*;
 /**
  * @author Igor Kaynov
  */
-public interface IDataField {
+public interface IDataField<T> {
   String getName();
 
   String getLabel();
@@ -17,4 +17,6 @@ public interface IDataField {
   boolean isRequired();
 
   List<IValidator> getValidators();
+
+  T parseValue(String value);
 }

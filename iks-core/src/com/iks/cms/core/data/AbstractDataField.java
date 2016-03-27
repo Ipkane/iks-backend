@@ -12,7 +12,7 @@ import javax.xml.crypto.*;
 /**
  * @author Igor Kaynov
  */
-public class DataField implements IDataField {
+public abstract class AbstractDataField implements IDataField {
   private String name;
   private String label;
   private String tableField;
@@ -24,6 +24,9 @@ public class DataField implements IDataField {
   }
   public void setName( String name ) {
     this.name = name;
+    if (tableField == null) {
+      tableField = name;
+    }
   }
   @Override
   public String getLabel() {
@@ -56,6 +59,10 @@ public class DataField implements IDataField {
   @Override
   public List< IValidator > getValidators() {
     return validators;
+  }
+  @Override
+  public Object parseValue( String value ) {
+    return value;
   }
   public void setValidators( List< IValidator > validators ) {
     this.validators = validators;

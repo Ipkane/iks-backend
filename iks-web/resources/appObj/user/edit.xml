@@ -4,5 +4,6 @@
     <textbox name="id" readonly="true"/>
     <textbox name="username"/>
     <textbox name="password"/>
+    <checkbox name="active"/>
   </fieldbox>
 </editView>

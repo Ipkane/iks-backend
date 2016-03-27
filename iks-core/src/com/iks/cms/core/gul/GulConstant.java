@@ -21,8 +21,10 @@ public interface GulConstant {
   String ATTR_SRC           = "src";
   String ATTR_VALUE         = "value";
   String ATTR_CONTROL       = "control";
+  String ATTR_CHECKED       = "checked";
   // element names
   String TEXTBOX            = "textbox";
+  String CHECKBOX            = "checkbox";
   String SELECT             = "select";
   String REFERENCE_FIELD    = "referenceField";
   String REFERENCE_SELECT   = "referenceSelect";

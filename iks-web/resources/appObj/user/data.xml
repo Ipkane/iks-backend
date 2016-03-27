@@ -3,4 +3,5 @@
   <field tableField="id" name="id" label="Id"/>
   <field tableField="username" name="username" label="Username" required="true"/>
   <field tableField="password" name="password" label="Password" required="true"/>
+  <field tableField="active" name="active" label="Active" type="boolean"/>
 </data>

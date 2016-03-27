@@ -14,6 +14,7 @@ import org.w3c.dom.*;
 public abstract class AbstractGulField extends GulElement implements IGulInputField {
   private String name;
   private String label;
+  private boolean readonly     = false;
   //  private IFieldContainer fieldContainer;
   @Override
   public void setParent( IGulContainer parent ) {
@@ -43,6 +44,9 @@ public abstract class AbstractGulField extends GulElement implements IGulInputFi
     if( xmlElement.hasAttribute( GulConstant.ATTR_LABEL ) ) {
       setLabel( xmlElement.getAttribute( GulConstant.ATTR_LABEL ) );
     }
+    if( xmlElement.hasAttribute( GulConstant.ATTR_READONLY ) ) {
+      setReadonly( BooleanUtils.toBoolean( xmlElement.getAttribute( GulConstant.ATTR_READONLY ) ) );
+    }
   }
   public String getName() {
     return StringUtils.trimToNull(name);
@@ -61,4 +65,11 @@ public abstract class AbstractGulField extends GulElement implements IGulInputFi
       label = dataField.getLabel();
     }
   }
+  public boolean isReadonly() {
+    return readonly;
+  }
+  public void setReadonly( boolean readonly ) {
+    this.readonly = readonly;
+  }
+
 }

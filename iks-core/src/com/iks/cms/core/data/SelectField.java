@@ -7,7 +7,7 @@ import java.util.*;
 /**
  * @author Igor Kaynov
  */
-public class SelectField extends DataField {
+public class SelectField extends AbstractDataField {
   private List< SelectOption > options = new ArrayList<>();
   public List< SelectOption > getOptions() {
     return options;

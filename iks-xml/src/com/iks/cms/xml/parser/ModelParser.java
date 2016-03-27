@@ -52,6 +52,9 @@ public class ModelParser {
     if( fieldElement.hasAttribute( ModelConstant.PRIMARY_KEY_ATTR ) ) {
       field.setIsPrimaryKey( BooleanUtils.toBoolean( fieldElement.getAttribute( ModelConstant.PRIMARY_KEY_ATTR ) ) );
     }
+    if( fieldElement.hasAttribute( ModelConstant.TYPE_ATTR ) ) {
+      field.setType( EDataType.getByValue( fieldElement.getAttribute( ModelConstant.TYPE_ATTR ) ) );
+    }
     return field;
   }
   private IDataField parseSelectField( Element fieldElement ) {
@@ -70,7 +73,7 @@ public class ModelParser {
     }
     return field;
   }
-  private void fillDataField( DataField field, Element fieldElement ) {
+  private void fillDataField( AbstractDataField field, Element fieldElement ) {
     field.setName( fieldElement.getAttribute( ModelConstant.NAME_ATTR ) );
     field.setLabel( fieldElement.getAttribute( ModelConstant.LABEL_ATTR ) );
     if( fieldElement.hasAttribute( ModelConstant.REQUIRED_ATTR ) ) {

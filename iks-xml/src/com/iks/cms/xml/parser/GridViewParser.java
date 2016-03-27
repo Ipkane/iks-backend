@@ -71,7 +71,7 @@ public class GridViewParser {
   private IGridField parseField( Element fieldElement ) {
     GridField field = new GridField();
     field.setName( fieldElement.getAttribute( "name" ) );
-    DataField dataField = ( DataField )model.getField( field.getName() );
+    AbstractDataField dataField = ( AbstractDataField )model.getField( field.getName() );
     if( fieldElement.hasAttribute( "label" ) ) {
       field.setLabel( fieldElement.getAttribute( "label" ) );
     } else {

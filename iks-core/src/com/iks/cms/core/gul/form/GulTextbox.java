@@ -13,7 +13,6 @@ import org.w3c.dom.*;
  */
 public class GulTextbox extends AbstractGulField implements IGulInputField {
   private boolean required     = false;
-  private boolean readonly     = false;
   private Object  defaultValue = null;
   @Override
   public String getTag() {
@@ -24,12 +23,6 @@ public class GulTextbox extends AbstractGulField implements IGulInputField {
   }
   public void setRequired( boolean required ) {
     this.required = required;
-  }
-  public boolean isReadonly() {
-    return readonly;
-  }
-  public void setReadonly( boolean readonly ) {
-    this.readonly = readonly;
   }
   public void setDefaultValue( Object defaultValue ) {
     this.defaultValue = defaultValue;
@@ -51,9 +44,6 @@ public class GulTextbox extends AbstractGulField implements IGulInputField {
     super.parse(xmlElement );
     if( xmlElement.hasAttribute( GulConstant.ATTR_REQUIRED ) ) {
       setRequired( BooleanUtils.toBoolean( xmlElement.getAttribute( GulConstant.ATTR_REQUIRED ) ) );
-    }
-    if( xmlElement.hasAttribute( GulConstant.ATTR_READONLY ) ) {
-      setReadonly( BooleanUtils.toBoolean( xmlElement.getAttribute( GulConstant.ATTR_READONLY ) ) );
     }
   }
   @Override

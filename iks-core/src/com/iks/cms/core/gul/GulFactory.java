@@ -14,6 +14,8 @@ public class GulFactory {
     switch( tagName ) {
       case GulConstant.TEXTBOX:
         return new GulTextbox();
+      case GulConstant.CHECKBOX:
+        return new GulCheckbox();
       case GulConstant.SELECT:
         return new GulSelect();
       case GulConstant.REFERENCE_SELECT:

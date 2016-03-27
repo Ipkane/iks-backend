@@ -1,7 +1,7 @@
 #default namespace = "http://com.iks.org/schema/gul/1.0"
 include "gul-attributes.rnc"
 
-gul.element = textbox | tabbox | label | hbox | vbox | fieldbox | grid | select | button | referenceSelect
+gul.element = textbox | checkbox | tabbox | label | hbox | vbox | fieldbox | grid | select | button | referenceSelect
 
 gul.elementType =
   attribute id {xsd:NCName }?
@@ -17,11 +17,16 @@ gul.fieldType =
   gul.elementType
   & nameAttr?
   & labelAttr?
+  & readonlyAttr?
 
 textbox = element textbox {
   gul.fieldType
-  & attribute readonly { xsd:boolean }?
   & attribute value { text }?
+}
+
+checkbox = element checkbox {
+  gul.fieldType
+  & attribute checked { xsd:boolean }?
 }
 
 tabbox = element tabbox {

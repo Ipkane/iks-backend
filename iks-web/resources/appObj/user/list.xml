@@ -3,5 +3,6 @@
   <table>
     <column name="id" label="User Id"/>
     <column name="username" label="Username"/>
+    <column name="active"/>
   </table>
 </gridView>

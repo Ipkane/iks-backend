@@ -46,7 +46,7 @@ public class SelectModelQuery< T extends SelectModelQuery > extends CommonModelQ
     int i = 0;
     for( IDataField field : getFields() ) {
       String value = data[i] == null ? null : data[i].toString();
-      resultItem.addFieldValue( field.getName(), value );
+      resultItem.addFieldValue( field.getName(), field.parseValue(value) );
       i++;
     }
     return resultItem;

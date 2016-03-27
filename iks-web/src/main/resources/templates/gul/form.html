@@ -4,6 +4,11 @@
     <input type="text" class="form-control" data-th-id="${element.id}" th:name="${element.name}" ng:model="${element.name} ? |${itemName}.${element.name}| : ''" ng:readonly="|${element.readonly}|"
            th:required="${element.required}" th:classappend="${element.cssClass}" th:styleappend="${element.style}"/>
 </th:block>
+<th:block th:fragment="checkbox">
+  <label data-th-for="${element.name}" class="control-label" data-th-text="${element.label}">Label</label>
+  <input type="checkbox" class="checkbox" data-th-id="${element.id}" th:name="${element.name}" ng:model="${element.name} ? |${itemName}.${element.name}| : ''" ng:readonly="|${element.readonly}|"
+         th:classappend="${element.cssClass}" th:styleappend="${element.style}" th:checked="${element.checked}"/>
+</th:block>
 <th:block th:fragment="select">
     <label data-th-for="${element.name}" class="control-label" data-th-text="${element.label}">Label</label>
     <select type="text" class="form-control" data-th-id="${element.id}" th:name="${element.name}" ng:model="${element.name} ? |${itemName}.${element.name}| : ''" ng:readonly="${element.readonly}"
