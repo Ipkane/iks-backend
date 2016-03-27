@@ -1,5 +1,7 @@
 package com.iks.cms.core.sql;
 
+import java.util.*;
+
 /**
  * @author Igor Kaynov
  */
@@ -41,5 +43,14 @@ public class Column {
   }
   public void setType( ColumnType type ) {
     this.type = type;
+  }
+  @Override
+  public boolean equals(Object o) {
+    if (o == null || !(o instanceof Column)) {
+      return false;
+    }
+    Column other = (Column) o;
+    return Objects.equals( tableAlias, other.tableAlias )
+        && Objects.equals( name, other.name );
   }
 }

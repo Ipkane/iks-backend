@@ -23,7 +23,7 @@
     </thead>
     <tbody>
     <tr ng-repeat="item in items" ng-click="selectItem(item)" ng-class="{'success': item == selectedItem}">
-      <td ng-repeat="field in grid.fields"> {{ formatItemValue( item, field.name) }}</td>
+      <td ng-repeat="field in grid.fields"> {{ formatItemValue( item, field) }}</td>
     </tr>
     </tbody>
   </table>

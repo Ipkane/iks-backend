@@ -46,11 +46,15 @@ public class SelectQuery  extends SqlQuery {
     return this;
   }
   public SelectQuery join( String join ) {
-    joins.add( join );
+    if (!joins.contains( join )) {
+      joins.add( join );
+    }
     return this;
   }
   public SelectQuery leftJoin( Join join ) {
-    leftJoins.add( join );
+    if (!leftJoins.contains( join )) {
+      leftJoins.add( join );
+    }
     return this;
   }
   public SelectQuery orderBy( ColumnOrder columnOrder ) {
@@ -59,7 +63,7 @@ public class SelectQuery  extends SqlQuery {
   }
   @Override
   public String toString() {
-    StringBuilder sql = new StringBuilder( "select" );
+    StringBuilder sql = new StringBuilder( "select " );
     if( columns.size() == 0 ) {
       sql.append( "*" );
     } else {

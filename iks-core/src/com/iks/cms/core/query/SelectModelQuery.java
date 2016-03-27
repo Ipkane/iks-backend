@@ -14,7 +14,10 @@ import org.hibernate.*;
 import org.slf4j.*;
 
 import java.util.*;
+import java.util.regex.*;
 import java.util.stream.*;
+
+import jdk.nashorn.internal.runtime.regexp.joni.*;
 
 /**
  * @author Igor Kaynov
@@ -48,7 +51,7 @@ public class SelectModelQuery< T extends SelectModelQuery > extends CommonModelQ
     Object[] data = ( Object[] )rawData;
     int i = 0;
     for( String field : getFields() ) {
-      String[] parts = field.split( Constants.FIELD_SEPARATOR );
+      String[] parts = ModelUtils.splitField( field );
       String value = data[i] == null ? null : data[i].toString();
       if( parts.length == 1 ) {
         IDataField dataField = model.getField( field );
@@ -62,8 +65,8 @@ public class SelectModelQuery< T extends SelectModelQuery > extends CommonModelQ
         }
       } else if( parts.length == 2 ) {
         ManyToOne manyToOne = ( ManyToOne )model.getField( parts[0] );
-        DataItem joinedItem = (DataItem)resultItem.getFieldValue( manyToOne.getName() );
-        if (joinedItem == null) {
+        DataItem joinedItem = ( DataItem )resultItem.getFieldValue( manyToOne.getName() );
+        if( joinedItem == null ) {
           joinedItem = new DataItem();
           resultItem.addFieldValue( manyToOne.getName(), joinedItem );
         }
@@ -80,7 +83,7 @@ public class SelectModelQuery< T extends SelectModelQuery > extends CommonModelQ
     Table table = new Table( model.getTableName(), model.getAppObj() );
     sb.from( table );
     for( String field : getFields() ) {
-      String[] parts = field.split( Constants.FIELD_SEPARATOR );
+      String[] parts = ModelUtils.splitField( field );
       if( parts.length == 1 ) {
         IDataField dataField = model.getField( parts[0] );
         sb.addColumn( table.getColumn( dataField.getTableField(), dataField.getName() ) );

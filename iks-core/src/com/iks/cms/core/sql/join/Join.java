@@ -46,4 +46,15 @@ public class Join {
   public void setSecondColumn( Column secondColumn ) {
     this.secondColumn = secondColumn;
   }
+  @Override
+  public boolean equals(Object o) {
+    if (o == null || !(o instanceof Join)) {
+      return false;
+    }
+    Join otherJoin = (Join) o;
+    return table.equals(  otherJoin.table )
+        && firstColumn.equals(otherJoin.firstColumn )
+        && secondColumn.equals( otherJoin.secondColumn )
+        && joinType.equals( otherJoin.joinType );
+  }
 }

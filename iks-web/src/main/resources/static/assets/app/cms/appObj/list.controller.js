@@ -130,10 +130,9 @@ function AppObjListController( $scope, $log, $uibModal, $timeout, CoreService, G
   vm.getField = function(fieldName) {
     return _.find($scope.grid.fields, {name: fieldName});
   };
-  $scope.formatItemValue   = function ( item, fieldName ) {
-    var field = vm.getField(fieldName);
+  $scope.formatItemValue   = function ( item, field ) {
     if (!field.displayField) {
-      return item[fieldName];
+      return item[field.name];
     } else {
       return item[field.name][field.displayField];
     }

@@ -36,4 +36,12 @@ public class Table {
     }
     return column;
   }
+  @Override
+  public boolean equals(Object o) {
+    if (o == null || !(o instanceof Table)) {
+      return false;
+    }
+    Table otherTable = (Table) o;
+    return Objects.equals(  name, otherTable.name);
+  }
 }

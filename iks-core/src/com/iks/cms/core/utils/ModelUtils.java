@@ -2,6 +2,8 @@ package com.iks.cms.core.utils;
 
 import com.iks.cms.core.query.*;
 
+import java.util.regex.*;
+
 /**
  * @author Igor Kaynov
  */
@@ -15,6 +17,6 @@ public class ModelUtils {
    * @return
    */
   public static String[] splitField(String fieldName) {
-    return fieldName.split( Constants.FIELD_SEPARATOR );
+    return fieldName.split( Pattern.quote( Constants.FIELD_SEPARATOR ));
   }
 }

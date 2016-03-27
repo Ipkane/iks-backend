@@ -12,6 +12,7 @@
     <column name="id"/>
     <column name="fio" label="First/Last Name Name"/>
     <column name="gender"/>
-    <column name="user" displayField="username"/>
+    <column name="user" label="Username" displayField="username"/>
+    <column name="user" label="Password" displayField="password"/>
   </table>
 </gridView>
