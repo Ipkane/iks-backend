@@ -17,7 +17,7 @@ public class Table {
     this.alias = alias;
   }
   public String toString() {
-    return alias != null ? name + " as " + alias : name;
+    return alias != null ? SqlUtils.quote(name) + " as " + SqlUtils.quote( alias ) : SqlUtils.quote( name );
   }
   public String getAlias() {
     return alias;

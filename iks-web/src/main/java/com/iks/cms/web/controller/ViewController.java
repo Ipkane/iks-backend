@@ -25,7 +25,7 @@ public class ViewController {
     IGridView gridView = appObjService.getGridView( appObj );
     model.addAttribute( "gridName", appObj );
     model.addAttribute( "gridView", gridView );
-    model.addAttribute( "appObj", appObjService.getAppObj( appObj ) );
+    model.addAttribute( "appObj", App.getAppObj( appObj ) );
     try {
       model.addAttribute( "gridJson", objectMapper.writeValueAsString( gridView.getGrid() ).replace( "\"", "\\\"" ) );
     } catch( JsonProcessingException e ) {
@@ -35,10 +35,10 @@ public class ViewController {
   }
   @RequestMapping( value = REQUEST_GET_GRID_EDIT_VIEW, method = RequestMethod.GET )
   public String editView( Model model, String appObj, Long itemId ) {
-    IEditView editView = appObjService.getEditView( appObj );
+    IEditView editView = App.getEditView( appObj );
     model.addAttribute( "editView", editView );
     model.addAttribute( "optionsMap", appObjService.getEdiViewOptionsMap( appObj ) );
-    model.addAttribute( "appObj", appObjService.getAppObj( appObj ) );
+    model.addAttribute( "appObj", App.getAppObj( appObj ) );
     return editView.getTemplatePath();
   }
 }

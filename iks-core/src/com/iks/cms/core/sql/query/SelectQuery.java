@@ -1,6 +1,7 @@
 package com.iks.cms.core.sql.query;
 
 import com.iks.cms.core.sql.*;
+import com.iks.cms.core.sql.join.*;
 
 import java.util.*;
 
@@ -8,14 +9,14 @@ import java.util.*;
  * @author Igor Kaynov
  */
 public class SelectQuery  extends SqlQuery {
-  private List< Column >    columns   = new ArrayList<>();
-  private List< Table >     tables    = new ArrayList<>();
-  private List< String >    joins     = new ArrayList<>();
-  private List< String >    leftJoins = new ArrayList<>();
-  private List< ICriteria > criterias = new ArrayList<>();
-  private List< ColumnOrder >    orderBys  = new ArrayList<>();
-  private List< Column >    groupBys  = new ArrayList<>();
-  private List< String >    havings   = new ArrayList<>();
+  private List< Column >      columns   = new ArrayList<>();
+  private List< Table >       tables    = new ArrayList<>();
+  private List< String >      joins     = new ArrayList<>();
+  private List< Join >        leftJoins = new ArrayList<>();
+  private List< ICriteria >   criterias = new ArrayList<>();
+  private List< ColumnOrder > orderBys  = new ArrayList<>();
+  private List< Column >      groupBys  = new ArrayList<>();
+  private List< String >      havings   = new ArrayList<>();
   public SelectQuery() {
   }
   public SelectQuery( Table table ) {
@@ -48,7 +49,7 @@ public class SelectQuery  extends SqlQuery {
     joins.add( join );
     return this;
   }
-  public SelectQuery leftJoin( String join ) {
+  public SelectQuery leftJoin( Join join ) {
     leftJoins.add( join );
     return this;
   }

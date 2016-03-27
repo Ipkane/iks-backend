@@ -23,17 +23,10 @@ import java.util.*;
 @Service
 public class AppObjService {
   private static final Logger                 logger    = LoggerFactory.getLogger( AppObjService.class );
-  private              Map< String, IAppObj > appObjMap = new LinkedHashMap<>();
   @Autowired
   private CommonDao commonDao;
-  public IGrid getGrid( String appObj ) {
-    return appObjMap.get( appObj ).getGrid();
-  }
-  public IDataModel getModel( String appObj ) {
-    return appObjMap.get( appObj ).getDataModel();
-  }
   public List< IDataItem > getGridData( String appObj, Map< String, Object > filter, String orderBy ) {
-    SelectGridQuery query = new SelectGridQuery( getModel( appObj ), getGrid( appObj ) );
+    SelectGridQuery query = new SelectGridQuery( App.getModel( appObj ), App.getGrid( appObj ) );
     if( filter != null ) {
       query.setFilters( filter );
     }
@@ -50,15 +43,15 @@ public class AppObjService {
     return query.executeQuery( commonDao.getSessionFactory() );
   }
   public List< IDataItem > getModelData( String appObj, List< String > fields ) {
-    SelectModelQuery query = new SelectModelQuery( getModel( appObj ) );
+    SelectModelQuery query = new SelectModelQuery( App.getModel( appObj ) );
     query.setFields( fields );
     return query.executeQuery( commonDao.getSessionFactory() );
   }
   public IDataItem getEditData( String appObj, Long itemId ) {
     if( itemId == null ) {
-      return createNewItem( appObj, getEditView( appObj ) );
+      return createNewItem( appObj, App.getEditView( appObj ) );
     } else {
-      SelectEditViewQuery query = new SelectEditViewQuery( getModel( appObj ), getEditView( appObj ), itemId );
+      SelectEditViewQuery query = new SelectEditViewQuery( App.getModel( appObj ), App.getEditView( appObj ), itemId );
       return query.executeSingleQuery( commonDao.getSessionFactory() );
     }
   }
@@ -72,41 +65,38 @@ public class AppObjService {
     return dataItem;
   }
   public void saveNewItem( String appObj, IDataItem item ) throws ValidationException {
-    IDataModel model = getModel( appObj );
+    IDataModel model = App.getModel( appObj );
     if( !model.validate( item ) ) {
       throw new ValidationException( item.getErrors() );
     }
-    CreateEditViewQuery query = new CreateEditViewQuery( getModel( appObj ), getEditView( appObj ), item );
+    CreateEditViewQuery query = new CreateEditViewQuery( App.getModel( appObj ), App.getEditView( appObj ), item );
     query.executeQuery( commonDao.getSessionFactory() );
   }
   public void updateItem( String appObj, IDataItem item ) throws ValidationException {
-    IDataModel model = getModel( appObj );
+    IDataModel model = App.getModel( appObj );
     if( !model.validate( item ) ) {
       throw new ValidationException( item.getErrors() );
     }
-    UpdateEditViewQuery query = new UpdateEditViewQuery( model, getEditView( appObj ), item );
+    UpdateEditViewQuery query = new UpdateEditViewQuery( model, App.getEditView( appObj ), item );
     query.executeQuery( commonDao.getSessionFactory() );
   }
   public void deleteItem( String appObj, Long itemId ) {
-    DeleteEditViewQuery query = new DeleteEditViewQuery( getModel( appObj ), getEditView( appObj ), itemId );
+    DeleteEditViewQuery query = new DeleteEditViewQuery( App.getModel( appObj ), App.getEditView( appObj ), itemId );
     query.executeQuery( commonDao.getSessionFactory() );
   }
-  public IEditView getEditView( String appObj ) {
-    return getAppObj( appObj ).getEditView();
-  }
   public IGridView getGridView( String appObj ) {
-    return getAppObj( appObj ).getGridView();
+    return App.getAppObj( appObj ).getGridView();
   }
   public Map< String, List< SelectOption > > getEdiViewOptionsMap( String appObj ) {
     Map< String, List< SelectOption > > optionsMap = new HashMap<>();
-    IDataModel model = getModel( appObj );
-    IEditView editView = getEditView( appObj );
+    IDataModel model = App.getModel( appObj );
+    IEditView editView = App.getEditView( appObj );
     for( IGulInputField field : editView.getFields() ) {
       if( Objects.equals( field.getTag(), GulConstant.REFERENCE_SELECT ) ) {
         GulReferenceField referenceField = ( GulReferenceField )field;
         ManyToOne dataField = ( ManyToOne )model.getField( field.getName() );
         List< String > referencedFields = Arrays.asList( dataField.getReferenceField(), referenceField.getDisplayField() );
-        SelectModelQuery query = new SelectModelQuery( getModel( dataField.getAppObj() ) );
+        SelectModelQuery query = new SelectModelQuery( App.getModel( dataField.getAppObj() ) );
         query.setFields( referencedFields );
         List< IDataItem > items = query.executeQuery( commonDao.getSessionFactory() );
         List< SelectOption > options = new ArrayList<>( items.size() );
@@ -117,17 +107,5 @@ public class AppObjService {
       }
     }
     return optionsMap;
-  }
-  public void addAppObj( IAppObj appObj ) {
-    appObjMap.put( appObj.getName(), appObj );
-  }
-  public IAppObj getAppObj( String appObj ) {
-    return appObjMap.get( appObj );
-  }
-  public void clear() {
-    appObjMap.clear();
-  }
-  public Collection< IAppObj > getAppObjList() {
-    return appObjMap.values();
   }
 }

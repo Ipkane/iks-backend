@@ -4,9 +4,9 @@ package com.iks.cms.core.sql;
  * @author Igor Kaynov
  */
 public class Column {
-  private String     tableAlias;
-  private String     name;
-  private String     alias;
+  private String tableAlias;
+  private String name;
+  private String alias;
   private ColumnType type = ColumnType.String;
   public Column( String name ) {
     this.name = name;
@@ -28,12 +28,12 @@ public class Column {
   public String toString() {
     StringBuilder sb = new StringBuilder();
     if( tableAlias != null ) {
-      sb.append( tableAlias ).append( '.' );
+      sb.append( SqlUtils.quote( tableAlias) ).append( '.' );
     }
-    sb.append( name );
-//    if( alias != null ) {
-//      sb.append( " as " ).append( alias );
-//    }
+    sb.append( SqlUtils.quote( name ) );
+    //    if( alias != null ) {
+    //      sb.append( " as " ).append( alias );
+    //    }
     return sb.toString();
   }
   public ColumnType getType() {

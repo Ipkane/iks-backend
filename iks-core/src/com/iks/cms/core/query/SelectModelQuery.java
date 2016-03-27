@@ -1,9 +1,11 @@
 package com.iks.cms.core.query;
 
+import com.iks.cms.core.appObj.*;
 import com.iks.cms.core.data.*;
 import com.iks.cms.core.grid.*;
 import com.iks.cms.core.model.*;
 import com.iks.cms.core.sql.*;
+import com.iks.cms.core.sql.join.*;
 import com.iks.cms.core.sql.query.*;
 import com.iks.cms.core.utils.*;
 
@@ -46,20 +48,37 @@ public class SelectModelQuery< T extends SelectModelQuery > extends CommonModelQ
     Object[] data = ( Object[] )rawData;
     int i = 0;
     for( String field : getFields() ) {
-      IDataField dataField = model.getField( field );
-      String value = data[i] == null ? null : data[i].toString();
-      resultItem.addFieldValue( dataField.getName(), dataField.parseValue( value ) );
+      String[] parts = field.split( Constants.FIELD_SEPARATOR );
+      if (parts.length == 1) {
+        IDataField dataField = model.getField( field );
+        String value = data[i] == null ? null : data[i].toString();
+        resultItem.addFieldValue( dataField.getName(), dataField.parseValue( value ) );
+      } else if (parts.length == 2) {
+        // todo add referenced fields
+      } else {
+        throw new RuntimeException( "Method doesn't support yet form complex fields" );
+      }
       i++;
     }
     return resultItem;
   }
   protected SelectQuery buildSqlQuery() {
     SelectQuery sb = new SelectQuery();
-    Table table = new Table( model.getTableName(), "t" );
+    Table table = new Table( model.getTableName(), model.getAppObj() );
     sb.from( table );
     for( String field : getFields() ) {
-      IDataField dataField = model.getField( field );
-      sb.addColumn( new Column( table, dataField.getTableField(), dataField.getName() ) );
+      String[] parts = field.split( Constants.FIELD_SEPARATOR );
+      if( parts.length == 1 ) {
+        IDataField dataField = model.getField( parts[0] );
+        sb.addColumn( table.getColumn( dataField.getTableField(), dataField.getName() ) );
+      } else if( parts.length == 2 ) {
+        // join tables
+        ManyToOne dataField = ( ManyToOne )model.getField( parts[0] );
+        IDataModel joinedModel = App.getModel( dataField.getAppObj() );
+        IDataField joinedField = joinedModel.getField( parts[1] );
+        Table joinedTable = new Table( joinedModel.getTableName(), joinedModel.getAppObj() );
+        sb.leftJoin( new Join( joinedTable, table.getColumn( dataField.getTableField(), dataField.getName() ), joinedTable.getColumn( dataField.getReferenceField() ) ) );
+      }
     }
     for( Map.Entry< String, Object > entry : filters.entrySet() ) {
       // todo add like filter

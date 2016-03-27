@@ -9,6 +9,7 @@ import java.util.*;
  * @author Igor Kaynov
  */
 public interface IDataModel {
+  String getAppObj();
   String getPrimaryFieldName();
   IDataField getField(String name);
   List<IDataField> getFields();

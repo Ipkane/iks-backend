@@ -33,7 +33,7 @@ public class ParseService {
   }
   public void loadApp() throws Exception {
     try {
-      appObjService.clear();
+      App.clearAppObjs();
       parseApp( "iks-web/resources/appObj/app.xml" );
     } catch( Exception e ) {
       logger.error( "Error loading app: ", e );
@@ -43,6 +43,6 @@ public class ParseService {
   private void parseApp( String fileName ) throws Exception {
     AppParser parser = new AppParser();
     List< IAppObj > appObjList = parser.parse( fileName );
-    appObjList.forEach( appObjService::addAppObj );
+    appObjList.forEach( App::addAppObj );
   }
 }

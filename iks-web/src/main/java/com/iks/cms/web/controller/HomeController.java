@@ -1,5 +1,6 @@
 package com.iks.cms.web.controller;
 
+import com.iks.cms.core.appObj.*;
 import com.iks.cms.core.service.*;
 import com.iks.cms.web.service.*;
 
@@ -20,7 +21,7 @@ public class HomeController {
   private AppObjService appObjService;
   @RequestMapping( value = "/", method = RequestMethod.GET )
   public String index( Model model ) {
-    model.addAttribute( "appObjList", appObjService.getAppObjList() );
+    model.addAttribute( "appObjList", App.getAppObjList() );
     return "index";
   }
 }
