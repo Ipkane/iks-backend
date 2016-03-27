@@ -10,6 +10,6 @@ public interface IAppObj {
   String getName();
   IDataModel getDataModel();
   IGrid getGrid();
-  IGridView getGridView();
+  IListView getListView();
   IEditView getEditView();
 }

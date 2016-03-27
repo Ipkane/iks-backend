@@ -19,7 +19,6 @@ function AppObjListController( $scope, $log, $uibModal, $timeout, CoreService, G
     if ( angular.isString( $scope.grid ) ) {
       $scope.grid = angular.fromJson( $scope.grid );
     }
-    $log.debug( $scope.grid );
     reload();
   }
 
@@ -59,7 +58,7 @@ function AppObjListController( $scope, $log, $uibModal, $timeout, CoreService, G
     $uibModal.open(
       {
         animation   : true,
-        templateUrl : 'view/gridEditView?appObj=' + $scope.gridName,
+        templateUrl : 'view/editView?appObj=' + $scope.gridName,
         controller  : 'GridEditController',
         controllerAs: 'vm',
         backdrop    : 'static',
@@ -77,7 +76,7 @@ function AppObjListController( $scope, $log, $uibModal, $timeout, CoreService, G
     $uibModal.open(
       {
         animation   : true,
-        templateUrl : 'view/gridEditView?appObj=' + $scope.gridName,
+        templateUrl : 'view/editView?appObj=' + $scope.gridName,
         controller  : 'GridEditController',
         controllerAs: 'vm',
         backdrop    : 'static',

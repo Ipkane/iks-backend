@@ -5,6 +5,7 @@
       <textbox name="id"/>
       <textbox name="fio"/>
       <select name="gender"/>
+      <referenceSelect name="user" displayField="username"/>
       <button label="Push the button" id="button_1"/>
     </hbox>
   </filter>

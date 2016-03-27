@@ -10,7 +10,7 @@ public class AppObj implements IAppObj {
   private String     name;
   private String     label;
   private IDataModel dataModel;
-  private IGridView  gridView;
+  private IListView  gridView;
   private EditView   editView;
   public IDataModel getDataModel() {
     return dataModel;
@@ -40,10 +40,10 @@ public class AppObj implements IAppObj {
   public void setEditView( EditView editView ) {
     this.editView = editView;
   }
-  public IGridView getGridView() {
+  public IListView getListView() {
     return gridView;
   }
-  public void setGridView( IGridView gridView ) {
+  public void setGridView( IListView gridView ) {
     this.gridView = gridView;
   }
 }

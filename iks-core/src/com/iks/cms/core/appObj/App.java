@@ -34,6 +34,9 @@ public class App {
   public static IEditView getEditView( String appObj ) {
     return getAppObj( appObj ).getEditView();
   }
+  public static IListView getListView( String appObj ) {
+    return getAppObj( appObj ).getListView();
+  }
   public static void clearAppObjs() {
     getInstance().appObjMap.clear();
   }

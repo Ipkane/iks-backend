@@ -6,6 +6,7 @@ import com.iks.cms.core.exception.*;
 import com.iks.cms.core.grid.*;
 import com.iks.cms.core.gul.*;
 import com.iks.cms.core.gul.form.*;
+import com.iks.cms.core.gul.panel.*;
 import com.iks.cms.core.model.*;
 import com.iks.cms.core.query.*;
 import com.iks.cms.core.repository.*;
@@ -22,7 +23,7 @@ import java.util.*;
  */
 @Service
 public class AppObjService {
-  private static final Logger                 logger    = LoggerFactory.getLogger( AppObjService.class );
+  private static final Logger logger = LoggerFactory.getLogger( AppObjService.class );
   @Autowired
   private CommonDao commonDao;
   public List< IDataItem > getGridData( String appObj, Map< String, Object > filter, String orderBy ) {
@@ -58,7 +59,7 @@ public class AppObjService {
   public IDataItem createNewItem( String appObj, IEditView editView ) {
     DataItem dataItem = new DataItem();
     for( IGulInputField field : editView.getFields() ) {
-      if (StringUtils.isNotBlank(field.getName())) {
+      if( StringUtils.isNotBlank( field.getName() ) ) {
         dataItem.addFieldValue( field.getName(), field.getDefaultValue() );
       }
     }
@@ -84,28 +85,43 @@ public class AppObjService {
     DeleteEditViewQuery query = new DeleteEditViewQuery( App.getModel( appObj ), App.getEditView( appObj ), itemId );
     query.executeQuery( commonDao.getSessionFactory() );
   }
-  public IGridView getGridView( String appObj ) {
-    return App.getAppObj( appObj ).getGridView();
+  public IListView getListView( String appObj ) {
+    return App.getAppObj( appObj ).getListView();
   }
   public Map< String, List< SelectOption > > getEdiViewOptionsMap( String appObj ) {
-    Map< String, List< SelectOption > > optionsMap = new HashMap<>();
     IDataModel model = App.getModel( appObj );
     IEditView editView = App.getEditView( appObj );
-    for( IGulInputField field : editView.getFields() ) {
+    return getOptionsMap( model, editView.getFields() );
+  }
+  public Map< String, List< SelectOption > > getListViewOptionsMap( String appObj ) {
+    IDataModel model = App.getModel( appObj );
+    IListView listView = App.getListView( appObj );
+    IGulFilterPanel filterPanel = listView.getFilterPanel();
+    if( filterPanel == null ) {
+      return Collections.emptyMap();
+    }
+    return getOptionsMap( model, filterPanel.getFields() );
+  }
+  public Map< String, List< SelectOption > > getOptionsMap( IDataModel model, List< IGulInputField > fields ) {
+    Map< String, List< SelectOption > > optionsMap = new HashMap<>();
+    for( IGulInputField field : fields ) {
       if( Objects.equals( field.getTag(), GulConstant.REFERENCE_SELECT ) ) {
         GulReferenceField referenceField = ( GulReferenceField )field;
-        ManyToOne dataField = ( ManyToOne )model.getField( field.getName() );
-        List< String > referencedFields = Arrays.asList( dataField.getReferenceField(), referenceField.getDisplayField() );
-        SelectModelQuery query = new SelectModelQuery( App.getModel( dataField.getAppObj() ) );
-        query.setFields( referencedFields );
-        List< IDataItem > items = query.executeQuery( commonDao.getSessionFactory() );
-        List< SelectOption > options = new ArrayList<>( items.size() );
-        for( IDataItem item : items ) {
-          options.add( new SelectOption( item.getFieldValue( dataField.getReferenceField() ).toString(), item.getFieldValue( referenceField.getDisplayField() ).toString() ) );
-        }
-        optionsMap.put( field.getName(), options );
+        optionsMap.put( field.getName(), getSelectOptions( model, referenceField ) );
       }
     }
     return optionsMap;
+  }
+  public List< SelectOption > getSelectOptions( IDataModel model, GulReferenceField referenceField ) {
+    ManyToOne dataField = ( ManyToOne )model.getField( referenceField.getName() );
+    List< String > referencedFields = Arrays.asList( dataField.getReferenceField(), referenceField.getDisplayField() );
+    SelectModelQuery query = new SelectModelQuery( App.getModel( dataField.getAppObj() ) );
+    query.setFields( referencedFields );
+    List< IDataItem > items = query.executeQuery( commonDao.getSessionFactory() );
+    List< SelectOption > options = new ArrayList<>( items.size() );
+    for( IDataItem item : items ) {
+      options.add( new SelectOption( item.getFieldValue( dataField.getReferenceField() ).toString(), item.getFieldValue( referenceField.getDisplayField() ).toString() ) );
+    }
+    return options;
   }
 }

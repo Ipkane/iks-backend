@@ -8,7 +8,7 @@ import com.iks.cms.core.gul.panel.*;
 /**
  * @author Igor Kaynov
  */
-public class GridView extends GulContainer implements IGridView {
+public class ListView extends GulContainer implements IListView {
   private IGrid           grid;
   private IGulFilterPanel filterPanel;
   public IGrid getGrid() {
@@ -25,7 +25,7 @@ public class GridView extends GulContainer implements IGridView {
   }
   @Override
   public String getTemplatePath() {
-    return "view/gridView";
+    return "view/listView";
   }
   @Override
   public String getTag() {

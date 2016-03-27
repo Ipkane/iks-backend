@@ -14,26 +14,27 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 @RequestMapping( "/view" )
 public class ViewController {
-  private static final String REQUEST_GET_GRID_VIEW      = "/gridView";
-  private static final String REQUEST_GET_GRID_EDIT_VIEW = "/gridEditView";
-  private final        Logger logger                     = LoggerFactory.getLogger( ViewController.class );
+  private static final String REQUEST_GET_LIST_VIEW = "/listView";
+  private static final String REQUEST_GET_EDIT_VIEW = "/editView";
+  private final        Logger logger                = LoggerFactory.getLogger( ViewController.class );
   @Autowired
   private AppObjService appObjService;
-  @RequestMapping( value = REQUEST_GET_GRID_VIEW, method = RequestMethod.GET )
-  public String gridView( Model model, String appObj ) {
+  @RequestMapping( value = REQUEST_GET_LIST_VIEW, method = RequestMethod.GET )
+  public String listView( Model model, String appObj ) {
     ObjectMapper objectMapper = new ObjectMapper();
-    IGridView gridView = appObjService.getGridView( appObj );
+    IListView listView = appObjService.getListView( appObj );
     model.addAttribute( "gridName", appObj );
-    model.addAttribute( "gridView", gridView );
+    model.addAttribute( "listView", listView );
+    model.addAttribute( "optionsMap", appObjService.getListViewOptionsMap( appObj ) );
     model.addAttribute( "appObj", App.getAppObj( appObj ) );
     try {
-      model.addAttribute( "gridJson", objectMapper.writeValueAsString( gridView.getGrid() ).replace( "\"", "\\\"" ) );
+      model.addAttribute( "gridJson", objectMapper.writeValueAsString( listView.getGrid() ).replace( "\"", "\\\"" ) );
     } catch( JsonProcessingException e ) {
       logger.error( "Serialization error:", e );
     }
-    return gridView.getTemplatePath();
+    return listView.getTemplatePath();
   }
-  @RequestMapping( value = REQUEST_GET_GRID_EDIT_VIEW, method = RequestMethod.GET )
+  @RequestMapping( value = REQUEST_GET_EDIT_VIEW, method = RequestMethod.GET )
   public String editView( Model model, String appObj, Long itemId ) {
     IEditView editView = App.getEditView( appObj );
     model.addAttribute( "editView", editView );

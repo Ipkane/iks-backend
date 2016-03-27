@@ -47,7 +47,7 @@ public class ModelParser {
   }
   // field
   private IDataField parseSimpleField( Element fieldElement ) {
-    SimpleDataField field = new SimpleDataField();
+    InputDataField field = new InputDataField();
     fillDataField( field, fieldElement );
     if( fieldElement.hasAttribute( ModelConstant.PRIMARY_KEY_ATTR ) ) {
       field.setIsPrimaryKey( BooleanUtils.toBoolean( fieldElement.getAttribute( ModelConstant.PRIMARY_KEY_ATTR ) ) );

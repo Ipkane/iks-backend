@@ -10,8 +10,6 @@ import com.iks.cms.xml.constant.*;
 import org.slf4j.*;
 import org.w3c.dom.*;
 
-import java.util.*;
-
 /**
  * @author Igor Kaynov
  */
@@ -21,14 +19,14 @@ public class ListViewParser {
   public ListViewParser( IDataModel model ) {
     this.model = model;
   }
-  public IGridView parse( String fileName ) throws Exception {
+  public IListView parse( String fileName ) throws Exception {
     Document doc = ParserUtils.parseFile( fileName );
     return parseRoot( doc );
   }
-  private IGridView parseRoot( Document doc ) throws Exception {
+  private IListView parseRoot( Document doc ) throws Exception {
     Element root = doc.getDocumentElement();
     NodeList nodeList = root.getChildNodes();
-    GridView gridView = new GridView();
+    ListView gridView = new ListView();
     for( int i = 0; i < nodeList.getLength(); i++ ) {
       Node node = nodeList.item( i );
       if( node.getNodeType() == Node.ELEMENT_NODE ) {

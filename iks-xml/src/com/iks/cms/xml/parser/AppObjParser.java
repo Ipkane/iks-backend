@@ -53,7 +53,7 @@ public class AppObjParser {
     return dataParser.parse( modelElement.getAttribute( "url" ) );
   }
   //list
-  private IGridView parseGridView( Element gridElement ) throws Exception {
+  private IListView parseGridView( Element gridElement ) throws Exception {
     ListViewParser dataParser = new ListViewParser( appObj.getDataModel() );
     return dataParser.parse( gridElement.getAttribute( "url" ) );
   }

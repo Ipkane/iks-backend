@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.*;
 public class DevApi {
   private final Logger logger = LoggerFactory.getLogger( DevApi.class );
   private static final String REQUEST_RELOAD_APP      = "/reloadAppObj";
-  private static final String REQUEST_GET_GRID_EDIT_VIEW = "/gridEditView";
   @Autowired
   private ParseService parseService;
   @RequestMapping( value = REQUEST_RELOAD_APP, method = RequestMethod.POST )

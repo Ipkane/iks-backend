@@ -7,7 +7,7 @@ import java.util.*;
 /**
  * @author Igor Kaynov
  */
-public class SelectField extends AbstractDataField {
+public class SelectField extends SimpleDataField {
   private List< SelectOption > options = new ArrayList<>();
   public List< SelectOption > getOptions() {
     return options;
@@ -15,7 +15,7 @@ public class SelectField extends AbstractDataField {
   public void setOptions( List< SelectOption > options ) {
     this.options = options;
   }
-  public void addOption(SelectOption option) {
+  public void addOption( SelectOption option ) {
     options.add( option );
   }
 }

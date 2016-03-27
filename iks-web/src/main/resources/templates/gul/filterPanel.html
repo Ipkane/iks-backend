@@ -2,14 +2,14 @@
 <th:block th:fragment="filterPanel">
   <div class="row">
     <form data-th-id="|${appObj.name}Form|" role="form" novalidate="novalidate" class="form-inline">
-      <!--<div class="col-xs-4" data-th-each="element : ${gridView.filterPanel.elements}">-->
+      <!--<div class="col-xs-4" data-th-each="element : ${listView.filterPanel.elements}">-->
       <!--<div class="form-group">-->
       <!--<div th:include="${element.templatePath} :: ${element.templateName}" th:with="itemName='filter.item'">-->
       <!--</div>-->
       <!--</div>-->
       <!--</div>-->
-      <th:block th:each="element : ${gridView.filterPanel.elements}">
-          <th:block th:include="${element.templatePath} :: ${element.templateName}" th:with="itemName='filter.item'">
+      <th:block th:each="childElement : ${element.elements}">
+          <th:block th:include="${childElement.templatePath} :: ${childElement.templateName}" th:with="element=${childElement}, itemName='filter.item'">
           </th:block>
       </th:block>
     </form>

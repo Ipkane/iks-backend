@@ -6,16 +6,16 @@
     <div class="btn btn-primary" ng-click="openAddModal()">New</div>
     <div class="btn btn-primary" ng-click="openEditModal()" ng-disabled="!selectedItem">Edit</div>
     <div class="btn btn-primary" ng-click="openDeleteModal()" ng-disabled="!selectedItem">Delete</div>
-    <div class="btn btn-success" ng-click="toggleFilterPanel()" th:attr="ng-disabled = |${gridView.filterPanel == null}| ">Filter</div>
+    <div class="btn btn-success" ng-click="toggleFilterPanel()" th:attr="ng-disabled = |${listView.filterPanel == null}| ">Filter</div>
     <div class="btn btn-success" ng-click="refresh()">Refresh</div>
   </div>
-  <div data-th-if="${gridView.filterPanel != null}" class="panel-body grid-filter-panel" ng-show="showFilterPanel">
-    <th:block th:include="${gridView.filterPanel.templatePath} :: ${gridView.filterPanel.templateName} ">
+  <div data-th-if="${listView.filterPanel != null}" class="panel-body grid-filter-panel" ng-show="showFilterPanel">
+    <th:block th:include="${listView.filterPanel.templatePath} :: ${listView.filterPanel.templateName}" th:with="element=${listView.filterPanel}">
     </th:block>
   </div>
   <table class="table table-bordered table-hover table-condensed grid-table">
     <thead>
-    <th data-th-each="field : ${gridView.grid.fields}" th:attr="ng-click = |setOrderBy('${field.name}')|" th:inline="text">
+    <th data-th-each="field : ${listView.grid.fields}" th:attr="ng-click = |setOrderBy('${field.name}')|" th:inline="text">
       [[${field.label}]]
       <span class="glyphicon glyphicon glyphicon-chevron-down" aria-hidden="true" th:attr="ng-show = | vm.getHeaderClass('${field.name}') == 'asc' |"></span>
       <span class="glyphicon glyphicon glyphicon-chevron-up" aria-hidden="true" th:attr="ng-show = | vm.getHeaderClass('${field.name}') == 'desc' |"></span>

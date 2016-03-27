@@ -14,10 +14,6 @@ import org.hibernate.*;
 import org.slf4j.*;
 
 import java.util.*;
-import java.util.regex.*;
-import java.util.stream.*;
-
-import jdk.nashorn.internal.runtime.regexp.joni.*;
 
 /**
  * @author Igor Kaynov
@@ -99,10 +95,29 @@ public class SelectModelQuery< T extends SelectModelQuery > extends CommonModelQ
     }
     for( Map.Entry< String, Object > entry : filters.entrySet() ) {
       // todo add like filter
-      if( entry.getValue() == null || StringUtils.trimToNull( entry.getValue().toString() ) == null ) {
-        continue;
+      IDataField dataField = model.getField( entry.getKey() );
+      if( dataField instanceof SimpleDataField ) {
+        // simple field query, just key and value
+        if( entry.getValue() == null || StringUtils.trimToNull( entry.getValue().toString() ) == null ) {
+          continue;
+        }
+        sb.addCriteria( new MatchCriteria( table.getColumn( entry.getKey() ), entry.getValue() ) );
+      } else if( dataField instanceof ManyToOne ) {
+        // query to many to one field. Herer value is a map with key/value pair
+        ManyToOne manyToOne = ( ManyToOne )dataField;
+        IDataModel joinedModel = App.getModel( manyToOne.getAppObj() );
+        Table joinedTable = new Table( joinedModel.getTableName(), joinedModel.getAppObj() );
+        sb.leftJoin( new Join( joinedTable, table.getColumn( dataField.getTableField(), dataField.getName() ), joinedTable.getColumn( manyToOne.getReferenceField() ) ) );
+        for( Map.Entry< String, Object > joinedItemEntry : ( ( Map< String, Object > )entry.getValue() ).entrySet() ) {
+          IDataField joinedField = joinedModel.getField( joinedItemEntry.getKey() );
+          if( joinedItemEntry.getValue() == null || StringUtils.trimToNull( joinedItemEntry.getValue().toString() ) == null ) {
+            continue;
+          }
+          sb.addCriteria( new MatchCriteria( joinedTable.getColumn( joinedField.getTableField() ), joinedItemEntry.getValue() ) );
+        }
+      } else {
+        throw new RuntimeException( "Method not implemented for this type of field" );
       }
-      sb.addCriteria( new MatchCriteria( table.getColumn( entry.getKey() ), entry.getValue() ) );
     }
     if( orderBy != null ) {
       sb.orderBy( new ColumnOrder( table.getColumn( orderBy ), orderAsc ? EColumnOrder.ASC : EColumnOrder.DESC ) );
