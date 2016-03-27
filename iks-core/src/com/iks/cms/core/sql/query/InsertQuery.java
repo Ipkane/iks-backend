@@ -7,12 +7,7 @@ import java.util.*;
 /**
  * @author Igor Kaynov
  */
-public class InsertQuery extends SqlQuery {
-  private Table table;
-  private List< UpdateColumn > updateColumns = new ArrayList<>();
-  public void addUpdateColumn( Column column, Object value ) {
-    updateColumns.add( new UpdateColumn( column, value ) );
-  }
+public class InsertQuery extends AbstractChangeQuery {
   @Override
   public String toString() {
     List< Column > columns = new ArrayList<>();
@@ -28,7 +23,5 @@ public class InsertQuery extends SqlQuery {
     appendList( sql, values, " (", ", ", ") " );
     return sql.toString();
   }
-  public void setTable( Table table ) {
-    this.table = table;
-  }
+
 }

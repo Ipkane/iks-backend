@@ -9,41 +9,24 @@ import com.iks.cms.core.sql.query.*;
 import org.hibernate.*;
 import org.slf4j.*;
 
+import java.util.*;
+
 /**
  * @author Igor Kaynov
  */
-public class UpdateModelQuery<T extends UpdateModelQuery> extends CommonModelQuery<T> {
+public class UpdateModelQuery< T extends UpdateModelQuery > extends AbstractChangeModelQuery< T > {
   private static final Logger logger = LoggerFactory.getLogger( UpdateEditViewQuery.class );
-  protected IDataItem item;
   public UpdateModelQuery( IDataModel model, IDataItem item ) {
-    super( model );
-    setItem( item );
+    super( model, item );
   }
-  public void executeQuery( SessionFactory sessionFactory ) {
-    String sqlQuery = buildSqlQuery().toString();
-    logger.debug( sqlQuery );
-    updateQuery( sessionFactory, sqlQuery );
-  }
+  @Override
   protected UpdateQuery buildSqlQuery() {
     UpdateQuery sb = new UpdateQuery();
-    Table table = new Table( model.getTableName() );
-    sb.setTable( table );
-    for( String field : getFields() ) {
-      if( field.equals( model.getPrimaryFieldName() ) ) {
-        continue;
-      }
-      IDataField dataField = model.getField( field );
-      sb.addUpdateColumn( new Column( table, dataField.getTableField() ), item.getFieldValue( dataField.getName() ) );
-    }
-    Column idColumn = new Column( table, model.getPrimaryFieldName() );
+    fillQuery( sb );
+    Table table = sb.getTable();
+    Column idColumn = table.getColumn( model.getPrimaryFieldName() );
     sb.addCriteria( new MatchCriteria( idColumn, getItemId(), MatchType.Eq ) );
     return sb;
-  }
-  public IDataItem getItem() {
-    return item;
-  }
-  public void setItem( IDataItem item ) {
-    this.item = item;
   }
   public Long getItemId() {
     return Long.valueOf( item.getFieldValue( model.getPrimaryFieldName() ).toString() );

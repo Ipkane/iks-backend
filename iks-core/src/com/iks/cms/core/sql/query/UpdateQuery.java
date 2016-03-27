@@ -7,9 +7,7 @@ import java.util.*;
 /**
  * @author Igor Kaynov
  */
-public class UpdateQuery extends SqlQuery {
-  private Table table;
-  private List< UpdateColumn > updateColumns = new ArrayList<>();
+public class UpdateQuery extends AbstractChangeQuery {
   private List< ICriteria >    criterias     = new ArrayList<>();
   public void addUpdateColumn( Column column, Object value ) {
     updateColumns.add( new UpdateColumn( column, value ) );
@@ -24,8 +22,5 @@ public class UpdateQuery extends SqlQuery {
     appendList( sql, updateColumns, "", ", ", " " );
     appendList( sql, criterias, " where ", " and ", " " );
     return sql.toString();
-  }
-  public void setTable( Table table ) {
-    this.table = table;
   }
 }

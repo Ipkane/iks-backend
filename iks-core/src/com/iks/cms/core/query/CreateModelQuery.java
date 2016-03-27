@@ -12,35 +12,15 @@ import org.slf4j.*;
 /**
  * @author Igor Kaynov
  */
-public class CreateModelQuery<T extends CreateModelQuery> extends CommonModelQuery<T> {
+public class CreateModelQuery<T extends CreateModelQuery> extends AbstractChangeModelQuery<T> {
   private static final Logger logger = LoggerFactory.getLogger( CreateModelQuery.class );
-  protected IDataItem item;
   public CreateModelQuery( IDataModel model, IDataItem item ) {
-    super( model );
-    setItem( item );
+    super( model, item );
   }
-  public IDataItem getItem() {
-    return item;
-  }
-  public void setItem( IDataItem item ) {
-    this.item = item;
-  }
-  public void executeQuery( SessionFactory sessionFactory ) {
-    String sqlQuery = buildSqlQuery().toString();
-    logger.debug( sqlQuery );
-    updateQuery( sessionFactory, sqlQuery );
-  }
+  @Override
   protected InsertQuery buildSqlQuery() {
     InsertQuery sb = new InsertQuery();
-    Table table = new Table( model.getTableName() );
-    sb.setTable( table );
-    for( String field : getFields() ) {
-      IDataField dataField = model.getField( field );
-      if( dataField.getName().equals( model.getPrimaryFieldName() ) ) {
-        continue;
-      }
-      sb.addUpdateColumn( new Column( table, dataField.getTableField() ), item.getFieldValue( dataField.getName() ) );
-    }
+    fillQuery( sb );
     return sb;
   }
 }
