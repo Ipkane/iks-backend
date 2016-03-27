@@ -19,6 +19,7 @@ function AppObjListController( $scope, $log, $uibModal, $timeout, CoreService, G
     if ( angular.isString( $scope.grid ) ) {
       $scope.grid = angular.fromJson( $scope.grid );
     }
+    $log.debug( $scope.grid );
     reload();
   }
 
@@ -124,10 +125,21 @@ function AppObjListController( $scope, $log, $uibModal, $timeout, CoreService, G
       $scope.orderAsc = true;
     }
     $scope.orderBy = fieldName;
-    $scope.items = _.orderBy( $scope.items, [ $scope.orderBy ], [ $scope.orderAsc ? 'asc' : 'desc' ] );
+    $scope.items   = _.orderBy( $scope.items, [ $scope.orderBy ], [ $scope.orderAsc ? 'asc' : 'desc' ] );
   };
-  vm.getHeaderClass = function(fieldName) {
-    if (fieldName == $scope.orderBy) {
+  vm.getField = function(fieldName) {
+    return _.find($scope.grid.fields, {name: fieldName});
+  };
+  $scope.formatItemValue   = function ( item, fieldName ) {
+    var field = vm.getField(fieldName);
+    if (!field.displayField) {
+      return item[fieldName];
+    } else {
+      return item[field.name][field.displayField];
+    }
+  };
+  vm.getHeaderClass        = function ( fieldName ) {
+    if ( fieldName == $scope.orderBy ) {
       return $scope.orderAsc ? 'asc' : 'desc';
     }
     return null;

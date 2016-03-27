@@ -49,12 +49,25 @@ public class SelectModelQuery< T extends SelectModelQuery > extends CommonModelQ
     int i = 0;
     for( String field : getFields() ) {
       String[] parts = field.split( Constants.FIELD_SEPARATOR );
-      if (parts.length == 1) {
+      String value = data[i] == null ? null : data[i].toString();
+      if( parts.length == 1 ) {
         IDataField dataField = model.getField( field );
-        String value = data[i] == null ? null : data[i].toString();
-        resultItem.addFieldValue( dataField.getName(), dataField.parseValue( value ) );
-      } else if (parts.length == 2) {
-        // todo add referenced fields
+        if( dataField instanceof ManyToOne ) {
+          ManyToOne manyToOne = ( ManyToOne )dataField;
+          DataItem joinedItem = new DataItem();
+          joinedItem.addFieldValue( manyToOne.getReferenceField(), value );
+          resultItem.addFieldValue( manyToOne.getName(), joinedItem );
+        } else {
+          resultItem.addFieldValue( dataField.getName(), dataField.parseValue( value ) );
+        }
+      } else if( parts.length == 2 ) {
+        ManyToOne manyToOne = ( ManyToOne )model.getField( parts[0] );
+        DataItem joinedItem = (DataItem)resultItem.getFieldValue( manyToOne.getName() );
+        if (joinedItem == null) {
+          joinedItem = new DataItem();
+          resultItem.addFieldValue( manyToOne.getName(), joinedItem );
+        }
+        joinedItem.addFieldValue( parts[1], value );
       } else {
         throw new RuntimeException( "Method doesn't support yet form complex fields" );
       }
@@ -78,6 +91,7 @@ public class SelectModelQuery< T extends SelectModelQuery > extends CommonModelQ
         IDataField joinedField = joinedModel.getField( parts[1] );
         Table joinedTable = new Table( joinedModel.getTableName(), joinedModel.getAppObj() );
         sb.leftJoin( new Join( joinedTable, table.getColumn( dataField.getTableField(), dataField.getName() ), joinedTable.getColumn( dataField.getReferenceField() ) ) );
+        sb.addColumn( joinedTable.getColumn( joinedField.getTableField(), joinedField.getName() ) );
       }
     }
     for( Map.Entry< String, Object > entry : filters.entrySet() ) {
