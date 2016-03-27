@@ -10,6 +10,7 @@ import com.iks.cms.core.model.*;
 import com.iks.cms.core.query.*;
 import com.iks.cms.core.repository.*;
 
+import org.apache.commons.lang3.*;
 import org.slf4j.*;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.stereotype.*;
@@ -64,7 +65,9 @@ public class AppObjService {
   public IDataItem createNewItem( String appObj, IEditView editView ) {
     DataItem dataItem = new DataItem();
     for( IGulInputField field : editView.getFields() ) {
-      dataItem.addFieldValue( field.getName(), field.getDefaultValue() );
+      if (StringUtils.isNotBlank(field.getName())) {
+        dataItem.addFieldValue( field.getName(), field.getDefaultValue() );
+      }
     }
     return dataItem;
   }

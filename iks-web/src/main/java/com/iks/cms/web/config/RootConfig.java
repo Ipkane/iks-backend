@@ -29,8 +29,6 @@ import javax.sql.*;
 //@PropertySource( "classpath:application.properties" )
 @Import( { XmlConfig.class } )
 public class RootConfig {
-  //  @Autowired
-  //  private DataSource  dataSource;
   @Autowired
   private DbProperties dbProperties;
   @Resource
@@ -57,29 +55,4 @@ public class RootConfig {
   public HibernateTransactionManager hibTransMan() {
     return new HibernateTransactionManager( sessionFactory() );
   }
-  //  @Bean
-  //  public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
-  //    HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
-  //    vendorAdapter.setDatabase( Database.POSTGRESQL );
-  //    vendorAdapter.setGenerateDdl( true );
-  //    vendorAdapter.setShowSql( true );
-  //    LocalContainerEntityManagerFactoryBean factory = new LocalContainerEntityManagerFactoryBean();
-  //    factory.setJpaVendorAdapter( vendorAdapter );
-  //    factory.setPackagesToScan( getClass().getPackage().getName() );
-  //    factory.setDataSource( dataSource() );
-  //    factory.setJpaProperties( jpaProperties() );
-  //    return factory;
-  //  }
-  //  private Properties jpaProperties() {
-  //    Properties properties = new Properties();
-  //    properties.put( "hibernate.dialect", "org.hibernate.dialect.PostgreSQLDialect" );
-  //    properties.put( "hibernate.show_sql", "false" );
-  //    return properties;
-  //  }
-  //  @Bean
-  //  public PlatformTransactionManager transactionManager() {
-  //    JpaTransactionManager txManager = new JpaTransactionManager();
-  //    txManager.setEntityManagerFactory( entityManagerFactory().getObject() );
-  //    return txManager;
-  //  }
 }

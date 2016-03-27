@@ -6,27 +6,7 @@
     <select name="gender"/>
     <referenceSelect name="user" displayField="username"/>
   </fieldbox>
-  <!--<grid style="width: 80%">-->
-  <!--<columns>-->
-  <!--<column flex="1"/>-->
-  <!--<column flex="2"/>-->
-  <!--</columns>-->
-  <!--<rows>-->
-  <!--<row>-->
-  <!--<label control="doctitle" value="Document Title:"/>-->
-  <!--<textbox id="doctitle" flex="1"/>-->
-  <!--</row>-->
-  <!--<row>-->
-  <!--<label control="docpath" value="Path:"/>-->
-  <!--<hbox flex="1">-->
-  <!--<textbox id="docpath"/>-->
-  <!--<button label="Browse..."/>-->
-  <!--</hbox>-->
-  <!--<label value="Hello"/>-->
-  <!--</row>-->
-  <!--</rows>-->
-  <!--</grid>-->
-  <tabbox style="width: 50%">
+  <tabbox>
     <tab label="Tab 1">
       <hbox>
         <textbox id="docpath"/>
@@ -36,6 +16,28 @@
     <tab label="Tab 2">
       <label control="doctitle" value="Document Title:"/>
       <textbox id="doctitle" flex="1"/>
+    </tab>
+    <tab label="Grid">
+      <grid>
+        <columns>
+          <column flex="1"/>
+          <column flex="2"/>
+        </columns>
+        <rows>
+          <row>
+            <label control="doctitle" value="Document Title:"/>
+            <textbox id="doctitle" flex="1"/>
+          </row>
+          <row>
+            <label control="docpath" value="Path:"/>
+            <hbox flex="1">
+              <textbox id="docpath"/>
+              <button label="Browse..."/>
+            </hbox>
+            <label value="Hello"/>
+          </row>
+        </rows>
+      </grid>
     </tab>
   </tabbox>
 </editView>

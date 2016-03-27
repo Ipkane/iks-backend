@@ -1,22 +1,16 @@
 default namespace = "http://com.iks.org/schema/list/1.0"
+include "gul/gul-schema.rnc"
 
 start =
   element gridView {
     attribute appObj { xsd:NCName },
     element filter {
-      element hbox {
-        element textbox {
-          attribute name { xsd:NCName }
-        }+
-        & element select {
-          attribute name { xsd:NCName }
-        }+
-      }
+      gul.element*
     }?,
     element table {
       element column {
-        attribute label { text }?,
-        attribute name { xsd:NCName }
+        labelAttr?,
+        nameAttr?
       }+
     }
   }

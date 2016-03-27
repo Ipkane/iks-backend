@@ -1,20 +1,87 @@
 #default namespace = "http://com.iks.org/schema/gul/1.0"
+include "gul-attributes.rnc"
 
-gul.element = textbox | tabbox | tab
+gul.element = textbox | tabbox | label | hbox | vbox | fieldbox | grid | select | button | referenceSelect
+
+gul.elementType =
+  attribute id {xsd:NCName }?
+  & attribute style { text }?
+  & attribute cssClass { text }?
+  & attribute flex { text }?
+
+gul.containerType =
+  gul.elementType
+  & gul.element*
+
+gul.fieldType =
+  gul.elementType
+  & nameAttr?
+  & labelAttr?
 
 textbox = element textbox {
-  attribute flex { xsd:integer }?,
-  attribute id { xsd:NCName }?,
-  attribute label { text }?,
-  attribute name { xsd:NCName }?,
-  attribute readonly { xsd:boolean }?,
-  attribute value { text }
+  gul.fieldType
+  & attribute readonly { xsd:boolean }?
+  & attribute value { text }?
 }
 
 tabbox = element tabbox {
-  tab+
+  gul.elementType
+  & element tab {
+    labelAttr
+    & gul.element*
+  }*
 }
 
-tab = element tab {
-  attribute label { text }
+label = element label {
+  gul.elementType
+  & valueAttr?
+  & attribute control { xsd:NCName }?
+}
+
+boxType =
+  gul.containerType
+  & attribute orient { "vertical" | "horizontal" }?
+  & attribute pack { "start" | "center" | "end" }?
+  & attribute align { "start" | "center" | "end" | "stretch" | "baseline" }?
+
+hbox = element hbox {
+  boxType
+}
+
+vbox = element vbox {
+  boxType
+}
+
+fieldbox = element fieldbox {
+  gul.containerType
+}
+
+grid = element grid {
+  element columns {
+    element column {
+      gul.containerType
+    }*
+  }
+  & element rows {
+    element row {
+      gul.containerType
+    }*
+  }
+}
+
+select = element select {
+  gul.fieldType
+  & element option {
+    valueAttr | text
+  }*
+}
+
+button = element button {
+  gul.elementType
+  & labelAttr
+}
+
+referenceSelect = element referenceSelect {
+  gul.fieldType
+  & attribute displayField { xsd:NCName }
 }

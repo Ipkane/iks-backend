@@ -1,30 +1,31 @@
 default namespace = "http://com.iks.org/schema/model/1.0"
+include "gul/gul-attributes.rnc"
 
 start =
   element data {
     attribute appObj { xsd:NCName }
     & attribute tableName { xsd:NCName }
     & element field {
-      attribute label { text },
-      attribute name { xsd:NCName },
+      labelAttr,
+      nameAttr,
       attribute primary { xsd:boolean }?,
       attribute required { xsd:boolean }?,
       attribute tableField { xsd:NCName }
     }*
     & element selectField {
-      attribute label { text },
-      attribute name { xsd:NCName },
+      labelAttr,
+      nameAttr,
       attribute tableField { xsd:NCName },
       element options {
         element option {
-          attribute value { text },
+          valueAttr,
           text
         }+
       }
     }*
     & element manyToOne {
       attribute appObj { xsd:NCName },
-      attribute name { xsd:NCName },
+      nameAttr,
       attribute referenceField { xsd:NCName },
       attribute tableField { xsd:NCName }
     }*

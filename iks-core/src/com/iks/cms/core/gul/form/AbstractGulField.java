@@ -45,7 +45,7 @@ public abstract class AbstractGulField extends GulElement implements IGulInputFi
     }
   }
   public String getName() {
-    return name;
+    return StringUtils.trimToNull(name);
   }
   public void setName( String name ) {
     this.name = name;
