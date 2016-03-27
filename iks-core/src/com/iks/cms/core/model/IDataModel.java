@@ -12,6 +12,7 @@ public interface IDataModel {
   String getPrimaryFieldName();
   IDataField getField(String name);
   List<IDataField> getFields();
+  List<String> getFieldNames();
   String getTableName();
   boolean validate( IDataItem item );
 }

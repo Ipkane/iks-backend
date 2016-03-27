@@ -9,8 +9,9 @@ start =
     }?,
     element table {
       element column {
-        labelAttr?,
-        nameAttr?
+        labelAttr?
+        & nameAttr?
+        & attribute displayField { text }?
       }+
     }
   }

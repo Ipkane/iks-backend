@@ -28,11 +28,12 @@ public class UpdateModelQuery<T extends UpdateModelQuery> extends CommonModelQue
     UpdateQuery sb = new UpdateQuery();
     Table table = new Table( model.getTableName() );
     sb.setTable( table );
-    for( IDataField field : getFields() ) {
-      if( field.getName().equals( model.getPrimaryFieldName() ) ) {
+    for( String field : getFields() ) {
+      if( field.equals( model.getPrimaryFieldName() ) ) {
         continue;
       }
-      sb.addUpdateColumn( new Column( table, field.getTableField() ), item.getFieldValue( field.getName() ) );
+      IDataField dataField = model.getField( field );
+      sb.addUpdateColumn( new Column( table, dataField.getTableField() ), item.getFieldValue( dataField.getName() ) );
     }
     Column idColumn = new Column( table, model.getPrimaryFieldName() );
     sb.addCriteria( new MatchCriteria( idColumn, getItemId(), MatchType.Eq ) );

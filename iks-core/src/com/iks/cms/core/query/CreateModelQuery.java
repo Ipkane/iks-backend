@@ -34,8 +34,8 @@ public class CreateModelQuery<T extends CreateModelQuery> extends CommonModelQue
     InsertQuery sb = new InsertQuery();
     Table table = new Table( model.getTableName() );
     sb.setTable( table );
-    for( IDataField field : getFields() ) {
-      IDataField dataField = model.getField( field.getName() );
+    for( String field : getFields() ) {
+      IDataField dataField = model.getField( field );
       if( dataField.getName().equals( model.getPrimaryFieldName() ) ) {
         continue;
       }

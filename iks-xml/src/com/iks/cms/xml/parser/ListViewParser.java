@@ -10,13 +10,15 @@ import com.iks.cms.xml.constant.*;
 import org.slf4j.*;
 import org.w3c.dom.*;
 
+import java.util.*;
+
 /**
  * @author Igor Kaynov
  */
-public class GridViewParser {
-  private static final Logger logger = LoggerFactory.getLogger( GridViewParser.class );
+public class ListViewParser {
+  private static final Logger logger = LoggerFactory.getLogger( ListViewParser.class );
   private IDataModel model;
-  public GridViewParser( IDataModel model ) {
+  public ListViewParser( IDataModel model ) {
     this.model = model;
   }
   public IGridView parse( String fileName ) throws Exception {
@@ -60,22 +62,25 @@ public class GridViewParser {
     return grid;
   }
   private IGulFilterPanel parseFilterPanel( Element filterElement ) throws Exception {
-    GulFilterPanel filterPanel = new GulFilterPanel(model);
-    filterPanel.parse(filterElement );
+    GulFilterPanel filterPanel = new GulFilterPanel( model );
+    filterPanel.parse( filterElement );
     return filterPanel;
   }
   protected IDataModel getModel() {
     return model;
   }
   // field
-  private IGridField parseField( Element fieldElement ) {
-    GridField field = new GridField();
-    field.setName( fieldElement.getAttribute( "name" ) );
+  private IGridColumn parseField( Element fieldElement ) {
+    GridColumn field = new GridColumn();
+    field.setName( fieldElement.getAttribute( ListConstant.NAME_ATTR ) );
     AbstractDataField dataField = ( AbstractDataField )model.getField( field.getName() );
-    if( fieldElement.hasAttribute( "label" ) ) {
-      field.setLabel( fieldElement.getAttribute( "label" ) );
+    if( fieldElement.hasAttribute( ListConstant.LABEL_ATTR ) ) {
+      field.setLabel( fieldElement.getAttribute( ListConstant.LABEL_ATTR ) );
     } else {
       field.setLabel( dataField.getLabel() );
+    }
+    if( fieldElement.hasAttribute( ListConstant.DISPLAY_FIELD_ATTR ) ) {
+      field.setDisplayField( fieldElement.getAttribute( ListConstant.DISPLAY_FIELD_ATTR ) );
     }
     return field;
   }

@@ -10,6 +10,7 @@ import com.iks.cms.core.validation.*;
 import org.apache.commons.lang3.*;
 
 import java.util.*;
+import java.util.stream.*;
 
 /**
  * @author Igor Kaynov
@@ -21,6 +22,10 @@ public class BaseDataModel implements IDataModel {
   private List< IValidator > validators = new ArrayList<>();
   public List< IDataField > getFields() {
     return fields;
+  }
+  @Override
+  public List< String > getFieldNames() {
+    return getFields().stream().map( field -> field.getName() ).collect( Collectors.toList() );
   }
   public void setFields( List< IDataField > fields ) {
     this.fields = fields;

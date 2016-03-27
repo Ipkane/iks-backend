@@ -3,12 +3,13 @@ package com.iks.cms.core.grid;
 /**
  * @author Igor Kaynov
  */
-public class GridField implements IGridField {
+public class GridColumn implements IGridColumn {
   private String name;
   private String label;
-  public GridField() {
+  private String displayField;
+  public GridColumn() {
   }
-  public GridField( String name, String label ) {
+  public GridColumn( String name, String label ) {
     this.name = name;
     this.label = label;
   }
@@ -25,5 +26,12 @@ public class GridField implements IGridField {
   }
   public void setLabel( String label ) {
     this.label = label;
+  }
+  @Override
+  public String getDisplayField() {
+    return displayField;
+  }
+  public void setDisplayField( String displayField ) {
+    this.displayField = displayField;
   }
 }

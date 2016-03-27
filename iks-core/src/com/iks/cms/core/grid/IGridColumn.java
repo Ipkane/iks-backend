@@ -3,7 +3,8 @@ package com.iks.cms.core.grid;
 /**
  * @author Igor Kaynov
  */
-public interface IGridField {
+public interface IGridColumn {
   public String getName();
   public String getLabel();
+  public String getDisplayField();
 }

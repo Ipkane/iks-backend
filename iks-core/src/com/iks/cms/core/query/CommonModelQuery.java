@@ -11,23 +11,26 @@ import java.util.stream.*;
  */
 public class CommonModelQuery< T extends CommonModelQuery > extends CommonDaoQuery {
   protected IDataModel model;
-  private List< IDataField > fields = new ArrayList<>();
+  private List< String > fields = new ArrayList<>();
   public CommonModelQuery( IDataModel model ) {
     this.model = model;
   }
-  public List< IDataField > getFields() {
-    return fields.size() == 0 ? model.getFields() : fields;
+  public List< String > getFields() {
+    if( fields.size() != 0 ) {
+      return fields;
+    }
+    return model.getFieldNames();
   }
   public T setFields( List< String > fieldsList ) {
     this.fields.clear();
-    this.fields.addAll( fieldsList.stream().map( model::getField ).collect( Collectors.toList() ) );
+    this.fields.addAll( fieldsList );
     return ( T )this;
   }
   public T addField( String field ) {
     if( field == null ) {
       return ( T )this;
     }
-    this.fields.add( model.getField( field ) );
+    this.fields.add( field );
     return ( T )this;
   }
 }

@@ -14,8 +14,11 @@ public class SelectGridQuery extends SelectModelQuery<SelectGridQuery> {
   public SelectGridQuery( IDataModel model, IGrid grid ) {
     super( model );
     this.grid = grid;
-    for( IGridField field : grid.getFields() ) {
+    for( IGridColumn field : grid.getFields() ) {
       addField( field.getName() );
+      if (field.getDisplayField() != null) {
+        addField( field.getName() + Constants.FIELD_SEPARATOR + field.getDisplayField() );
+      }
     }
   }
   public IGrid getGrid() {

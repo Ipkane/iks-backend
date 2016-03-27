@@ -5,6 +5,7 @@ import com.iks.cms.core.grid.*;
 import com.iks.cms.core.model.*;
 import com.iks.cms.core.sql.*;
 import com.iks.cms.core.sql.query.*;
+import com.iks.cms.core.utils.*;
 
 import org.apache.commons.lang3.*;
 import org.hibernate.*;
@@ -44,9 +45,10 @@ public class SelectModelQuery< T extends SelectModelQuery > extends CommonModelQ
     DataItem resultItem = new DataItem();
     Object[] data = ( Object[] )rawData;
     int i = 0;
-    for( IDataField field : getFields() ) {
+    for( String field : getFields() ) {
+      IDataField dataField = model.getField( field );
       String value = data[i] == null ? null : data[i].toString();
-      resultItem.addFieldValue( field.getName(), field.parseValue(value) );
+      resultItem.addFieldValue( dataField.getName(), dataField.parseValue( value ) );
       i++;
     }
     return resultItem;
@@ -55,8 +57,9 @@ public class SelectModelQuery< T extends SelectModelQuery > extends CommonModelQ
     SelectQuery sb = new SelectQuery();
     Table table = new Table( model.getTableName(), "t" );
     sb.from( table );
-    for( IDataField field : getFields() ) {
-      sb.addColumn( new Column( table, field.getTableField(), field.getName() ) );
+    for( String field : getFields() ) {
+      IDataField dataField = model.getField( field );
+      sb.addColumn( new Column( table, dataField.getTableField(), dataField.getName() ) );
     }
     for( Map.Entry< String, Object > entry : filters.entrySet() ) {
       // todo add like filter

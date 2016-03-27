@@ -12,5 +12,6 @@
     <column name="id"/>
     <column name="fio" label="First/Last Name Name"/>
     <column name="gender"/>
+    <column name="user"/>
   </table>
 </gridView>
