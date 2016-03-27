@@ -7,6 +7,8 @@ import java.util.*;
 
 /**
  * @author Igor Kaynov
+ *
+ * Main class singleton. Contains all app objs and models
  */
 public class App {
   private static App instance;

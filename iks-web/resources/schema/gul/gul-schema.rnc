@@ -49,6 +49,7 @@ boxType =
   & attribute pack { "start" | "center" | "end" }?
   & attribute align { "start" | "center" | "end" | "stretch" | "baseline" }?
 
+## horizontal flex container
 hbox = element hbox {
   boxType
 }

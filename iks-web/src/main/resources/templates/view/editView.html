@@ -11,7 +11,7 @@
     <!--</div>-->
     <!--</div>-->
     <th:block th:each="element : ${editView.elements}">
-      <th:block th:include="${element.templatePath} :: ${element.templateName}" th:with="itemName='selectedItem'">
+      <th:block th:include="${element.templatePath} :: ${element.templateName}" th:with="modelName='selectedItem'">
       </th:block>
     </th:block>
   </form>
