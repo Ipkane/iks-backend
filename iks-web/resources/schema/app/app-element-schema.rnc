@@ -1,0 +1,24 @@
+include "../gul/gul-schema.rnc"
+
+gul.element |= appTable
+
+appObjAttr = attribute appObj { xsd:NCName }
+
+appTable = element appTable {
+  idAttr
+  & appObjAttr
+  & filterPanel?
+  & element columns {
+    column+
+  }
+}
+
+filterPanel = element filterPanel {
+  gul.element*
+}
+
+column = element column {
+  nameAttr?
+  & labelAttr?
+  & attribute displayField { text }?
+}+

@@ -1,4 +1,5 @@
 default namespace = "http://com.iks.org/schema/app/1.0"
+include "app/app-element-schema.rnc"
 
 start = app
 app =

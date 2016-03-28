@@ -1,4 +1,3 @@
-appObjAttr = attribute appObj { xsd:NCName }
 idAttr = attribute id { xsd:NCName }
 nameAttr = attribute name { xsd:NCName }
 labelAttr = attribute label { text }

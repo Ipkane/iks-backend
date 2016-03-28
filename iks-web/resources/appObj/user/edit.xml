@@ -6,4 +6,14 @@
     <textbox name="password"/>
     <checkbox name="active"/>
   </fieldbox>
+  <tabbox>
+    <tab label="Roles">
+      <appTable appObj="role" id="user_role_grid_2">
+        <columns>
+          <column name="id" label="Role Id"/>
+          <column name="name" label="Name"/>
+        </columns>
+      </appTable>
+    </tab>
+  </tabbox>
 </editView>

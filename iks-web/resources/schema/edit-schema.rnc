@@ -1,5 +1,5 @@
 default namespace = "http://com.iks.org/schema/edit/1.0"
-include "gul/gul-schema.rnc"
+include "app/app-element-schema.rnc"
 
 start =
   element editView {

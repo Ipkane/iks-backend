@@ -1,30 +1,8 @@
 default namespace = "http://com.iks.org/schema/list/1.0"
-include "gul/gul-schema.rnc"
+include "app/app-element-schema.rnc"
 
 start =
   element listView {
     attribute appObj { xsd:NCName }
-    & appTable*
     & gul.element*
   }
-
-#gul.element |= appTable
-
-appTable = element appTable {
-  idAttr
-  & appObjAttr
-  & filterPanel?
-  & element columns {
-    column+
-  }
-}
-
-filterPanel = element filterPanel {
-  gul.element*
-}
-
-column = element column {
-  nameAttr?
-  & labelAttr?
-  & attribute displayField { text }?
-}+
