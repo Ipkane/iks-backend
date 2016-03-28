@@ -4,6 +4,7 @@ import com.iks.cms.core.gul.*;
 import com.iks.cms.core.gul.container.*;
 import com.iks.cms.core.gul.element.*;
 import com.iks.cms.core.gul.grid.*;
+import com.iks.cms.core.parser.*;
 
 import org.w3c.dom.*;
 
@@ -24,8 +25,8 @@ public class GulTabbox extends GulContainer {
     return "gul/tab";
   }
   @Override
-  public void parse( Element xmlElement ) throws Exception {
-    super.parse( xmlElement );
+  public void parse( IParseContext context, Element xmlElement ) throws Exception {
+    super.parse( context, xmlElement );
     for( IGulElement element : elements ) {
       if( element instanceof GulTab ) {
         tabs.add( ( GulTab )element );

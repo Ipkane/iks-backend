@@ -5,7 +5,7 @@ import java.util.*;
 /**
  * @author Igor Kaynov
  */
-public interface IGrid {
+public interface IBaseGrid {
   String getId();
   String getAppObj();
   List<IGridColumn > getFields();

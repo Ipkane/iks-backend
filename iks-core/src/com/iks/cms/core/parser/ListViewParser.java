@@ -24,9 +24,10 @@ public class ListViewParser {
     return parseRoot( doc );
   }
   private IListView parseRoot( Document doc ) throws Exception {
+    ParseContext context = new ParseContext();
     Element root = doc.getDocumentElement();
     ListView listView = new ListView();
-    listView.parse( root );
+    listView.parse( context, root );
     return listView;
   }
   protected IDataModel getModel() {

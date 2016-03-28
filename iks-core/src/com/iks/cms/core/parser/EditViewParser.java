@@ -20,10 +20,13 @@ public class EditViewParser {
     return parseRoot( doc );
   }
   private EditView parseRoot( Document doc ) throws Exception {
+    ParseContext context = new ParseContext();
     Element root = doc.getDocumentElement();
     EditView editView = new EditView();
     editView.setModel( model );
-    editView.parse( root );
+    context.setModel( model );
+    context.setAppObj( model.getAppObj() );
+    editView.parse( context, root );
     return editView;
   }
   protected IDataModel getModel() {

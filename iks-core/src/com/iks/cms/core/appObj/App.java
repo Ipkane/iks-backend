@@ -1,6 +1,5 @@
 package com.iks.cms.core.appObj;
 
-import com.iks.cms.core.data.*;
 import com.iks.cms.core.grid.*;
 import com.iks.cms.core.gul.*;
 import com.iks.cms.core.gul.form.*;
@@ -14,8 +13,8 @@ import java.util.*;
  */
 public class App {
   private static App instance;
-  private Map< String, IAppObj > appObjMap = new LinkedHashMap<>();
-  private Map< String, IGrid >   grids     = new HashMap<>();
+  private Map< String, IAppObj >   appObjMap = new LinkedHashMap<>();
+  private Map< String, IBaseGrid > grids     = new HashMap<>();
   private AppObjService service;
   private App() {
   }
@@ -25,13 +24,13 @@ public class App {
     }
     return instance;
   }
-  public static void addGrid( String gridId, IGrid grid ) {
-    if (getInstance().grids.containsKey( gridId )) {
+  public static void addGrid( String gridId, IBaseGrid grid ) {
+    if( getInstance().grids.containsKey( gridId ) ) {
       throw new RuntimeException( "Duplicate grid id " + gridId );
     }
     getInstance().grids.put( gridId, grid );
   }
-  public static IGrid getGrid( String gridId ) {
+  public static IBaseGrid getGrid( String gridId ) {
     return getInstance().grids.get( gridId );
   }
   public static IDataModel getModel( String appObj ) {

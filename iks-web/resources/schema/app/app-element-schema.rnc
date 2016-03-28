@@ -1,6 +1,6 @@
 include "../gul/gul-schema.rnc"
 
-gul.element |= appTable
+gul.element |= appTable | referenceTable
 
 appObjAttr = attribute appObj { xsd:NCName }
 
@@ -8,9 +8,7 @@ appTable = element appTable {
   idAttr
   & appObjAttr
   & filterPanel?
-  & element columns {
-    column+
-  }
+  & columns
 }
 
 filterPanel = element filterPanel {
@@ -22,3 +20,13 @@ column = element column {
   & labelAttr?
   & attribute displayField { text }?
 }+
+
+columns = element columns {
+  column+
+}
+
+referenceTable = element referenceTable {
+ nameAttr
+ & labelAttr?
+ & columns
+}

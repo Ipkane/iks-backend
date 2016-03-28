@@ -4,6 +4,7 @@ import com.iks.cms.core.data.*;
 import com.iks.cms.core.gul.*;
 import com.iks.cms.core.gul.container.*;
 import com.iks.cms.core.gul.element.*;
+import com.iks.cms.core.parser.*;
 
 import org.apache.commons.lang3.*;
 import org.w3c.dom.*;
@@ -14,7 +15,7 @@ import org.w3c.dom.*;
 public abstract class AbstractGulField extends GulElement implements IGulInputField {
   private String name;
   private String label;
-  private boolean readonly     = false;
+  private boolean readonly = false;
   //  private IFieldContainer fieldContainer;
   @Override
   public void setParent( IGulContainer parent ) {
@@ -36,8 +37,8 @@ public abstract class AbstractGulField extends GulElement implements IGulInputFi
   //    this.fieldContainer = fieldContainer;
   //  }
   @Override
-  public void parse( Element xmlElement ) throws Exception {
-    super.parse(xmlElement );
+  public void parse( IParseContext context, Element xmlElement ) throws Exception {
+    super.parse( context, xmlElement );
     if( xmlElement.hasAttribute( GulConstant.ATTR_NAME ) ) {
       setName( xmlElement.getAttribute( GulConstant.ATTR_NAME ) );
     }
@@ -49,7 +50,7 @@ public abstract class AbstractGulField extends GulElement implements IGulInputFi
     }
   }
   public String getName() {
-    return StringUtils.trimToNull(name);
+    return StringUtils.trimToNull( name );
   }
   public void setName( String name ) {
     this.name = name;
@@ -71,5 +72,4 @@ public abstract class AbstractGulField extends GulElement implements IGulInputFi
   public void setReadonly( boolean readonly ) {
     this.readonly = readonly;
   }
-
 }

@@ -3,6 +3,7 @@ package com.iks.cms.core.gul.container;
 import com.iks.cms.core.data.*;
 import com.iks.cms.core.gul.form.*;
 import com.iks.cms.core.model.*;
+import com.iks.cms.core.parser.*;
 
 import org.apache.commons.lang3.*;
 import org.w3c.dom.*;
@@ -43,8 +44,8 @@ public abstract class GulFieldContainer extends GulContainer implements IFieldCo
     fields.remove( field );
   }
   @Override
-  public void parse( Element xmlElement ) throws Exception {
-    super.parse( xmlElement );
+  public void parse(IParseContext context,  Element xmlElement ) throws Exception {
+    super.parse( context, xmlElement );
     fields = fields.stream().filter( field -> StringUtils.isNotBlank( field.getName() ) ).collect( Collectors.toList() );
     for( IGulInputField field : fields ) {
       if( field.getName() != null ) {

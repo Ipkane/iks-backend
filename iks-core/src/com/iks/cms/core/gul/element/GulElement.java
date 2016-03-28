@@ -5,6 +5,7 @@ import com.google.common.base.*;
 import com.iks.cms.core.gul.*;
 import com.iks.cms.core.gul.container.*;
 import com.iks.cms.core.model.*;
+import com.iks.cms.core.parser.*;
 
 import org.w3c.dom.*;
 
@@ -56,8 +57,10 @@ public abstract class GulElement implements IGulElement {
     this.flex = flex;
   }
   @Override
-  public void parse( Element xmlElement ) throws Exception {
-    setId( xmlElement.getAttribute( GulConstant.ATTR_ID ) );
+  public void parse( IParseContext context, Element xmlElement ) throws Exception {
+    if( xmlElement.hasAttribute( GulConstant.ATTR_ID ) ) {
+      setId( xmlElement.getAttribute( GulConstant.ATTR_ID ) );
+    }
     if( xmlElement.hasAttribute( GulConstant.ATTR_STYLE ) ) {
       setStyle( xmlElement.getAttribute( GulConstant.ATTR_STYLE ) );
     }

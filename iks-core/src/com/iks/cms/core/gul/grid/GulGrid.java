@@ -3,6 +3,7 @@ package com.iks.cms.core.gul.grid;
 import com.iks.cms.core.gul.*;
 import com.iks.cms.core.gul.container.*;
 import com.iks.cms.core.gul.element.*;
+import com.iks.cms.core.parser.*;
 
 import org.w3c.dom.*;
 
@@ -24,8 +25,8 @@ public class GulGrid extends GulContainer {
     return "gul/grid";
   }
   @Override
-  public void parse( Element xmlElement ) throws Exception {
-    super.parse( xmlElement );
+  public void parse( IParseContext context, Element xmlElement ) throws Exception {
+    super.parse( context, xmlElement );
     for( IGulElement element : elements ) {
       if( element instanceof GulColumns ) {
         GulColumns columns = ( GulColumns )element;

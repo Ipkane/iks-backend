@@ -2,7 +2,7 @@
 
 <th:block th:fragment="appTable">
   <div class="app-table"  th:id="${element.id}" th:classappend="${element.cssClass}" th:styleappend="${element.style}" ng:controller="'AppObjListController as vm'">
-    <div class="panel-heading">
+    <div class="panel-heading app-table-toolbar" th:if="${element.showToolbar}">
       <div class="hbox">
         <div class="btn btn-primary" ng-click="openAddModal()">New</div>
         <div class="btn btn-primary" ng-click="openEditModal()" ng-disabled="!selectedItem">Edit</div>
@@ -11,7 +11,7 @@
         <div class="btn btn-success" ng-click="refresh()">Refresh</div>
       </div>
     </div>
-    <div data-th-if="${element.filterPanel != null}" class="panel-body grid-filter-panel" ng-show="showFilterPanel">
+    <div data-th-if="${element.filterPanel != null}" class="panel-body app-table-filter-panel" ng-show="showFilterPanel">
       <th:block th:include="${element.filterPanel.templatePath} :: ${element.filterPanel.templateName}" th:with="element=${element.filterPanel}">
       </th:block>
     </div>

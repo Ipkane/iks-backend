@@ -4,6 +4,7 @@ import com.iks.cms.core.data.*;
 import com.iks.cms.core.gul.*;
 import com.iks.cms.core.gul.element.*;
 import com.iks.cms.core.model.*;
+import com.iks.cms.core.parser.*;
 
 import org.apache.commons.lang3.*;
 import org.w3c.dom.*;
@@ -40,8 +41,8 @@ public class GulTextbox extends AbstractGulField implements IGulInputField {
     return getTag();
   }
   @Override
-  public void parse( Element xmlElement ) throws Exception {
-    super.parse(xmlElement );
+  public void parse( IParseContext context, Element xmlElement ) throws Exception {
+    super.parse( context, xmlElement );
     if( xmlElement.hasAttribute( GulConstant.ATTR_REQUIRED ) ) {
       setRequired( BooleanUtils.toBoolean( xmlElement.getAttribute( GulConstant.ATTR_REQUIRED ) ) );
     }
@@ -49,6 +50,6 @@ public class GulTextbox extends AbstractGulField implements IGulInputField {
   @Override
   public void applyModel( IDataField dataField ) {
     super.applyModel( dataField );
-//    setRequired( dataField.isRequired() );
+    //    setRequired( dataField.isRequired() );
   }
 }

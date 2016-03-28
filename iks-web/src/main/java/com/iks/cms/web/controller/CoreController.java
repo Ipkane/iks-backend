@@ -27,17 +27,6 @@ public class CoreController {
   private final        Logger logger                          = LoggerFactory.getLogger( CoreController.class );
   @Autowired
   private AppObjService appObjService;
-  //  @RequestMapping( value = REQUEST_GET_GRID, method = RequestMethod.GET )
-  //  public ResponseEntity< DefaultResponseBody< ?, ? > > getGrid( RequestGetGrid request ) {
-  //    try {
-  //      ResponseGetGrid response = new ResponseGetGrid();
-  //      response.setGrid( appObjService.getGrid( request.getAppObj() ) );
-  //      return ApiUtils.makeResponse( REQUEST_GET_GRID, request, response );
-  //    } catch( Exception ex ) {
-  //      logger.error( RESPONSE_ERROR_GET_GRID, ex );
-  //      return ApiUtils.makeErrorResponse( REQUEST_GET_GRID, RESPONSE_ERROR_GET_GRID, request );
-  //    }
-  //  }
   @RequestMapping( value = REQUEST_GET_GRID_DATA, method = RequestMethod.POST )
   public ResponseEntity< DefaultResponseBody< ?, ? > > getGridData( @RequestBody RequestGetGridData request ) {
     try {

@@ -8,12 +8,12 @@
   </fieldbox>
   <tabbox>
     <tab label="Roles">
-      <appTable appObj="role" id="user_role_grid_2">
+      <referenceTable name="roles" appObj="role">
         <columns>
           <column name="id" label="Role Id"/>
           <column name="name" label="Name"/>
         </columns>
-      </appTable>
+      </referenceTable>
     </tab>
   </tabbox>
 </editView>

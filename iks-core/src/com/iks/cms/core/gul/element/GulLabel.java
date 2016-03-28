@@ -1,6 +1,7 @@
 package com.iks.cms.core.gul.element;
 
 import com.iks.cms.core.gul.*;
+import com.iks.cms.core.parser.*;
 
 import org.w3c.dom.*;
 
@@ -15,7 +16,8 @@ public class GulLabel extends GulElement {
     return GulConstant.LABEL;
   }
   @Override
-  public void parse( Element xmlElement ) {
+  public void parse( IParseContext context, Element xmlElement ) throws Exception {
+    super.parse( context, xmlElement );
     setValue( xmlElement.getTextContent() );
     if( xmlElement.hasAttribute( GulConstant.ATTR_VALUE ) ) {
       setValue( xmlElement.getAttribute( GulConstant.ATTR_VALUE ) );

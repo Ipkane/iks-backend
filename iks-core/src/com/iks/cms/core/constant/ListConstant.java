@@ -12,5 +12,6 @@ public interface ListConstant {
   // element names
   String COLUMN             = "column";
   String APP_TABLE          = "appTable";
+  String REFERENCE_TABLE          = "referenceTable";
   String FILTER_PANEL       = "filterPanel";
 }

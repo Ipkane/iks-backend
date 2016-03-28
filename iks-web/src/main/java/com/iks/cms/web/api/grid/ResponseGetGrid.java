@@ -7,11 +7,11 @@ import com.iks.cms.web.api.common.*;
  * @author Igor Kaynov
  */
 public class ResponseGetGrid extends AbstractApiResponse {
-  private IGrid grid;
-  public IGrid getGrid() {
+  private IBaseGrid grid;
+  public IBaseGrid getGrid() {
     return grid;
   }
-  public void setGrid( IGrid grid ) {
+  public void setGrid( IBaseGrid grid ) {
     this.grid = grid;
   }
 }

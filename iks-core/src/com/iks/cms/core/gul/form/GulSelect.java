@@ -3,6 +3,7 @@ package com.iks.cms.core.gul.form;
 import com.iks.cms.core.data.*;
 import com.iks.cms.core.gul.*;
 import com.iks.cms.core.model.*;
+import com.iks.cms.core.parser.*;
 
 import org.w3c.dom.*;
 
@@ -27,8 +28,8 @@ public class GulSelect extends GulTextbox {
     options.add( option );
   }
   @Override
-  public void parse( Element xmlElement ) throws Exception {
-    super.parse( xmlElement );
+  public void parse( IParseContext context, Element xmlElement ) throws Exception {
+    super.parse( context, xmlElement );
   }
   public void applyModel( IDataField dataField ) {
     super.applyModel( dataField );

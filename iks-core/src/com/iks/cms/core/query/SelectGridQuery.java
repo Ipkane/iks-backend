@@ -10,22 +10,21 @@ import org.slf4j.*;
  */
 public class SelectGridQuery extends SelectModelQuery<SelectGridQuery> {
   private static final Logger logger = LoggerFactory.getLogger( SelectGridQuery.class );
-  private IGrid grid;
-
-  public SelectGridQuery( IDataModel model, IGrid grid ) {
+  private IBaseGrid grid;
+  public SelectGridQuery( IDataModel model, IBaseGrid grid ) {
     super( model );
     this.grid = grid;
     for( IGridColumn field : grid.getFields() ) {
       addField( field.getName() );
-      if (field.getDisplayField() != null) {
+      if( field.getDisplayField() != null) {
         addField( field.getName() + Constants.FIELD_SEPARATOR + field.getDisplayField() );
       }
     }
   }
-  public IGrid getGrid() {
+  public IBaseGrid getGrid() {
     return grid;
   }
-  public void setGrid( IGrid grid ) {
+  public void setGrid( IBaseGrid grid ) {
     this.grid = grid;
   }
 }

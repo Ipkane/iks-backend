@@ -2,6 +2,7 @@ package com.iks.cms.core.gul.form;
 
 import com.iks.cms.core.gul.*;
 import com.iks.cms.core.model.*;
+import com.iks.cms.core.parser.*;
 
 import org.w3c.dom.*;
 
@@ -30,7 +31,7 @@ public class GulReferenceSelect extends GulReferenceField {
     return "gul/referenceSelect";
   }
   @Override
-  public void parse( Element xmlElement ) throws Exception {
-    super.parse( xmlElement );
+  public void parse(IParseContext context,  Element xmlElement ) throws Exception {
+    super.parse( context, xmlElement );
   }
 }

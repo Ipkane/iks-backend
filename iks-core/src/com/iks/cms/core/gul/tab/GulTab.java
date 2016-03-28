@@ -3,6 +3,7 @@ package com.iks.cms.core.gul.tab;
 import com.iks.cms.core.gul.*;
 import com.iks.cms.core.gul.container.*;
 import com.iks.cms.core.gul.element.*;
+import com.iks.cms.core.parser.*;
 
 import org.w3c.dom.*;
 
@@ -24,8 +25,8 @@ public class GulTab extends GulContainer {
     return label;
   }
   @Override
-  public void parse( Element xmlElement ) throws Exception {
-    super.parse( xmlElement );
+  public void parse( IParseContext context, Element xmlElement ) throws Exception {
+    super.parse( context, xmlElement );
     if (xmlElement.hasAttribute( GulConstant.ATTR_LABEL )) {
       setLabel( xmlElement.getAttribute(GulConstant.ATTR_LABEL) );
     }

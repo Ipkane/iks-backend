@@ -2,6 +2,7 @@ package com.iks.cms.core.gul.element;
 
 import com.iks.cms.core.gul.*;
 import com.iks.cms.core.model.*;
+import com.iks.cms.core.parser.*;
 
 import org.w3c.dom.*;
 
@@ -16,8 +17,8 @@ public class GulScript extends GulElement {
     return "script";
   }
   @Override
-  public void parse( Element xmlElement ) throws Exception {
-    super.parse( xmlElement );
+  public void parse( IParseContext context, Element xmlElement ) throws Exception {
+    super.parse( context, xmlElement );
     setText( xmlElement.getTextContent() );
     if( xmlElement.hasAttribute( GulConstant.ATTR_SRC ) ) {
       setSrc( xmlElement.getAttribute( GulConstant.ATTR_SRC ) );

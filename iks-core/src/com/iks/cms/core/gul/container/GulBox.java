@@ -2,6 +2,7 @@ package com.iks.cms.core.gul.container;
 
 import com.iks.cms.core.gul.*;
 import com.iks.cms.core.model.*;
+import com.iks.cms.core.parser.*;
 
 import org.apache.commons.lang3.*;
 import org.w3c.dom.*;
@@ -29,8 +30,8 @@ public class GulBox extends GulContainer {
     this.orient = orient;
   }
   @Override
-  public void parse( Element xmlElement ) throws Exception {
-    super.parse(xmlElement );
+  public void parse(IParseContext context,  Element xmlElement ) throws Exception {
+    super.parse( context, xmlElement );
     if( xmlElement.hasAttribute( GulConstant.ATTR_ORIENT ) ) {
       setOrient( xmlElement.getAttribute( GulConstant.ATTR_ORIENT ) );
     }

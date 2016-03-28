@@ -2,6 +2,7 @@ package com.iks.cms.core.gul.form;
 
 import com.iks.cms.core.data.*;
 import com.iks.cms.core.gul.*;
+import com.iks.cms.core.parser.*;
 
 import org.apache.commons.lang3.*;
 import org.w3c.dom.*;
@@ -24,8 +25,8 @@ public class GulCheckbox extends AbstractGulField implements IGulInputField {
     return getTag();
   }
   @Override
-  public void parse( Element xmlElement ) throws Exception {
-    super.parse(xmlElement );
+  public void parse(IParseContext context,  Element xmlElement ) throws Exception {
+    super.parse( context, xmlElement );
     if( xmlElement.hasAttribute( GulConstant.ATTR_CHECKED ) ) {
       setChecked( BooleanUtils.toBoolean( xmlElement.getAttribute( GulConstant.ATTR_CHECKED ) ) );
     }

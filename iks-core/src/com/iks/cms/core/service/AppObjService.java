@@ -6,7 +6,6 @@ import com.iks.cms.core.exception.*;
 import com.iks.cms.core.grid.*;
 import com.iks.cms.core.gul.*;
 import com.iks.cms.core.gul.form.*;
-import com.iks.cms.core.gul.panel.*;
 import com.iks.cms.core.model.*;
 import com.iks.cms.core.query.*;
 import com.iks.cms.core.repository.*;
@@ -33,7 +32,7 @@ public class AppObjService {
     App.getInstance().setService( this );
   }
   public PageableResult getGridData( IGridRequest request ) {
-    IGrid grid = App.getGrid( request.getGridId() );
+    IBaseGrid grid = App.getGrid( request.getGridId() );
     SelectGridQuery query = new SelectGridQuery( App.getModel( grid.getAppObj() ), grid  );
     if( request.getFilter() != null ) {
       query.setFilters( request.getFilter() );

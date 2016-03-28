@@ -1,29 +1,37 @@
 package com.iks.cms.core.grid;
 
-import com.iks.cms.core.data.*;
+import com.fasterxml.jackson.core.*;
+import com.fasterxml.jackson.databind.*;
+import com.iks.cms.core.appObj.*;
+import com.iks.cms.core.constant.*;
 import com.iks.cms.core.gul.*;
 import com.iks.cms.core.gul.element.*;
+import com.iks.cms.core.gul.panel.*;
+import com.iks.cms.core.model.*;
 import com.iks.cms.core.parser.*;
 
 import org.w3c.dom.*;
 
+import sun.security.x509.*;
+
+import java.util.*;
+
 /**
  * @author Igor Kaynov
  */
-public class GridColumn extends GulElement implements IGridColumn {
+public class ReferenceTable extends BaseGrid {
   private String name;
   private String label;
-  private String displayField;
-  public GridColumn() {
+  public ReferenceTable() {
+    id = UUID.randomUUID().toString();
+    showToolbar = false;
   }
-  @Override
   public String getName() {
     return name;
   }
   public void setName( String name ) {
     this.name = name;
   }
-  @Override
   public String getLabel() {
     return label;
   }
@@ -31,32 +39,14 @@ public class GridColumn extends GulElement implements IGridColumn {
     this.label = label;
   }
   @Override
-  public String getDisplayField() {
-    return displayField;
-  }
-  public void setDisplayField( String displayField ) {
-    this.displayField = displayField;
-  }
-  @Override
-  public String getTag() {
-    return null;
-  }
-  @Override
   public void parse( IParseContext context, Element xmlElement ) throws Exception {
+    setParentAppObj( context.getAppObj() );
     super.parse( context, xmlElement );
     if( xmlElement.hasAttribute( GulConstant.ATTR_NAME ) ) {
       setName( xmlElement.getAttribute( GulConstant.ATTR_NAME ) );
     }
     if( xmlElement.hasAttribute( GulConstant.ATTR_LABEL ) ) {
       setLabel( xmlElement.getAttribute( GulConstant.ATTR_LABEL ) );
-    }
-    if( xmlElement.hasAttribute( GulConstant.ATTR_DISPLAY_FIELD ) ) {
-      setDisplayField( xmlElement.getAttribute( GulConstant.ATTR_DISPLAY_FIELD ) );
-    }
-  }
-  public void applyModel( IDataField dataField ) {
-    if( getLabel() == null ) {
-      setLabel( dataField.getLabel() );
     }
   }
 }

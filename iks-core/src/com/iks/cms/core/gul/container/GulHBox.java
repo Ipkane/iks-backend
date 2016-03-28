@@ -2,6 +2,7 @@ package com.iks.cms.core.gul.container;
 
 import com.iks.cms.core.gul.*;
 import com.iks.cms.core.model.*;
+import com.iks.cms.core.parser.*;
 
 import org.w3c.dom.*;
 
@@ -18,8 +19,8 @@ public class GulHBox extends GulBox {
     return GulConstant.HBOX;
   }
   @Override
-  public void parse( Element xmlElement ) throws Exception {
-    super.parse( xmlElement );
+  public void parse(IParseContext context,  Element xmlElement ) throws Exception {
+    super.parse( context, xmlElement );
     setOrient( "horizontal" );
   }
 }
