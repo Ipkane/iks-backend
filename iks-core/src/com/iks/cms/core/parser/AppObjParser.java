@@ -11,12 +11,14 @@ import org.w3c.dom.*;
  */
 public class AppObjParser {
   private static final Logger logger = LoggerFactory.getLogger( AppObjParser.class );
-  private AppObj appObj;
+  private AppObj  appObj;
+  private Boolean parseModel;
   public IAppObj parse( String fileName ) throws Exception {
     Document doc = ParserUtils.parseFile( fileName );
     return parseRoot( doc.getDocumentElement() );
   }
-  public IAppObj parse( Element root ) throws Exception {
+  public IAppObj parse( Element root, boolean parseModel ) throws Exception {
+    this.parseModel = parseModel;
     return parseRoot( root );
   }
   //appObj
@@ -24,9 +26,17 @@ public class AppObjParser {
     appObj = new AppObj();
     appObj.setName( root.getAttribute( "name" ) );
     appObj.setLabel( root.getAttribute( "label" ) );
-    App.addAppObj( appObj );
+    if( App.getAppObj( appObj.getName() ) == null ) {
+      App.addAppObj( appObj );
+    } else {
+      appObj = ( AppObj )App.getAppObj( appObj.getName() );
+    }
     NodeList fieldList = root.getChildNodes();
-    appObj.setDataModel( parseDataModel( ( Element )root.getElementsByTagName( "data" ).item( 0 ) ) );
+    if (parseModel) {
+      // on this step only parse model
+      appObj.setDataModel( parseDataModel( ( Element )root.getElementsByTagName( "data" ).item( 0 ) ) );
+      return appObj;
+    }
     for( int i = 0; i < fieldList.getLength(); i++ ) {
       Node node = fieldList.item( i );
       if( node.getNodeType() == Node.ELEMENT_NODE ) {

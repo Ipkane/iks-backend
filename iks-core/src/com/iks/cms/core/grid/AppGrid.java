@@ -7,6 +7,7 @@ import com.iks.cms.core.constant.*;
 import com.iks.cms.core.gul.element.*;
 import com.iks.cms.core.gul.form.*;
 import com.iks.cms.core.gul.panel.*;
+import com.iks.cms.core.model.*;
 import com.iks.cms.core.parser.*;
 
 import org.w3c.dom.*;
@@ -41,18 +42,20 @@ public class AppGrid extends GulElement implements IGrid {
   @Override
   public void parse( Element xmlElement ) throws Exception {
     super.parse( xmlElement );
-    if (xmlElement.hasAttribute( ListConstant.ATTR_ID )) {
-      setId(xmlElement.getAttribute( ListConstant.ATTR_ID ));
+    if( xmlElement.hasAttribute( ListConstant.ATTR_ID ) ) {
+      setId( xmlElement.getAttribute( ListConstant.ATTR_ID ) );
     }
-    if (xmlElement.hasAttribute( ListConstant.ATTR_APP_OBJ )) {
+    if( xmlElement.hasAttribute( ListConstant.ATTR_APP_OBJ ) ) {
       setAppObj( xmlElement.getAttribute( ListConstant.ATTR_APP_OBJ ) );
     }
     App.addGrid( id, this );
+    IDataModel model = App.getModel( appObj );
     NodeList elements = xmlElement.getElementsByTagName( ListConstant.COLUMN );
     for( int i = 0; i < elements.getLength(); i++ ) {
       Element element = ( Element )elements.item( i );
       GridColumn column = ( GridColumn )AppFactory.createElement( element.getTagName() );
       column.parse( element );
+      column.applyModel( model.getField( column.getName() ) );
       addField( column );
     }
     elements = xmlElement.getElementsByTagName( ListConstant.FILTER_PANEL );
@@ -60,7 +63,6 @@ public class AppGrid extends GulElement implements IGrid {
       Element element = ( Element )elements.item( 0 );
       FilterPanel filterPanel = ( FilterPanel )AppFactory.createElement( element.getTagName() );
       filterPanel.setAppObj( appObj );
-
       filterPanel.parse( element );
       setFilterPanel( filterPanel );
     }
@@ -92,8 +94,14 @@ public class AppGrid extends GulElement implements IGrid {
     this.id = id;
   }
   private class GridJson {
-    public List<IGridColumn> getFields(){
+    public List< IGridColumn > getFields() {
       return AppGrid.this.getFields();
+    }
+    public String getId() {
+      return AppGrid.this.id;
+    }
+    public String getAppObj() {
+      return AppGrid.this.appObj;
     }
   }
 }

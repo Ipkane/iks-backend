@@ -14,7 +14,7 @@
         templateUrl: function ($stateParams){
           return 'view/listView?appObj=' + $stateParams.appObj;
         },
-        controller : "AppObjListController as vm"
+        //controller : "AppObjListController as vm"
       } )
     ;
     $urlRouterProvider.otherwise( 'home' );

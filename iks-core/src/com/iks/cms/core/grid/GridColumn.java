@@ -1,5 +1,6 @@
 package com.iks.cms.core.grid;
 
+import com.iks.cms.core.data.*;
 import com.iks.cms.core.gul.*;
 import com.iks.cms.core.gul.element.*;
 
@@ -49,6 +50,11 @@ public class GridColumn extends GulElement implements IGridColumn {
     }
     if( xmlElement.hasAttribute( GulConstant.ATTR_DISPLAY_FIELD ) ) {
       setDisplayField( xmlElement.getAttribute( GulConstant.ATTR_DISPLAY_FIELD ) );
+    }
+  }
+  public void applyModel( IDataField dataField ) {
+    if( getLabel() == null ) {
+      setLabel( dataField.getLabel() );
     }
   }
 }

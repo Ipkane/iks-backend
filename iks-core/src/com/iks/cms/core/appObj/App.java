@@ -51,6 +51,7 @@ public class App {
   }
   public static void clearAppObjs() {
     getInstance().appObjMap.clear();
+    getInstance().grids.clear();
   }
   public static Collection< IAppObj > getAppObjList() {
     return getInstance().appObjMap.values();

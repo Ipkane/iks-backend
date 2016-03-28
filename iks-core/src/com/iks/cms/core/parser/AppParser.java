@@ -21,12 +21,26 @@ public class AppParser {
     Element root = doc.getDocumentElement();
     List< IAppObj > appObjList = new ArrayList<>();
     NodeList fieldList = doc.getElementsByTagName( "appObj" );
+    // app parsed in two steps. in first step it collects all models, than other types
     for( int i = 0; i < fieldList.getLength(); i++ ) {
       Node node = fieldList.item( i );
       if( node.getNodeType() == Node.ELEMENT_NODE ) {
         try {
           Element appObjElement = ( Element )node;
-          IAppObj appObj = parseAppObj( appObjElement );
+          IAppObj appObj = parseAppObj( appObjElement, true );
+          appObjList.add( appObj );
+          logger.debug( "Parsed model {}", appObj.getName() );
+        } catch(Exception e) {
+          logger.error("Error parsing app obj: ", e);
+        }
+      }
+    }
+    for( int i = 0; i < fieldList.getLength(); i++ ) {
+      Node node = fieldList.item( i );
+      if( node.getNodeType() == Node.ELEMENT_NODE ) {
+        try {
+          Element appObjElement = ( Element )node;
+          IAppObj appObj = parseAppObj( appObjElement, false );
           appObjList.add( appObj );
           logger.debug( "Parsed appObj {}", appObj.getName() );
         } catch(Exception e) {
@@ -37,8 +51,8 @@ public class AppParser {
     return appObjList;
   }
   // appObj
-  private IAppObj parseAppObj( Element appObjElement ) throws Exception {
+  private IAppObj parseAppObj( Element appObjElement, boolean parseModel ) throws Exception {
     AppObjParser appObjParser = new AppObjParser();
-    return appObjParser.parse( appObjElement );
+    return appObjParser.parse( appObjElement, parseModel );
   }
 }

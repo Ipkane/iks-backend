@@ -16,6 +16,7 @@ public class GulLabel extends GulElement {
   }
   @Override
   public void parse( Element xmlElement ) {
+    setValue( xmlElement.getTextContent() );
     if( xmlElement.hasAttribute( GulConstant.ATTR_VALUE ) ) {
       setValue( xmlElement.getAttribute( GulConstant.ATTR_VALUE ) );
     }

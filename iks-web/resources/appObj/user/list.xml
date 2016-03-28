@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<gridView appObj="user" xmlns="http://com.iks.org/schema/list/1.0">
+<listView appObj="user" xmlns="http://com.iks.org/schema/list/1.0">
   <appTable id="user_grid" appObj="user">
     <filterPanel>
       <hbox>
@@ -12,4 +12,14 @@
       <column name="active"/>
     </columns>
   </appTable>
-</gridView>
+  <tabbox>
+    <tab label="Roles">
+      <appTable appObj="role" id="user_role_grid">
+        <columns>
+          <column name="id" label="Role Id"/>
+          <column name="name" label="Name"/>
+        </columns>
+      </appTable>
+    </tab>
+  </tabbox>
+</listView>

@@ -2,17 +2,22 @@ default namespace = "http://com.iks.org/schema/list/1.0"
 include "gul/gul-schema.rnc"
 
 start =
-  element gridView {
+  element listView {
     attribute appObj { xsd:NCName }
-    & element appTable {
-      idAttr
-      & appObjAttr
-      & filterPanel?
-      & element columns {
-       column+
-      }
-    }?
+    & appTable*
+    & gul.element*
   }
+
+#gul.element |= appTable
+
+appTable = element appTable {
+  idAttr
+  & appObjAttr
+  & filterPanel?
+  & element columns {
+    column+
+  }
+}
 
 filterPanel = element filterPanel {
   gul.element*

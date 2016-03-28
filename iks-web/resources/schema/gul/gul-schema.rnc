@@ -41,6 +41,7 @@ label = element label {
   gul.elementType
   & valueAttr?
   & attribute control { xsd:NCName }?
+  & text
 }
 
 boxType =

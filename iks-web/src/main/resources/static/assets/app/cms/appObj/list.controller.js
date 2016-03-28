@@ -8,7 +8,6 @@ function AppObjListController( $scope, $log, $uibModal, $timeout, CoreService, G
     filter      : {
       item: {}
     },
-    gridId    : null,
     grid        : null,
     selectedItem: null,
     orderBy     : 'id',
@@ -27,26 +26,26 @@ function AppObjListController( $scope, $log, $uibModal, $timeout, CoreService, G
 
   function reload() {
     CoreService.getGridData( {
-      gridId: $scope.gridId, filter: $scope.filter.item, orderBy: ($scope.orderAsc ? '' : '-') + $scope.orderBy,
+      gridId: $scope.grid.id, filter: $scope.filter.item, orderBy: ($scope.orderAsc ? '' : '-') + $scope.orderBy,
       page  : $scope.currentPage, limit: $scope.itemsPerPage
     } ).$promise.then( function ( response ) {
-      $scope.items          = response.success.result.items;
-      $scope.totalItems     = response.success.result.totalItems;
-      var foundSelectedItem = false;
-      if ( $scope.selectedItem ) {
-        _.each( $scope.items, function ( item ) {
-          if ( item.id == $scope.selectedItem.id ) {
-            $scope.selectedItem = item;
-            foundSelectedItem   = true;
-          }
-        } );
-        if ( !foundSelectedItem ) {
-          $scope.selectedItem = null;
-        }
-      }
-    } ).catch( function ( response ) {
-      $log.debug( response );
-    } );
+                         $scope.items          = response.success.result.items;
+                         $scope.totalItems     = response.success.result.totalItems;
+                         var foundSelectedItem = false;
+                         if ( $scope.selectedItem ) {
+                           _.each( $scope.items, function ( item ) {
+                             if ( item.id == $scope.selectedItem.id ) {
+                               $scope.selectedItem = item;
+                               foundSelectedItem   = true;
+                             }
+                           } );
+                           if ( !foundSelectedItem ) {
+                             $scope.selectedItem = null;
+                           }
+                         }
+                       } ).catch( function ( response ) {
+                                    $log.debug( response );
+                                  } );
   };
   $scope.pageChanged       = function () {
     reload();
@@ -68,12 +67,12 @@ function AppObjListController( $scope, $log, $uibModal, $timeout, CoreService, G
     $uibModal.open(
       {
         animation   : true,
-        templateUrl : 'view/editView?appObj=' + $scope.gridName,
+        templateUrl : 'view/editView?appObj=' + $scope.grid.appObj,
         controller  : 'GridEditController',
         controllerAs: 'vm',
         backdrop    : 'static',
         resolve     : {
-          payload: { appObj: $scope.gridName, itemId: $scope.selectedItem.id }
+          payload: { appObj: $scope.grid.appObj, itemId: $scope.selectedItem.id }
         }
       }
     ).result.then( function ( updatedItem ) {
