@@ -11,6 +11,7 @@ import org.slf4j.*;
 public class SelectGridQuery extends SelectModelQuery<SelectGridQuery> {
   private static final Logger logger = LoggerFactory.getLogger( SelectGridQuery.class );
   private IGrid grid;
+
   public SelectGridQuery( IDataModel model, IGrid grid ) {
     super( model );
     this.grid = grid;
@@ -27,4 +28,4 @@ public class SelectGridQuery extends SelectModelQuery<SelectGridQuery> {
   public void setGrid( IGrid grid ) {
     this.grid = grid;
   }
-  }
+}

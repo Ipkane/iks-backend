@@ -9,11 +9,11 @@ import java.util.*;
  * @author Igor Kaynov
  */
 public class ResponseGetGridData extends AbstractApiResponse {
-  private List< IDataItem > items;
-  public List< IDataItem > getItems() {
-    return items;
+  private PageableResult result;
+  public PageableResult getResult() {
+    return result;
   }
-  public void setItems( List< IDataItem > items ) {
-    this.items = items;
+  public void setResult( PageableResult result ) {
+    this.result = result;
   }
 }

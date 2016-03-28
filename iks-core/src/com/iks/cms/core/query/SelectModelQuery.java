@@ -6,6 +6,7 @@ import com.iks.cms.core.grid.*;
 import com.iks.cms.core.model.*;
 import com.iks.cms.core.sql.*;
 import com.iks.cms.core.sql.join.*;
+import com.iks.cms.core.sql.projection.*;
 import com.iks.cms.core.sql.query.*;
 import com.iks.cms.core.utils.*;
 
@@ -13,6 +14,7 @@ import org.apache.commons.lang3.*;
 import org.hibernate.*;
 import org.slf4j.*;
 
+import java.math.*;
 import java.util.*;
 
 /**
@@ -23,6 +25,8 @@ public class SelectModelQuery< T extends SelectModelQuery > extends CommonModelQ
   private String orderBy;
   private boolean               orderAsc = true;
   private Map< String, Object > filters  = new HashMap<>();
+  private Integer offset;
+  private Integer limit;
   public SelectModelQuery( IDataModel model ) {
     super( model );
   }
@@ -35,6 +39,37 @@ public class SelectModelQuery< T extends SelectModelQuery > extends CommonModelQ
       resultList.add( parseResult( rowData ) );
     }
     return resultList;
+  }
+  public PageableResult getPageableResult( SessionFactory sessionFactory ) {
+    SelectQuery query = buildSqlQuery();
+    String sqlQuery = query.toString();
+    logger.debug( sqlQuery );
+    List rows = selectQuery( sessionFactory, sqlQuery );
+    List< IDataItem > resultList = new ArrayList<>();
+    for( Object rowData : rows ) {
+      resultList.add( parseResult( rowData ) );
+    }
+    PageableResult result = new PageableResult();
+    result.setItems( resultList );
+    result.setLimit( limit );
+    result.setOffset( offset );
+    result.setTotalItems( getCount( sessionFactory ) );
+    return result;
+  }
+  public Long getCount( SessionFactory sessionFactory ) {
+    SelectQuery query = buildSqlQuery();
+    query.getColumns().clear();
+    query.getOrderBys().clear();
+    if (filters == null || filters.size() == 0) {
+      query.getLeftJoins().clear();
+    }
+    query.addProjection( Projections.rowCount( null ) );
+    query.setLimit( 0 );
+    query.setOffset( 0 );
+    String sqlQuery = query.toString();
+    logger.debug( sqlQuery );
+    BigInteger count= (BigInteger )selectSingleQuery( sessionFactory, sqlQuery );
+    return count.longValue();
   }
   public IDataItem executeSingleQuery( SessionFactory sessionFactory ) {
     String sqlQuery = buildSqlQuery().toString();
@@ -124,6 +159,8 @@ public class SelectModelQuery< T extends SelectModelQuery > extends CommonModelQ
     } else {
       sb.orderBy( new ColumnOrder( table.getColumn( model.getPrimaryFieldName(), null ), EColumnOrder.ASC ) );
     }
+    sb.setLimit( limit );
+    sb.setOffset( offset );
     return sb;
   }
   public String getOrderBy() {
@@ -148,5 +185,17 @@ public class SelectModelQuery< T extends SelectModelQuery > extends CommonModelQ
   public T addFilter( String fieldName, Object value ) {
     this.filters.put( fieldName, value );
     return ( T )this;
+  }
+  public Integer getLimit() {
+    return limit;
+  }
+  public void setLimit( Integer limit ) {
+    this.limit = limit;
+  }
+  public Integer getOffset() {
+    return offset;
+  }
+  public void setOffset( Integer offset ) {
+    this.offset = offset;
   }
 }

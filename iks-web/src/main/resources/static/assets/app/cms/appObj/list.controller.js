@@ -13,7 +13,10 @@ function AppObjListController( $scope, $log, $uibModal, $timeout, CoreService, G
     selectedItem: null,
     orderBy     : 'id',
     orderAsc    : true,
-    items       : []
+    items       : [],
+    itemsPerPage: 10,
+    currentPage : 1,
+    totalItems  : 0
   } );
   function init() {
     if ( angular.isString( $scope.grid ) ) {
@@ -23,8 +26,12 @@ function AppObjListController( $scope, $log, $uibModal, $timeout, CoreService, G
   }
 
   function reload() {
-    GridHelper.getGridData( $scope.gridName, $scope.filter.item, ($scope.orderAsc ? '' : '-') + $scope.orderBy ).then( function ( response ) {
-      $scope.items          = response.success.items;
+    CoreService.getGridData( {
+      appObj: $scope.gridName, filter: $scope.filter.item, orderBy: ($scope.orderAsc ? '' : '-') + $scope.orderBy,
+      page  : $scope.currentPage, limit: $scope.itemsPerPage
+    } ).$promise.then( function ( response ) {
+      $scope.items          = response.success.result.items;
+      $scope.totalItems     = response.success.result.totalItems;
       var foundSelectedItem = false;
       if ( $scope.selectedItem ) {
         _.each( $scope.items, function ( item ) {
@@ -41,6 +48,9 @@ function AppObjListController( $scope, $log, $uibModal, $timeout, CoreService, G
       $log.debug( response );
     } );
   };
+  $scope.pageChanged       = function () {
+    reload();
+  }
   $scope.toggleFilterPanel = function () {
     $scope.showFilterPanel = !$scope.showFilterPanel;
   };
@@ -126,14 +136,14 @@ function AppObjListController( $scope, $log, $uibModal, $timeout, CoreService, G
     $scope.orderBy = fieldName;
     $scope.items   = _.orderBy( $scope.items, [ $scope.orderBy ], [ $scope.orderAsc ? 'asc' : 'desc' ] );
   };
-  vm.getField = function(fieldName) {
-    return _.find($scope.grid.fields, {name: fieldName});
+  vm.getField              = function ( fieldName ) {
+    return _.find( $scope.grid.fields, { name: fieldName } );
   };
   $scope.formatItemValue   = function ( item, field ) {
-    if (!field.displayField) {
-      return item[field.name];
+    if ( !field.displayField ) {
+      return item[ field.name ];
     } else {
-      return item[field.name][field.displayField];
+      return item[ field.name ][ field.displayField ];
     }
   };
   vm.getHeaderClass        = function ( fieldName ) {
@@ -142,7 +152,7 @@ function AppObjListController( $scope, $log, $uibModal, $timeout, CoreService, G
     }
     return null;
   };
-  $scope.clearFilter = function() {
+  $scope.clearFilter       = function () {
     $scope.filter.item = {};
     reload();
   };

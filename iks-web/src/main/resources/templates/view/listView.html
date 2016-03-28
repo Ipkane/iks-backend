@@ -2,12 +2,14 @@
 <h1 data-th-text="${appObj.label}">Title</h1>
 
 <div class="panel panel-default">
-  <div class="panel-heading grid-edit-panel">
-    <div class="btn btn-primary" ng-click="openAddModal()">New</div>
-    <div class="btn btn-primary" ng-click="openEditModal()" ng-disabled="!selectedItem">Edit</div>
-    <div class="btn btn-primary" ng-click="openDeleteModal()" ng-disabled="!selectedItem">Delete</div>
-    <div class="btn btn-success" ng-click="toggleFilterPanel()" th:attr="ng-disabled = |${listView.filterPanel == null}| ">Filter</div>
-    <div class="btn btn-success" ng-click="refresh()">Refresh</div>
+  <div class="panel-heading">
+    <div class="hbox">
+      <div class="btn btn-primary" ng-click="openAddModal()">New</div>
+      <div class="btn btn-primary" ng-click="openEditModal()" ng-disabled="!selectedItem">Edit</div>
+      <div class="btn btn-primary" ng-click="openDeleteModal()" ng-disabled="!selectedItem">Delete</div>
+      <div class="btn btn-success" ng-click="toggleFilterPanel()" th:attr="ng-disabled = |${listView.filterPanel == null}| ">Filter</div>
+      <div class="btn btn-success" ng-click="refresh()">Refresh</div>
+    </div>
   </div>
   <div data-th-if="${listView.filterPanel != null}" class="panel-body grid-filter-panel" ng-show="showFilterPanel">
     <th:block th:include="${listView.filterPanel.templatePath} :: ${listView.filterPanel.templateName}" th:with="element=${listView.filterPanel}">
@@ -27,6 +29,7 @@
     </tr>
     </tbody>
   </table>
+  <uib-pagination total-items="totalItems" ng-model="currentPage" ng-change="pageChanged()" items-per-page="itemsPerPage"></uib-pagination>
   <div ng:init="|gridName='${gridName}'; grid = '${gridJson}'|" style="display: none"></div>
 </div>
 </html>

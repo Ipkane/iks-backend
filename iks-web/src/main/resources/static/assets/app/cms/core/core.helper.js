@@ -35,12 +35,8 @@
       return deferred.promise;
     }
 
-    function getGridData( name, filter, orderBy ) {
-      return CoreService.getGridData( {
-        appObj: name,
-        filter: filter,
-        orderBy: orderBy
-      } ).$promise;
+    function getGridData( request ) {
+      return CoreService.getGridData( request ).$promise;
     }
   }
 })( angular );

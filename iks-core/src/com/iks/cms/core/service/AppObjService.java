@@ -26,11 +26,12 @@ public class AppObjService {
   private static final Logger logger = LoggerFactory.getLogger( AppObjService.class );
   @Autowired
   private CommonDao commonDao;
-  public List< IDataItem > getGridData( String appObj, Map< String, Object > filter, String orderBy ) {
-    SelectGridQuery query = new SelectGridQuery( App.getModel( appObj ), App.getGrid( appObj ) );
-    if( filter != null ) {
-      query.setFilters( filter );
+  public PageableResult getGridData( IGridRequest request ) {
+    SelectGridQuery query = new SelectGridQuery( App.getModel( request.getAppObj() ), App.getGrid( request.getAppObj() ) );
+    if( request.getFilter() != null ) {
+      query.setFilters( request.getFilter() );
     }
+    String orderBy = request.getOrderBy();
     if( orderBy != null ) {
       boolean orderAsc = true;
       String orderField = orderBy;
@@ -41,7 +42,11 @@ public class AppObjService {
       query.setOrderBy( orderField );
       query.setOrderAsc( orderAsc );
     }
-    return query.executeQuery( commonDao.getSessionFactory() );
+    if( request.getLimit() != null && request.getPage() != null ) {
+      query.setOffset( ( request.getPage() - 1 ) * request.getLimit() );
+      query.setLimit( request.getLimit() );
+    }
+    return query.getPageableResult( commonDao.getSessionFactory() );
   }
   public List< IDataItem > getModelData( String appObj, List< String > fields ) {
     SelectModelQuery query = new SelectModelQuery( App.getModel( appObj ) );
