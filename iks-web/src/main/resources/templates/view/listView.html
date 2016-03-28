@@ -15,21 +15,30 @@
     <th:block th:include="${listView.filterPanel.templatePath} :: ${listView.filterPanel.templateName}" th:with="element=${listView.filterPanel}">
     </th:block>
   </div>
-  <table class="table table-bordered table-hover table-condensed grid-table">
-    <thead>
-    <th data-th-each="field : ${listView.grid.fields}" th:attr="ng-click = |setOrderBy('${field.name}')|" th:inline="text">
-      [[${field.label}]]
-      <span class="glyphicon glyphicon glyphicon-chevron-down" aria-hidden="true" th:attr="ng-show = | vm.getHeaderClass('${field.name}') == 'asc' |"></span>
-      <span class="glyphicon glyphicon glyphicon-chevron-up" aria-hidden="true" th:attr="ng-show = | vm.getHeaderClass('${field.name}') == 'desc' |"></span>
-    </th>
-    </thead>
-    <tbody>
-    <tr ng-repeat="item in items" ng-click="selectItem(item)" ng-class="{'success': item == selectedItem}">
-      <td ng-repeat="field in grid.fields"> {{ formatItemValue( item, field) }}</td>
-    </tr>
-    </tbody>
-  </table>
-  <uib-pagination total-items="totalItems" ng-model="currentPage" ng-change="pageChanged()" items-per-page="itemsPerPage"></uib-pagination>
+  <div class="hbox">
+    <div class="spacer" style="flex:1"/>
+    <uib-pagination total-items="totalItems" ng-model="currentPage" ng-change="pageChanged()" items-per-page="itemsPerPage"></uib-pagination>
+  </div>
+  <div>
+    <table class="table table-bordered table-hover table-condensed grid-table">
+      <thead>
+      <th data-th-each="field : ${listView.grid.fields}" th:attr="ng-click = |setOrderBy('${field.name}')|" th:inline="text">
+        [[${field.label}]]
+        <span class="glyphicon glyphicon glyphicon-chevron-down" aria-hidden="true" th:attr="ng-show = | vm.getHeaderClass('${field.name}') == 'asc' |"></span>
+        <span class="glyphicon glyphicon glyphicon-chevron-up" aria-hidden="true" th:attr="ng-show = | vm.getHeaderClass('${field.name}') == 'desc' |"></span>
+      </th>
+      </thead>
+      <tbody>
+      <tr ng-repeat="item in items" ng-click="selectItem(item)" ng-class="{'success': item == selectedItem}">
+        <td ng-repeat="field in grid.fields"> {{ formatItemValue( item, field) }}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="hbox">
+    <div class="spacer" style="flex:1"/>
+    <uib-pagination total-items="totalItems" ng-model="currentPage" ng-change="pageChanged()" items-per-page="itemsPerPage"></uib-pagination>
+  </div>
   <div ng:init="|gridName='${gridName}'; grid = '${gridJson}'|" style="display: none"></div>
 </div>
 </html>

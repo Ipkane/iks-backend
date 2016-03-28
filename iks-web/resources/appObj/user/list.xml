@@ -1,5 +1,10 @@
 <?xml version="1.0"?>
 <gridView appObj="employee" xmlns="http://com.iks.org/schema/list/1.0">
+  <filter>
+    <hbox>
+      <checkbox name="active"/>
+    </hbox>
+  </filter>
   <table>
     <column name="id" label="User Id"/>
     <column name="username" label="Username"/>
