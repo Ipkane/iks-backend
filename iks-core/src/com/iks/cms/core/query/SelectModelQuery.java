@@ -88,8 +88,9 @@ public class SelectModelQuery< T extends SelectModelQuery > extends CommonModelQ
         IDataField dataField = model.getField( field );
         if( dataField instanceof ManyToOne ) {
           ManyToOne manyToOne = ( ManyToOne )dataField;
+          IDataModel joinedModel = App.getModel( manyToOne.getAppObj());
           DataItem joinedItem = new DataItem();
-          joinedItem.addFieldValue( manyToOne.getReferenceField(), value );
+          joinedItem.addFieldValue( joinedModel.getPrimaryFieldName(), value );
           resultItem.addFieldValue( manyToOne.getName(), joinedItem );
         } else {
           resultItem.addFieldValue( dataField.getName(), dataField.parseValue( value ) );
@@ -124,7 +125,7 @@ public class SelectModelQuery< T extends SelectModelQuery > extends CommonModelQ
         IDataModel joinedModel = App.getModel( dataField.getAppObj() );
         IDataField joinedField = joinedModel.getField( parts[1] );
         Table joinedTable = new Table( joinedModel.getTableName(), joinedModel.getAppObj() );
-        sb.leftJoin( new Join( joinedTable, table.getColumn( dataField.getTableField(), dataField.getName() ), joinedTable.getColumn( dataField.getReferenceField() ) ) );
+        sb.leftJoin( new Join( joinedTable, table.getColumn( dataField.getTableField(), dataField.getName() ), joinedTable.getColumn( joinedModel.getPrimaryFieldName() ) ) );
         sb.addColumn( joinedTable.getColumn( joinedField.getTableField(), joinedField.getName() ) );
       }
     }
@@ -142,7 +143,7 @@ public class SelectModelQuery< T extends SelectModelQuery > extends CommonModelQ
         ManyToOne manyToOne = ( ManyToOne )dataField;
         IDataModel joinedModel = App.getModel( manyToOne.getAppObj() );
         Table joinedTable = new Table( joinedModel.getTableName(), joinedModel.getAppObj() );
-        sb.leftJoin( new Join( joinedTable, table.getColumn( dataField.getTableField(), dataField.getName() ), joinedTable.getColumn( manyToOne.getReferenceField() ) ) );
+        sb.leftJoin( new Join( joinedTable, table.getColumn( dataField.getTableField(), dataField.getName() ), joinedTable.getColumn( joinedModel.getPrimaryFieldName()) ) );
         for( Map.Entry< String, Object > joinedItemEntry : ( ( Map< String, Object > )entry.getValue() ).entrySet() ) {
           IDataField joinedField = joinedModel.getField( joinedItemEntry.getKey() );
           if( joinedItemEntry.getValue() == null || StringUtils.trimToNull( joinedItemEntry.getValue().toString() ) == null ) {

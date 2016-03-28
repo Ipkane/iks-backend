@@ -2,7 +2,7 @@
 angular.module( 'app.cms' )//
   .controller( 'AppObjListController', AppObjListController )
 ;//
-function AppObjListController( $scope, $log, $uibModal, $timeout, CoreService, GridHelper, _ ) {
+function AppObjListController( $scope, $log, $uibModal, $timeout, $rootScope, CoreService, GridHelper, _ ) {
   var vm = this;
   angular.extend( $scope, {
     filter      : {
@@ -21,6 +21,7 @@ function AppObjListController( $scope, $log, $uibModal, $timeout, CoreService, G
     if ( angular.isString( $scope.grid ) ) {
       $scope.grid = angular.fromJson( $scope.grid );
     }
+    $rootScope.grids[$scope.grid['id']] = $scope;
     reload();
   }
 

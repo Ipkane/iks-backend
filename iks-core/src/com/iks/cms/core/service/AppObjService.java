@@ -117,13 +117,14 @@ public class AppObjService {
   }
   public List< SelectOption > getSelectOptions( IDataModel model, GulReferenceField referenceField ) {
     ManyToOne dataField = ( ManyToOne )model.getField( referenceField.getName() );
-    List< String > referencedFields = Arrays.asList( dataField.getReferenceField(), referenceField.getDisplayField() );
+    IDataModel joinedModel = App.getModel( dataField.getAppObj() );
+    List< String > referencedFields = Arrays.asList( joinedModel.getPrimaryFieldName(), referenceField.getDisplayField() );
     SelectModelQuery query = new SelectModelQuery( App.getModel( dataField.getAppObj() ) );
     query.setFields( referencedFields );
     List< IDataItem > items = query.executeQuery( commonDao.getSessionFactory() );
     List< SelectOption > options = new ArrayList<>( items.size() );
     for( IDataItem item : items ) {
-      options.add( new SelectOption( item.getFieldValue( dataField.getReferenceField() ).toString(), item.getFieldValue( referenceField.getDisplayField() ).toString() ) );
+      options.add( new SelectOption( item.getFieldValue( joinedModel.getPrimaryFieldName() ).toString(), item.getFieldValue( referenceField.getDisplayField() ).toString() ) );
     }
     return options;
   }

@@ -1,21 +1,31 @@
 package com.iks.cms.core.data;
 
+import com.iks.cms.core.appObj.*;
+import com.iks.cms.core.constant.*;
+
+import org.w3c.dom.*;
+
 /**
  * @author Igor Kaynov
  */
 public class ManyToOne extends AbstractDataField {
   private String appObj;
-  private String referenceField = FieldConstant.DEFAULT_PRIMARY_FIELD;
   public String getAppObj() {
     return appObj;
   }
   public void setAppObj( String appObj ) {
     this.appObj = appObj;
   }
+  /**
+   * Primary field of referenced model
+   * @return
+   */
   public String getReferenceField() {
-    return referenceField;
+    return App.getModel(appObj).getPrimaryFieldName();
   }
-  public void setReferenceField( String referenceField ) {
-    this.referenceField = referenceField;
+  @Override
+  public void parse(Element xmlElement) {
+    super.parse(xmlElement);
+    setAppObj( xmlElement.getAttribute( ModelConstant.APP_OBJ_ATTR ) );
   }
 }

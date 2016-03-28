@@ -1,8 +1,10 @@
 package com.iks.cms.core.data;
 
+import com.iks.cms.core.constant.*;
 import com.iks.cms.core.validation.*;
 
 import org.apache.commons.lang3.*;
+import org.w3c.dom.*;
 
 import java.util.*;
 import java.util.stream.*;
@@ -59,6 +61,15 @@ public abstract class AbstractDataField implements IDataField {
   @Override
   public List< IValidator > getValidators() {
     return validators;
+  }
+  @Override
+  public void parse( Element xmlElement ) {
+    setName( xmlElement.getAttribute( ModelConstant.NAME_ATTR ) );
+    setLabel( xmlElement.getAttribute( ModelConstant.LABEL_ATTR ) );
+    if( xmlElement.hasAttribute( ModelConstant.REQUIRED_ATTR ) ) {
+      setRequired( BooleanUtils.toBoolean( xmlElement.getAttribute( ModelConstant.REQUIRED_ATTR ) ) );
+    }
+    setTableField( xmlElement.getAttribute( ModelConstant.TABLE_FIELD_ATTR ) );
   }
   @Override
   public Object parseValue( String value ) {

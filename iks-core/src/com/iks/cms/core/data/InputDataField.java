@@ -1,6 +1,9 @@
 package com.iks.cms.core.data;
 
+import com.iks.cms.core.constant.*;
+
 import org.apache.commons.lang3.*;
+import org.w3c.dom.*;
 
 import java.text.*;
 
@@ -32,5 +35,15 @@ public class InputDataField extends SimpleDataField {
   }
   public void setType( EDataType type ) {
     this.type = type;
+  }
+  @Override
+  public void parse( Element xmlElement ) {
+    super.parse( xmlElement );
+    if( xmlElement.hasAttribute( ModelConstant.PRIMARY_KEY_ATTR ) ) {
+      setIsPrimaryKey( BooleanUtils.toBoolean( xmlElement.getAttribute( ModelConstant.PRIMARY_KEY_ATTR ) ) );
+    }
+    if( xmlElement.hasAttribute( ModelConstant.TYPE_ATTR ) ) {
+      setType( EDataType.getByValue( xmlElement.getAttribute( ModelConstant.TYPE_ATTR ) ) );
+    }
   }
 }

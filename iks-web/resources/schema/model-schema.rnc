@@ -8,7 +8,7 @@ start =
     & dataField*
   }
 
-dataField = field | selectField | manyToOne
+dataField = field | selectField | manyToOne | oneToOne | manyToMany
 
 dataFieldType =
   nameAttr
@@ -32,8 +32,19 @@ selectField = element selectField {
   }
 }
 
+oneToOne = element oneToOne {
+  dataFieldType
+  & attribute appObj { xsd:NCName }
+}
+
 manyToOne = element manyToOne {
   dataFieldType
   & attribute appObj { xsd:NCName }
-  & attribute referenceField { xsd:NCName }
+}
+
+manyToMany = element manyToMany {
+  dataFieldType
+  & attribute joinTable { xsd:NCName }
+  & attribute appObj { xsd:NCName }
+  & attribute inverseTableField { xsd:NCName }
 }

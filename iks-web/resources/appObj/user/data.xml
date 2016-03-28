@@ -4,4 +4,5 @@
   <field tableField="username" name="username" label="Username" required="true"/>
   <field tableField="password" name="password" label="Password" required="true"/>
   <field tableField="active" name="active" label="Active" type="boolean"/>
+  <manyToMany name="roles" joinTable="user_role" tableField="user_id" appObj="role" inverseTableField="role_id"/>
 </data>
