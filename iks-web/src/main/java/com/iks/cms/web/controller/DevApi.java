@@ -1,9 +1,9 @@
 package com.iks.cms.web.controller;
 
+import com.iks.cms.core.service.*;
 import com.iks.cms.web.api.common.*;
 import com.iks.cms.web.api.grid.*;
 import com.iks.cms.web.utils.*;
-import com.iks.cms.xml.service.*;
 
 import org.slf4j.*;
 import org.springframework.beans.factory.annotation.*;
@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping( "/dev" )
 public class DevApi {
-  private final Logger logger = LoggerFactory.getLogger( DevApi.class );
-  private static final String REQUEST_RELOAD_APP      = "/reloadAppObj";
+  private final        Logger logger             = LoggerFactory.getLogger( DevApi.class );
+  private static final String REQUEST_RELOAD_APP = "/reloadAppObj";
   @Autowired
   private ParseService parseService;
   @RequestMapping( value = REQUEST_RELOAD_APP, method = RequestMethod.POST )

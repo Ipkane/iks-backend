@@ -1,13 +1,15 @@
 <?xml version="1.0"?>
-<gridView appObj="employee" xmlns="http://com.iks.org/schema/list/1.0">
-  <filter>
-    <hbox>
-      <checkbox name="active"/>
-    </hbox>
-  </filter>
-  <table>
-    <column name="id" label="User Id"/>
-    <column name="username" label="Username"/>
-    <column name="active"/>
-  </table>
+<gridView appObj="user" xmlns="http://com.iks.org/schema/list/1.0">
+  <appTable id="user_grid" appObj="user">
+    <filterPanel>
+      <hbox>
+        <checkbox name="active"/>
+      </hbox>
+    </filterPanel>
+    <columns>
+      <column name="id" label="User Id"/>
+      <column name="username" label="Username"/>
+      <column name="active"/>
+    </columns>
+  </appTable>
 </gridView>

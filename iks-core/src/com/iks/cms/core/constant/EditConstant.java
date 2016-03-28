@@ -1,4 +1,4 @@
-package com.iks.cms.xml.constant;
+package com.iks.cms.core.constant;
 
 /**
  * @author Igor Kaynov

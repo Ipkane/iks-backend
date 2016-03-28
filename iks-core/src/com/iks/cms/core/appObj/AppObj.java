@@ -18,9 +18,6 @@ public class AppObj implements IAppObj {
   public void setDataModel( IDataModel dataModel ) {
     this.dataModel = dataModel;
   }
-  public IGrid getGrid() {
-    return gridView.getGrid();
-  }
   public String getName() {
     return name;
   }

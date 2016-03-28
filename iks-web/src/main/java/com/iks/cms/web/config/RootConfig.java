@@ -4,15 +4,12 @@ package com.iks.cms.web.config;
 ** config data source , entity manager here
 */
 
-import com.fasterxml.jackson.databind.*;
 import com.iks.cms.config.properties.*;
-import com.iks.cms.xml.config.*;
 
 import org.hibernate.*;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.boot.context.properties.*;
 import org.springframework.context.annotation.*;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.*;
 import org.springframework.jdbc.datasource.*;
 import org.springframework.orm.hibernate4.*;
@@ -27,7 +24,7 @@ import javax.sql.*;
 @ComponentScan( basePackages = { "com.iks.cms.core.service", "com.iks.cms.core.repository" } )
 @EnableConfigurationProperties( { DbProperties.class } )
 //@PropertySource( "classpath:application.properties" )
-@Import( { XmlConfig.class } )
+//@Import( { XmlConfig.class } )
 public class RootConfig {
   @Autowired
   private DbProperties dbProperties;

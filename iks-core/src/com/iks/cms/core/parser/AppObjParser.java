@@ -1,4 +1,4 @@
-package com.iks.cms.xml.parser;
+package com.iks.cms.core.parser;
 
 import com.iks.cms.core.appObj.*;
 import com.iks.cms.core.model.*;
@@ -24,6 +24,7 @@ public class AppObjParser {
     appObj = new AppObj();
     appObj.setName( root.getAttribute( "name" ) );
     appObj.setLabel( root.getAttribute( "label" ) );
+    App.addAppObj( appObj );
     NodeList fieldList = root.getChildNodes();
     appObj.setDataModel( parseDataModel( ( Element )root.getElementsByTagName( "data" ).item( 0 ) ) );
     for( int i = 0; i < fieldList.getLength(); i++ ) {

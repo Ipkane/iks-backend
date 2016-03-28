@@ -13,8 +13,11 @@ import java.util.*;
  * @author Igor Kaynov
  */
 public class EditView extends GulFieldContainer implements IEditView {
-  public EditView( IDataModel model ) {
-    super( model );
+  public EditView(IDataModel model) {
+    super(model);
+  }
+  public EditView() {
+    super();
   }
   @Override
   public String getTemplatePath() {

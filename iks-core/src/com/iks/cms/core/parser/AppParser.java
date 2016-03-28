@@ -1,8 +1,6 @@
-package com.iks.cms.xml.parser;
+package com.iks.cms.core.parser;
 
 import com.iks.cms.core.appObj.*;
-import com.iks.cms.core.data.*;
-import com.iks.cms.core.model.*;
 
 import org.slf4j.*;
 import org.w3c.dom.*;

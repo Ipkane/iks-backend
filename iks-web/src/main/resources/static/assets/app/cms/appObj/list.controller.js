@@ -8,7 +8,7 @@ function AppObjListController( $scope, $log, $uibModal, $timeout, CoreService, G
     filter      : {
       item: {}
     },
-    gridName    : null,
+    gridId    : null,
     grid        : null,
     selectedItem: null,
     orderBy     : 'id',
@@ -27,7 +27,7 @@ function AppObjListController( $scope, $log, $uibModal, $timeout, CoreService, G
 
   function reload() {
     CoreService.getGridData( {
-      appObj: $scope.gridName, filter: $scope.filter.item, orderBy: ($scope.orderAsc ? '' : '-') + $scope.orderBy,
+      gridId: $scope.gridId, filter: $scope.filter.item, orderBy: ($scope.orderAsc ? '' : '-') + $scope.orderBy,
       page  : $scope.currentPage, limit: $scope.itemsPerPage
     } ).$promise.then( function ( response ) {
       $scope.items          = response.success.result.items;

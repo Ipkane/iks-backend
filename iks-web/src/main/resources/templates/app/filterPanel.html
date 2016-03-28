@@ -8,7 +8,7 @@
       <!--</div>-->
       <!--</div>-->
       <!--</div>-->
-      <th:block th:each="childElement : ${element.elements}">
+      <th:block th:each="childElement : ${element.elements}" th:with="optionsMap=${element.getOptionsMap()}">
         <th:block th:include="${childElement.templatePath} :: ${childElement.templateName}" th:with="element=${childElement}, modelName='filter.item'">
         </th:block>
       </th:block>

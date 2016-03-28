@@ -1,21 +1,23 @@
 <?xml version="1.0"?>
 <gridView appObj="employee" xmlns="http://com.iks.org/schema/list/1.0">
-  <filter>
-    <hbox>
-      <textbox name="id"/>
-      <textbox name="fio"/>
-    </hbox>
-    <hbox>
-      <select name="gender"/>
-      <referenceSelect name="user" displayField="username"/>
-      <button label="Push the button" id="button_1"/>
-    </hbox>
-  </filter>
-  <table>
-    <column name="id"/>
-    <column name="fio" label="First/Last Name Name"/>
-    <column name="gender"/>
-    <column name="user" label="Username" displayField="username"/>
-    <column name="user" label="Password" displayField="password"/>
-  </table>
+  <appTable id="employee_grid" appObj="employee">
+    <filterPanel>
+      <hbox>
+        <textbox name="id"/>
+        <textbox name="fio"/>
+      </hbox>
+      <hbox>
+        <select name="gender"/>
+        <referenceSelect name="user" displayField="username"/>
+        <button label="Push the button" id="button_1"/>
+      </hbox>
+    </filterPanel>
+    <columns>
+      <column name="id"/>
+      <column name="fio" label="First/Last Name Name"/>
+      <column name="gender"/>
+      <column name="user" label="Username" displayField="username"/>
+      <column name="user" label="Password" displayField="password"/>
+    </columns>
+  </appTable>
 </gridView>

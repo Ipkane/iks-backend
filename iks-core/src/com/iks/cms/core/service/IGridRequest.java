@@ -6,7 +6,7 @@ import java.util.*;
  * @author Igor Kaynov
  */
 public interface IGridRequest {
-  String getAppObj();
+  String getGridId();
   Map< String, Object > getFilter();
   String getOrderBy();
   Integer getPage();

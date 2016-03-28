@@ -24,7 +24,7 @@ public interface GulConstant {
   String ATTR_CHECKED       = "checked";
   // element names
   String TEXTBOX            = "textbox";
-  String CHECKBOX            = "checkbox";
+  String CHECKBOX           = "checkbox";
   String SELECT             = "select";
   String REFERENCE_FIELD    = "referenceField";
   String REFERENCE_SELECT   = "referenceSelect";
@@ -54,6 +54,6 @@ public interface GulConstant {
   String TABPANEL           = "tabpanel";
   // custom
   String FILTER_PANEL       = "filterPanel";
-  String GRID_VIEW          = "gridView";
+  String LIST_VIEW          = "listView";
   String EDIT_VIEW          = "editView";
 }

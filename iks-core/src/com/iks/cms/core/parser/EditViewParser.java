@@ -1,4 +1,4 @@
-package com.iks.cms.xml.parser;
+package com.iks.cms.core.parser;
 
 import com.iks.cms.core.appObj.*;
 import com.iks.cms.core.model.*;
@@ -21,7 +21,8 @@ public class EditViewParser {
   }
   private EditView parseRoot( Document doc ) throws Exception {
     Element root = doc.getDocumentElement();
-    EditView editView = new EditView(model);
+    EditView editView = new EditView();
+    editView.setModel( model );
     editView.parse( root );
     return editView;
   }

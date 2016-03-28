@@ -18,6 +18,8 @@ import org.springframework.stereotype.*;
 
 import java.util.*;
 
+import javax.annotation.*;
+
 /**
  * @author Igor Kaynov
  */
@@ -26,8 +28,13 @@ public class AppObjService {
   private static final Logger logger = LoggerFactory.getLogger( AppObjService.class );
   @Autowired
   private CommonDao commonDao;
+  @PostConstruct
+  private void init() {
+    App.getInstance().setService( this );
+  }
   public PageableResult getGridData( IGridRequest request ) {
-    SelectGridQuery query = new SelectGridQuery( App.getModel( request.getAppObj() ), App.getGrid( request.getAppObj() ) );
+    IGrid grid = App.getGrid( request.getGridId() );
+    SelectGridQuery query = new SelectGridQuery( App.getModel( grid.getAppObj() ), grid  );
     if( request.getFilter() != null ) {
       query.setFilters( request.getFilter() );
     }
@@ -94,20 +101,11 @@ public class AppObjService {
     return App.getAppObj( appObj ).getListView();
   }
   public Map< String, List< SelectOption > > getEdiViewOptionsMap( String appObj ) {
-    IDataModel model = App.getModel( appObj );
     IEditView editView = App.getEditView( appObj );
-    return getOptionsMap( model, editView.getFields() );
+    return getOptionsMap( appObj, editView.getFields() );
   }
-  public Map< String, List< SelectOption > > getListViewOptionsMap( String appObj ) {
+  public Map< String, List< SelectOption > > getOptionsMap( String appObj, List< IGulInputField > fields ) {
     IDataModel model = App.getModel( appObj );
-    IListView listView = App.getListView( appObj );
-    IGulFilterPanel filterPanel = listView.getFilterPanel();
-    if( filterPanel == null ) {
-      return Collections.emptyMap();
-    }
-    return getOptionsMap( model, filterPanel.getFields() );
-  }
-  public Map< String, List< SelectOption > > getOptionsMap( IDataModel model, List< IGulInputField > fields ) {
     Map< String, List< SelectOption > > optionsMap = new HashMap<>();
     for( IGulInputField field : fields ) {
       if( Objects.equals( field.getTag(), GulConstant.REFERENCE_SELECT ) ) {

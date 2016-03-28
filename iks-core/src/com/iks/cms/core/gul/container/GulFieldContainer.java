@@ -15,8 +15,14 @@ import java.util.stream.*;
  */
 public abstract class GulFieldContainer extends GulContainer implements IFieldContainer {
   protected IDataModel model;
-  public GulFieldContainer( IDataModel model ) {
+  public GulFieldContainer() {
     super();
+  }
+  public GulFieldContainer( IDataModel model ) {
+    this();
+    this.model = model;
+  }
+  public void setModel( IDataModel model ) {
     this.model = model;
   }
   protected List< IGulInputField > fields = new ArrayList<>();
@@ -39,11 +45,11 @@ public abstract class GulFieldContainer extends GulContainer implements IFieldCo
   @Override
   public void parse( Element xmlElement ) throws Exception {
     super.parse( xmlElement );
-    fields = fields.stream().filter( field -> StringUtils.isNotBlank(field.getName() )).collect( Collectors.toList() );
-    for (IGulInputField field: fields) {
-      if (field.getName() != null) {
+    fields = fields.stream().filter( field -> StringUtils.isNotBlank( field.getName() ) ).collect( Collectors.toList() );
+    for( IGulInputField field : fields ) {
+      if( field.getName() != null ) {
         IDataField dataField = model.getField( field.getName() );
-        if (dataField != null) {
+        if( dataField != null ) {
           field.applyModel( model.getField( field.getName() ) );
         }
       }

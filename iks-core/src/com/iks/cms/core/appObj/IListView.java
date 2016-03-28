@@ -8,6 +8,4 @@ import com.iks.cms.core.gul.panel.*;
  * @author Igor Kaynov
  */
 public interface IListView extends IGulContainer {
-  IGrid getGrid();
-  IGulFilterPanel getFilterPanel();
 }

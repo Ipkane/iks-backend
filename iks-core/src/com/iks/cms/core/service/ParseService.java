@@ -1,13 +1,8 @@
-package com.iks.cms.xml.service;
+package com.iks.cms.core.service;
 
 import com.iks.cms.core.appObj.*;
-import com.iks.cms.core.data.*;
-import com.iks.cms.core.grid.*;
-import com.iks.cms.core.model.*;
-import com.iks.cms.core.service.*;
-import com.iks.cms.xml.parser.*;
+import com.iks.cms.core.parser.*;
 
-import org.apache.catalina.core.*;
 import org.slf4j.*;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.stereotype.*;
@@ -43,6 +38,5 @@ public class ParseService {
   private void parseApp( String fileName ) throws Exception {
     AppParser parser = new AppParser();
     List< IAppObj > appObjList = parser.parse( fileName );
-    appObjList.forEach( App::addAppObj );
   }
 }

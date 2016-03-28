@@ -21,17 +21,9 @@ public class ViewController {
   private AppObjService appObjService;
   @RequestMapping( value = REQUEST_GET_LIST_VIEW, method = RequestMethod.GET )
   public String listView( Model model, String appObj ) {
-    ObjectMapper objectMapper = new ObjectMapper();
     IListView listView = appObjService.getListView( appObj );
-    model.addAttribute( "gridName", appObj );
     model.addAttribute( "listView", listView );
-    model.addAttribute( "optionsMap", appObjService.getListViewOptionsMap( appObj ) );
     model.addAttribute( "appObj", App.getAppObj( appObj ) );
-    try {
-      model.addAttribute( "gridJson", objectMapper.writeValueAsString( listView.getGrid() ).replace( "\"", "\\\"" ) );
-    } catch( JsonProcessingException e ) {
-      logger.error( "Serialization error:", e );
-    }
     return listView.getTemplatePath();
   }
   @RequestMapping( value = REQUEST_GET_EDIT_VIEW, method = RequestMethod.GET )

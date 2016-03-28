@@ -5,5 +5,5 @@ import com.iks.cms.core.gul.container.*;
 /**
  * @author Igor Kaynov
  */
-public interface IGulFilterPanel extends IFieldContainer {
+public interface IFilterPanel extends IFieldContainer {
 }

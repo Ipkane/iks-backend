@@ -3,15 +3,23 @@ include "gul/gul-schema.rnc"
 
 start =
   element gridView {
-    attribute appObj { xsd:NCName },
-    element filter {
-      gul.element*
-    }?,
-    element table {
-      element column {
-        labelAttr?
-        & nameAttr?
-        & attribute displayField { text }?
-      }+
-    }
+    attribute appObj { xsd:NCName }
+    & element appTable {
+      idAttr
+      & appObjAttr
+      & filterPanel?
+      & element columns {
+       column+
+      }
+    }?
   }
+
+filterPanel = element filterPanel {
+  gul.element*
+}
+
+column = element column {
+  nameAttr?
+  & labelAttr?
+  & attribute displayField { text }?
+}+

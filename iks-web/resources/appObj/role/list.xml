@@ -1,7 +1,9 @@
 <?xml version="1.0"?>
 <gridView appObj="role" xmlns="http://com.iks.org/schema/list/1.0">
-  <table>
-    <column name="id" label="Role Id"/>
-    <column name="name" label="Name"/>
-  </table>
+  <appTable appObj="role" id="role_grid">
+    <columns>
+      <column name="id" label="Role Id"/>
+      <column name="name" label="Name"/>
+    </columns>
+  </appTable>
 </gridView>

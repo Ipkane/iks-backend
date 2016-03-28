@@ -9,17 +9,11 @@ import java.util.*;
  * @author Igor Kaynov
  */
 public class RequestGetGridData extends AbstractApiRequest implements IGridRequest {
-  private String                appObj;
+  private String                gridId;
   private Map< String, Object > filter;
   private String                orderBy;
   private Integer page = 1;
   private Integer limit;
-  public String getAppObj() {
-    return appObj;
-  }
-  public void setAppObj( String appObj ) {
-    this.appObj = appObj;
-  }
   public Map< String, Object > getFilter() {
     return filter;
   }
@@ -43,5 +37,12 @@ public class RequestGetGridData extends AbstractApiRequest implements IGridReque
   }
   public void setLimit( Integer limit ) {
     this.limit = limit;
+  }
+  @Override
+  public String getGridId() {
+    return gridId;
+  }
+  public void setGridId( String gridId ) {
+    this.gridId = gridId;
   }
 }

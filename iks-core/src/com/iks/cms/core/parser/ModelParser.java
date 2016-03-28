@@ -1,9 +1,9 @@
-package com.iks.cms.xml.parser;
+package com.iks.cms.core.parser;
 
+import com.iks.cms.core.constant.*;
 import com.iks.cms.core.data.*;
 import com.iks.cms.core.gul.*;
 import com.iks.cms.core.model.*;
-import com.iks.cms.xml.constant.*;
 
 import org.apache.commons.lang3.*;
 import org.slf4j.*;

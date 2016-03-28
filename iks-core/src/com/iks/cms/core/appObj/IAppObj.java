@@ -9,7 +9,6 @@ import com.iks.cms.core.model.*;
 public interface IAppObj {
   String getName();
   IDataModel getDataModel();
-  IGrid getGrid();
   IListView getListView();
   IEditView getEditView();
 }

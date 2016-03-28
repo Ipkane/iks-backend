@@ -1,5 +1,7 @@
 package com.iks.cms.core.gul;
 
+import com.iks.cms.core.constant.*;
+import com.iks.cms.core.grid.*;
 import com.iks.cms.core.gul.container.*;
 import com.iks.cms.core.gul.element.*;
 import com.iks.cms.core.gul.form.*;
@@ -52,6 +54,8 @@ public class GulFactory {
         return new GulTabbox();
       case GulConstant.TAB:
         return new GulTab();
+      case ListConstant.APP_TABLE:
+        return new AppGrid();
       default:
         throw new Exception( "Couldn't parse element " + tagName );
     }

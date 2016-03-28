@@ -1,0 +1,45 @@
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:ng="">
+
+<th:block th:fragment="appTable">
+  <div class="app-table"  th:id="${element.id}" th:classappend="${element.cssClass}" th:styleappend="${element.style}">
+    <div class="panel-heading">
+      <div class="hbox">
+        <div class="btn btn-primary" ng-click="openAddModal()">New</div>
+        <div class="btn btn-primary" ng-click="openEditModal()" ng-disabled="!selectedItem">Edit</div>
+        <div class="btn btn-primary" ng-click="openDeleteModal()" ng-disabled="!selectedItem">Delete</div>
+        <div class="btn btn-success" ng-click="toggleFilterPanel()" th:attr="ng-disabled = |${element.filterPanel == null}| ">Filter</div>
+        <div class="btn btn-success" ng-click="refresh()">Refresh</div>
+      </div>
+    </div>
+    <div data-th-if="${element.filterPanel != null}" class="panel-body grid-filter-panel" ng-show="showFilterPanel">
+      <th:block th:include="${element.filterPanel.templatePath} :: ${element.filterPanel.templateName}" th:with="element=${element.filterPanel}">
+      </th:block>
+    </div>
+    <div class="hbox">
+      <div class="spacer" style="flex:1"/>
+      <uib-pagination total-items="totalItems" ng-model="currentPage" ng-change="pageChanged()" items-per-page="itemsPerPage"></uib-pagination>
+    </div>
+    <div>
+      <table class="table table-bordered table-hover table-condensed grid-table">
+        <thead>
+        <th data-th-each="field : ${element.fields}" th:attr="ng-click = |setOrderBy('${field.name}')|" th:inline="text">
+          [[${field.label}]]
+          <span class="glyphicon glyphicon glyphicon-chevron-down" aria-hidden="true" th:attr="ng-show = | vm.getHeaderClass('${field.name}') == 'asc' |"></span>
+          <span class="glyphicon glyphicon glyphicon-chevron-up" aria-hidden="true" th:attr="ng-show = | vm.getHeaderClass('${field.name}') == 'desc' |"></span>
+        </th>
+        </thead>
+        <tbody>
+        <tr ng-repeat="item in items" ng-click="selectItem(item)" ng-class="{'success': item == selectedItem}">
+          <td ng-repeat="field in grid.fields"> {{ formatItemValue( item, field) }}</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="hbox">
+      <div class="spacer" style="flex:1"/>
+      <uib-pagination total-items="totalItems" ng-model="currentPage" ng-change="pageChanged()" items-per-page="itemsPerPage"></uib-pagination>
+    </div>
+    <div ng:init="|gridId='${element.id}'; grid = '${element.toJson()}'|" style="display: none"></div>
+  </div>
+</th:block>
+</html>

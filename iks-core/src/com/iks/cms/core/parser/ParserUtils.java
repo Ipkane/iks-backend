@@ -1,4 +1,4 @@
-package com.iks.cms.xml.parser;
+package com.iks.cms.core.parser;
 
 import org.w3c.dom.*;
 
