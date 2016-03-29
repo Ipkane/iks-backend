@@ -6,6 +6,7 @@ import java.util.*;
  * @author Igor Kaynov
  */
 public class Table {
+  private static int counter = 0;
   private String name;
   private String alias;
   private Map< String, Column > columns = new HashMap<>();

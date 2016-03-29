@@ -9,4 +9,7 @@ public class Projections {
   public static IProjection rowCount(Column column) {
     return new Projection( "count", column );
   }
+  public static IProjection rowCount() {
+    return new Projection( "count", null );
+  }
 }

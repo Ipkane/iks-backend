@@ -9,6 +9,7 @@ import com.iks.cms.core.sql.join.*;
 import com.iks.cms.core.sql.projection.*;
 import com.iks.cms.core.sql.query.*;
 import com.iks.cms.core.utils.*;
+import com.sun.istack.internal.*;
 
 import org.apache.commons.lang3.*;
 import org.hibernate.*;
@@ -36,7 +37,10 @@ public class SelectModelQuery< T extends SelectModelQuery > extends CommonModelQ
     List rows = selectQuery( sessionFactory, sqlQuery );
     List< IDataItem > resultList = new ArrayList<>();
     for( Object rowData : rows ) {
-      resultList.add( parseResult( rowData ) );
+      IDataItem item = parseResult( rowData );
+      if (item != null) {
+        resultList.add( item );
+      }
     }
     return resultList;
   }
@@ -47,7 +51,10 @@ public class SelectModelQuery< T extends SelectModelQuery > extends CommonModelQ
     List rows = selectQuery( sessionFactory, sqlQuery );
     List< IDataItem > resultList = new ArrayList<>();
     for( Object rowData : rows ) {
-      resultList.add( parseResult( rowData ) );
+      IDataItem item = parseResult( rowData );
+      if (item != null) {
+        resultList.add(item);
+      }
     }
     PageableResult result = new PageableResult();
     result.setItems( resultList );
@@ -60,15 +67,15 @@ public class SelectModelQuery< T extends SelectModelQuery > extends CommonModelQ
     SelectQuery query = buildSqlQuery();
     query.getColumns().clear();
     query.getOrderBys().clear();
-    if (filters == null || filters.size() == 0) {
-      query.getLeftJoins().clear();
-    }
-    query.addProjection( Projections.rowCount( null ) );
+    //    if (filters == null || filters.size() == 0) {
+    //      query.getLeftJoins().clear();
+    //    }
+    query.addProjection( Projections.rowCount() );
     query.setLimit( 0 );
     query.setOffset( 0 );
     String sqlQuery = query.toString();
     logger.debug( sqlQuery );
-    BigInteger count= (BigInteger )selectSingleQuery( sessionFactory, sqlQuery );
+    BigInteger count = ( BigInteger )selectSingleQuery( sessionFactory, sqlQuery );
     return count.longValue();
   }
   public IDataItem executeSingleQuery( SessionFactory sessionFactory ) {
@@ -77,9 +84,12 @@ public class SelectModelQuery< T extends SelectModelQuery > extends CommonModelQ
     Object row = selectSingleQuery( sessionFactory, sqlQuery );
     return parseResult( row );
   }
-  protected IDataItem parseResult( Object rawData ) {
+  protected @Nullable IDataItem parseResult( Object rawData ) {
     DataItem resultItem = new DataItem();
     Object[] data = ( Object[] )rawData;
+    if (ModelUtils.isEmptyArray(data)) {
+      return null;
+    }
     int i = 0;
     for( String field : getFields() ) {
       String[] parts = ModelUtils.splitField( field );

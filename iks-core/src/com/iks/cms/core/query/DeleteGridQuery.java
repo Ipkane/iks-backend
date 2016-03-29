@@ -1,6 +1,7 @@
 package com.iks.cms.core.query;
 
 import com.iks.cms.core.appObj.*;
+import com.iks.cms.core.grid.*;
 import com.iks.cms.core.model.*;
 import com.iks.cms.core.sql.*;
 import com.iks.cms.core.sql.query.*;
@@ -11,11 +12,11 @@ import org.slf4j.*;
 /**
  * @author Igor Kaynov
  */
-public class DeleteEditViewQuery extends DeleteModelQuery {
+public class DeleteGridQuery extends DeleteModelQuery {
   private static final Logger logger = LoggerFactory.getLogger( SelectEditViewQuery.class );
-  private IEditView  editView;
-  public DeleteEditViewQuery( IDataModel model, IEditView editView, Long itemId ) {
+  private IBaseGrid grid;
+  public DeleteGridQuery( IDataModel model, IBaseGrid grid, Long itemId ) {
     super(model, itemId);
-    this.editView = editView;
+    this.grid = grid;
   }
 }

@@ -6,11 +6,13 @@ var formScope;
 function GridEditController( $scope, $log, payload, $uibModalInstance, CoreService ) {
   formScope = $scope;
   angular.extend( $scope, {
+    itemId      : payload.itemId,
+    appObj      : payload.appObj,
     alerts      : [],
     selectedItem: {}
   } );
   function init() {
-    CoreService.getEditData( { appObj: payload.appObj, itemId: payload.itemId }, function ( response ) {
+    CoreService.getEditData( { appObj: payload.appObj, itemId: $scope.itemId }, function ( response ) {
       if ( response.isSuccess ) {
         $scope.selectedItem = response.success.item || {};
       } else {
@@ -24,8 +26,9 @@ function GridEditController( $scope, $log, payload, $uibModalInstance, CoreServi
     //  $scope.addAlert("Form is invalid");
     //  return;
     //}
+    $scope.alerts = [];
     CoreService.updateEditData(
-      { appObj: payload.appObj, item: $scope.selectedItem, isNew: payload.isNew } ,
+      { appObj: payload.appObj, item: $scope.selectedItem, isNew: payload.isNew },
       function ( response ) {
         if ( response.isSuccess ) {
           $uibModalInstance.close( $scope.selectedItem );

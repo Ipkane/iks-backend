@@ -27,8 +27,8 @@ function AppObjListController( $scope, $log, $uibModal, $timeout, $rootScope, Co
 
   function reload() {
     var parentId = null;
-    if ($scope.$parent.selectedItem) {
-      parentId= $scope.$parent.selectedItem.id;
+    if ($scope.$parent.itemId) {
+      parentId= $scope.$parent.itemId;
     }
     CoreService.getGridData( {
       gridId: $scope.grid.id, filter: $scope.filter.item, orderBy: ($scope.orderAsc ? '' : '-') + $scope.orderBy,
@@ -69,6 +69,12 @@ function AppObjListController( $scope, $log, $uibModal, $timeout, $rootScope, Co
     $scope.selectedItem = item;
   };
   $scope.openEditModal     = function () {
+    openEditModel(false);
+  };
+  $scope.openAddModal      = function () {
+    openEditModel(true);
+  };
+  function openEditModel(isNew) {
     // open modal
     $uibModal.open(
       {
@@ -78,32 +84,14 @@ function AppObjListController( $scope, $log, $uibModal, $timeout, $rootScope, Co
         controllerAs: 'vm',
         backdrop    : 'static',
         resolve     : {
-          payload: { appObj: $scope.grid.appObj, itemId: $scope.selectedItem.id }
+          payload: { appObj: $scope.grid.appObj, itemId: isNew ? null : $scope.selectedItem.id, isNew: isNew }
         }
       }
     ).result.then( function ( updatedItem ) {
                      reload();
                    }, function () {
                    } );
-  };
-  $scope.openAddModal      = function () {
-    // open modal
-    $uibModal.open(
-      {
-        animation   : true,
-        templateUrl : 'view/editView?appObj=' + $scope.gridName,
-        controller  : 'GridEditController',
-        controllerAs: 'vm',
-        backdrop    : 'static',
-        resolve     : {
-          payload: { appObj: $scope.gridName, itemId: null, isNew: true }
-        }
-      }
-    ).result.then( function ( updatedItem ) {
-                     reload();
-                   }, function () {
-                   } );
-  };
+  }
   $scope.openDeleteModal   = function () {
     // open modal
     $uibModal.open(
@@ -122,7 +110,7 @@ function AppObjListController( $scope, $log, $uibModal, $timeout, $rootScope, Co
           },
           onConfirm: function () {
             return function () {
-              return CoreService.deleteItem( { appObj: $scope.gridName, itemId: $scope.selectedItem.id } ).$promise;
+              return CoreService.deleteItem( { gridId: $scope.grid.id, itemId: $scope.selectedItem.id } ).$promise;
             }
           }
         }

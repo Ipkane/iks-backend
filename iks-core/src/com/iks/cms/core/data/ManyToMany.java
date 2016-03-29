@@ -1,8 +1,13 @@
 package com.iks.cms.core.data;
 
+import com.iks.cms.core.appObj.*;
 import com.iks.cms.core.constant.*;
 import com.iks.cms.core.grid.*;
+import com.iks.cms.core.model.*;
+import com.iks.cms.core.sql.*;
+import com.iks.cms.core.sql.join.*;
 import com.iks.cms.core.sql.query.*;
+import com.iks.cms.core.utils.*;
 
 import org.apache.commons.lang3.*;
 import org.w3c.dom.*;
@@ -41,7 +46,20 @@ public class ManyToMany extends AbstractDataField {
   }
   @Override
   public void extendSelectQueryFields( SelectQuery query, String fullField ) {
-    throw new RuntimeException( "Method not implemented" );
+    Table table = query.getMainTable();
+    String[] parts = ModelUtils.splitField( fullField );
+    IDataModel otherModel = App.getModel( getAppObj() );
+    Table otherTable = new Table( otherModel.getTableName(), otherModel.getAppObj() );
+    Table joinTable = new Table( getJoinTable(), getJoinTable() );
+    query.leftJoin( new Join( joinTable, table.getColumn( FieldConstant.DEFAULT_PRIMARY_FIELD ), joinTable.getColumn( getTableField() ) ) );
+    IDataField otherField;
+    if( parts.length == 1 ) {
+      otherField = otherModel.getField( otherModel.getPrimaryFieldName() );
+    } else {
+      otherField = otherModel.getField( parts[1] );
+    }
+    query.leftJoin( new Join( otherTable, joinTable.getColumn( getInverseTableField() ), otherTable.getColumn( otherModel.getPrimaryFieldName() ) ) );
+    query.addColumn( otherTable.getColumn( otherField.getTableField(), otherField.getName() ) );
   }
   @Override
   public void extendSelectQueryFilter( SelectQuery query, Object value ) {
@@ -49,6 +67,7 @@ public class ManyToMany extends AbstractDataField {
   }
   @Override
   public void fillSelectQueryResult( DataItem resultItem, String value, String fullField ) {
-    throw new RuntimeException( "Method not implemented" );
+    String parts[] = ModelUtils.splitField( fullField );
+    resultItem.addFieldValue( parts[1], value );
   }
 }

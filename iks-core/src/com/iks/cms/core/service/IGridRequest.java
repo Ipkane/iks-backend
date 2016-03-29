@@ -11,4 +11,5 @@ public interface IGridRequest {
   String getOrderBy();
   Integer getPage();
   Integer getLimit();
+  String getParentId();
 }

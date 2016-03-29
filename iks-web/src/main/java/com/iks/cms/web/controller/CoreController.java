@@ -70,7 +70,7 @@ public class CoreController {
   @RequestMapping( value = REQUEST_DELETE_ITEM, method = RequestMethod.POST )
   public ResponseEntity< DefaultResponseBody< ?, ? > > deleteItem( @RequestBody RequestDeleteItem request ) {
     try {
-      appObjService.deleteItem( request.getAppObj(), request.getItemId() );
+      appObjService.deleteItem( request.getGridId(), request.getItemId() );
       return ApiUtils.makeResponse( REQUEST_DELETE_ITEM, request, new ResponseEmpty() );
     } catch( Exception ex ) {
       logger.error( RESPONSE_ERROR_DELETE_ITEM, ex );

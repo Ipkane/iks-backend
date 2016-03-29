@@ -2,6 +2,9 @@ package com.iks.cms.core.utils;
 
 import com.iks.cms.core.query.*;
 
+import org.apache.commons.lang3.*;
+
+import java.util.*;
 import java.util.regex.*;
 
 /**
@@ -18,5 +21,17 @@ public class ModelUtils {
    */
   public static String[] splitField(String fieldName) {
     return fieldName.split( Pattern.quote( Constants.FIELD_SEPARATOR ));
+  }
+  public static boolean isEmptyArray(Object[] item) {
+    if ( ArrayUtils.isEmpty(item)) {
+      return true;
+    }
+    for (Object value: item) {
+      if (value != null) {
+        return false;
+      }
+    }
+    return true;
+
   }
 }

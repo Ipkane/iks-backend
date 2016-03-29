@@ -33,9 +33,14 @@ public class AppObjService {
   }
   public PageableResult getGridData( IGridRequest request ) {
     IBaseGrid grid = App.getGrid( request.getGridId() );
-    SelectGridQuery query = new SelectGridQuery( App.getModel( grid.getAppObj() ), grid  );
+    SelectGridQuery query = new SelectGridQuery( App.getModel( grid.getAppObj() ), grid );
+    if( StringUtils.isNotBlank( request.getParentId() ) ) {
+      query.setParentId( request.getParentId() );
+    }
     if( request.getFilter() != null ) {
-      query.setFilters( request.getFilter() );
+      for( Map.Entry< String, Object > entry : request.getFilter().entrySet() ) {
+        query.addFilter( entry.getKey(), entry.getValue() );
+      }
     }
     String orderBy = request.getOrderBy();
     if( orderBy != null ) {
@@ -92,8 +97,9 @@ public class AppObjService {
     UpdateEditViewQuery query = new UpdateEditViewQuery( model, App.getEditView( appObj ), item );
     query.executeQuery( commonDao.getSessionFactory() );
   }
-  public void deleteItem( String appObj, Long itemId ) {
-    DeleteEditViewQuery query = new DeleteEditViewQuery( App.getModel( appObj ), App.getEditView( appObj ), itemId );
+  public void deleteItem( String gridId, Long itemId ) {
+    IBaseGrid grid = App.getGrid( gridId );
+    DeleteGridQuery query = new DeleteGridQuery( App.getModel( grid.getAppObj() ), grid, itemId );
     query.executeQuery( commonDao.getSessionFactory() );
   }
   public IListView getListView( String appObj ) {
