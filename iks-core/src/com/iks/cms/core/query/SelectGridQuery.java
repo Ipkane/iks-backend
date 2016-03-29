@@ -1,23 +1,37 @@
 package com.iks.cms.core.query;
 
+import com.iks.cms.core.appObj.*;
+import com.iks.cms.core.data.*;
 import com.iks.cms.core.grid.*;
 import com.iks.cms.core.model.*;
 
+import org.apache.commons.lang3.*;
 import org.slf4j.*;
 
 /**
  * @author Igor Kaynov
  */
-public class SelectGridQuery extends SelectModelQuery<SelectGridQuery> {
+public class SelectGridQuery extends SelectModelQuery< SelectGridQuery > {
   private static final Logger logger = LoggerFactory.getLogger( SelectGridQuery.class );
+  private String    parentId;
   private IBaseGrid grid;
   public SelectGridQuery( IDataModel model, IBaseGrid grid ) {
     super( model );
     this.grid = grid;
+    String fieldPrefix = "";
+//    if( StringUtils.isNotBlank( grid.getParentAppObj() ) ) {
+//      IDataModel parentModel = App.getModel( grid.getParentAppObj() );
+//      IDataField parentField = parentModel.getField( grid.getName() );
+//      fieldPrefix = grid.getName() + ".";
+//      if( StringUtils.isNotBlank( parentId ) ) {
+//        addFilter( parentModel.getPrimaryFieldName(), getParentId() );
+//      }
+//      setModel( App.getModel( grid.getParentAppObj() ) );
+//    }
     for( IGridColumn field : grid.getFields() ) {
-      addField( field.getName() );
-      if( field.getDisplayField() != null) {
-        addField( field.getName() + Constants.FIELD_SEPARATOR + field.getDisplayField() );
+      addField( fieldPrefix + field.getName() );
+      if( field.getDisplayField() != null ) {
+        addField( fieldPrefix + field.getName() + Constants.FIELD_SEPARATOR + field.getDisplayField() );
       }
     }
   }
@@ -26,5 +40,11 @@ public class SelectGridQuery extends SelectModelQuery<SelectGridQuery> {
   }
   public void setGrid( IBaseGrid grid ) {
     this.grid = grid;
+  }
+  public String getParentId() {
+    return parentId;
+  }
+  public void setParentId( String parentId ) {
+    this.parentId = parentId;
   }
 }

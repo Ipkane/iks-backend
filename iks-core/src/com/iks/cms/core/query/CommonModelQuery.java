@@ -33,4 +33,10 @@ public class CommonModelQuery< T extends CommonModelQuery > extends CommonDaoQue
     this.fields.add( field );
     return ( T )this;
   }
+  public IDataModel getModel() {
+    return model;
+  }
+  public void setModel( IDataModel model ) {
+    this.model = model;
+  }
 }

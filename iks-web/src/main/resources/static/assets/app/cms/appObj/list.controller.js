@@ -26,8 +26,13 @@ function AppObjListController( $scope, $log, $uibModal, $timeout, $rootScope, Co
   }
 
   function reload() {
+    var parentId = null;
+    if ($scope.$parent.selectedItem) {
+      parentId= $scope.$parent.selectedItem.id;
+    }
     CoreService.getGridData( {
       gridId: $scope.grid.id, filter: $scope.filter.item, orderBy: ($scope.orderAsc ? '' : '-') + $scope.orderBy,
+      parentId: parentId,
       page  : $scope.currentPage, limit: $scope.itemsPerPage
     } ).$promise.then( function ( response ) {
                          $scope.items          = response.success.result.items;

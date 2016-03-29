@@ -12,6 +12,7 @@ public class RequestGetGridData extends AbstractApiRequest implements IGridReque
   private String                gridId;
   private Map< String, Object > filter;
   private String                orderBy;
+  private String                parentId;
   private Integer page = 1;
   private Integer limit;
   public Map< String, Object > getFilter() {
@@ -44,5 +45,11 @@ public class RequestGetGridData extends AbstractApiRequest implements IGridReque
   }
   public void setGridId( String gridId ) {
     this.gridId = gridId;
+  }
+  public String getParentId() {
+    return parentId;
+  }
+  public void setParentId( String parentId ) {
+    this.parentId = parentId;
   }
 }

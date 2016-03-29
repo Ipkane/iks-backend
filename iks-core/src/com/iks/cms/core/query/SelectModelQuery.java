@@ -84,28 +84,8 @@ public class SelectModelQuery< T extends SelectModelQuery > extends CommonModelQ
     for( String field : getFields() ) {
       String[] parts = ModelUtils.splitField( field );
       String value = data[i] == null ? null : data[i].toString();
-      if( parts.length == 1 ) {
-        IDataField dataField = model.getField( field );
-        if( dataField instanceof ManyToOne ) {
-          ManyToOne manyToOne = ( ManyToOne )dataField;
-          IDataModel joinedModel = App.getModel( manyToOne.getAppObj());
-          DataItem joinedItem = new DataItem();
-          joinedItem.addFieldValue( joinedModel.getPrimaryFieldName(), value );
-          resultItem.addFieldValue( manyToOne.getName(), joinedItem );
-        } else {
-          resultItem.addFieldValue( dataField.getName(), dataField.parseValue( value ) );
-        }
-      } else if( parts.length == 2 ) {
-        ManyToOne manyToOne = ( ManyToOne )model.getField( parts[0] );
-        DataItem joinedItem = ( DataItem )resultItem.getFieldValue( manyToOne.getName() );
-        if( joinedItem == null ) {
-          joinedItem = new DataItem();
-          resultItem.addFieldValue( manyToOne.getName(), joinedItem );
-        }
-        joinedItem.addFieldValue( parts[1], value );
-      } else {
-        throw new RuntimeException( "Method doesn't support yet form complex fields" );
-      }
+      IDataField dataField = model.getField( parts[0] );
+      dataField.fillSelectQueryResult( resultItem, value, field );
       i++;
     }
     return resultItem;
@@ -116,44 +96,13 @@ public class SelectModelQuery< T extends SelectModelQuery > extends CommonModelQ
     sb.from( table );
     for( String field : getFields() ) {
       String[] parts = ModelUtils.splitField( field );
-      if( parts.length == 1 ) {
-        IDataField dataField = model.getField( parts[0] );
-        sb.addColumn( table.getColumn( dataField.getTableField(), dataField.getName() ) );
-      } else if( parts.length == 2 ) {
-        // join tables
-        ManyToOne dataField = ( ManyToOne )model.getField( parts[0] );
-        IDataModel joinedModel = App.getModel( dataField.getAppObj() );
-        IDataField joinedField = joinedModel.getField( parts[1] );
-        Table joinedTable = new Table( joinedModel.getTableName(), joinedModel.getAppObj() );
-        sb.leftJoin( new Join( joinedTable, table.getColumn( dataField.getTableField(), dataField.getName() ), joinedTable.getColumn( joinedModel.getPrimaryFieldName() ) ) );
-        sb.addColumn( joinedTable.getColumn( joinedField.getTableField(), joinedField.getName() ) );
-      }
+      IDataField dataField = model.getField( parts[0] );
+      dataField.extendSelectQueryFields( sb, field );
     }
     for( Map.Entry< String, Object > entry : filters.entrySet() ) {
       // todo add like filter
       IDataField dataField = model.getField( entry.getKey() );
-      if( dataField instanceof SimpleDataField ) {
-        // simple field query, just key and value
-        if( entry.getValue() == null || StringUtils.trimToNull( entry.getValue().toString() ) == null ) {
-          continue;
-        }
-        sb.addCriteria( new MatchCriteria( table.getColumn( entry.getKey() ), entry.getValue() ) );
-      } else if( dataField instanceof ManyToOne ) {
-        // query to many to one field. Herer value is a map with key/value pair
-        ManyToOne manyToOne = ( ManyToOne )dataField;
-        IDataModel joinedModel = App.getModel( manyToOne.getAppObj() );
-        Table joinedTable = new Table( joinedModel.getTableName(), joinedModel.getAppObj() );
-        sb.leftJoin( new Join( joinedTable, table.getColumn( dataField.getTableField(), dataField.getName() ), joinedTable.getColumn( joinedModel.getPrimaryFieldName()) ) );
-        for( Map.Entry< String, Object > joinedItemEntry : ( ( Map< String, Object > )entry.getValue() ).entrySet() ) {
-          IDataField joinedField = joinedModel.getField( joinedItemEntry.getKey() );
-          if( joinedItemEntry.getValue() == null || StringUtils.trimToNull( joinedItemEntry.getValue().toString() ) == null ) {
-            continue;
-          }
-          sb.addCriteria( new MatchCriteria( joinedTable.getColumn( joinedField.getTableField() ), joinedItemEntry.getValue() ) );
-        }
-      } else {
-        throw new RuntimeException( "Method not implemented for this type of field" );
-      }
+      dataField.extendSelectQueryFilter( sb, entry.getValue() );
     }
     if( orderBy != null ) {
       sb.orderBy( new ColumnOrder( table.getColumn( orderBy ), orderAsc ? EColumnOrder.ASC : EColumnOrder.DESC ) );
