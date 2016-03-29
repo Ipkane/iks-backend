@@ -24,7 +24,7 @@ public class ReferenceTable extends BaseGrid {
   private String label;
   public ReferenceTable() {
     id = UUID.randomUUID().toString();
-    showToolbar = false;
+//    showToolbar = false;
   }
   public String getName() {
     return name;

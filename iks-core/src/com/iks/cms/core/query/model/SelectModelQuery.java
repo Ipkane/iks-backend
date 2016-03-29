@@ -1,17 +1,14 @@
-package com.iks.cms.core.query;
+package com.iks.cms.core.query.model;
 
-import com.iks.cms.core.appObj.*;
 import com.iks.cms.core.data.*;
 import com.iks.cms.core.grid.*;
 import com.iks.cms.core.model.*;
 import com.iks.cms.core.sql.*;
-import com.iks.cms.core.sql.join.*;
 import com.iks.cms.core.sql.projection.*;
 import com.iks.cms.core.sql.query.*;
 import com.iks.cms.core.utils.*;
 import com.sun.istack.internal.*;
 
-import org.apache.commons.lang3.*;
 import org.hibernate.*;
 import org.slf4j.*;
 

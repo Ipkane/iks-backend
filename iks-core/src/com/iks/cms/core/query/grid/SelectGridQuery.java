@@ -1,9 +1,11 @@
-package com.iks.cms.core.query;
+package com.iks.cms.core.query.grid;
 
 import com.iks.cms.core.appObj.*;
 import com.iks.cms.core.data.*;
 import com.iks.cms.core.grid.*;
 import com.iks.cms.core.model.*;
+import com.iks.cms.core.query.*;
+import com.iks.cms.core.query.model.*;
 
 import org.apache.commons.lang3.*;
 import org.slf4j.*;

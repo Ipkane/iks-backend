@@ -15,25 +15,25 @@ function AppObjListController( $scope, $log, $uibModal, $timeout, $rootScope, Co
     items       : [],
     itemsPerPage: 10,
     currentPage : 1,
+    parentItemId: null,
     totalItems  : 0
   } );
   function init() {
     if ( angular.isString( $scope.grid ) ) {
       $scope.grid = angular.fromJson( $scope.grid );
     }
-    $rootScope.grids[$scope.grid['id']] = $scope;
+    $rootScope.grids[ $scope.grid[ 'id' ] ] = $scope;
     reload();
   }
 
   function reload() {
-    var parentId = null;
-    if ($scope.$parent.itemId) {
-      parentId= $scope.$parent.itemId;
+    if ( $scope.$parent.itemId ) {
+      $scope.parentItemId = $scope.$parent.itemId;
     }
     CoreService.getGridData( {
-      gridId: $scope.grid.id, filter: $scope.filter.item, orderBy: ($scope.orderAsc ? '' : '-') + $scope.orderBy,
-      parentId: parentId,
-      page  : $scope.currentPage, limit: $scope.itemsPerPage
+      gridId  : $scope.grid.id, filter: $scope.filter.item, orderBy: ($scope.orderAsc ? '' : '-') + $scope.orderBy,
+      parentId: $scope.parentItemId,
+      page    : $scope.currentPage, limit: $scope.itemsPerPage
     } ).$promise.then( function ( response ) {
                          $scope.items          = response.success.result.items;
                          $scope.totalItems     = response.success.result.totalItems;
@@ -69,12 +69,12 @@ function AppObjListController( $scope, $log, $uibModal, $timeout, $rootScope, Co
     $scope.selectedItem = item;
   };
   $scope.openEditModal     = function () {
-    openEditModel(false);
+    openEditModal( false );
   };
   $scope.openAddModal      = function () {
-    openEditModel(true);
+    openEditModal( true );
   };
-  function openEditModel(isNew) {
+  function openEditModal( isNew ) {
     // open modal
     $uibModal.open(
       {
@@ -92,7 +92,26 @@ function AppObjListController( $scope, $log, $uibModal, $timeout, $rootScope, Co
                    }, function () {
                    } );
   }
-  $scope.openDeleteModal   = function () {
+
+  $scope.openReferenceModal = function () {
+    // open modal
+    $uibModal.open(
+      {
+        animation   : true,
+        templateUrl : 'view/referenceView?appObj=' + $scope.grid.appObj,
+        controller  : 'ReferenceListModalController',
+        controllerAs: 'vm',
+        backdrop    : 'static',
+        resolve     : {
+          payload: { gridId: $scope.grid.id, parentItemId: $scope.parentItemId }
+        }
+      }
+    ).result.then( function ( selectedItem ) {
+                     reload();
+                   }, function () {
+                   } );
+  };
+  $scope.openDeleteModal    = function () {
     // open modal
     $uibModal.open(
       {
@@ -120,7 +139,7 @@ function AppObjListController( $scope, $log, $uibModal, $timeout, $rootScope, Co
                    }, function () {
                    } );
   };
-  $scope.setOrderBy        = function ( fieldName ) {
+  $scope.setOrderBy         = function ( fieldName ) {
     if ( fieldName == $scope.orderBy ) {
       $scope.orderAsc = !$scope.orderAsc;
     } else {
@@ -129,23 +148,23 @@ function AppObjListController( $scope, $log, $uibModal, $timeout, $rootScope, Co
     $scope.orderBy = fieldName;
     $scope.items   = _.orderBy( $scope.items, [ $scope.orderBy ], [ $scope.orderAsc ? 'asc' : 'desc' ] );
   };
-  vm.getField              = function ( fieldName ) {
+  vm.getField               = function ( fieldName ) {
     return _.find( $scope.grid.fields, { name: fieldName } );
   };
-  $scope.formatItemValue   = function ( item, field ) {
+  $scope.formatItemValue    = function ( item, field ) {
     if ( !field.displayField ) {
       return item[ field.name ];
     } else {
       return item[ field.name ][ field.displayField ];
     }
   };
-  vm.getHeaderClass        = function ( fieldName ) {
+  vm.getHeaderClass         = function ( fieldName ) {
     if ( fieldName == $scope.orderBy ) {
       return $scope.orderAsc ? 'asc' : 'desc';
     }
     return null;
   };
-  $scope.clearFilter       = function () {
+  $scope.clearFilter        = function () {
     $scope.filter.item = {};
     reload();
   };

@@ -1,7 +1,7 @@
-package com.iks.cms.core.query;
+package com.iks.cms.core.query.model;
 
-import com.iks.cms.core.appObj.*;
 import com.iks.cms.core.model.*;
+import com.iks.cms.core.query.*;
 import com.iks.cms.core.sql.*;
 import com.iks.cms.core.sql.query.*;
 

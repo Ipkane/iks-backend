@@ -1,12 +1,9 @@
-package com.iks.cms.core.query;
+package com.iks.cms.core.query.model;
 
-import com.iks.cms.core.data.*;
 import com.iks.cms.core.grid.*;
 import com.iks.cms.core.model.*;
-import com.iks.cms.core.sql.*;
 import com.iks.cms.core.sql.query.*;
 
-import org.hibernate.*;
 import org.slf4j.*;
 
 /**

@@ -8,6 +8,7 @@
     return $resource( 'api/core/:action', {}, {
       getGrid       : ApiService.buildGetServiceMethod( 'getGrid' ),
       getGridData   : ApiService.buildPostServiceMethod( 'getGridData' ),
+      addGridItem   : ApiService.buildPostServiceMethod( 'addGridItem' ),
       getEditData   : ApiService.buildGetServiceMethod( 'getEditData' ),
       updateEditData: ApiService.buildPostServiceMethod( 'updateEditData' ),
       deleteItem    : ApiService.buildPostServiceMethod( 'deleteItem' )

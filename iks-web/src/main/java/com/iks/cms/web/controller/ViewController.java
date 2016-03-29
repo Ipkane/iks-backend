@@ -15,16 +15,24 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping( "/view" )
 public class ViewController {
   private static final String REQUEST_GET_LIST_VIEW = "/listView";
+  private static final String REQUEST_GET_REFERENCE_VIEW = "/referenceView";
   private static final String REQUEST_GET_EDIT_VIEW = "/editView";
   private final        Logger logger                = LoggerFactory.getLogger( ViewController.class );
   @Autowired
   private AppObjService appObjService;
   @RequestMapping( value = REQUEST_GET_LIST_VIEW, method = RequestMethod.GET )
-  public String listView( Model model, String appObj ) {
+     public String listView( Model model, String appObj ) {
     IListView listView = appObjService.getListView( appObj );
     model.addAttribute( "listView", listView );
     model.addAttribute( "appObj", App.getAppObj( appObj ) );
     return listView.getTemplatePath();
+  }
+  @RequestMapping( value = REQUEST_GET_REFERENCE_VIEW, method = RequestMethod.GET )
+  public String referenceView( Model model, String appObj ) {
+    IListView listView = appObjService.getListView( appObj );
+    model.addAttribute( "grid", App.getInstance().getAppObjMainGrid(appObj) );
+    model.addAttribute( "appObj", App.getAppObj( appObj ) );
+    return "view/referenceView";
   }
   @RequestMapping( value = REQUEST_GET_EDIT_VIEW, method = RequestMethod.GET )
   public String editView( Model model, String appObj, Long itemId ) {

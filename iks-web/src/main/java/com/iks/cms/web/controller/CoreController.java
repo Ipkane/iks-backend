@@ -21,6 +21,7 @@ public class CoreController {
   private static final String REQUEST_GET_EDIT_DATA           = "/getEditData";
   private static final String RESPONSE_ERROR_GET_EDIT_DATA    = "Couldn't get edit data";
   private static final String REQUEST_UPDATE_EDIT_DATA        = "/updateEditData";
+  private static final String REQUEST_ADD_GRID_ITEM           = "/addGridItem";
   private static final String RESPONSE_ERROR_UPDATE_EDIT_DATA = "Couldn't update edit data";
   private static final String REQUEST_DELETE_ITEM             = "/deleteItem";
   private static final String RESPONSE_ERROR_DELETE_ITEM      = "Couldn't delete item";
@@ -31,7 +32,7 @@ public class CoreController {
   public ResponseEntity< DefaultResponseBody< ?, ? > > getGridData( @RequestBody RequestGetGridData request ) {
     try {
       ResponseGetGridData response = new ResponseGetGridData();
-      response.setResult( appObjService.getGridData( request ));
+      response.setResult( appObjService.getGridData( request ) );
       return ApiUtils.makeResponse( REQUEST_GET_GRID_DATA, request, response );
     } catch( Exception ex ) {
       logger.error( RESPONSE_ERROR_GET_GRID_DATA, ex );
@@ -62,6 +63,16 @@ public class CoreController {
       logger.error( RESPONSE_ERROR_UPDATE_EDIT_DATA, ex );
       ResponseValidationException response = new ResponseValidationException( ex );
       return ApiUtils.makeClientErrorResponse( REQUEST_UPDATE_EDIT_DATA, RESPONSE_ERROR_UPDATE_EDIT_DATA, response, request );
+    } catch( Exception ex ) {
+      logger.error( RESPONSE_ERROR_UPDATE_EDIT_DATA, ex );
+      return ApiUtils.makeErrorResponse( REQUEST_UPDATE_EDIT_DATA, RESPONSE_ERROR_UPDATE_EDIT_DATA, request );
+    }
+  }
+  @RequestMapping( value = REQUEST_ADD_GRID_ITEM, method = RequestMethod.POST )
+  public ResponseEntity< DefaultResponseBody< ?, ? > > addGridItem( @RequestBody RequestAddGridItem request ) {
+    try {
+      appObjService.addGridItem( request.getGridId(), request.getParentItemId(), request.getItemId() );
+      return ApiUtils.makeResponse( REQUEST_UPDATE_EDIT_DATA, request, new ResponseEmpty() );
     } catch( Exception ex ) {
       logger.error( RESPONSE_ERROR_UPDATE_EDIT_DATA, ex );
       return ApiUtils.makeErrorResponse( REQUEST_UPDATE_EDIT_DATA, RESPONSE_ERROR_UPDATE_EDIT_DATA, request );

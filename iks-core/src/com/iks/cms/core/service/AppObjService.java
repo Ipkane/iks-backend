@@ -7,7 +7,9 @@ import com.iks.cms.core.grid.*;
 import com.iks.cms.core.gul.*;
 import com.iks.cms.core.gul.form.*;
 import com.iks.cms.core.model.*;
-import com.iks.cms.core.query.*;
+import com.iks.cms.core.query.editView.*;
+import com.iks.cms.core.query.grid.*;
+import com.iks.cms.core.query.model.*;
 import com.iks.cms.core.repository.*;
 
 import org.apache.commons.lang3.*;
@@ -101,6 +103,11 @@ public class AppObjService {
     IBaseGrid grid = App.getGrid( gridId );
     DeleteGridQuery query = new DeleteGridQuery( App.getModel( grid.getAppObj() ), grid, itemId );
     query.executeQuery( commonDao.getSessionFactory() );
+  }
+  public void addGridItem( String gridId, String parentItemId, String itemId ) {
+    IBaseGrid grid = App.getGrid( gridId );
+    AddReferenceValueQuery query = new AddReferenceValueQuery( App.getModel( grid.getAppObj() ), grid.getName(), parentItemId, itemId );
+    query.execute( commonDao.getSessionFactory() );
   }
   public IListView getListView( String appObj ) {
     return App.getAppObj( appObj ).getListView();

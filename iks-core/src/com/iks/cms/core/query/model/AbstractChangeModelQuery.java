@@ -1,4 +1,4 @@
-package com.iks.cms.core.query;
+package com.iks.cms.core.query.model;
 
 import com.iks.cms.core.data.*;
 import com.iks.cms.core.grid.*;

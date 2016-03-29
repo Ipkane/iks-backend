@@ -1,10 +1,9 @@
-package com.iks.cms.core.query;
+package com.iks.cms.core.query.model;
 
-import com.iks.cms.core.data.*;
 import com.iks.cms.core.model.*;
+import com.iks.cms.core.query.*;
 
 import java.util.*;
-import java.util.stream.*;
 
 /**
  * @author Igor Kaynov
