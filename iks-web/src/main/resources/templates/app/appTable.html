@@ -8,7 +8,7 @@
         <div class="btn btn-primary" ng-click="openAddModal()">New</div>
         <div class="btn btn-primary" ng-click="openEditModal()" ng-disabled="!selectedItem">Edit</div>
         <div class="btn btn-primary" ng-click="openDeleteModal()" ng-disabled="!selectedItem">Delete</div>
-        <div class="btn btn-success" ng-click="toggleFilterPanel()" th:attr="ng-disabled = |${element.filterPanel == null}| ">Filter</div>
+        <div class="btn btn-success" ng-click="toggleFilterPanel()" th:if="${element.filterPanel != null}">Filter</div>
         <div class="btn btn-success" ng-click="refresh()">Refresh</div>
       </div>
     </div>

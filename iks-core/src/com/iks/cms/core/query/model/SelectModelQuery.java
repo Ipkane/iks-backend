@@ -35,7 +35,7 @@ public class SelectModelQuery< T extends SelectModelQuery > extends CommonModelQ
     List< IDataItem > resultList = new ArrayList<>();
     for( Object rowData : rows ) {
       IDataItem item = parseResult( rowData );
-      if (item != null) {
+      if( item != null ) {
         resultList.add( item );
       }
     }
@@ -49,8 +49,8 @@ public class SelectModelQuery< T extends SelectModelQuery > extends CommonModelQ
     List< IDataItem > resultList = new ArrayList<>();
     for( Object rowData : rows ) {
       IDataItem item = parseResult( rowData );
-      if (item != null) {
-        resultList.add(item);
+      if( item != null ) {
+        resultList.add( item );
       }
     }
     PageableResult result = new PageableResult();
@@ -81,10 +81,12 @@ public class SelectModelQuery< T extends SelectModelQuery > extends CommonModelQ
     Object row = selectSingleQuery( sessionFactory, sqlQuery );
     return parseResult( row );
   }
-  protected @Nullable IDataItem parseResult( Object rawData ) {
+  protected
+  @Nullable
+  IDataItem parseResult( Object rawData ) {
     DataItem resultItem = new DataItem();
     Object[] data = ( Object[] )rawData;
-    if (ModelUtils.isEmptyArray(data)) {
+    if( ModelUtils.isEmptyArray( data ) ) {
       return null;
     }
     int i = 0;
@@ -102,8 +104,7 @@ public class SelectModelQuery< T extends SelectModelQuery > extends CommonModelQ
     Table table = new Table( model.getTableName(), model.getAppObj() );
     sb.from( table );
     for( String field : getFields() ) {
-      String[] parts = ModelUtils.splitField( field );
-      IDataField dataField = model.getField( parts[0] );
+      IDataField dataField = model.getField( ModelUtils.getBaseField( field ) );
       dataField.extendSelectQueryFields( sb, field );
     }
     for( Map.Entry< String, Object > entry : filters.entrySet() ) {
@@ -112,7 +113,8 @@ public class SelectModelQuery< T extends SelectModelQuery > extends CommonModelQ
       dataField.extendSelectQueryFilter( sb, entry.getValue() );
     }
     if( orderBy != null ) {
-      sb.orderBy( new ColumnOrder( table.getColumn( orderBy ), orderAsc ? EColumnOrder.ASC : EColumnOrder.DESC ) );
+      IDataField dataField = model.getField( ModelUtils.getBaseField( orderBy ) );
+      dataField.setSelectQueryOrder( sb, orderBy, orderAsc ? EColumnOrder.ASC : EColumnOrder.DESC );
     } else {
       sb.orderBy( new ColumnOrder( table.getColumn( model.getPrimaryFieldName(), null ), EColumnOrder.ASC ) );
     }

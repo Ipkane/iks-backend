@@ -90,3 +90,7 @@ input.form-control.ng-invalid {
 .vbox > .form-control {
   align-self: stretch;
 }
+
+.modal-error .message {
+  word-break: break-all;
+}

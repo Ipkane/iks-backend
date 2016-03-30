@@ -8,8 +8,7 @@ import org.apache.commons.lang3.*;
 
 /**
  * @author Igor Kaynov
- *
- * This is a simple table field, without references etc.
+ *         This is a simple table field, without references etc.
  */
 public abstract class SimpleDataField extends AbstractDataField {
   @Override
@@ -26,7 +25,12 @@ public abstract class SimpleDataField extends AbstractDataField {
     query.addCriteria( new MatchCriteria( table.getColumn( getFieldName() ), value ) );
   }
   @Override
-  public void fillSelectQueryResult(DataItem resultItem, String value, String fullField) {
+  public void setSelectQueryOrder( SelectQuery query, String fullField, EColumnOrder order ) {
+    Table table = query.getMainTable();
+    query.orderBy( new ColumnOrder( table.getColumn( getFieldName() ), order ) );
+  }
+  @Override
+  public void fillSelectQueryResult( DataItem resultItem, String value, String fullField ) {
     resultItem.addFieldValue( getFieldName(), parseValue( value ) );
   }
 }

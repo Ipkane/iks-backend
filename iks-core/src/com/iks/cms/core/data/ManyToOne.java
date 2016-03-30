@@ -67,18 +67,32 @@ public class ManyToOne extends AbstractDataField {
   @Override
   public void fillSelectQueryResult( DataItem resultItem, String value, String fullField ) {
     String parts[] = ModelUtils.splitField( fullField );
-//    if( parts.length == 1 ) {
-//      IDataModel joinedModel = App.getModel( getAppObj() );
-//      DataItem joinedItem = new DataItem();
-//      joinedItem.addFieldValue( joinedModel.getPrimaryFieldName(), value );
-//      resultItem.addFieldValue( getFieldName(), joinedItem );
-//    } else {
+    if( parts.length == 1 ) {
+      IDataModel joinedModel = App.getModel( getAppObj() );
+      DataItem joinedItem = new DataItem();
+      joinedItem.addFieldValue( joinedModel.getPrimaryFieldName(), value );
+      resultItem.addFieldValue( getFieldName(), joinedItem );
+    } else {
       DataItem joinedItem = ( DataItem )resultItem.getFieldValue( parts[0] );
       if( joinedItem == null ) {
         joinedItem = new DataItem();
         resultItem.addFieldValue( parts[0], joinedItem );
       }
       joinedItem.addFieldValue( parts[1], value );
-//    }
+    }
+  }
+  @Override
+  public void setSelectQueryOrder( SelectQuery query, String fullField, EColumnOrder order ) {
+    Table table = query.getMainTable();
+    String[] parts = ModelUtils.splitField( fullField );
+    if( parts.length == 1 ) {
+      query.orderBy( new ColumnOrder( table.getColumn( getTableField(), getFieldName() ), order ) );
+    } else {
+      IDataModel joinedModel = App.getModel( getAppObj() );
+      IDataField joinedField = joinedModel.getField( parts[1] );
+      Table joinedTable = new Table( joinedModel.getTableName(), joinedModel.getAppObj() );
+      query.leftJoin( new Join( joinedTable, table.getColumn( getTableField(), getFieldName() ), joinedTable.getColumn( joinedModel.getPrimaryFieldName() ) ) );
+      query.orderBy( new ColumnOrder( joinedTable.getColumn( joinedField.getTableField(), joinedField.getFieldName() ), order ) );
+    }
   }
 }

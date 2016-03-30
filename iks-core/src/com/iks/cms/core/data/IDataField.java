@@ -28,5 +28,6 @@ public interface IDataField<T> {
 
   void extendSelectQueryFields( SelectQuery query, String fullField );
   void extendSelectQueryFilter( SelectQuery query, Object value );
+  void setSelectQueryOrder( SelectQuery query,String fullField, EColumnOrder order );
   void fillSelectQueryResult(DataItem resultItem, String value, String fullField);
 }

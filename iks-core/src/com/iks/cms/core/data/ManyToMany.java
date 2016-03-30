@@ -74,4 +74,17 @@ public class ManyToMany extends AbstractDataField {
     }
     joinedItem.addFieldValue( parts[1], value );
   }
+  @Override
+  public void setSelectQueryOrder( SelectQuery query, String fullField, EColumnOrder order ) {
+    Table table = query.getMainTable();
+    String[] parts = ModelUtils.splitField( fullField );
+    IDataModel otherModel = App.getModel( getAppObj() );
+    Table otherTable = new Table( otherModel.getTableName(), otherModel.getAppObj() );
+    Table joinTable = new Table( getJoinTable(), getJoinTable() );
+    query.leftJoin( new Join( joinTable, table.getColumn( FieldConstant.DEFAULT_PRIMARY_FIELD ), joinTable.getColumn( getTableField() ) ) );
+    IDataField otherField;
+    otherField = otherModel.getField( parts[1] );
+    query.leftJoin( new Join( otherTable, joinTable.getColumn( getInverseTableField() ), otherTable.getColumn( otherModel.getPrimaryFieldName() ) ) );
+    query.orderBy( new ColumnOrder( otherTable.getColumn( otherField.getTableField(), otherField.getFieldName() ), order ) );
+  }
 }

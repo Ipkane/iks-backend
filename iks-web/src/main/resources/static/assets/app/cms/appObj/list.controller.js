@@ -35,28 +35,33 @@ function AppObjListController( $scope, $log, $uibModal, $timeout, $rootScope, Co
       gridId  : $scope.grid.id, filter: $scope.filter.item, orderBy: ($scope.orderAsc ? '' : '-') + $scope.orderBy,
       parentId: $scope.parentItemId,
       page    : $scope.currentPage, limit: $scope.itemsPerPage
-    } ).$promise.then( function ( response ) {
-                         $scope.items          = response.success.result.items;
-                         $scope.totalItems     = response.success.result.totalItems;
-                         var foundSelectedItem = false;
-                         if ( $scope.selectedItem ) {
-                           _.each( $scope.items, function ( item ) {
-                             if ( item.id == $scope.selectedItem.id ) {
-                               $scope.selectedItem = item;
-                               foundSelectedItem   = true;
-                             }
-                           } );
-                           if ( !foundSelectedItem ) {
-                             $scope.selectedItem = null;
-                           }
-                         }
-                       } ).catch( function ( response ) {
-                                    $log.debug( response );
-                                  } );
-  };
+    } ).$promise.then(
+      function ( response ) {
+        if ( !response.isSuccess ) {
+          ModalHelper.showErrorModal( response );
+          return;
+        }
+        $scope.items          = response.success.result.items;
+        $scope.totalItems     = response.success.result.totalItems;
+        var foundSelectedItem = false;
+        if ( $scope.selectedItem ) {
+          _.each( $scope.items, function ( item ) {
+            if ( item.id == $scope.selectedItem.id ) {
+              $scope.selectedItem = item;
+              foundSelectedItem   = true;
+            }
+          } );
+          if ( !foundSelectedItem ) {
+            $scope.selectedItem = null;
+          }
+        }
+      } ).catch( function ( response ) {
+                   ModalHelper.showErrorModal( response );
+                 } );
+  }
   $scope.pageChanged       = function () {
     reload();
-  }
+  };
   $scope.toggleFilterPanel = function () {
     $scope.showFilterPanel = !$scope.showFilterPanel;
   };

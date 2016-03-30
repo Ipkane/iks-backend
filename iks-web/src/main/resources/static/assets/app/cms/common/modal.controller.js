@@ -5,7 +5,6 @@ angular.module( 'app.cms' )//
 ;//
 function ConfirmModalController( $scope, $log, title, message, onConfirm, $uibModalInstance, ModalHelper ) {
   angular.extend($scope, {
-    alerts      : [],
     title: title,
     message: message
   });
@@ -15,7 +14,7 @@ function ConfirmModalController( $scope, $log, title, message, onConfirm, $uibMo
       if ( response.isSuccess ) {
         $uibModalInstance.close( response );
       } else {
-        $scope.addAlert(response.failure.message);
+        ModalHelper.showErrorModal(response);
       }
     }, function ( response ) {
       ModalHelper.showErrorModal(response);
@@ -24,16 +23,6 @@ function ConfirmModalController( $scope, $log, title, message, onConfirm, $uibMo
   $scope.cancel = function () {
     $uibModalInstance.dismiss( 'Cancel' );
   };
-  $scope.addAlert   = function ( msg, params ) {
-    $scope.alerts.push( {
-      type   : 'danger',
-      message: msg,
-      params : params
-    } )
-  };
-  $scope.closeAlert = function ( index ) {
-    $scope.alerts.splice( index, 1 );
-  };
 }
 function ErrorModalController( $scope, $log, response, $uibModalInstance ) {
   angular.extend($scope, {
@@ -41,10 +30,18 @@ function ErrorModalController( $scope, $log, response, $uibModalInstance ) {
   });
   function init() {
     var failure = response.failure;
-    $scope.message = failure.message;
-    $scope.status = failure.status;
-    $scope.reason = failure.reason;
-    $scope.error = failure.error;
+    if (failure) {
+      $scope.status    = failure.status;
+      $scope.reason    = failure.reason;
+      $scope.message   = failure.error.message;
+      $scope.exception = failure.error.exception;
+    } else {
+      var data = response.data;
+      $scope.status    = response.status;
+      $scope.message   = data.message;
+      $scope.reason    = data.error;
+      $scope.exception = data.exception;
+    }
   }
   $scope.ok = function () {
     $uibModalInstance.close(  );

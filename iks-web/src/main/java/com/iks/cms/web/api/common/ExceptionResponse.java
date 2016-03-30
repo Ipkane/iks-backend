@@ -8,10 +8,10 @@ public class ExceptionResponse extends AbstractApiResponse{
   public ExceptionResponse(Exception e) {
     this.e = e;
   }
-  public String getMessage() {
+  public String getException() {
     return e.toString();
   }
-  public String getCause() {
+  public String getMessage() {
     return e.getCause().toString();
   }
 }
