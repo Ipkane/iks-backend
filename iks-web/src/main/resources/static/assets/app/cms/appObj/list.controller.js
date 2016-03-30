@@ -2,7 +2,7 @@
 angular.module( 'app.cms' )//
   .controller( 'AppObjListController', AppObjListController )
 ;//
-function AppObjListController( $scope, $log, $uibModal, $timeout, $rootScope, CoreService, GridHelper, _ ) {
+function AppObjListController( $scope, $log, $uibModal, $timeout, $rootScope, CoreService, GridHelper, ModalHelper, _ ) {
   var vm = this;
   angular.extend( $scope, {
     filter      : {
@@ -113,64 +113,84 @@ function AppObjListController( $scope, $log, $uibModal, $timeout, $rootScope, Co
                    } );
   };
   $scope.openDeleteModal          = function () {
-    // open modal
-    $uibModal.open(
+    ModalHelper.openConfirmModal(
       {
-        animation   : true,
-        templateUrl : 'assets/app/cms/common/templates/confirm-modal.html',
-        controller  : 'ConfirmModalController',
-        controllerAs: 'vm',
-        backdrop    : 'static',
-        resolve     : {
-          title    : function () {
-            return "Confirm deletion"
-          },
-          message  : function () {
-            return "Are you sure, you want to delete item " + $scope.selectedItem.id
-          },
-          onConfirm: function () {
-            return function () {
-              return CoreService.deleteItem( { gridId: $scope.grid.id, itemId: $scope.selectedItem.id } ).$promise;
-            }
-          }
-        }
+        title    : "Confirm deletion",
+        message  : "Are you sure, you want to delete item " + $scope.selectedItem.id,
+        onConfirm: function () {
+          return CoreService.deleteItem( { gridId: $scope.grid.id, itemId: $scope.selectedItem.id } ).$promise;
+        },
+        onSuccess: reload
       }
-    ).result.then( function () {
-                     reload();
-                   }, function () {
-                   } );
+    );
+    // open modal
+    //$uibModal.open(
+    //  {
+    //    animation   : true,
+    //    templateUrl : 'assets/app/cms/common/templates/confirm-modal.html',
+    //    controller  : 'ConfirmModalController',
+    //    controllerAs: 'vm',
+    //    backdrop    : 'static',
+    //    resolve     : {
+    //      title    : function () {
+    //        return "Confirm deletion"
+    //      },
+    //      message  : function () {
+    //        return "Are you sure, you want to delete item " + $scope.selectedItem.id
+    //      },
+    //      onConfirm: function () {
+    //        return function () {
+    //          return CoreService.deleteItem( { gridId: $scope.grid.id, itemId: $scope.selectedItem.id } ).$promise;
+    //        }
+    //      }
+    //    }
+    //  }
+    //).result.then( function () {
+    //                 reload();
+    //               }, function () {
+    //               } );
   };
   $scope.openDeleteOneToManyModal = function () {
     var selectedItemId;
     if ( $scope.grid.fieldName ) {
       selectedItemId = $scope.selectedItem[ $scope.grid.fieldName ][ 'id' ];
     }
-    // open modal
-    $uibModal.open(
+    ModalHelper.openConfirmModal(
       {
-        animation   : true,
-        templateUrl : 'assets/app/cms/common/templates/confirm-modal.html',
-        controller  : 'ConfirmModalController',
-        controllerAs: 'vm',
-        backdrop    : 'static',
-        resolve     : {
-          title    : function () {
-            return "Confirm deletion"
-          },
-          message  : function () {
-            return "Are you sure, you want to delete item " + selectedItemId
-          },
-          onConfirm: function () {
-            return function () {
-              return CoreService.deleteOneToManyItem( { gridId: $scope.grid.id, parentItemId: $scope.parentItemId, itemId: selectedItemId } ).$promise;
-            }
-          }
-        }
+        title    : "Confirm deletion",
+        message  : "Are you sure, you want to delete item " + selectedItemId,
+        onConfirm: function () {
+          return CoreService.deleteOneToManyItem( { gridId: $scope.grid.id, parentItemId: $scope.parentItemId, itemId: selectedItemId } ).$promise;
+        },
+        onSuccess: reload
       }
-    ).result.then( function () {
-                     reload();
-                   }, function () {
-                   } );
+    );
+    // open modal
+    //$uibModal.open(
+    //  {
+    //    animation   : true,
+    //    templateUrl : 'assets/app/cms/common/templates/confirm-modal.html',
+    //    controller  : 'ConfirmModalController',
+    //    controllerAs: 'vm',
+    //    backdrop    : 'static',
+    //    resolve     : {
+    //      title    : function () {
+    //        return "Confirm deletion"
+    //      },
+    //      message  : function () {
+    //        return "Are you sure, you want to delete item " + selectedItemId
+    //      },
+    //      onConfirm: function () {
+    //        return function () {
+    //          return CoreService.deleteOneToManyItem( { gridId: $scope.grid.id, parentItemId: $scope.parentItemId, itemId: selectedItemId } ).$promise;
+    //        }
+    //      }
+    //    }
+    //  }
+    //).result.then( function () {
+    //                 reload();
+    //               }, function () {
+    //               } );
   };
   $scope.setOrderBy               = function ( fieldName ) {
     if ( fieldName == $scope.orderBy ) {

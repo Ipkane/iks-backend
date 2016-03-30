@@ -2,6 +2,7 @@
   'use strict';
   angular.module( 'app.cms' ) //
     .factory( 'GridHelper', GridHelper ) //
+    .factory( 'ModalHelper', ModalHelper ) //
     .factory( '_', LodashService ) //
   ;
   function LodashService() {
@@ -37,6 +38,43 @@
 
     function getGridData( request ) {
       return CoreService.getGridData( request ).$promise;
+    }
+  }
+
+  function ModalHelper( $uibModal ) {
+    return {
+      openConfirmModal: openConfirmModal
+    };
+    function openConfirmModal( params ) {
+      // open modal
+      $uibModal.open(
+        {
+          animation   : true,
+          templateUrl : 'assets/app/cms/common/templates/confirm-modal.html',
+          controller  : 'ConfirmModalController',
+          controllerAs: 'vm',
+          backdrop    : 'static',
+          resolve     : {
+            title    : function () {
+              return params.title
+            },
+            message  : function () {
+              return params.message
+            },
+            onConfirm: function () {
+              return params.onConfirm
+            }
+          }
+        }
+      ).result.then( function () {
+                       if ( angular.isFunction( params.onSuccess ) ) {
+                         params.onSuccess();
+                       }
+                     }, function () {
+                       if ( angular.isFunction( params.onCancel ) ) {
+                         params.onCancel();
+                       }
+                     } );
     }
   }
 })( angular );
