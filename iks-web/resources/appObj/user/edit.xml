@@ -10,8 +10,8 @@
     <tab label="Roles">
       <referenceTable fieldName="roles">
         <columns>
-          <column fieldName="id" label="Role Id"/>
-          <column fieldName="fieldName" label="Name"/>
+          <column fieldName="roles.id" label="Role Id"/>
+          <column fieldName="roles.name" label="Name"/>
         </columns>
       </referenceTable>
     </tab>

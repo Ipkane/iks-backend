@@ -67,18 +67,18 @@ public class ManyToOne extends AbstractDataField {
   @Override
   public void fillSelectQueryResult( DataItem resultItem, String value, String fullField ) {
     String parts[] = ModelUtils.splitField( fullField );
-    if( parts.length == 1 ) {
-      IDataModel joinedModel = App.getModel( getAppObj() );
-      DataItem joinedItem = new DataItem();
-      joinedItem.addFieldValue( joinedModel.getPrimaryFieldName(), value );
-      resultItem.addFieldValue( getFieldName(), joinedItem );
-    } else {
-      DataItem joinedItem = ( DataItem )resultItem.getFieldValue( getFieldName() );
+//    if( parts.length == 1 ) {
+//      IDataModel joinedModel = App.getModel( getAppObj() );
+//      DataItem joinedItem = new DataItem();
+//      joinedItem.addFieldValue( joinedModel.getPrimaryFieldName(), value );
+//      resultItem.addFieldValue( getFieldName(), joinedItem );
+//    } else {
+      DataItem joinedItem = ( DataItem )resultItem.getFieldValue( parts[0] );
       if( joinedItem == null ) {
         joinedItem = new DataItem();
-        resultItem.addFieldValue( getFieldName(), joinedItem );
+        resultItem.addFieldValue( parts[0], joinedItem );
       }
       joinedItem.addFieldValue( parts[1], value );
-    }
+//    }
   }
 }

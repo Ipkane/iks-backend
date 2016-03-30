@@ -67,6 +67,11 @@ public class ManyToMany extends AbstractDataField {
   @Override
   public void fillSelectQueryResult( DataItem resultItem, String value, String fullField ) {
     String parts[] = ModelUtils.splitField( fullField );
-    resultItem.addFieldValue( parts[1], value );
+    DataItem joinedItem = ( DataItem )resultItem.getFieldValue( parts[0] );
+    if( joinedItem == null ) {
+      joinedItem = new DataItem();
+      resultItem.addFieldValue( parts[0], joinedItem );
+    }
+    joinedItem.addFieldValue( parts[1], value );
   }
 }
