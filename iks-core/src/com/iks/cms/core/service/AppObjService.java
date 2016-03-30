@@ -104,8 +104,8 @@ public class AppObjService {
     DeleteGridQuery query = new DeleteGridQuery( App.getModel( grid.getAppObj() ), grid, itemId );
     query.executeQuery( commonDao.getSessionFactory() );
   }
-  public void addGridItem( String gridId, String parentItemId, String itemId ) {
-    IBaseGrid grid = App.getGrid( gridId );
+  public void addReferenceGridItem( String gridId, String parentItemId, String itemId ) {
+    ReferenceTableField grid = (ReferenceTableField)App.getGrid( gridId );
     AddReferenceValueQuery query = new AddReferenceValueQuery( App.getModel( grid.getAppObj() ), grid.getFieldName(), parentItemId, itemId );
     query.execute( commonDao.getSessionFactory() );
   }

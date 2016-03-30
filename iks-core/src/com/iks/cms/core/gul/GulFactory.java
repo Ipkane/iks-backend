@@ -56,8 +56,8 @@ public class GulFactory {
         return new GulTab();
       case ListConstant.APP_TABLE:
         return new AppGrid();
-      case ListConstant.REFERENCE_TABLE:
-        return new ReferenceTable();
+      case ListConstant.REFERENCE_TABLE_FIELD:
+        return new ReferenceTableField();
       default:
         throw new Exception( "Couldn't parse element " + tagName );
     }

@@ -1,7 +1,5 @@
 package com.iks.cms.core.query.grid;
 
-import com.iks.cms.core.appObj.*;
-import com.iks.cms.core.data.*;
 import com.iks.cms.core.grid.*;
 import com.iks.cms.core.model.*;
 import com.iks.cms.core.query.*;
@@ -20,7 +18,7 @@ public class SelectGridQuery extends SelectModelQuery< SelectGridQuery > {
   public SelectGridQuery( IDataModel model, IBaseGrid grid ) {
     super( model );
     this.grid = grid;
-    for( IGridColumn field : grid.getFields() ) {
+    for( IGridColumn field : grid.getColumns() ) {
       addField( field.getFieldName() );
       if( field.getDisplayField() != null ) {
         addField( field.getFieldName() + Constants.FIELD_SEPARATOR + field.getDisplayField() );

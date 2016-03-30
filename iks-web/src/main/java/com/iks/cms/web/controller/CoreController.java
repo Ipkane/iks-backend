@@ -71,7 +71,7 @@ public class CoreController {
   @RequestMapping( value = REQUEST_ADD_GRID_ITEM, method = RequestMethod.POST )
   public ResponseEntity< DefaultResponseBody< ?, ? > > addGridItem( @RequestBody RequestAddGridItem request ) {
     try {
-      appObjService.addGridItem( request.getGridId(), request.getParentItemId(), request.getItemId() );
+      appObjService.addReferenceGridItem( request.getGridId(), request.getParentItemId(), request.getItemId() );
       return ApiUtils.makeResponse( REQUEST_UPDATE_EDIT_DATA, request, new ResponseEmpty() );
     } catch( Exception ex ) {
       logger.error( RESPONSE_ERROR_UPDATE_EDIT_DATA, ex );

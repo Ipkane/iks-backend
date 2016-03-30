@@ -10,6 +10,7 @@ function AppObjListController( $scope, $log, $uibModal, $timeout, $rootScope, Co
     },
     grid        : null,
     selectedItem: null,
+    searchGridId: null, // for  reference field
     orderBy     : 'id',
     orderAsc    : true,
     items       : [],
@@ -93,17 +94,17 @@ function AppObjListController( $scope, $log, $uibModal, $timeout, $rootScope, Co
                    } );
   }
 
-  $scope.openReferenceModal = function () {
+  $scope.openOneToManyModal = function () {
     // open modal
     $uibModal.open(
       {
         animation   : true,
-        templateUrl : 'view/referenceView?appObj=' + $scope.grid.appObj,
+        templateUrl : 'view/referenceView?gridId=' + $scope.searchGridId,
         controller  : 'ReferenceListModalController',
         controllerAs: 'vm',
         backdrop    : 'static',
         resolve     : {
-          payload: { gridId: $scope.grid.id, parentItemId: $scope.parentItemId }
+          payload: { parentGridId: $scope.grid.id, parentItemId: $scope.parentItemId }
         }
       }
     ).result.then( function ( selectedItem ) {

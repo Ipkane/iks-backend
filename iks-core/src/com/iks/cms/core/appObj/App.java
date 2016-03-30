@@ -42,15 +42,6 @@ public class App {
   public static IAppObj getAppObj( String appObj ) {
     return getInstance().appObjMap.get( appObj );
   }
-  public IBaseGrid getAppObjMainGrid( String appObj ) {
-    // todo implement better algorithm
-    for (IBaseGrid grid: grids.values()) {
-      if (grid.getAppObj().equals( appObj )) {
-        return grid;
-      }
-    }
-    return null;
-  }
   public static IEditView getEditView( String appObj ) {
     return getAppObj( appObj ).getEditView();
   }

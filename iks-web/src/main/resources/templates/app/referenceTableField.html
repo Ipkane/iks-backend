@@ -1,13 +1,12 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:ng="">
 
-<th:block th:fragment="appTable">
-  <div class="app-table" th:id="${element.id}" th:classappend="${element.cssClass}" th:styleappend="${element.style}" ng:controller="'AppObjListController as vm'">
-    <div ng:init="|grid = '${element.toJson()}'|" style="display: none"></div>
+<th:block th:fragment="referenceTableField">
+  <div class="reference-table"  th:id="${element.id}" th:classappend="${element.cssClass}" th:styleappend="${element.style}" ng:controller="'AppObjListController as vm'">
+    <div ng:init="|grid = '${element.toJson()}'; searchGridId='${element.searchGrid.id}'|" style="display: none"></div>
     <div class="panel-heading app-table-toolbar" th:if="${element.showToolbar}">
       <div class="hbox">
-        <div class="btn btn-primary" ng-click="openAddModal()">New</div>
-        <div class="btn btn-primary" ng-click="openEditModal()" ng-disabled="!selectedItem">Edit</div>
-        <div class="btn btn-primary" ng-click="openDeleteModal()" ng-disabled="!selectedItem">Delete</div>
+        <div class="btn btn-primary" ng-click="openOneToManyModal()">Add</div>
+        <div class="btn btn-primary" ng-click="openDeleteOneToManyModal()" ng-disabled="!selectedItem">Delete</div>
         <div class="btn btn-success" ng-click="toggleFilterPanel()" th:attr="ng-disabled = |${element.filterPanel == null}| ">Filter</div>
         <div class="btn btn-success" ng-click="refresh()">Refresh</div>
       </div>

@@ -8,6 +8,5 @@ import java.util.*;
 public interface IBaseGrid {
   String getId();
   String getAppObj();
-  List<IGridColumn > getFields();
-  String getFieldName();
+  List<IGridColumn > getColumns();
 }

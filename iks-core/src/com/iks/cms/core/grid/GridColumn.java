@@ -1,5 +1,7 @@
 package com.iks.cms.core.grid;
 
+import com.fasterxml.jackson.annotation.*;
+import com.iks.cms.common.json.*;
 import com.iks.cms.core.data.*;
 import com.iks.cms.core.gul.*;
 import com.iks.cms.core.gul.element.*;
@@ -11,10 +13,18 @@ import org.w3c.dom.*;
  * @author Igor Kaynov
  */
 public class GridColumn extends GulElement implements IGridColumn {
+  @JsonView( JsonViews.Normal.class )
   private String fieldName;
+  @JsonView( JsonViews.Normal.class )
   private String label;
+  @JsonView( JsonViews.Normal.class )
   private String displayField;
   public GridColumn() {
+  }
+  public GridColumn( IGridColumn src ) {
+    fieldName = src.getFieldName();
+    label = src.getLabel();
+    displayField = src.getDisplayField();
   }
   @Override
   public String getFieldName() {

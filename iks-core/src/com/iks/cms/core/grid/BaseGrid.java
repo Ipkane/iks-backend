@@ -1,7 +1,9 @@
 package com.iks.cms.core.grid;
 
+import com.fasterxml.jackson.annotation.*;
 import com.fasterxml.jackson.core.*;
 import com.fasterxml.jackson.databind.*;
+import com.iks.cms.common.json.*;
 import com.iks.cms.core.appObj.*;
 import com.iks.cms.core.constant.*;
 import com.iks.cms.core.gul.element.*;
@@ -17,19 +19,22 @@ import java.util.*;
  * @author Igor Kaynov
  */
 public abstract class BaseGrid extends GulElement implements IBaseGrid {
+  @JsonView( JsonViews.Normal.class )
   protected String       appObj;
   private   IFilterPanel filterPanel;
-  protected Boolean showToolbar = true;
-  private List< IGridColumn > fields = new ArrayList<>();
+  @JsonView( JsonViews.Normal.class )
+  protected Boolean             showToolbar = true;
+  @JsonView( JsonViews.Normal.class )
+  private   List< IGridColumn > columns     = new ArrayList<>();
   @Override
-  public List< IGridColumn > getFields() {
-    return fields;
+  public List< IGridColumn > getColumns() {
+    return columns;
   }
-  public void setFields( List< IGridColumn > fields ) {
-    this.fields = fields;
+  public void setColumns( List< IGridColumn > columns ) {
+    this.columns = columns;
   }
-  public void addField( IGridColumn field ) {
-    this.fields.add( field );
+  public void addColumn( IGridColumn column ) {
+    this.columns.add( column );
   }
   @Override
   public String getAppObj() {
@@ -52,7 +57,7 @@ public abstract class BaseGrid extends GulElement implements IBaseGrid {
       GridColumn column = ( GridColumn )AppFactory.createElement( element.getTagName() );
       column.parse( context, element );
       column.applyModel( model.getField( column.getFieldName() ) );
-      addField( column );
+      addColumn( column );
     }
     elements = xmlElement.getElementsByTagName( ListConstant.FILTER_PANEL );
     if( elements.getLength() > 0 ) {
@@ -64,13 +69,10 @@ public abstract class BaseGrid extends GulElement implements IBaseGrid {
     }
   }
   @Override
-  public String getTemplatePath() {
-    return "app/appTable";
-  }
+  public abstract String getTemplatePath();
+
   @Override
-  public String getTag() {
-    return ListConstant.APP_TABLE;
-  }
+  public abstract String getTag();
   public IFilterPanel getFilterPanel() {
     return filterPanel;
   }
@@ -79,7 +81,7 @@ public abstract class BaseGrid extends GulElement implements IBaseGrid {
   }
   public String toJson() throws JsonProcessingException {
     ObjectMapper objectMapper = new ObjectMapper();
-    return objectMapper.writeValueAsString( new GridJson() ).replace( "\"", "\\\"" );
+    return objectMapper.writerWithView( JsonViews.Internal.class ).writeValueAsString( this ).replace( "\"", "\\\"" );
   }
   @Override
   public String getId() {
@@ -94,16 +96,5 @@ public abstract class BaseGrid extends GulElement implements IBaseGrid {
   }
   public void setShowToolbar( Boolean showToolbar ) {
     this.showToolbar = showToolbar;
-  }
-  private class GridJson {
-    public List< IGridColumn > getFields() {
-      return BaseGrid.this.getFields();
-    }
-    public String getId() {
-      return BaseGrid.this.id;
-    }
-    public String getAppObj() {
-      return BaseGrid.this.appObj;
-    }
   }
 }

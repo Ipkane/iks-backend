@@ -2,6 +2,8 @@ package com.iks.cms.core.gul.element;
 
 import com.google.common.base.*;
 
+import com.fasterxml.jackson.annotation.*;
+import com.iks.cms.common.json.*;
 import com.iks.cms.core.gul.*;
 import com.iks.cms.core.gul.container.*;
 import com.iks.cms.core.model.*;
@@ -19,6 +21,7 @@ public abstract class GulElement implements IGulElement {
   private   String        style;
   private   String        cssClass;
   private   String        flex;
+  @JsonIgnore
   private   IGulContainer parent;
   @Override
   public String getId() {

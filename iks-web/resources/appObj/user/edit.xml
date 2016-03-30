@@ -8,12 +8,12 @@
   </fieldbox>
   <tabbox>
     <tab label="Roles">
-      <referenceTable fieldName="roles">
+      <referenceTableField fieldName="roles">
         <columns>
           <column fieldName="roles.id" label="Role Id"/>
           <column fieldName="roles.name" label="Name"/>
         </columns>
-      </referenceTable>
+      </referenceTableField>
     </tab>
   </tabbox>
 </editView>

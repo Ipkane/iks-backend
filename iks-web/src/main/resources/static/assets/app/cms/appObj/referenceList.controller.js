@@ -8,7 +8,7 @@ angular.module( 'app.cms' )//
 function AppObjListController( $scope, $log, $uibModalInstance, $timeout, $rootScope, payload, CoreService, GridHelper, _ ) {
   var vm = this;
   angular.extend( $scope, {
-    parentGridId  : payload.gridId,
+    parentGridId  : payload.parentGridId,
     parentItemId  : payload.parentItemId,
     childGridId   : null,
     childGridScope: null

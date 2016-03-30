@@ -5,13 +5,13 @@ package com.iks.cms.core.constant;
  */
 public interface ListConstant {
   // attributes
-  String ATTR_ID            = "id";
-  String ATTR_APP_OBJ       = "appObj";
-  String LABEL_ATTR         = "label";
-  String DISPLAY_FIELD_ATTR = "displayField";
+  String ATTR_ID               = "id";
+  String ATTR_APP_OBJ          = "appObj";
+  String LABEL_ATTR            = "label";
+  String DISPLAY_FIELD_ATTR    = "displayField";
   // element names
-  String COLUMN             = "column";
-  String APP_TABLE          = "appTable";
-  String REFERENCE_TABLE          = "referenceTable";
-  String FILTER_PANEL       = "filterPanel";
+  String COLUMN                = "column";
+  String APP_TABLE             = "appTable";
+  String REFERENCE_TABLE_FIELD = "referenceTableField";
+  String FILTER_PANEL          = "filterPanel";
 }
