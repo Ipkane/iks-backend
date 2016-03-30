@@ -16,16 +16,18 @@ import org.springframework.web.bind.annotation.*;
 public class CoreController {
   //  private static final String REQUEST_GET_GRID                = "/getGrid";
   //  private static final String RESPONSE_ERROR_GET_GRID         = "Couldn't get grid";
-  private static final String REQUEST_GET_GRID_DATA           = "/getGridData";
-  private static final String RESPONSE_ERROR_GET_GRID_DATA    = "Couldn't get grid data";
-  private static final String REQUEST_GET_EDIT_DATA           = "/getEditData";
-  private static final String RESPONSE_ERROR_GET_EDIT_DATA    = "Couldn't get edit data";
-  private static final String REQUEST_UPDATE_EDIT_DATA        = "/updateEditData";
-  private static final String REQUEST_ADD_GRID_ITEM           = "/addGridItem";
-  private static final String RESPONSE_ERROR_UPDATE_EDIT_DATA = "Couldn't update edit data";
-  private static final String REQUEST_DELETE_ITEM             = "/deleteItem";
-  private static final String RESPONSE_ERROR_DELETE_ITEM      = "Couldn't delete item";
-  private final        Logger logger                          = LoggerFactory.getLogger( CoreController.class );
+  private static final String REQUEST_GET_GRID_DATA                  = "/getGridData";
+  private static final String RESPONSE_ERROR_GET_GRID_DATA           = "Couldn't get grid data";
+  private static final String REQUEST_GET_EDIT_DATA                  = "/getEditData";
+  private static final String RESPONSE_ERROR_GET_EDIT_DATA           = "Couldn't get edit data";
+  private static final String REQUEST_UPDATE_EDIT_DATA               = "/updateEditData";
+  private static final String REQUEST_ADD_GRID_ITEM                  = "/addGridItem";
+  private static final String RESPONSE_ERROR_UPDATE_EDIT_DATA        = "Couldn't update edit data";
+  private static final String REQUEST_DELETE_ITEM                    = "/deleteItem";
+  private static final String RESPONSE_ERROR_DELETE_ITEM             = "Couldn't delete item";
+  private static final String REQUEST_DELETE_ONE_TO_MANY_ITEM        = "/deleteOneToManyItem";
+  private static final String RESPONSE_ERROR_DELETE_ONE_TO_MANY_ITEM = "Couldn't delete one to many item";
+  private final        Logger logger                                 = LoggerFactory.getLogger( CoreController.class );
   @Autowired
   private AppObjService appObjService;
   @RequestMapping( value = REQUEST_GET_GRID_DATA, method = RequestMethod.POST )
@@ -86,6 +88,16 @@ public class CoreController {
     } catch( Exception ex ) {
       logger.error( RESPONSE_ERROR_DELETE_ITEM, ex );
       return ApiUtils.makeErrorResponse( REQUEST_DELETE_ITEM, RESPONSE_ERROR_DELETE_ITEM, request );
+    }
+  }
+  @RequestMapping( value = REQUEST_DELETE_ONE_TO_MANY_ITEM, method = RequestMethod.POST )
+  public ResponseEntity< DefaultResponseBody< ?, ? > > deleteOneToManyItem( @RequestBody RequestDeleteManyToManyItem request ) {
+    try {
+      appObjService.deleteOneToManyItem( request.getGridId(), request.getParentItemId(), request.getItemId() );
+      return ApiUtils.makeResponse( REQUEST_DELETE_ONE_TO_MANY_ITEM, request, new ResponseEmpty() );
+    } catch( Exception ex ) {
+      logger.error( RESPONSE_ERROR_DELETE_ITEM, ex );
+      return ApiUtils.makeErrorResponse( REQUEST_DELETE_ONE_TO_MANY_ITEM, RESPONSE_ERROR_DELETE_ITEM, request );
     }
   }
 }

@@ -15,7 +15,6 @@ function AppObjListController( $scope, $log, $uibModalInstance, $timeout, $rootS
   } );
   function init() {
     $scope.childGridScope = angular.element( $( '#' + $scope.childGridId ) ).scope();
-    $log.debug($scope);
   }
 
   $scope.ok     = function () {

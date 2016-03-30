@@ -94,7 +94,7 @@ function AppObjListController( $scope, $log, $uibModal, $timeout, $rootScope, Co
                    } );
   }
 
-  $scope.openOneToManyModal = function () {
+  $scope.openOneToManyModal       = function () {
     // open modal
     $uibModal.open(
       {
@@ -112,7 +112,7 @@ function AppObjListController( $scope, $log, $uibModal, $timeout, $rootScope, Co
                    }, function () {
                    } );
   };
-  $scope.openDeleteModal    = function () {
+  $scope.openDeleteModal          = function () {
     // open modal
     $uibModal.open(
       {
@@ -140,7 +140,39 @@ function AppObjListController( $scope, $log, $uibModal, $timeout, $rootScope, Co
                    }, function () {
                    } );
   };
-  $scope.setOrderBy         = function ( fieldName ) {
+  $scope.openDeleteOneToManyModal = function () {
+    var selectedItemId;
+    if ( $scope.grid.fieldName ) {
+      selectedItemId = $scope.selectedItem[ $scope.grid.fieldName ][ 'id' ];
+    }
+    // open modal
+    $uibModal.open(
+      {
+        animation   : true,
+        templateUrl : 'assets/app/cms/common/templates/confirm-modal.html',
+        controller  : 'ConfirmModalController',
+        controllerAs: 'vm',
+        backdrop    : 'static',
+        resolve     : {
+          title    : function () {
+            return "Confirm deletion"
+          },
+          message  : function () {
+            return "Are you sure, you want to delete item " + selectedItemId
+          },
+          onConfirm: function () {
+            return function () {
+              return CoreService.deleteOneToManyItem( { gridId: $scope.grid.id, parentItemId: $scope.parentItemId, itemId: selectedItemId } ).$promise;
+            }
+          }
+        }
+      }
+    ).result.then( function () {
+                     reload();
+                   }, function () {
+                   } );
+  };
+  $scope.setOrderBy               = function ( fieldName ) {
     if ( fieldName == $scope.orderBy ) {
       $scope.orderAsc = !$scope.orderAsc;
     } else {
@@ -149,24 +181,24 @@ function AppObjListController( $scope, $log, $uibModal, $timeout, $rootScope, Co
     $scope.orderBy = fieldName;
     $scope.items   = _.orderBy( $scope.items, [ $scope.orderBy ], [ $scope.orderAsc ? 'asc' : 'desc' ] );
   };
-  vm.getField               = function ( fieldName ) {
+  vm.getField                     = function ( fieldName ) {
     return _.find( $scope.grid.fields, { fieldName: fieldName } );
   };
-  $scope.formatItemValue    = function ( item, field ) {
-    var parts = _.split(field.fieldName, '.');
+  $scope.formatItemValue          = function ( item, field ) {
+    var parts = _.split( field.fieldName, '.' );
     if ( parts.length == 1 ) {
       return item[ field.fieldName ];
-    } else if (parts.length == 2) {
-      return item[ parts[0] ][ parts[1] ];
+    } else if ( parts.length == 2 ) {
+      return item[ parts[ 0 ] ][ parts[ 1 ] ];
     }
   };
-  vm.getHeaderClass         = function ( fieldName ) {
+  vm.getHeaderClass               = function ( fieldName ) {
     if ( fieldName == $scope.orderBy ) {
       return $scope.orderAsc ? 'asc' : 'desc';
     }
     return null;
   };
-  $scope.clearFilter        = function () {
+  $scope.clearFilter              = function () {
     $scope.filter.item = {};
     reload();
   };
