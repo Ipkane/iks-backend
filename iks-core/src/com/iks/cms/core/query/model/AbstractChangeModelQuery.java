@@ -43,12 +43,12 @@ public abstract class AbstractChangeModelQuery< T extends AbstractChangeModelQue
       IDataField dataField = model.getField( field );
       if( dataField instanceof ManyToOne ) {
         ManyToOne manyToOne = ( ManyToOne )dataField;
-        Map< String, Object > joinedItem = ( Map< String, Object > )item.getFieldValue( dataField.getName() );
+        Map< String, Object > joinedItem = ( Map< String, Object > )item.getFieldValue( dataField.getFieldName() );
         if (joinedItem != null) {
           query.addUpdateColumn( new Column( table, dataField.getTableField() ), joinedItem.get( manyToOne.getReferenceField() ) );
         }
       } else {
-        query.addUpdateColumn( new Column( table, dataField.getTableField() ), item.getFieldValue( dataField.getName() ) );
+        query.addUpdateColumn( new Column( table, dataField.getTableField() ), item.getFieldValue( dataField.getFieldName() ) );
       }
     }
   }

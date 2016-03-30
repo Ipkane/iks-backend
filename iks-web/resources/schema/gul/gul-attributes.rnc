@@ -1,5 +1,6 @@
 idAttr = attribute id { xsd:NCName }
 nameAttr = attribute name { xsd:NCName }
+fieldNameAttr = attribute fieldName { xsd:NCName }
 labelAttr = attribute label { text }
 valueAttr = attribute value { text }
 readonlyAttr = attribute readonly { xsd:boolean }

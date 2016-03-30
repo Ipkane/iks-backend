@@ -1,12 +1,12 @@
 <?xml version="1.0"?>
 <data appObj="employee" tableName="employee" xmlns="http://com.iks.org/schema/model/1.0">
-  <field tableField="id" name="id" label="Id" primary="true"/>
-  <field tableField="fio" name="fio" label="First Name/Last Name" required="true"/>
-  <selectField tableField="gender" name="gender" label="Sex">
+  <field tableField="id" fieldName="id" label="Id" primary="true"/>
+  <field tableField="fio" fieldName="fio" label="First Name/Last Name" required="true"/>
+  <selectField tableField="gender" fieldName="gender" label="Sex">
     <options>
       <option value="male">Male</option>
       <option value="female">Female</option>
     </options>
   </selectField>
-  <oneToOne name="user" appObj="user" tableField="user_id"/>
+  <oneToOne fieldName="user" appObj="user" tableField="user_id"/>
 </data>

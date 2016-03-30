@@ -15,6 +15,7 @@ gul.containerType =
 
 gul.fieldType =
   gul.elementType
+  & fieldNameAttr?
   & nameAttr?
   & labelAttr?
   & readonlyAttr?

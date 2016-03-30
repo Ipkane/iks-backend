@@ -20,17 +20,10 @@ public class SelectGridQuery extends SelectModelQuery< SelectGridQuery > {
   public SelectGridQuery( IDataModel model, IBaseGrid grid ) {
     super( model );
     this.grid = grid;
-    String fieldPrefix = "";
-    if( StringUtils.isNotBlank( grid.getParentAppObj() ) ) {
-      IDataModel parentModel = App.getModel( grid.getParentAppObj() );
-      IDataField parentField = parentModel.getField( grid.getName() );
-      fieldPrefix = grid.getName() + ".";
-      setModel( parentModel );
-    }
     for( IGridColumn field : grid.getFields() ) {
-      addField( fieldPrefix + field.getName() );
+      addField( field.getFieldName() );
       if( field.getDisplayField() != null ) {
-        addField( fieldPrefix + field.getName() + Constants.FIELD_SEPARATOR + field.getDisplayField() );
+        addField( field.getFieldName() + Constants.FIELD_SEPARATOR + field.getDisplayField() );
       }
     }
   }
@@ -45,9 +38,8 @@ public class SelectGridQuery extends SelectModelQuery< SelectGridQuery > {
   }
   public void setParentId( String parentId ) {
     this.parentId = parentId;
-    IDataModel parentModel = App.getModel( grid.getParentAppObj() );
     if( StringUtils.isNotBlank( parentId ) ) {
-      addFilter( parentModel.getPrimaryFieldName(), getParentId() );
+      addFilter( model.getPrimaryFieldName(), getParentId() );
     }
   }
 }

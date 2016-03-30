@@ -13,7 +13,7 @@ import org.w3c.dom.*;
  * @author Igor Kaynov
  */
 public abstract class AbstractGulField extends GulElement implements IGulInputField {
-  private String name;
+  private String fieldName;
   private String label;
   private boolean readonly = false;
   //  private IFieldContainer fieldContainer;
@@ -40,7 +40,10 @@ public abstract class AbstractGulField extends GulElement implements IGulInputFi
   public void parse( IParseContext context, Element xmlElement ) throws Exception {
     super.parse( context, xmlElement );
     if( xmlElement.hasAttribute( GulConstant.ATTR_NAME ) ) {
-      setName( xmlElement.getAttribute( GulConstant.ATTR_NAME ) );
+      setFieldName( xmlElement.getAttribute( GulConstant.ATTR_NAME ) );
+    }
+    if( xmlElement.hasAttribute( GulConstant.ATTR_FIELD_NAME ) ) {
+      setFieldName( xmlElement.getAttribute( GulConstant.ATTR_FIELD_NAME ) );
     }
     if( xmlElement.hasAttribute( GulConstant.ATTR_LABEL ) ) {
       setLabel( xmlElement.getAttribute( GulConstant.ATTR_LABEL ) );
@@ -48,12 +51,6 @@ public abstract class AbstractGulField extends GulElement implements IGulInputFi
     if( xmlElement.hasAttribute( GulConstant.ATTR_READONLY ) ) {
       setReadonly( BooleanUtils.toBoolean( xmlElement.getAttribute( GulConstant.ATTR_READONLY ) ) );
     }
-  }
-  public String getName() {
-    return StringUtils.trimToNull( name );
-  }
-  public void setName( String name ) {
-    this.name = name;
   }
   public String getLabel() {
     return label;
@@ -71,5 +68,11 @@ public abstract class AbstractGulField extends GulElement implements IGulInputFi
   }
   public void setReadonly( boolean readonly ) {
     this.readonly = readonly;
+  }
+  public String getFieldName() {
+    return fieldName;
+  }
+  public void setFieldName( String fieldName ) {
+    this.fieldName = fieldName;
   }
 }

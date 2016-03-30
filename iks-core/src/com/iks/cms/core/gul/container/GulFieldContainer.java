@@ -46,12 +46,12 @@ public abstract class GulFieldContainer extends GulContainer implements IFieldCo
   @Override
   public void parse(IParseContext context,  Element xmlElement ) throws Exception {
     super.parse( context, xmlElement );
-    fields = fields.stream().filter( field -> StringUtils.isNotBlank( field.getName() ) ).collect( Collectors.toList() );
+    fields = fields.stream().filter( field -> StringUtils.isNotBlank( field.getFieldName() ) ).collect( Collectors.toList() );
     for( IGulInputField field : fields ) {
-      if( field.getName() != null ) {
-        IDataField dataField = model.getField( field.getName() );
+      if( field.getFieldName() != null ) {
+        IDataField dataField = model.getField( field.getFieldName() );
         if( dataField != null ) {
-          field.applyModel( model.getField( field.getName() ) );
+          field.applyModel( model.getField( field.getFieldName() ) );
         }
       }
     }

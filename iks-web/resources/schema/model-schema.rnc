@@ -11,7 +11,7 @@ start =
 dataField = field | selectField | manyToOne | oneToOne | manyToMany
 
 dataFieldType =
-  nameAttr
+  fieldNameAttr
   & labelAttr?
   & attribute tableField { xsd:NCName }?
 

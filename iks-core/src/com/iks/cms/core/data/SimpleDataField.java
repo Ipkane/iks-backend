@@ -15,7 +15,7 @@ public abstract class SimpleDataField extends AbstractDataField {
   @Override
   public void extendSelectQueryFields( SelectQuery query, String fullField ) {
     Table table = query.getMainTable();
-    query.addColumn( table.getColumn( getTableField(), getName() ) );
+    query.addColumn( table.getColumn( getTableField(), getFieldName() ) );
   }
   @Override
   public void extendSelectQueryFilter( SelectQuery query, Object value ) {
@@ -23,10 +23,10 @@ public abstract class SimpleDataField extends AbstractDataField {
     if( value == null || StringUtils.trimToNull( value.toString() ) == null ) {
       return;
     }
-    query.addCriteria( new MatchCriteria( table.getColumn( getName() ), value ) );
+    query.addCriteria( new MatchCriteria( table.getColumn( getFieldName() ), value ) );
   }
   @Override
   public void fillSelectQueryResult(DataItem resultItem, String value, String fullField) {
-    resultItem.addFieldValue( getName(), parseValue( value ) );
+    resultItem.addFieldValue( getFieldName(), parseValue( value ) );
   }
 }

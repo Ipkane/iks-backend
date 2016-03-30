@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <data appObj="user" tableName="app_user" xmlns="http://com.iks.org/schema/model/1.0">
-  <field tableField="id" name="id" label="Id"/>
-  <field tableField="username" name="username" label="Username" required="true"/>
-  <field tableField="password" name="password" label="Password" required="true"/>
-  <field tableField="active" name="active" label="Active" type="boolean"/>
-  <manyToMany name="roles" joinTable="user_role" tableField="user_id" appObj="role" inverseTableField="role_id"/>
+  <field tableField="id" fieldName="id" label="Id"/>
+  <field tableField="username" fieldName="username" label="Username" required="true"/>
+  <field tableField="password" fieldName="password" label="Password" required="true"/>
+  <field tableField="active" fieldName="active" label="Active" type="boolean"/>
+  <manyToMany fieldName="roles" joinTable="user_role" tableField="user_id" appObj="role" inverseTableField="role_id"/>
 </data>

@@ -149,13 +149,14 @@ function AppObjListController( $scope, $log, $uibModal, $timeout, $rootScope, Co
     $scope.items   = _.orderBy( $scope.items, [ $scope.orderBy ], [ $scope.orderAsc ? 'asc' : 'desc' ] );
   };
   vm.getField               = function ( fieldName ) {
-    return _.find( $scope.grid.fields, { name: fieldName } );
+    return _.find( $scope.grid.fields, { fieldName: fieldName } );
   };
   $scope.formatItemValue    = function ( item, field ) {
-    if ( !field.displayField ) {
-      return item[ field.name ];
-    } else {
-      return item[ field.name ][ field.displayField ];
+    var parts = _.split(field.fieldName, '.');
+    if ( parts.length == 1 ) {
+      return item[ field.fieldName ];
+    } else if (parts.length == 2) {
+      return item[ parts[0] ][ parts[1] ];
     }
   };
   vm.getHeaderClass         = function ( fieldName ) {

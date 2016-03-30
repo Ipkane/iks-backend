@@ -16,7 +16,7 @@ filterPanel = element filterPanel {
 }
 
 column = element column {
-  nameAttr?
+  fieldNameAttr?
   & labelAttr?
   & attribute displayField { text }?
 }+
@@ -26,7 +26,8 @@ columns = element columns {
 }
 
 referenceTable = element referenceTable {
- nameAttr
- & labelAttr?
- & columns
+  fieldNameAttr?
+  & nameAttr?
+  & labelAttr?
+  & columns
 }

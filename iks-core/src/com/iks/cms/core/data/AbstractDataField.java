@@ -1,40 +1,36 @@
 package com.iks.cms.core.data;
 
 import com.iks.cms.core.constant.*;
-import com.iks.cms.core.sql.query.*;
 import com.iks.cms.core.validation.*;
 
 import org.apache.commons.lang3.*;
 import org.w3c.dom.*;
 
 import java.util.*;
-import java.util.stream.*;
-
-import javax.xml.crypto.*;
 
 /**
  * @author Igor Kaynov
  */
 public abstract class AbstractDataField implements IDataField {
-  private String name;
+  private String fieldName;
   private String label;
   private String tableField;
   private boolean            required   = false;
   private List< IValidator > validators = new ArrayList<>();
   @Override
-  public String getName() {
-    return StringUtils.defaultIfBlank( name, tableField );
+  public String getFieldName() {
+    return StringUtils.defaultIfBlank( fieldName, tableField );
   }
-  public void setName( String name ) {
-    this.name = name;
-    if (tableField == null) {
+  public void setFieldName( String name ) {
+    this.fieldName = name;
+    if( tableField == null ) {
       tableField = name;
     }
   }
   @Override
   public String getLabel() {
     if( StringUtils.isBlank( label ) ) {
-      label = StringUtils.capitalize( getName() );
+      label = StringUtils.capitalize( getFieldName() );
     }
     return label;
   }
@@ -54,7 +50,7 @@ public abstract class AbstractDataField implements IDataField {
   public void setRequired( boolean required ) {
     this.required = required;
     if( required ) {
-      addValidator( new RequiredValidator( name ) );
+      addValidator( new RequiredValidator( fieldName ) );
     } else {
       removeValidator( RequiredValidator.class );
     }
@@ -65,7 +61,7 @@ public abstract class AbstractDataField implements IDataField {
   }
   @Override
   public void parse( Element xmlElement ) {
-    setName( xmlElement.getAttribute( ModelConstant.NAME_ATTR ) );
+    setFieldName( xmlElement.getAttribute( ModelConstant.FIELD_NAME_ATTR ) );
     setLabel( xmlElement.getAttribute( ModelConstant.LABEL_ATTR ) );
     if( xmlElement.hasAttribute( ModelConstant.REQUIRED_ATTR ) ) {
       setRequired( BooleanUtils.toBoolean( xmlElement.getAttribute( ModelConstant.REQUIRED_ATTR ) ) );

@@ -17,8 +17,8 @@ public class SelectEditViewQuery extends SelectModelQuery< SelectEditViewQuery >
     super( model );
     this.editView = editView;
     for( IGulInputField field : editView.getFields() ) {
-      if (field.getName() != null) {
-        addField( field.getName() );
+      if (field.getFieldName() != null) {
+        addField( field.getFieldName() );
       }
     }
     addFilter( model.getPrimaryFieldName(), itemId );

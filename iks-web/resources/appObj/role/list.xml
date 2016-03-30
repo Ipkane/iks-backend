@@ -2,8 +2,8 @@
 <listView appObj="role" xmlns="http://com.iks.org/schema/list/1.0">
   <appTable appObj="role" id="role_grid">
     <columns>
-      <column name="id" label="Role Id"/>
-      <column name="name" label="Name"/>
+      <column fieldName="id" label="Role Id"/>
+      <column fieldName="name" label="Name"/>
     </columns>
   </appTable>
 </listView>

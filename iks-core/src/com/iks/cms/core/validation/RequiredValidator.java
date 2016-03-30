@@ -20,7 +20,7 @@ public class RequiredValidator extends AbstractValidator {
     IDataField dataField = model.getField( fieldName );
     Object value = item.getFieldValue( fieldName );
     if( value == null || StringUtils.trimToNull( value.toString() ) == null ) {
-      setError( new FieldError( dataField.getName(), dataField.getLabel() + " is required" ) );
+      setError( new FieldError( dataField.getFieldName(), dataField.getLabel() + " is required" ) );
       return false;
     }
     return true;

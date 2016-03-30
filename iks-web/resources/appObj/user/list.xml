@@ -3,13 +3,13 @@
   <appTable id="user_grid" appObj="user">
     <filterPanel>
       <hbox>
-        <checkbox name="active"/>
+        <checkbox fieldName="active"/>
       </hbox>
     </filterPanel>
     <columns>
-      <column name="id" label="User Id"/>
-      <column name="username" label="Username"/>
-      <column name="active"/>
+      <column fieldName="id" label="User Id"/>
+      <column fieldName="username" label="Username"/>
+      <column fieldName="active"/>
     </columns>
   </appTable>
 </listView>

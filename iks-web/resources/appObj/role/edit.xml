@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <editView appObj="role" xmlns="http://com.iks.org/schema/edit/1.0">
   <fieldbox>
-    <textbox name="id" readonly="true"/>
-    <textbox name="name"/>
+    <textbox fieldName="id" readonly="true"/>
+    <textbox fieldName="name"/>
   </fieldbox>
 </editView>

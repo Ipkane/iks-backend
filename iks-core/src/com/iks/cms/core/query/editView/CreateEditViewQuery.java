@@ -19,7 +19,7 @@ public class CreateEditViewQuery extends CreateModelQuery<CreateEditViewQuery > 
     super(model, item);
     for( IGulInputField field : editView.getFields() ) {
 
-      addField( field.getName() );
+      addField( field.getFieldName() );
     }
     this.editView = editView;
   }

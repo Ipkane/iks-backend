@@ -5,7 +5,7 @@ package com.iks.cms.core.constant;
  */
 public interface ModelConstant {
   // attributes
-  String NAME_ATTR                = "name";
+  String FIELD_NAME_ATTR          = "fieldName";
   String LABEL_ATTR               = "label";
   String REQUIRED_ATTR            = "required";
   String TABLE_FIELD_ATTR         = "tableField";

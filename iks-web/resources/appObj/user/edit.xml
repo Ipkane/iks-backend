@@ -1,17 +1,17 @@
 <?xml version="1.0"?>
 <editView appObj="user" xmlns="http://com.iks.org/schema/edit/1.0">
   <fieldbox>
-    <textbox name="id" readonly="true"/>
-    <textbox name="username"/>
-    <textbox name="password"/>
-    <checkbox name="active"/>
+    <textbox fieldName="id" readonly="true"/>
+    <textbox fieldName="username"/>
+    <textbox fieldName="password"/>
+    <checkbox fieldName="active"/>
   </fieldbox>
   <tabbox>
     <tab label="Roles">
-      <referenceTable name="roles" appObj="role">
+      <referenceTable fieldName="roles">
         <columns>
-          <column name="id" label="Role Id"/>
-          <column name="name" label="Name"/>
+          <column fieldName="id" label="Role Id"/>
+          <column fieldName="fieldName" label="Name"/>
         </columns>
       </referenceTable>
     </tab>

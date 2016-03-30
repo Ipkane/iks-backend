@@ -9,6 +9,5 @@ public interface IBaseGrid {
   String getId();
   String getAppObj();
   List<IGridColumn > getFields();
-  String getParentAppObj();
-  String getName();
+  String getFieldName();
 }

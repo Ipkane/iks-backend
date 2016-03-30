@@ -12,7 +12,7 @@ import java.util.*;
  * @author Igor Kaynov
  */
 public interface IDataField<T> {
-  String getName();
+  String getFieldName();
 
   String getLabel();
 

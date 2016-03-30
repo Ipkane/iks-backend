@@ -9,7 +9,6 @@ import com.iks.cms.core.sql.join.*;
 import com.iks.cms.core.sql.query.*;
 import com.iks.cms.core.utils.*;
 
-import org.apache.commons.lang3.*;
 import org.w3c.dom.*;
 
 /**
@@ -59,7 +58,7 @@ public class ManyToMany extends AbstractDataField {
       otherField = otherModel.getField( parts[1] );
     }
     query.leftJoin( new Join( otherTable, joinTable.getColumn( getInverseTableField() ), otherTable.getColumn( otherModel.getPrimaryFieldName() ) ) );
-    query.addColumn( otherTable.getColumn( otherField.getTableField(), otherField.getName() ) );
+    query.addColumn( otherTable.getColumn( otherField.getTableField(), otherField.getFieldName() ) );
   }
   @Override
   public void extendSelectQueryFilter( SelectQuery query, Object value ) {

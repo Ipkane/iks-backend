@@ -20,7 +20,6 @@ public abstract class BaseGrid extends GulElement implements IBaseGrid {
   protected String       appObj;
   private   IFilterPanel filterPanel;
   protected Boolean showToolbar = true;
-  protected String parentAppObj;
   private List< IGridColumn > fields = new ArrayList<>();
   @Override
   public List< IGridColumn > getFields() {
@@ -52,7 +51,7 @@ public abstract class BaseGrid extends GulElement implements IBaseGrid {
       Element element = ( Element )elements.item( i );
       GridColumn column = ( GridColumn )AppFactory.createElement( element.getTagName() );
       column.parse( context, element );
-      column.applyModel( model.getField( column.getName() ) );
+      column.applyModel( model.getField( column.getFieldName() ) );
       addField( column );
     }
     elements = xmlElement.getElementsByTagName( ListConstant.FILTER_PANEL );
@@ -106,11 +105,5 @@ public abstract class BaseGrid extends GulElement implements IBaseGrid {
     public String getAppObj() {
       return BaseGrid.this.appObj;
     }
-  }
-  public String getParentAppObj() {
-    return parentAppObj;
-  }
-  public void setParentAppObj( String parentAppObj ) {
-    this.parentAppObj = parentAppObj;
   }
 }

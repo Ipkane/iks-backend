@@ -2,10 +2,11 @@ default namespace = "http://com.iks.org/schema/app/1.0"
 include "app/app-element-schema.rnc"
 
 start = app
-app =
+app = element app {
   appObj+
+}
 
-appObj =
+appObj = element appObj {
   attribute name { xsd:NCName }
   & labelAttr
   & element data {
@@ -17,3 +18,4 @@ appObj =
   & element edit {
     attribute url { xsd:anyURI }
   }
+}

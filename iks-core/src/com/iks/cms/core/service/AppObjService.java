@@ -77,8 +77,8 @@ public class AppObjService {
   public IDataItem createNewItem( String appObj, IEditView editView ) {
     DataItem dataItem = new DataItem();
     for( IGulInputField field : editView.getFields() ) {
-      if( StringUtils.isNotBlank( field.getName() ) ) {
-        dataItem.addFieldValue( field.getName(), field.getDefaultValue() );
+      if( StringUtils.isNotBlank( field.getFieldName() ) ) {
+        dataItem.addFieldValue( field.getFieldName(), field.getDefaultValue() );
       }
     }
     return dataItem;
@@ -106,7 +106,7 @@ public class AppObjService {
   }
   public void addGridItem( String gridId, String parentItemId, String itemId ) {
     IBaseGrid grid = App.getGrid( gridId );
-    AddReferenceValueQuery query = new AddReferenceValueQuery( App.getModel( grid.getAppObj() ), grid.getName(), parentItemId, itemId );
+    AddReferenceValueQuery query = new AddReferenceValueQuery( App.getModel( grid.getAppObj() ), grid.getFieldName(), parentItemId, itemId );
     query.execute( commonDao.getSessionFactory() );
   }
   public IListView getListView( String appObj ) {
@@ -122,13 +122,13 @@ public class AppObjService {
     for( IGulInputField field : fields ) {
       if( Objects.equals( field.getTag(), GulConstant.REFERENCE_SELECT ) ) {
         GulReferenceField referenceField = ( GulReferenceField )field;
-        optionsMap.put( field.getName(), getSelectOptions( model, referenceField ) );
+        optionsMap.put( field.getFieldName(), getSelectOptions( model, referenceField ) );
       }
     }
     return optionsMap;
   }
   public List< SelectOption > getSelectOptions( IDataModel model, GulReferenceField referenceField ) {
-    ManyToOne dataField = ( ManyToOne )model.getField( referenceField.getName() );
+    ManyToOne dataField = ( ManyToOne )model.getField( referenceField.getFieldName() );
     IDataModel joinedModel = App.getModel( dataField.getAppObj() );
     List< String > referencedFields = Arrays.asList( joinedModel.getPrimaryFieldName(), referenceField.getDisplayField() );
     SelectModelQuery query = new SelectModelQuery( App.getModel( dataField.getAppObj() ) );

@@ -1,13 +1,8 @@
 package com.iks.cms.core.model;
 
-import com.google.common.collect.*;
-
 import com.iks.cms.core.data.*;
-import com.iks.cms.core.exception.*;
 import com.iks.cms.core.grid.*;
 import com.iks.cms.core.validation.*;
-
-import org.apache.commons.lang3.*;
 
 import java.util.*;
 import java.util.stream.*;
@@ -25,7 +20,7 @@ public class BaseDataModel implements IDataModel {
   }
   @Override
   public List< String > getFieldNames() {
-    return getFields().stream().map( field -> field.getName() ).collect( Collectors.toList() );
+    return getFields().stream().map( field -> field.getFieldName() ).collect( Collectors.toList() );
   }
   public void setFields( List< IDataField > fields ) {
     this.fields = fields;
@@ -46,7 +41,7 @@ public class BaseDataModel implements IDataModel {
   }
   @Override
   public IDataField getField( String name ) {
-    return fields.stream().filter( field -> field.getName().equals( name ) ).findFirst().orElse( null );
+    return fields.stream().filter( field -> field.getFieldName().equals( name ) ).findFirst().orElse( null );
   }
   public String getAppObj() {
     return appObj;

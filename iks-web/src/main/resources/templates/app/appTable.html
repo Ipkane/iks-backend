@@ -23,10 +23,10 @@
     <div>
       <table class="table table-bordered table-hover table-condensed grid-table">
         <thead>
-        <th data-th-each="field : ${element.fields}" th:attr="ng-click = |setOrderBy('${field.name}')|" th:inline="text">
+        <th data-th-each="field : ${element.fields}" th:attr="ng-click = |setOrderBy('${field.fieldName}')|" th:inline="text">
           [[${field.label}]]
-          <span class="glyphicon glyphicon glyphicon-chevron-down" aria-hidden="true" th:attr="ng-show = | vm.getHeaderClass('${field.name}') == 'asc' |"></span>
-          <span class="glyphicon glyphicon glyphicon-chevron-up" aria-hidden="true" th:attr="ng-show = | vm.getHeaderClass('${field.name}') == 'desc' |"></span>
+          <span class="glyphicon glyphicon glyphicon-chevron-down" aria-hidden="true" th:attr="ng-show = | vm.getHeaderClass('${field.fieldName}') == 'asc' |"></span>
+          <span class="glyphicon glyphicon glyphicon-chevron-up" aria-hidden="true" th:attr="ng-show = | vm.getHeaderClass('${field.fieldName}') == 'desc' |"></span>
         </th>
         </thead>
         <tbody>

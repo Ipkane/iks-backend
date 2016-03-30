@@ -11,17 +11,17 @@ import org.w3c.dom.*;
  * @author Igor Kaynov
  */
 public class GridColumn extends GulElement implements IGridColumn {
-  private String name;
+  private String fieldName;
   private String label;
   private String displayField;
   public GridColumn() {
   }
   @Override
-  public String getName() {
-    return name;
+  public String getFieldName() {
+    return fieldName;
   }
-  public void setName( String name ) {
-    this.name = name;
+  public void setFieldName( String fieldName ) {
+    this.fieldName = fieldName;
   }
   @Override
   public String getLabel() {
@@ -44,8 +44,8 @@ public class GridColumn extends GulElement implements IGridColumn {
   @Override
   public void parse( IParseContext context, Element xmlElement ) throws Exception {
     super.parse( context, xmlElement );
-    if( xmlElement.hasAttribute( GulConstant.ATTR_NAME ) ) {
-      setName( xmlElement.getAttribute( GulConstant.ATTR_NAME ) );
+    if( xmlElement.hasAttribute( GulConstant.ATTR_FIELD_NAME ) ) {
+      setFieldName( xmlElement.getAttribute( GulConstant.ATTR_FIELD_NAME ) );
     }
     if( xmlElement.hasAttribute( GulConstant.ATTR_LABEL ) ) {
       setLabel( xmlElement.getAttribute( GulConstant.ATTR_LABEL ) );

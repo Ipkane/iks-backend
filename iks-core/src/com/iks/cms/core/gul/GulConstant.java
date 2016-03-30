@@ -7,6 +7,7 @@ public interface GulConstant {
   // attributes
   String ATTR_ID            = "id";
   String ATTR_NAME          = "name";
+  String ATTR_FIELD_NAME    = "fieldName";
   String ATTR_LABEL         = "label";
   String ATTR_READONLY      = "readonly";
   String ATTR_REQUIRED      = "required";

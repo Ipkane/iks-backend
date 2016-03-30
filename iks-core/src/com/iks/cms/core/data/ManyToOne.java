@@ -41,13 +41,13 @@ public class ManyToOne extends AbstractDataField {
     Table table = query.getMainTable();
     String[] parts = ModelUtils.splitField( fullField );
     if( parts.length == 1 ) {
-      query.addColumn( table.getColumn( getTableField(), getName() ) );
+      query.addColumn( table.getColumn( getTableField(), getFieldName() ) );
     } else {
       IDataModel joinedModel = App.getModel( getAppObj() );
       IDataField joinedField = joinedModel.getField( parts[1] );
       Table joinedTable = new Table( joinedModel.getTableName(), joinedModel.getAppObj() );
-      query.leftJoin( new Join( joinedTable, table.getColumn( getTableField(), getName() ), joinedTable.getColumn( joinedModel.getPrimaryFieldName() ) ) );
-      query.addColumn( joinedTable.getColumn( joinedField.getTableField(), joinedField.getName() ) );
+      query.leftJoin( new Join( joinedTable, table.getColumn( getTableField(), getFieldName() ), joinedTable.getColumn( joinedModel.getPrimaryFieldName() ) ) );
+      query.addColumn( joinedTable.getColumn( joinedField.getTableField(), joinedField.getFieldName() ) );
     }
   }
   @Override
@@ -55,7 +55,7 @@ public class ManyToOne extends AbstractDataField {
     Table table = query.getMainTable();
     IDataModel joinedModel = App.getModel( getAppObj() );
     Table joinedTable = new Table( joinedModel.getTableName(), joinedModel.getAppObj() );
-    query.leftJoin( new Join( joinedTable, table.getColumn( getTableField(), getName() ), joinedTable.getColumn( joinedModel.getPrimaryFieldName() ) ) );
+    query.leftJoin( new Join( joinedTable, table.getColumn( getTableField(), getFieldName() ), joinedTable.getColumn( joinedModel.getPrimaryFieldName() ) ) );
     for( Map.Entry< String, Object > joinedItemEntry : ( ( Map< String, Object > )value ).entrySet() ) {
       IDataField joinedField = joinedModel.getField( joinedItemEntry.getKey() );
       if( joinedItemEntry.getValue() == null || StringUtils.trimToNull( joinedItemEntry.getValue().toString() ) == null ) {
@@ -71,12 +71,12 @@ public class ManyToOne extends AbstractDataField {
       IDataModel joinedModel = App.getModel( getAppObj() );
       DataItem joinedItem = new DataItem();
       joinedItem.addFieldValue( joinedModel.getPrimaryFieldName(), value );
-      resultItem.addFieldValue( getName(), joinedItem );
+      resultItem.addFieldValue( getFieldName(), joinedItem );
     } else {
-      DataItem joinedItem = ( DataItem )resultItem.getFieldValue( getName() );
+      DataItem joinedItem = ( DataItem )resultItem.getFieldValue( getFieldName() );
       if( joinedItem == null ) {
         joinedItem = new DataItem();
-        resultItem.addFieldValue( getName(), joinedItem );
+        resultItem.addFieldValue( getFieldName(), joinedItem );
       }
       joinedItem.addFieldValue( parts[1], value );
     }

@@ -8,7 +8,7 @@ import com.iks.cms.core.gul.element.*;
  * @author Igor Kaynov
  */
 public interface IGulInputField extends IGulElement {
-  String getName();
+  String getFieldName();
   String getLabel();
   Object getDefaultValue();
   void applyModel(IDataField dataField);

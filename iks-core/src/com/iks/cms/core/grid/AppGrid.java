@@ -5,7 +5,7 @@ package com.iks.cms.core.grid;
  */
 public class AppGrid extends BaseGrid implements IBaseGrid {
   @Override
-  public String getName() {
+  public String getFieldName() {
     return null;
   }
 }

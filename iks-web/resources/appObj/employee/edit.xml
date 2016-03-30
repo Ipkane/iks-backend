@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
 <editView appObj="employee" xmlns="http://com.iks.org/schema/edit/1.0">
   <fieldbox>
-    <textbox name="id" readonly="true"/>
-    <textbox id="fio" name="fio" label="First/Last Name Name"/>
-    <select name="gender"/>
-    <referenceSelect name="user" displayField="username"/>
+    <textbox fieldName="id" readonly="true"/>
+    <textbox id="fio" fieldName="fio" label="First/Last fieldName"/>
+    <select fieldName="gender"/>
+    <referenceSelect fieldName="user" displayField="username"/>
   </fieldbox>
   <tabbox>
     <tab label="Tab 1">
