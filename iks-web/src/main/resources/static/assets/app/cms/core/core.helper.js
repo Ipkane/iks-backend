@@ -43,10 +43,10 @@
 
   function ModalHelper( $uibModal ) {
     return {
-      openConfirmModal: openConfirmModal
+      openConfirmModal: openConfirmModal,
+      showErrorModal  : showErrorModal
     };
     function openConfirmModal( params ) {
-      // open modal
       $uibModal.open(
         {
           animation   : true,
@@ -75,6 +75,21 @@
                          params.onCancel();
                        }
                      } );
+    }
+
+    function showErrorModal( response ) {
+      $uibModal.open(
+        {
+          animation   : true,
+          templateUrl : 'assets/app/cms/common/templates/error-modal.html',
+          controller  : 'ErrorModalController',
+          controllerAs: 'vm',
+          backdrop    : 'static',
+          resolve     : {
+            response: response
+          }
+        }
+      );
     }
   }
 })( angular );

@@ -3,7 +3,7 @@ angular.module( 'app.cms' )//
   .controller( 'GridEditController', GridEditController )
 ;//
 var formScope;
-function GridEditController( $scope, $log, payload, $uibModalInstance, CoreService ) {
+function GridEditController( $scope, $log, payload, $uibModalInstance, CoreService, ModalHelper ) {
   formScope = $scope;
   angular.extend( $scope, {
     itemId      : payload.itemId,
@@ -16,8 +16,10 @@ function GridEditController( $scope, $log, payload, $uibModalInstance, CoreServi
       if ( response.isSuccess ) {
         $scope.selectedItem = response.success.item || {};
       } else {
-        $log.error( response );
+        ModalHelper.showErrorModal( response );
       }
+    }, function ( response ) {
+      ModalHelper.showErrorModal( response );
     } );
   };
   $scope.save       = function ( isValid ) {
@@ -38,11 +40,11 @@ function GridEditController( $scope, $log, payload, $uibModalInstance, CoreServi
               $scope.addAlert( error.message );
             } );
           } else {
-            $scope.addAlert( response.failure.message );
+            ModalHelper.showErrorModal(response);
           }
         }
       }, function ( response ) {
-        $log.debug( response );
+        ModalHelper.showErrorModal(response);
       }
     )
     ;

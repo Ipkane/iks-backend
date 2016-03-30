@@ -1,8 +1,9 @@
 'use strict';
 angular.module( 'app.cms' )//
   .controller( 'ConfirmModalController', ConfirmModalController )
+  .controller( 'ErrorModalController', ErrorModalController )
 ;//
-function ConfirmModalController( $scope, $log, title, message, onConfirm, $uibModalInstance ) {
+function ConfirmModalController( $scope, $log, title, message, onConfirm, $uibModalInstance, ModalHelper ) {
   angular.extend($scope, {
     alerts      : [],
     title: title,
@@ -17,8 +18,7 @@ function ConfirmModalController( $scope, $log, title, message, onConfirm, $uibMo
         $scope.addAlert(response.failure.message);
       }
     }, function ( response ) {
-      $log.error( response );
-      $scope.addAlert("Server error occured");
+      ModalHelper.showErrorModal(response);
     });
   };
   $scope.cancel = function () {
@@ -34,4 +34,20 @@ function ConfirmModalController( $scope, $log, title, message, onConfirm, $uibMo
   $scope.closeAlert = function ( index ) {
     $scope.alerts.splice( index, 1 );
   };
+}
+function ErrorModalController( $scope, $log, response, $uibModalInstance ) {
+  angular.extend($scope, {
+    message: null
+  });
+  function init() {
+    var failure = response.failure;
+    $scope.message = failure.message;
+    $scope.status = failure.status;
+    $scope.reason = failure.reason;
+    $scope.error = failure.error;
+  }
+  $scope.ok = function () {
+    $uibModalInstance.close(  );
+  };
+  init();
 }

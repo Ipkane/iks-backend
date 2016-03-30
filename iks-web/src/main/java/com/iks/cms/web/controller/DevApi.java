@@ -26,7 +26,7 @@ public class DevApi {
       parseService.loadApp();
       return ApiUtils.makeResponse( REQUEST_RELOAD_APP, null, new ResponseEmpty() );
     } catch( Exception ex ) {
-      return ApiUtils.makeErrorResponse( REQUEST_RELOAD_APP, "Error reloading app", null );
+      return ApiUtils.makeErrorResponse( REQUEST_RELOAD_APP, "Error reloading app", null, ex );
     }
   }
 }

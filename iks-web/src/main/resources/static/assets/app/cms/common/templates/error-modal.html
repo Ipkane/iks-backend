@@ -1,0 +1,20 @@
+<div class="modal-header">
+  <h2 class="modal-title">Error</h2>
+</div>
+<div class="modal-body">
+  <div class="status">Status: {{status}}, reason: {{reason}}</div>
+  <div class="message">{{ message }}</div>
+  <div class="detail-message">
+    {{ error.message }}
+  </div>
+  <div class="cause">
+    Caused by: {{ error.cause }}
+  </div>
+</div>
+<div class="modal-footer">
+  <div class="row">
+    <div class="col-xs-3 col-xs-offset-3">
+      <button class="btn btn-danger" ng-click="ok()">Ok</button>
+    </div>
+  </div>
+</div>

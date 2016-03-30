@@ -38,7 +38,7 @@ public class CoreController {
       return ApiUtils.makeResponse( REQUEST_GET_GRID_DATA, request, response );
     } catch( Exception ex ) {
       logger.error( RESPONSE_ERROR_GET_GRID_DATA, ex );
-      return ApiUtils.makeErrorResponse( REQUEST_GET_GRID_DATA, RESPONSE_ERROR_GET_GRID_DATA, request );
+      return ApiUtils.makeErrorResponse( REQUEST_GET_GRID_DATA, RESPONSE_ERROR_GET_GRID_DATA, request, ex );
     }
   }
   @RequestMapping( value = REQUEST_GET_EDIT_DATA, method = RequestMethod.GET )
@@ -49,7 +49,7 @@ public class CoreController {
       return ApiUtils.makeResponse( REQUEST_GET_EDIT_DATA, request, response );
     } catch( Exception ex ) {
       logger.error( RESPONSE_ERROR_GET_EDIT_DATA, ex );
-      return ApiUtils.makeErrorResponse( REQUEST_GET_EDIT_DATA, RESPONSE_ERROR_GET_EDIT_DATA, request );
+      return ApiUtils.makeErrorResponse( REQUEST_GET_EDIT_DATA, RESPONSE_ERROR_GET_EDIT_DATA, request, ex );
     }
   }
   @RequestMapping( value = REQUEST_UPDATE_EDIT_DATA, method = RequestMethod.POST )
@@ -67,7 +67,7 @@ public class CoreController {
       return ApiUtils.makeClientErrorResponse( REQUEST_UPDATE_EDIT_DATA, RESPONSE_ERROR_UPDATE_EDIT_DATA, response, request );
     } catch( Exception ex ) {
       logger.error( RESPONSE_ERROR_UPDATE_EDIT_DATA, ex );
-      return ApiUtils.makeErrorResponse( REQUEST_UPDATE_EDIT_DATA, RESPONSE_ERROR_UPDATE_EDIT_DATA, request );
+      return ApiUtils.makeErrorResponse( REQUEST_UPDATE_EDIT_DATA, RESPONSE_ERROR_UPDATE_EDIT_DATA, request, ex );
     }
   }
   @RequestMapping( value = REQUEST_ADD_GRID_ITEM, method = RequestMethod.POST )
@@ -77,7 +77,7 @@ public class CoreController {
       return ApiUtils.makeResponse( REQUEST_UPDATE_EDIT_DATA, request, new ResponseEmpty() );
     } catch( Exception ex ) {
       logger.error( RESPONSE_ERROR_UPDATE_EDIT_DATA, ex );
-      return ApiUtils.makeErrorResponse( REQUEST_UPDATE_EDIT_DATA, RESPONSE_ERROR_UPDATE_EDIT_DATA, request );
+      return ApiUtils.makeErrorResponse( REQUEST_UPDATE_EDIT_DATA, RESPONSE_ERROR_UPDATE_EDIT_DATA, request, ex );
     }
   }
   @RequestMapping( value = REQUEST_DELETE_ITEM, method = RequestMethod.POST )
@@ -87,7 +87,7 @@ public class CoreController {
       return ApiUtils.makeResponse( REQUEST_DELETE_ITEM, request, new ResponseEmpty() );
     } catch( Exception ex ) {
       logger.error( RESPONSE_ERROR_DELETE_ITEM, ex );
-      return ApiUtils.makeErrorResponse( REQUEST_DELETE_ITEM, RESPONSE_ERROR_DELETE_ITEM, request );
+      return ApiUtils.makeErrorResponse( REQUEST_DELETE_ITEM, RESPONSE_ERROR_DELETE_ITEM, request, ex );
     }
   }
   @RequestMapping( value = REQUEST_DELETE_ONE_TO_MANY_ITEM, method = RequestMethod.POST )
@@ -97,7 +97,7 @@ public class CoreController {
       return ApiUtils.makeResponse( REQUEST_DELETE_ONE_TO_MANY_ITEM, request, new ResponseEmpty() );
     } catch( Exception ex ) {
       logger.error( RESPONSE_ERROR_DELETE_ITEM, ex );
-      return ApiUtils.makeErrorResponse( REQUEST_DELETE_ONE_TO_MANY_ITEM, RESPONSE_ERROR_DELETE_ITEM, request );
+      return ApiUtils.makeErrorResponse( REQUEST_DELETE_ONE_TO_MANY_ITEM, RESPONSE_ERROR_DELETE_ITEM, request, ex );
     }
   }
 }

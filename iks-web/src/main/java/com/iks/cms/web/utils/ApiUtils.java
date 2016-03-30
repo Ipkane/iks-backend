@@ -8,8 +8,11 @@ import org.springframework.http.*;
  * @author Igor Kaynov
  */
 public class ApiUtils {
-  public static ResponseEntity< DefaultResponseBody< ?, ? > > makeErrorResponse( String methodName, String message, AbstractApiRequest request ) {
-    return new ResponseEntity<>( new DefaultResponseBody<>( methodName, request, HttpStatus.INTERNAL_SERVER_ERROR, message, null ), HttpStatus.OK );
+//  public static ResponseEntity< DefaultResponseBody< ?, ? > > makeErrorResponse( String methodName, String message, AbstractApiRequest request ) {
+//    return new ResponseEntity<>( new DefaultResponseBody<>( methodName, request, HttpStatus.INTERNAL_SERVER_ERROR, message, null ), HttpStatus.OK );
+//  }
+  public static ResponseEntity< DefaultResponseBody< ?, ? > > makeErrorResponse( String methodName, String message, AbstractApiRequest request, Exception ex ) {
+    return new ResponseEntity<>( new DefaultResponseBody<>( methodName, request, HttpStatus.INTERNAL_SERVER_ERROR, message, new ExceptionResponse( ex ) ), HttpStatus.OK );
   }
   public static ResponseEntity< DefaultResponseBody< ?, ? > > makeClientErrorResponse( String methodName, String message, AbstractApiResponse error, AbstractApiRequest request ) {
     return new ResponseEntity<>( new DefaultResponseBody<>( methodName, request, HttpStatus.BAD_REQUEST, message, error ), HttpStatus.OK );
