@@ -1,7 +1,8 @@
 define([
   // The dojo/dom module is required by this module, so it goes
   // in this list of dependencies.
-  'dojo/dom'
+  'dojo/dom',
+  'dojo/domReady!'
 ], function(dom){
   // Once all modules in the dependency list have loaded, this
   // function is called to define the demo/myModule module.
