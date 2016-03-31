@@ -7,7 +7,6 @@ import com.iks.cms.core.sql.*;
 import com.iks.cms.core.sql.projection.*;
 import com.iks.cms.core.sql.query.*;
 import com.iks.cms.core.utils.*;
-import com.sun.istack.internal.*;
 
 import org.hibernate.*;
 import org.slf4j.*;
@@ -57,7 +56,7 @@ public class SelectModelQuery< T extends SelectModelQuery > extends CommonModelQ
     result.setItems( resultList );
     result.setLimit( limit );
     result.setOffset( offset );
-    result.setTotalItems( getCount( sessionFactory ) );
+    result.setTotal( getCount( sessionFactory ) );
     return result;
   }
   public Long getCount( SessionFactory sessionFactory ) {
@@ -81,9 +80,7 @@ public class SelectModelQuery< T extends SelectModelQuery > extends CommonModelQ
     Object row = selectSingleQuery( sessionFactory, sqlQuery );
     return parseResult( row );
   }
-  protected
-  @Nullable
-  IDataItem parseResult( Object rawData ) {
+  protected IDataItem parseResult( Object rawData ) {
     DataItem resultItem = new DataItem();
     Object[] data = ( Object[] )rawData;
     if( ModelUtils.isEmptyArray( data ) ) {

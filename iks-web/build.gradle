@@ -32,10 +32,10 @@ sourceSets {
     java {
       srcDir 'src/main/java'
     }
-    resources {
-      srcDir 'resources'
-      srcDir 'src/main/resources'
-    }
+//    resources {
+//      srcDir 'resources'
+//      srcDir 'src/main/resources'
+//    }
   }
 }
 

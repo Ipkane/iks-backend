@@ -7,12 +7,20 @@ import com.iks.cms.web.api.common.*;
 import com.iks.cms.web.api.grid.*;
 import com.iks.cms.web.utils.*;
 
+import net.jazdw.rql.parser.*;
+
+import org.apache.commons.lang3.*;
 import org.slf4j.*;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
+
+import javax.servlet.http.*;
+
+import cz.jirutka.rsql.parser.*;
+import cz.jirutka.rsql.parser.ast.*;
 
 @RestController
 @RequestMapping( "/api/core" )
@@ -34,15 +42,21 @@ public class CoreController {
   private final        Logger logger                                 = LoggerFactory.getLogger( CoreController.class );
   @Autowired
   private AppObjService appObjService;
-  @RequestMapping( value = REQUEST_GET_GRID_DATA, method = RequestMethod.POST )
-  public ResponseEntity< DefaultResponseBody< ?, ? > > getGridData( @RequestBody RequestGetGridData request ) {
+  @RequestMapping( value = REQUEST_GET_GRID_DATA, method = RequestMethod.GET )
+  public ResponseEntity< DefaultResponseBody< ?, ? > > getGridData( HttpServletRequest request ) {
     try {
+      String gridId = request.getParameter( "gridId" );
+      String query = request.getQueryString();
+      //      Node rootNode = new RSQLParser().parse(query);
+      ASTNode node = new RQLParser().parse( query );
+      QueryRequestVisitor visitor = new QueryRequestVisitor();
+      node.accept( visitor );
       ResponseGetGridData response = new ResponseGetGridData();
-      response.setResult( appObjService.getGridData( request ) );
-      return ApiUtils.makeResponse( REQUEST_GET_GRID_DATA, request, response );
+      response.setResult( appObjService.getGridData( gridId, visitor.getRequest() ) );
+      return ApiUtils.makeResponse( REQUEST_GET_GRID_DATA, null, response );
     } catch( Exception ex ) {
       logger.error( RESPONSE_ERROR_GET_GRID_DATA, ex );
-      return ApiUtils.makeErrorResponse( REQUEST_GET_GRID_DATA, RESPONSE_ERROR_GET_GRID_DATA, request, ex );
+      return ApiUtils.makeErrorResponse( REQUEST_GET_GRID_DATA, RESPONSE_ERROR_GET_GRID_DATA, null, ex );
     }
   }
   @RequestMapping( value = REQUEST_GET_EDIT_DATA, method = RequestMethod.GET )
@@ -105,10 +119,10 @@ public class CoreController {
     }
   }
   @RequestMapping( value = REQUEST_GET_NAV_DATA, method = RequestMethod.GET )
-  public ResponseEntity< DefaultResponseBody< ?, ? > > getNavData(  ) {
+  public ResponseEntity< DefaultResponseBody< ?, ? > > getNavData() {
     try {
-      List<NavItem > navItemList = appObjService.getNavItems();
-      return ApiUtils.makeResponse( REQUEST_DELETE_ONE_TO_MANY_ITEM, null, new ResponseNavItems(navItemList) );
+      List< NavItem > navItemList = appObjService.getNavItems();
+      return ApiUtils.makeResponse( REQUEST_DELETE_ONE_TO_MANY_ITEM, null, new ResponseNavItems( navItemList ) );
     } catch( Exception ex ) {
       logger.error( RESPONSE_ERROR_DELETE_ITEM, ex );
       return ApiUtils.makeErrorResponse( REQUEST_DELETE_ONE_TO_MANY_ITEM, null, null, ex );

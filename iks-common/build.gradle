@@ -26,6 +26,8 @@ dependencies {
 //  compile 'org.thymeleaf:thymeleaf:2.1.4.RELEASE'
 //  compile 'org.thymeleaf:thymeleaf-spring4:2.1.4.RELEASE'
 
+  compile 'cz.jirutka.rsql:rsql-parser:2.1.0'
+compile 'net.jazdw:rql-parser:0.3.1'
 }
 
 sourceSets {

@@ -5,15 +5,16 @@
 
   <!--<link href="../static/assets/css/bootstrap.min.css" th:href="@{assets/css/bootstrap.min.css}" rel="stylesheet"/>-->
   <!--<link href="../static/assets/css/bootstrap-theme.min.css" th:href="@{assets/css/bootstrap-theme.min.css}" rel="stylesheet"/>-->
-  <link href="assets/dijit/themes/tundra/tundra.css" rel="stylesheet"/>
+  <link href="assets/dijit/themes/claro/claro.css" rel="stylesheet"/>
   <link href="assets/dgrid/css/dgrid.css" rel="stylesheet"/>
-  <link href="assets/dgrid/css/skins/tundra.css" rel="stylesheet"/>
+  <link href="assets/dgrid/css/skins/claro.css" rel="stylesheet"/>
   <link href="../static/assets/css/gul.css" th:href="@{assets/css/gul.css}" rel="stylesheet"/>
+  <link href="../static/assets/css/app.css" th:href="@{assets/css/app.css}" rel="stylesheet"/>
   <link href="../static/assets/css/main.css" th:href="@{assets/css/main.css}" rel="stylesheet"/>
   <link href="../static/assets/css/dev.css" th:href="@{assets/css/dev.css}" rel="stylesheet"/>
 
 </head>
-<body ng-app="app" class="tundra">
+<body ng-app="app" class="claro">
 <div class="dev-panel" ng-controller="DevPanelController">
   <div ng-include="'assets/app/dev/dev-panel.html'"></div>
 </div>
@@ -38,7 +39,7 @@
 <!--</footer>-->
 <!--</div>-->
 <div id="appLayout" class="demoLayout" data-dojo-type="dijit/layout/BorderContainer" data-dojo-props="design: 'headline'">
-  <div id='mainContent' class="centerPanel" data-dojo-type="dijit/layout/ContentPane" data-dojo-props="region: 'center'">
+  <div id='mainContent' class="centerPanel vbox" data-dojo-type="dijit/layout/ContentPane" data-dojo-props="region: 'center'">
   </div>
   <div class="edgePanel" data-dojo-type="dijit/layout/ContentPane" data-dojo-props="region: 'top'">Header content (top)
 
@@ -62,6 +63,7 @@
       'dijit',
       'dojox',
       'dgrid',
+      'dstore',
       'app',
     ],
     map        : {

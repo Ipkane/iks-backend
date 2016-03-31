@@ -1,15 +1,11 @@
-package com.iks.cms.web.api.grid;
-
-import com.iks.cms.core.service.*;
-import com.iks.cms.web.api.common.*;
+package com.iks.cms.core.service;
 
 import java.util.*;
 
 /**
  * @author Igor Kaynov
  */
-public class RequestGetGridData extends AbstractApiRequest implements IQueryRequest {
-  private String                gridId;
+public class QueryRequest implements IQueryRequest {
   private Map< String, Object > filter;
   private String                orderBy;
   private String                parentId;
@@ -38,12 +34,6 @@ public class RequestGetGridData extends AbstractApiRequest implements IQueryRequ
   }
   public void setLimit( Integer limit ) {
     this.limit = limit;
-  }
-  public String getGridId() {
-    return gridId;
-  }
-  public void setGridId( String gridId ) {
-    this.gridId = gridId;
   }
   public String getParentId() {
     return parentId;

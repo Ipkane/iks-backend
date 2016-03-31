@@ -34,8 +34,8 @@ public class AppObjService {
   private void init() {
     App.getInstance().setService( this );
   }
-  public PageableResult getGridData( IGridRequest request ) {
-    IBaseGrid grid = App.getGrid( request.getGridId() );
+  public PageableResult getGridData( String gridId, IQueryRequest request ) {
+    IBaseGrid grid = App.getGrid( gridId );
     SelectGridQuery query = new SelectGridQuery( App.getModel( grid.getAppObj() ), grid );
     if( StringUtils.isNotBlank( request.getParentId() ) ) {
       query.setParentId( request.getParentId() );
@@ -47,12 +47,8 @@ public class AppObjService {
     }
     String orderBy = request.getOrderBy();
     if( orderBy != null ) {
-      boolean orderAsc = true;
-      String orderField = orderBy;
-      if( orderBy.substring( 0, 1 ).equals( "-" ) ) {
-        orderField = orderBy.substring( 1, orderBy.length() );
-        orderAsc = false;
-      }
+      String orderField = orderBy.substring( 1, orderBy.length() );
+      boolean orderAsc = orderBy.substring( 0, 1 ).equals( "+" );
       query.setOrderBy( orderField );
       query.setOrderAsc( orderAsc );
     }

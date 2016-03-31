@@ -9,7 +9,7 @@ public class PageableResult {
   private List< IDataItem > items;
   private Integer           limit;
   private Integer           offset;
-  private Long           totalItems;
+  private Long           total;
   public Integer getOffset() {
     return offset;
   }
@@ -28,10 +28,10 @@ public class PageableResult {
   public void setItems( List< IDataItem > items ) {
     this.items = items;
   }
-  public Long getTotalItems() {
-    return totalItems;
+  public Long getTotal() {
+    return total;
   }
-  public void setTotalItems( Long totalItems ) {
-    this.totalItems = totalItems;
+  public void setTotal( Long totalItems ) {
+    this.total = totalItems;
   }
 }
