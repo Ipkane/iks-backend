@@ -8,6 +8,7 @@ import com.iks.cms.core.model.*;
  */
 public interface IAppObj {
   String getName();
+  String getLabel();
   IDataModel getDataModel();
   IListView getListView();
   IEditView getEditView();

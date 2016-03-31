@@ -1,6 +1,7 @@
 package com.iks.cms.core.service;
 
 import com.iks.cms.core.appObj.*;
+import com.iks.cms.core.common.*;
 import com.iks.cms.core.data.*;
 import com.iks.cms.core.exception.*;
 import com.iks.cms.core.grid.*;
@@ -105,12 +106,12 @@ public class AppObjService {
     query.executeQuery( commonDao.getSessionFactory() );
   }
   public void deleteOneToManyItem( String gridId, String parentItemId, String itemId ) {
-    ReferenceTableField grid = (ReferenceTableField)App.getGrid( gridId );
+    ReferenceTableField grid = ( ReferenceTableField )App.getGrid( gridId );
     DeleteManyToManyQuery query = new DeleteManyToManyQuery( App.getModel( grid.getAppObj() ), grid.getFieldName(), parentItemId, itemId );
     query.execute( commonDao.getSessionFactory() );
   }
   public void addReferenceGridItem( String gridId, String parentItemId, String itemId ) {
-    ReferenceTableField grid = (ReferenceTableField)App.getGrid( gridId );
+    ReferenceTableField grid = ( ReferenceTableField )App.getGrid( gridId );
     AddReferenceValueQuery query = new AddReferenceValueQuery( App.getModel( grid.getAppObj() ), grid.getFieldName(), parentItemId, itemId );
     query.execute( commonDao.getSessionFactory() );
   }
@@ -144,5 +145,15 @@ public class AppObjService {
       options.add( new SelectOption( item.getFieldValue( joinedModel.getPrimaryFieldName() ).toString(), item.getFieldValue( referenceField.getDisplayField() ).toString() ) );
     }
     return options;
+  }
+  public List< NavItem > getNavItems() {
+    List< NavItem > navItems = new ArrayList<>();
+    for( IAppObj appObj : App.getAppObjList() ) {
+      NavItem item = new NavItem( appObj.getName(), appObj.getLabel() );
+      item.setParent( "root" );
+      item.setUrl( "view/listView?appObj=" + appObj.getName() );
+      navItems.add( item );
+    }
+    return navItems;
   }
 }

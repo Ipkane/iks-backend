@@ -1,5 +1,6 @@
 package com.iks.cms.web.controller;
 
+import com.iks.cms.core.common.*;
 import com.iks.cms.core.exception.*;
 import com.iks.cms.core.service.*;
 import com.iks.cms.web.api.common.*;
@@ -10,6 +11,8 @@ import org.slf4j.*;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.*;
 
 @RestController
 @RequestMapping( "/api/core" )
@@ -27,6 +30,7 @@ public class CoreController {
   private static final String RESPONSE_ERROR_DELETE_ITEM             = "Couldn't delete item";
   private static final String REQUEST_DELETE_ONE_TO_MANY_ITEM        = "/deleteOneToManyItem";
   private static final String RESPONSE_ERROR_DELETE_ONE_TO_MANY_ITEM = "Couldn't delete one to many item";
+  private static final String REQUEST_GET_NAV_DATA                   = "/getNavData";
   private final        Logger logger                                 = LoggerFactory.getLogger( CoreController.class );
   @Autowired
   private AppObjService appObjService;
@@ -98,6 +102,16 @@ public class CoreController {
     } catch( Exception ex ) {
       logger.error( RESPONSE_ERROR_DELETE_ITEM, ex );
       return ApiUtils.makeErrorResponse( REQUEST_DELETE_ONE_TO_MANY_ITEM, RESPONSE_ERROR_DELETE_ITEM, request, ex );
+    }
+  }
+  @RequestMapping( value = REQUEST_GET_NAV_DATA, method = RequestMethod.GET )
+  public ResponseEntity< DefaultResponseBody< ?, ? > > getNavData(  ) {
+    try {
+      List<NavItem > navItemList = appObjService.getNavItems();
+      return ApiUtils.makeResponse( REQUEST_DELETE_ONE_TO_MANY_ITEM, null, new ResponseNavItems(navItemList) );
+    } catch( Exception ex ) {
+      logger.error( RESPONSE_ERROR_DELETE_ITEM, ex );
+      return ApiUtils.makeErrorResponse( REQUEST_DELETE_ONE_TO_MANY_ITEM, null, null, ex );
     }
   }
 }
