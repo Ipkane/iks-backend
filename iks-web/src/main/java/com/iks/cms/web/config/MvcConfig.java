@@ -35,7 +35,8 @@ public class MvcConfig extends WebMvcAutoConfiguration.WebMvcAutoConfigurationAd
   public SpringTemplateEngine templateEngine() {
     SpringTemplateEngine engine = new SpringTemplateEngine();
     engine.setTemplateResolver( templateResolver() );
-    engine.addDialect( new AngularDialect() );
+//    engine.addDialect( new AngularDialect() );
+    engine.addDialect( new DojoDialect() );
     return engine;
   }
   @Bean

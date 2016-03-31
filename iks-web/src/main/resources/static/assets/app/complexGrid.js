@@ -1,6 +1,7 @@
 define( [
   "dojo/_base/declare",
   "dojo/_base/lang",
+  "dojo/json",
   "dojo/dom-construct",
   "dijit/layout/ContentPane",
   "dgrid/Grid",
@@ -9,40 +10,37 @@ define( [
   "dgrid/OnDemandGrid",
   "app/GridStore",
   "ready!"
-], function ( declare, lang, domConstruct, ContentPane, Grid, Selection, Keyboard, OnDemandGrid, GridStore ) {
+], function ( declare, lang, JSON, domConstruct, ContentPane, Grid, Selection, Keyboard, OnDemandGrid, GridStore ) {
   return declare( "app.ComplexGrid", [ ContentPane ], {
     grid          : null,
+    gridString    : null,
     postCreate    : function () {
-      var self  = this;
-      var store = new GridStore( {
+      var self        = this;
+      var store       = new GridStore( {
         target: 'api/core/getGridData?gridId=' + self.get( 'id' )
       } );
-      //var data       = [
-      //  { first: 'Bob', last: 'Barker', age: 89 },
-      //  { first: 'Vanna', last: 'White', age: 55 },
-      //  { first: 'Pat', last: 'Sajak', age: 65 }
-      //];
-      var CustomGrid = declare( [ OnDemandGrid, Keyboard, Selection ] );
-      var grid       = new CustomGrid( {
-        columns       : [
-          { field: 'fio', label: 'First Name/Last Name' },
-          { field: 'gender', label: 'Gender' }
-        ],
-        className     : 'dgrid-autoheight',
+      var gridOptions = parseGridString( this.gridString );
+      var CustomGrid  = declare( [ OnDemandGrid, Keyboard, Selection ] );
+      var grid        = new CustomGrid( {
+        columns       : gridOptions.columns,
+        //className     : 'dgrid-autoheight',
         collection    : store,
         selectionMode : 'single',
         cellNavigation: false,
         loadingMessage: 'Loading data...',
         noDataMessage : 'No results found.'
       } );
-      //grid.renderArray( data );
-      grid.startup();
+      this.grid       = grid;
       this._handleEvents( grid );
       this.set( 'content', grid );
-      this.grid      = grid;
       this.inherited( arguments );
     },
+    startup: function() {
+      this.inherited(arguments);
+      this.grid.startup();
+    },
     _handleEvents : function ( grid ) {
+      var self = this;
       grid.on( 'dgrid-select', lang.hitch( this, self._onRowSelect ) );
       grid.on( 'dgrid-deselect', lang.hitch( this, self._onRowDeselect ) );
       grid.on( 'dgrid-error', function ( event ) {
@@ -58,13 +56,28 @@ define( [
       } );
     },
     _onRowSelect  : function ( event ) {
-      // Report the item from the selected row to the console.
-      console.log( 'Row selected: ' );
-      console.log( event );
+      //console.log( 'Row selected: ' );
+      //console.log( event );
     },
     _onRowDeselect: function ( event ) {
-      console.log( 'Row de-selected: ' );
-      console.log( event );
+      //console.log( 'Row de-selected: ' );
+      //console.log( event );
     }
   } );
+  function parseGridString( gridString ) {
+    var gridOptions = JSON.parse( gridString );
+    var columns     = [];
+    _.forEach( gridOptions.columns, function ( column ) {
+      if (column.fieldName == 'id') {
+        return;
+      }
+      columns.push( {
+        field : column.fieldName,
+        label: column.label
+      } );
+    } );
+    return {
+      columns: columns
+    }
+  }
 } );

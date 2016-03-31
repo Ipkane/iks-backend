@@ -20,12 +20,3 @@ html, body {
   background-color: #d0e9fc;
 }
 
-.dgrid-row-table {
-  height: auto;
-}
-
-.dgrid {
-  height: 100%;
-  flex: 1;
-}
-
