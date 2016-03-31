@@ -1,13 +1,13 @@
 define( [
-  "dojo/_base/declare", "dojo/dom", "dijit/registry",
+  "dojo/_base/declare", "dojo/dom", "dijit/registry", "dojo/hash", "dojo/topic",
   "dojo/store/Memory", "dojo/store/Observable",
   "dijit/tree/ObjectStoreModel", "dojo/request", "dojo/_base/array", "dijit/Tree",
   "ready!"
-], function ( declare, dom,registry, Memory, Observable, ObjectStoreModel, request, arrayUtil, Tree ) {
-  return declare( [ Tree ], {
-    showRoot       : false,
-    store          : null,
-    postCreate     : function () {
+], function ( declare, dom, registry, hash, topic, Memory, Observable, ObjectStoreModel, request, arrayUtil, Tree ) {
+  return declare("app.NavTree", [ Tree ], {
+    showRoot      : false,
+    store         : null,
+    postCreate    : function () {
       var self    = this;
       self.store  = new Memory( {
         data       : [ { id: 'root' } ],
@@ -22,9 +22,12 @@ define( [
       } );
       this.set( 'model', myModel );
       this.inherited( arguments );
+      topic.subscribe( "/dojo/hashchange", function ( hash ) {
+        self.loadPage( hash );
+      } );
       this._loadItems();
     }
-    , _loadItems   : function () {
+    , _loadItems  : function () {
       var self = this;
       request.get( "api/core/getNavData", {
         handleAs: "json"
@@ -40,10 +43,14 @@ define( [
     , getIconClass: function ( /*dojo.store.Item*/ item, /*Boolean*/ opened ) {
       return item.directory ? (opened ? "dijitFolderOpened" : "dijitFolderClosed") : "dijitLeaf";
     }
-    , onClick: function(item) {
-      if (!item.directory) {
-        registry.byId( 'mainContent' ).set( 'href', item.url );
+    , onClick     : function ( item ) {
+      if ( !item.directory ) {
+        //hash( item.url );
+        this.loadPage( item.url );
       }
+    },
+    loadPage      : function ( url ) {
+      registry.byId( 'mainContent' ).set( 'href', url );
     }
   } );
 } );

@@ -5,10 +5,13 @@
 
   <!--<link href="../static/assets/css/bootstrap.min.css" th:href="@{assets/css/bootstrap.min.css}" rel="stylesheet"/>-->
   <!--<link href="../static/assets/css/bootstrap-theme.min.css" th:href="@{assets/css/bootstrap-theme.min.css}" rel="stylesheet"/>-->
-  <link rel="stylesheet" href="assets/dijit/themes/tundra/tundra.css"/>
+  <link href="assets/dijit/themes/tundra/tundra.css" rel="stylesheet"/>
+  <link href="assets/dgrid/css/dgrid.css" rel="stylesheet"/>
+  <link href="assets/dgrid/css/skins/tundra.css" rel="stylesheet"/>
   <link href="../static/assets/css/gul.css" th:href="@{assets/css/gul.css}" rel="stylesheet"/>
   <link href="../static/assets/css/main.css" th:href="@{assets/css/main.css}" rel="stylesheet"/>
   <link href="../static/assets/css/dev.css" th:href="@{assets/css/dev.css}" rel="stylesheet"/>
+
 </head>
 <body ng-app="app" class="tundra">
 <div class="dev-panel" ng-controller="DevPanelController">
@@ -58,6 +61,7 @@
       'dojo',
       'dijit',
       'dojox',
+      'dgrid',
       'app',
     ],
     map        : {
