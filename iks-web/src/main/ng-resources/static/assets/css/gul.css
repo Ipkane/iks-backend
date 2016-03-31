@@ -1,0 +1,85 @@
+.box {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+  align-content: flex-start;
+}
+
+.hbox {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+  align-content: flex-start;
+  width: 100%;
+  flex-direction: row;
+  flex-wrap: nowrap;
+}
+
+.vbox {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+  align-content: flex-start;
+  /*height: 100%;*/
+  flex-direction: column;
+}
+
+.hbox.pack-start, .vbox.pack-start {
+  align-items: flex-start;
+}
+
+.hbox.pack-center, .vbox.pack-center {
+  justify-content: center;
+}
+
+.hbox.pack-end, .vbox.pack-end {
+  justify-content: flex-end;
+}
+
+.hbox.align-start, .vbox.align-start {
+  align-items: flex-start;
+}
+
+.hbox.align-center, .vbox.align-center {
+  align-items: center;
+}
+
+.hbox.align-end, .vbox.align-end {
+  align-items: flex-end;
+}
+
+.hbox.align-stretch, .vbox.align-stretch {
+  align-items: stretch;
+}
+
+.hbox.align-baseline, .vbox.align-baseline {
+  align-items: baseline;
+}
+
+.fieldbox > .hbox {
+  margin-bottom: 10px;
+}
+
+.form-group > label {
+  width: 150px;
+  margin-right: 10px;
+}
+
+.grid {
+  width: 100%;
+}

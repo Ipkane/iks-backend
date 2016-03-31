@@ -1,0 +1,20 @@
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:ng="">
+<th:block th:fragment="textbox">
+    <label data-th-for="${element.fieldName}" class="control-label" data-th-text="${element.label}">Label</label>
+    <input type="text" class="form-control" data-th-id="${element.id}" th:name="${element.fieldName}" ng:model="${element.fieldName} ? |${modelName}.${element.fieldName}| : ''" ng:readonly="|${element.readonly}|"
+           th:required="${element.required}" th:classappend="${element.cssClass}" th:styleappend="${element.style}"/>
+</th:block>
+<th:block th:fragment="checkbox">
+  <label data-th-for="${element.fieldName}" class="control-label" data-th-text="${element.label}">Label</label>
+  <input type="checkbox" class="checkbox" data-th-id="${element.id}" th:name="${element.fieldName}" ng:model="${element.fieldName} ? |${modelName}.${element.fieldName}| : ''" ng:readonly="|${element.readonly}|"
+         th:classappend="${element.cssClass}" th:styleappend="${element.style}" th:checked="${element.checked}"/>
+</th:block>
+<th:block th:fragment="select">
+    <label data-th-for="${element.fieldName}" class="control-label" data-th-text="${element.label}">Label</label>
+    <select type="text" class="form-control" data-th-id="${element.id}" th:name="${element.fieldName}" ng:model="${element.fieldName} ? |${modelName}.${element.fieldName}| : ''" ng:readonly="${element.readonly}"
+            th:required="${element.required}" th:classappend="${element.cssClass}" th:styleappend="${element.style}">
+      <option data-th-if="${!element.required}" value=""></option>
+      <option data-th-value="${option.value}" data-th-each="option : ${element.options}" data-th-text="${option.label}">Option Label</option>
+    </select>
+</th:block>
+</html>

@@ -1,0 +1,75 @@
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:ng="">
+<head>
+  <title>CMS</title>
+
+  <link href="../static/assets/css/bootstrap.min.css" th:href="@{assets/css/bootstrap.min.css}" rel="stylesheet"/>
+  <link href="../static/assets/css/bootstrap-theme.min.css" th:href="@{assets/css/bootstrap-theme.min.css}" rel="stylesheet"/>
+  <link href="../static/assets/css/gul.css" th:href="@{assets/css/gul.css}" rel="stylesheet"/>
+  <link href="../static/assets/css/main.css" th:href="@{assets/css/main.css}" rel="stylesheet"/>
+  <link href="../static/assets/css/dev.css" th:href="@{assets/css/dev.css}" rel="stylesheet"/>
+</head>
+<body ng-app="app">
+<div class="dev-panel" ng-controller="DevPanelController">
+  <div ng-include="'assets/app/dev/dev-panel.html'"></div>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-2">
+      <nav class="sidebar-nav">
+        <ul class="nav nav-pills nav-stacked">
+          <li data-th-each="appObj : ${appObjList}" ui-sref-active="active">
+            <a ng:sref="|appObjListView({appObj:'${appObj.name}'}) |" data-th-text="${appObj.label}">Link</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+    <div class="col-md-10" ui-view="">
+    </div>
+  </div>
+  <footer>
+    <p>&copy; IKaynov.ru 2016</p>
+  </footer>
+</div>
+<!-- libs -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js" th:src="@{https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js}"></script>
+<script src="../static/assets/js/lib/angular.js?timestamp=@timestamp@" th:src="@{assets/js/lib/angular.js?timestamp=@timestamp@}"></script>
+<script src="../static/assets/js/lib/angular-route.js?timestamp=@timestamp@" th:src="@{assets/js/lib/angular-route.js?timestamp=@timestamp@}"></script>
+<script src="../static/assets/js/lib/lodash.js?timestamp=@timestamp@" th:src="@{assets/js/lib/lodash.js?timestamp=@timestamp@}"></script>
+<script src="../static/assets/js/lib/bootstrap.min.js?timestamp=@timestamp@" th:src="@{assets/js/lib/bootstrap.min.js?timestamp=@timestamp@}"></script>
+<script src="../static/assets/js/lib/angular-file-upload-shim.min.js?timestamp=@timestamp@" th:src="@{assets/js/lib/angular-file-upload-shim.min.js?timestamp=@timestamp@}"></script>
+<script src="../static/assets/js/lib/angular-ui-router.js?timestamp=@timestamp@" th:src="@{assets/js/lib/angular-ui-router.js?timestamp=@timestamp@}"></script>
+<script src="../static/assets/js/lib/angular-permission.js?timestamp=@timestamp@" th:src="@{assets/js/lib/angular-permission.js?timestamp=@timestamp@}"></script>
+<script src="../static/assets/js/lib/angular-animate.min.js?timestamp=@timestamp@" th:src="@{assets/js/lib/angular-animate.min.js?timestamp=@timestamp@}"></script>
+<script src="../static/assets/js/lib/angular-cookies.min.js?timestamp=@timestamp@" th:src="@{assets/js/lib/angular-cookies.min.js?timestamp=@timestamp@}"></script>
+<script src="../static/assets/js/lib/angular-resource.min.js?timestamp=@timestamp@" th:src="@{assets/js/lib/angular-resource.min.js?timestamp=@timestamp@}"></script>
+<script src="../static/assets/js/lib/angular-messages.min.js?timestamp=@timestamp@" th:src="@{assets/js/lib/angular-messages.min.js?timestamp=@timestamp@}"></script>
+<script src="../static/assets/js/lib/angular-translate.min.js?timestamp=@timestamp@" th:src="@{assets/js/lib/angular-translate.min.js?timestamp=@timestamp@}"></script>
+<script src="../static/assets/js/lib/angular-translate-loader-url.min.js?timestamp=@timestamp@" th:src="@{assets/js/lib/angular-translate-loader-url.min.js?timestamp=@timestamp@}"></script>
+<script src="../static/assets/js/lib/ui-bootstrap-tpls.min.js?timestamp=@timestamp@" th:src="@{assets/js/lib/ui-bootstrap-tpls.min.js?timestamp=@timestamp@}"></script>
+<!--<script src="assets/js/lib/ui-bootstrap.min.js?timestamp=@timestamp@"></script>-->
+<script src="../static/assets/js/lib/angular-file-upload.min.js?timestamp=@timestamp@" th:src="@{assets/js/lib/angular-file-upload.min.js?timestamp=@timestamp@}"></script>
+<script src="../static/assets/js/lib/angular-sanitize.min.js?timestamp=@timestamp@" th:src="@{assets/js/lib/angular-sanitize.min.js?timestamp=@timestamp@}"></script>
+<script src="../static/assets/js/lib/angular-confirm.js?timestamp=@timestamp@" th:src="@{assets/js/lib/angular-confirm.js?timestamp=@timestamp@}"></script>
+<script src="../static/assets/js/lib/angular-slider.js?timestamp=@timestamp@" th:src="@{assets/js/lib/angular-slider.js?timestamp=@timestamp@}"></script>
+<script src="../static/assets/js/lib/bootstrap-slider.min.js?timestamp=@timestamp@" th:src="@{assets/js/lib/bootstrap-slider.min.js?timestamp=@timestamp@}"></script>
+<script src="../static/assets/js/lib/spin.min.js?timestamp=@timestamp@" th:src="@{assets/js/lib/spin.min.js?timestamp=@timestamp@}"></script>
+<script src="../static/assets/js/lib/jquery-ui.min.js?timestamp=@timestamp@" th:src="@{assets/js/lib/jquery-ui.min.js?timestamp=@timestamp@}"></script>
+<script src="../static/assets/js/lib/angular-ui-numeric.js?timestamp=@timestamp@" th:src="@{assets/js/lib/angular-ui-numeric.js?timestamp=@timestamp@}"></script>
+
+<script src="../static/assets/app/app.module.js" th:src="@{assets/app/app.module.js}"></script>
+<script src="../static/assets/app/app.js" th:src="@{assets/app/app.js}"></script>
+<script src="../static/assets/app/app.config.js" th:src="@{assets/app/app.config.js}"></script>
+<script src="../static/assets/app/app.state.js" th:src="@{assets/app/app.state.js}"></script>
+<script src="../static/assets/app/dev/dev.controller.js" th:src="@{assets/app/dev/dev.controller.js}"></script>
+<script src="../static/assets/app/dev/data.service.js" th:src="@{assets/app/dev/data.service.js}"></script>
+<script src="../static/assets/app/cms/core/core.service.js" th:src="@{assets/app/cms/core/core.service.js}"></script>
+<script src="../static/assets/app/cms/core/core.helper.js" th:src="@{assets/app/cms/core/core.helper.js}"></script>
+<script src="../static/assets/app/cms/home/home.controller.js" th:src="@{assets/app/cms/home/home.controller.js}"></script>
+<script src="../static/assets/app/cms/common/modal.controller.js" th:src="@{assets/app/cms/common/modal.controller.js}"></script>
+<script src="../static/assets/app/cms/appObj/list.controller.js" th:src="@{assets/app/cms/appObj/list.controller.js}"></script>
+<script src="../static/assets/app/cms/appObj/edit.controller.js" th:src="@{assets/app/cms/appObj/edit.controller.js}"></script>
+<script src="../static/assets/app/cms/appObj/referenceList.controller.js" th:src="@{assets/app/cms/appObj/referenceList.controller.js}"></script>
+<script src="../static/assets/app/cms/appObj/data.service.js" th:src="@{assets/app/cms/appObj/data.service.js}"></script>
+</body>
+</html>

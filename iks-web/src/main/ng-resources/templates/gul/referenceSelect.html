@@ -1,0 +1,10 @@
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:ng="">
+<th:block th:fragment="referenceSelect">
+  <label data-th-for="${element.fieldName}" class="control-label" data-th-text="${element.label}">Label</label>
+  <select type="text" class="form-control" data-th-id="${element.id}" th:name="${element.fieldName}" ng:model="${element.fieldName} ? |${modelName}.${element.fieldName}.id| : ''"
+          ng:readonly="|${element.readonly}|" th:required="${element.required}" th:classappend="${element.cssClass}" th:styleappend="${element.style}">
+    <option data-th-if="${!element.required}" value=""></option>
+    <option data-th-value="${option.value}" data-th-each="option : ${optionsMap[element.fieldName]}" data-th-text="${option.label}">Option label</option>
+  </select>
+</th:block>
+</html>
