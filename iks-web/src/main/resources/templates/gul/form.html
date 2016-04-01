@@ -6,7 +6,7 @@
 </th:block>
 <th:block th:fragment="checkbox">
   <label data-th-for="${element.fieldName}" class="control-label" data-th-text="${element.label}">Label</label>
-  <input type="checkbox" data-dojo-type="dijit/form/CheckBox" class="checkbox" data-th-id="${element.id}" th:name="${element.fieldName}" ng:model="${element.fieldName} ? |${modelName}.${element.fieldName}| : ''" ng:readonly="|${element.readonly}|"
+  <input type="checkbox" data-dojo-type="app/form/CheckBox" class="checkbox" data-th-id="${element.id}" th:name="${element.fieldName}" ng:model="${element.fieldName} ? |${modelName}.${element.fieldName}| : ''" ng:readonly="|${element.readonly}|"
          th:classappend="${element.cssClass}" th:styleappend="${element.style}" th:checked="${element.checked}"/>
 </th:block>
 <th:block th:fragment="select">

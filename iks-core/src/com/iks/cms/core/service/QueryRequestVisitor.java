@@ -2,6 +2,8 @@ package com.iks.cms.core.service;
 
 import net.jazdw.rql.parser.*;
 
+import org.apache.commons.lang3.*;
+
 /**
  * @author Igor Kaynov
  */
@@ -42,10 +44,12 @@ public class QueryRequestVisitor implements SimpleASTVisitor< QueryRequest > {
         return request;
       case "eq":
         String field = ( String )node.getArgument( 0 );
-        if (field.equals( "gridId" )) {
+        if( field.equals( "gridId" ) ) {
           return request;
         }
-        request.getFilter().put( field, node.getArgument( 1 ) );
+        Object value = node.getArgument( 1 );
+        value = value instanceof String ? StringUtils.trimToNull( ( String )value ) : value;
+        request.getFilter().put( field, value );
       default:
         return request;
     }

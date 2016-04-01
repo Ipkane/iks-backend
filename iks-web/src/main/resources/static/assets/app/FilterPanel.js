@@ -27,10 +27,14 @@ define( [
       );
     },
     search      : function ( event ) {
-      var values    = this.form.getValues();
+      var values    = this.form.get('value');
       var newValues = {};
       _.forOwn( values, function ( value, key ) {
         if ( _.isNil( value ) ) {
+          return;
+        }
+        if (value === false) {
+          // ignore false values
           return;
         }
         if ( _.isString( value ) ) {
@@ -38,6 +42,7 @@ define( [
           if ( value.length > 0 ) {
             newValues[ key ] = value;
           }
+
         } else {
           newValues[ key ] = value;
         }
