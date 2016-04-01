@@ -7,7 +7,7 @@
         <textbox fieldName="fio" flex="1"/>
       </hbox>
       <hbox>
-        <select fieldName="gender" flex="1"/>
+        <select fieldName="gender"/>
         <referenceSelect fieldName="user" displayField="username" flex="1"/>
       </hbox>
     </filterPanel>

@@ -1,7 +1,7 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <th:block th:fragment="filterPanel">
-  <div class="hbox">
-    <form data-dojo-type="dijit/form/Form" data-th-id="|${appObj.name}Form|" role="form" novalidate="novalidate" class="form" style="width: 100%">
+  <div class="vbox appFilterPanel" data-dojo-type="app/FilterPanel">
+    <form data-dojo-type="dijit/form/Form" role="form" novalidate="novalidate" class="form">
       <!--<div class="col-xs-4" data-th-each="element : ${listView.filterPanel.elements}">-->
       <!--<div class="form-group">-->
       <!--<div th:include="${element.templatePath} :: ${element.templateName}" th:with="itemName='filter.item'">-->
@@ -13,10 +13,10 @@
         </th:block>
       </th:block>
     </form>
-  </div>
-  <div class="hbox">
-    <button data-dojo-type="dijit/form/Button">Search</button>
-    <button data-dojo-type="dijit/form/Button" ng-click="clearFilter()">Clear</button>
+    <div class="hbox">
+      <button data-dojo-type="dijit/form/Button" class="searchButton">Search</button>
+      <button data-dojo-type="dijit/form/Button" class="clearButton" ng-click="clearFilter()">Clear</button>
+    </div>
   </div>
 </th:block>
 </html>

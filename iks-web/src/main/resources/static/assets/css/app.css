@@ -27,9 +27,9 @@
   box-sizing: border-box;
 }
 
-.dijitSelect {
+.app .dijitSelect {
   min-width: 100px;
-  display: table;
+  display: inline-block !important;
 }
 
 .dijitSelect .dijitStretch {
