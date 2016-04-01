@@ -51,35 +51,40 @@ public class ManyToOne extends AbstractDataField {
     }
   }
   @Override
-  public void extendSelectQueryFilter( SelectQuery query, Object value ) {
+  public void extendSelectQueryFilter( SelectQuery query, String fullField, Object value ) {
     Table table = query.getMainTable();
     IDataModel joinedModel = App.getModel( getAppObj() );
     Table joinedTable = new Table( joinedModel.getTableName(), joinedModel.getAppObj() );
-    query.leftJoin( new Join( joinedTable, table.getColumn( getTableField(), getFieldName() ), joinedTable.getColumn( joinedModel.getPrimaryFieldName() ) ) );
-    for( Map.Entry< String, Object > joinedItemEntry : ( ( Map< String, Object > )value ).entrySet() ) {
-      IDataField joinedField = joinedModel.getField( joinedItemEntry.getKey() );
-      if( joinedItemEntry.getValue() == null || StringUtils.trimToNull( joinedItemEntry.getValue().toString() ) == null ) {
-        continue;
+    String[] parts = ModelUtils.splitField( fullField );
+    if( parts.length == 1 ) {
+      query.addCriteria( new MatchCriteria( joinedTable.getColumn( getTableField() ), value ) );
+    } else {
+      query.leftJoin( new Join( joinedTable, table.getColumn( getTableField(), getFieldName() ), joinedTable.getColumn( joinedModel.getPrimaryFieldName() ) ) );
+      for( Map.Entry< String, Object > joinedItemEntry : ( ( Map< String, Object > )value ).entrySet() ) {
+        IDataField joinedField = joinedModel.getField( joinedItemEntry.getKey() );
+        if( joinedItemEntry.getValue() == null || StringUtils.trimToNull( joinedItemEntry.getValue().toString() ) == null ) {
+          continue;
+        }
+        query.addCriteria( new MatchCriteria( joinedTable.getColumn( joinedField.getTableField() ), joinedItemEntry.getValue() ) );
       }
-      query.addCriteria( new MatchCriteria( joinedTable.getColumn( joinedField.getTableField() ), joinedItemEntry.getValue() ) );
     }
   }
   @Override
   public void fillSelectQueryResult( DataItem resultItem, String value, String fullField ) {
-//    String parts[] = ModelUtils.splitField( fullField );
-//    if( parts.length == 1 ) {
-//      IDataModel joinedModel = App.getModel( getAppObj() );
-//      DataItem joinedItem = new DataItem();
-//      joinedItem.addFieldValue( joinedModel.getPrimaryFieldName(), value );
-//      resultItem.addFieldValue( getFieldName(), joinedItem );
-//    } else {
-//      DataItem joinedItem = ( DataItem )resultItem.getFieldValue( parts[0] );
-//      if( joinedItem == null ) {
-//        joinedItem = new DataItem();
-//        resultItem.addFieldValue( parts[0], joinedItem );
-//      }
-//      joinedItem.addFieldValue( parts[1], value );
-//    }
+    //    String parts[] = ModelUtils.splitField( fullField );
+    //    if( parts.length == 1 ) {
+    //      IDataModel joinedModel = App.getModel( getAppObj() );
+    //      DataItem joinedItem = new DataItem();
+    //      joinedItem.addFieldValue( joinedModel.getPrimaryFieldName(), value );
+    //      resultItem.addFieldValue( getFieldName(), joinedItem );
+    //    } else {
+    //      DataItem joinedItem = ( DataItem )resultItem.getFieldValue( parts[0] );
+    //      if( joinedItem == null ) {
+    //        joinedItem = new DataItem();
+    //        resultItem.addFieldValue( parts[0], joinedItem );
+    //      }
+    //      joinedItem.addFieldValue( parts[1], value );
+    //    }
     resultItem.addFieldValue( fullField, value );
   }
   @Override

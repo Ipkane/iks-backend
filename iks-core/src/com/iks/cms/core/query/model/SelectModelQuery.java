@@ -107,7 +107,7 @@ public class SelectModelQuery< T extends SelectModelQuery > extends CommonModelQ
     for( Map.Entry< String, Object > entry : filters.entrySet() ) {
       // todo add like filter
       IDataField dataField = model.getField( entry.getKey() );
-      dataField.extendSelectQueryFilter( sb, entry.getValue() );
+      dataField.extendSelectQueryFilter( sb, entry.getKey(), entry.getValue() );
     }
     if( orderBy != null ) {
       IDataField dataField = model.getField( ModelUtils.getBaseField( orderBy ) );

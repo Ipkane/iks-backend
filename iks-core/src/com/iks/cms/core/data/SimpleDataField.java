@@ -17,7 +17,7 @@ public abstract class SimpleDataField extends AbstractDataField {
     query.addColumn( table.getColumn( getTableField(), getFieldName() ) );
   }
   @Override
-  public void extendSelectQueryFilter( SelectQuery query, Object value ) {
+  public void extendSelectQueryFilter( SelectQuery query, String fullField, Object value ) {
     Table table = query.getMainTable();
     if( value == null || StringUtils.trimToNull( value.toString() ) == null ) {
       return;

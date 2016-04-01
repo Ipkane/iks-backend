@@ -19,6 +19,7 @@ define( [
 ], function ( declare, Evented, lang, JSON, query, on, registry, domConstruct, Utils, _WidgetBase, Selection, Keyboard, OnDemandGrid, ColumnResizer, ColumnHider, GridStore ) {
   return declare( "app.ComplexGrid", [ _WidgetBase, Evented ], {
     grid             : null,
+    gridStore: null,
     gridString       : null,
     filterPanel      : null,
     postCreate       : function () {
@@ -33,16 +34,13 @@ define( [
       domConstruct.place( this.grid.domNode, gridNode );
       this.filterPanel = Utils.getWidget( '.appFilterPanel', this.domNode );
       if ( this.filterPanel ) {
-        this.filterPanel.on("search", lang.hitch( this, this._onFilter ) );
+        this.filterPanel.on( "search", lang.hitch( this, this._onFilter ) );
       }
       this.grid.startup();
     },
-    _onFilter        : function ( e ) {
-      console.log( e );
-    },
     _buildGrid       : function () {
       var self        = this;
-      var store       = new GridStore( {
+      this.gridStore       = new GridStore( {
         target: 'api/core/getGridData?gridId=' + self.get( 'id' )
       } );
       var gridOptions = parseGridString( this.gridString );
@@ -50,7 +48,7 @@ define( [
       var grid        = new CustomGrid( {
         columns       : gridOptions.columns,
         //className     : 'dgrid-autoheight',
-        collection    : store,
+        collection    : this.gridStore,
         selectionMode : 'single',
         cellNavigation: false,
         loadingMessage: 'Loading data...',
@@ -59,6 +57,11 @@ define( [
       this._handleGridEvents( grid );
       return grid;
     },
+    _onFilter        : function ( e ) {
+      console.log( e );
+      this.grid.set( 'collection', this.gridStore.filter( e.filter) );
+    },
+
     _handleGridEvents: function ( grid ) {
       var self = this;
       grid.on( 'dgrid-select', lang.hitch( this, self._onRowSelect ) );

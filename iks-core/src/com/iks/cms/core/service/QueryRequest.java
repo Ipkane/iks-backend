@@ -12,6 +12,9 @@ public class QueryRequest implements IQueryRequest {
   private Integer page = 1;
   private Integer limit;
   public Map< String, Object > getFilter() {
+    if (filter == null) {
+      filter = new HashMap<>(  );
+    }
     return filter;
   }
   public void setFilter( Map< String, Object > filter ) {

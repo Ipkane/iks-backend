@@ -2,6 +2,7 @@ package com.iks.cms.core.model;
 
 import com.iks.cms.core.data.*;
 import com.iks.cms.core.grid.*;
+import com.iks.cms.core.utils.*;
 import com.iks.cms.core.validation.*;
 
 import java.util.*;
@@ -41,7 +42,8 @@ public class BaseDataModel implements IDataModel {
   }
   @Override
   public IDataField getField( String name ) {
-    return fields.stream().filter( field -> field.getFieldName().equals( name ) ).findFirst().orElse( null );
+    String baseFieldName = ModelUtils.getBaseField(name);
+    return fields.stream().filter( field -> field.getFieldName().equals( baseFieldName ) ).findFirst().orElse( null );
   }
   public String getAppObj() {
     return appObj;

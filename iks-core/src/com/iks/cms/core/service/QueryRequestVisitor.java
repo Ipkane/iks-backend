@@ -40,6 +40,12 @@ public class QueryRequestVisitor implements SimpleASTVisitor< QueryRequest > {
       case "sort":
         request.setOrderBy( ( String )node.getArgument( 0 ) );
         return request;
+      case "eq":
+        String field = ( String )node.getArgument( 0 );
+        if (field.equals( "gridId" )) {
+          return request;
+        }
+        request.getFilter().put( field, node.getArgument( 1 ) );
       default:
         return request;
     }

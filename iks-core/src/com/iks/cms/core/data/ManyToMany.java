@@ -61,7 +61,7 @@ public class ManyToMany extends AbstractDataField {
     query.addColumn( otherTable.getColumn( otherField.getTableField(), otherField.getFieldName() ) );
   }
   @Override
-  public void extendSelectQueryFilter( SelectQuery query, Object value ) {
+  public void extendSelectQueryFilter( SelectQuery query, String fullField, Object value ) {
     throw new RuntimeException( "Method not implemented" );
   }
   @Override
