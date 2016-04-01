@@ -20,7 +20,7 @@ public class DevApi {
   private static final String REQUEST_RELOAD_APP = "/reloadAppObj";
   @Autowired
   private ParseService parseService;
-  @RequestMapping( value = REQUEST_RELOAD_APP, method = RequestMethod.POST )
+  @RequestMapping( value = REQUEST_RELOAD_APP )
   public ResponseEntity< DefaultResponseBody< ?, ? > > reloadAppObj() {
     try {
       parseService.loadApp();

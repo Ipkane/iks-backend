@@ -3,13 +3,12 @@
   <appTable id="employee_grid" appObj="employee">
     <filterPanel>
       <hbox>
-        <textbox fieldName="id"/>
-        <textbox fieldName="fio"/>
+        <textbox fieldName="id" flex="1"/>
+        <textbox fieldName="fio" flex="1"/>
       </hbox>
       <hbox>
-        <select fieldName="gender"/>
-        <referenceSelect fieldName="user" displayField="username"/>
-        <button label="Push the button" id="button_1"/>
+        <select fieldName="gender" flex="1"/>
+        <referenceSelect fieldName="user" displayField="username" flex="1"/>
       </hbox>
     </filterPanel>
     <columns>

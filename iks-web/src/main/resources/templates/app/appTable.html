@@ -2,34 +2,49 @@
 
 <th:block th:fragment="appTable">
   <!--<div class="app-table" th:id="${element.id}" th:classappend="${element.cssClass}" th:styleappend="${element.style}" ng:controller="'AppObjListController as vm'">-->
-    <!--<div ng:init="|grid = '${element.toJson()}'|" style="display: none"></div>-->
-    <!--<div class="panel-heading app-table-toolbar" th:if="${element.showToolbar}">-->
-      <!--<div class="hbox">-->
-        <!--<div class="btn btn-primary" ng-click="openAddModal()">New</div>-->
-        <!--<div class="btn btn-primary" ng-click="openEditModal()" ng-disabled="!selectedItem">Edit</div>-->
-        <!--<div class="btn btn-primary" ng-click="openDeleteModal()" ng-disabled="!selectedItem">Delete</div>-->
-        <!--<div class="btn btn-success" ng-click="toggleFilterPanel()" th:if="${element.filterPanel != null}">Filter</div>-->
-        <!--<div class="btn btn-success" ng-click="refresh()">Refresh</div>-->
-      <!--</div>-->
-    <!--</div>-->
-    <!--<div data-th-if="${element.filterPanel != null}" class="panel-body app-table-filter-panel" ng-show="showFilterPanel">-->
-      <!--<th:block th:include="${element.filterPanel.templatePath} :: ${element.filterPanel.templateName}" th:with="element=${element.filterPanel}">-->
-      <!--</th:block>-->
-    <!--</div>-->
-    <!--<div class="hbox">-->
-      <!--<div class="spacer" style="flex:1"/>-->
-      <!--<uib-pagination total-items="totalItems" ng-model="currentPage" ng-change="pageChanged()" items-per-page="itemsPerPage"></uib-pagination>-->
-    <!--</div>-->
-    <!--<div>-->
-      <!--<th:block th:include="app/table :: table"></th:block>-->
-    <!--</div>-->
-    <!--<div class="hbox">-->
-      <!--<div class="spacer" style="flex:1"/>-->
-      <!--<uib-pagination total-items="totalItems" ng-model="currentPage" ng-change="pageChanged()" items-per-page="itemsPerPage"></uib-pagination>-->
-    <!--</div>-->
+  <!--<div ng:init="|grid = '${element.toJson()}'|" style="display: none"></div>-->
+  <!--<div class="panel-heading app-table-toolbar" th:if="${element.showToolbar}">-->
+  <!--<div class="hbox">-->
+  <!--<div class="btn btn-primary" ng-click="openAddModal()">New</div>-->
+  <!--<div class="btn btn-primary" ng-click="openEditModal()" ng-disabled="!selectedItem">Edit</div>-->
+  <!--<div class="btn btn-primary" ng-click="openDeleteModal()" ng-disabled="!selectedItem">Delete</div>-->
+  <!--<div class="btn btn-success" ng-click="toggleFilterPanel()" th:if="${element.filterPanel != null}">Filter</div>-->
+  <!--<div class="btn btn-success" ng-click="refresh()">Refresh</div>-->
   <!--</div>-->
-  <div data-dojo-type="app/ComplexGrid" class="complexGridPane" th:id="${element.id}" th:classappend="${element.cssClass}" th:styleappend="${element.style}"
+  <!--</div>-->
+  <!--<div data-th-if="${element.filterPanel != null}" class="panel-body app-table-filter-panel" ng-show="showFilterPanel">-->
+  <!--<th:block th:include="${element.filterPanel.templatePath} :: ${element.filterPanel.templateName}" th:with="element=${element.filterPanel}">-->
+  <!--</th:block>-->
+  <!--</div>-->
+  <!--<div class="hbox">-->
+  <!--<div class="spacer" style="flex:1"/>-->
+  <!--<uib-pagination total-items="totalItems" ng-model="currentPage" ng-change="pageChanged()" items-per-page="itemsPerPage"></uib-pagination>-->
+  <!--</div>-->
+  <!--<div>-->
+  <!--<th:block th:include="app/table :: table"></th:block>-->
+  <!--</div>-->
+  <!--<div class="hbox">-->
+  <!--<div class="spacer" style="flex:1"/>-->
+  <!--<uib-pagination total-items="totalItems" ng-model="currentPage" ng-change="pageChanged()" items-per-page="itemsPerPage"></uib-pagination>-->
+  <!--</div>-->
+  <!--</div>-->
+  <div data-dojo-type="app/ComplexGrid" class="complexGridPane vbox" th:id="${element.id}" th:classappend="${element.cssClass}" th:styleappend="${element.style}"
        data-dojo-props="|gridString: '${element.toJson()}'|">
+    <div data-dojo-type="dijit/Toolbar">
+      <div data-dojo-type="dijit/form/Button" ng-click="openAddModal()">New</div>
+      <div data-dojo-type="dijit/form/Button" ng-click="openEditModal()" ng-disabled="!selectedItem">Edit</div>
+      <div data-dojo-type="dijit/form/Button" ng-click="openDeleteModal()" ng-disabled="!selectedItem">Delete</div>
+      <span data-dojo-type="dijit/ToolbarSeparator"></span>
+
+      <div data-dojo-type="dijit/form/ToggleButton" ng-click="toggleFilterPanel()" th:if="${element.filterPanel != null}">Filter</div>
+      <div data-dojo-type="dijit/form/Button" ng-click="refresh()">Refresh</div>
+    </div>
+    <div data-th-if="${element.filterPanel != null}" class="app-table-filter-panel">
+      <th:block th:include="${element.filterPanel.templatePath} :: ${element.filterPanel.templateName}" th:with="element=${element.filterPanel}">
+      </th:block>
+    </div>
+    <div class="grid" style="flex:1">
+    </div>
   </div>
 </th:block>
 </html>

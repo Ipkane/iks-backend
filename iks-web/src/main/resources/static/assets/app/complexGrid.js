@@ -2,19 +2,21 @@ define( [
   "dojo/_base/declare",
   "dojo/_base/lang",
   "dojo/json",
+  "dojo/query",
   "dojo/dom-construct",
-  "dijit/layout/ContentPane",
+  "dijit/_WidgetBase",
   "dgrid/Grid",
   "dgrid/Selection",
   "dgrid/Keyboard",
   "dgrid/OnDemandGrid",
   "app/GridStore",
   "ready!"
-], function ( declare, lang, JSON, domConstruct, ContentPane, Grid, Selection, Keyboard, OnDemandGrid, GridStore ) {
-  return declare( "app.ComplexGrid", [ ContentPane ], {
+], function ( declare, lang, JSON, query, domConstruct, _WidgetBase, Grid, Selection, Keyboard, OnDemandGrid, GridStore ) {
+  return declare( "app.ComplexGrid", [ _WidgetBase ], {
     grid          : null,
     gridString    : null,
     postCreate    : function () {
+      this.inherited( arguments );
       var self        = this;
       var store       = new GridStore( {
         target: 'api/core/getGridData?gridId=' + self.get( 'id' )
@@ -32,8 +34,9 @@ define( [
       } );
       this.grid       = grid;
       this._handleEvents( grid );
-      this.set( 'content', grid );
-      this.inherited( arguments );
+
+      var gridNode = query('.grid', this.domNode)[0];
+      domConstruct.place(grid.domNode, gridNode);
     },
     startup: function() {
       this.inherited(arguments);

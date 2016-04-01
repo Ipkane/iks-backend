@@ -13,7 +13,7 @@
   </script>
 </th:block>
 <th:block th:fragment="button">
-  <button th:id="${element.id}" th:text="${element.label}" class="btn btn-default"  th:classappend="${element.cssClass}" th:styleappend="${element.style}"></button>
+  <button  data-dojo-type="dijit/form/Button" th:id="${element.id}" th:text="${element.label}" class=""  th:classappend="${element.cssClass}" th:styleappend="${element.style}"></button>
 </th:block>
 <th:block th:fragment="markup">
   <th:block th:utext="${element.content}">
