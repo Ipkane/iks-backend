@@ -47,7 +47,7 @@ define( [
       } );
     },
     clear       : function () {
-      this.form.setValues({});
+      this.form.reset();
       this.emit( "search", {
         filter: {}
       } );

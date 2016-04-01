@@ -57,7 +57,7 @@ public class ManyToOne extends AbstractDataField {
     Table joinedTable = new Table( joinedModel.getTableName(), joinedModel.getAppObj() );
     String[] parts = ModelUtils.splitField( fullField );
     if( parts.length == 1 ) {
-      query.addCriteria( new MatchCriteria( joinedTable.getColumn( getTableField() ), value ) );
+      query.addCriteria( new MatchCriteria( table.getColumn( getTableField() ), value ) );
     } else {
       query.leftJoin( new Join( joinedTable, table.getColumn( getTableField(), getFieldName() ), joinedTable.getColumn( joinedModel.getPrimaryFieldName() ) ) );
       for( Map.Entry< String, Object > joinedItemEntry : ( ( Map< String, Object > )value ).entrySet() ) {
