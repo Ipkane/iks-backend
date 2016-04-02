@@ -3,15 +3,22 @@ package com.iks.cms.web.config;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import freemarker.cache.TemplateLoader;
+import freemarker.cache.WebappTemplateLoader;
+import freemarker.template.TemplateException;
 import org.springframework.boot.autoconfigure.web.WebMvcAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.ui.freemarker.FreeMarkerConfigurationFactory;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
 import org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver;
+
+import java.io.IOException;
 
 @Configuration
 //@EnableWebMvc
@@ -43,9 +50,19 @@ public class MvcConfig extends WebMvcAutoConfiguration.WebMvcAutoConfigurationAd
   public ViewResolver viewResolver() {
     FreeMarkerViewResolver viewResolver = new FreeMarkerViewResolver();
     viewResolver.setCache(false);
-    viewResolver.setPrefix("classpath:/templates/");
+    viewResolver.setPrefix("");
     viewResolver.setSuffix(".ftl");
     return viewResolver;
+  }
+
+  @Bean
+  public FreeMarkerConfigurer freemarkerConfig() throws IOException, TemplateException {
+    FreeMarkerConfigurationFactory factory = new FreeMarkerConfigurationFactory();
+    factory.setTemplateLoaderPaths("classpath:templates", "src/main/resources/templates");
+    factory.setDefaultEncoding("UTF-8");
+    FreeMarkerConfigurer result = new FreeMarkerConfigurer();
+    result.setConfiguration(factory.createConfiguration());
+    return result;
   }
 
   @Override
