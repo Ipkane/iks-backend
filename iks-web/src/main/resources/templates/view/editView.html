@@ -1,8 +1,5 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:ng="">
-<div class="modal-header">
-  <h2 class="modal-title" data-th-text="|Edit ${appObj.label}|">Edit Item</h2>
-</div>
-<div class="modal-body">
+<div>
   <form data-th-id="|${appObj.name}Form|" role="form" novalidate="novalidate" class="form">
     <!--<div class="form-group" data-th-each="element : ${editView.elements}">-->
     <!--<div class="col-sm-8">-->
@@ -24,14 +21,8 @@
     </div>
   </div>
 </div>
-<div class="modal-footer">
-  <div class="row">
-    <div class="col-xs-3 col-xs-offset-3">
-      <button type="submit" class="btn btn-danger btn-block" ng:click="|save(${appObj.name}Form.$valid)|">Save</button>
-    </div>
-    <div class="col-xs-3">
-      <button class="btn btn-success btn-block" ng-click="cancel()">Cancel</button>
-    </div>
-  </div>
+<div class="hbox pack-center">
+      <button data-dojo-type="dijit/form/Button">Save</button>
+      <button data-dojo-type="dijit/form/Button">Cancel</button>
 </div>
 </html>

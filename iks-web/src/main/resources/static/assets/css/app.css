@@ -28,7 +28,7 @@
 }
 
 .app .dijitSelect {
-  min-width: 100px;
+  width: 15em;
   display: inline-block !important;
 }
 
@@ -38,4 +38,8 @@
 
 .appFilterPanel {
   width: 100%;
+}
+
+.dijitToggleButton, .dijitButton, .dijitDropDownButton, .dijitComboButton {
+  margin: 0;
 }

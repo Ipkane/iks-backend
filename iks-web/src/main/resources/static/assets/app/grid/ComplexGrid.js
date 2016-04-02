@@ -7,6 +7,7 @@ define([
   "dojo/on",
   "dijit/registry",
   "dojo/dom-construct",
+  "dijit/Dialog",
   "app/Utils",
   "dijit/_WidgetBase",
   "dgrid/Selection",
@@ -16,13 +17,15 @@ define([
   'dgrid/extensions/ColumnHider',
   "app/grid/GridStore",
   "ready!"
-], function (declare, Evented, lang, JSON, query, on, registry, domConstruct, Utils, _WidgetBase, Selection, Keyboard, OnDemandGrid, ColumnResizer, ColumnHider, GridStore) {
+], function (declare, Evented, lang, JSON, query, on, registry, domConstruct, Dialog, Utils, _WidgetBase, Selection, Keyboard, OnDemandGrid, ColumnResizer, ColumnHider, GridStore) {
   return declare("app.grid.ComplexGrid", [_WidgetBase, Evented], {
+    appObj: null,
     grid: null,
     gridStore: null,
     gridString: null,
     filterPanel: null,
     toolbar: null,
+    editDialog: null,
     postCreate: function () {
       this.inherited(arguments);
       var self = this;
@@ -48,9 +51,11 @@ define([
         }
         if (this.toolbar.editButton) {
           this.toolbar.editButton.on("click", lang.hitch(this, this.openEditDialog));
+          this.toolbar.editButton.set('disabled', true);
         }
         if (this.toolbar.deleteButton) {
           this.toolbar.deleteButton.on("click", lang.hitch(this, this.openDeleteDialog));
+          this.toolbar.deleteButton.set('disabled', true);
         }
         if (this.toolbar.filterButton) {
           this.toolbar.filterButton.on("click", lang.hitch(this, this.toggleFilterPanel));
@@ -69,6 +74,7 @@ define([
       var CustomGrid = declare([OnDemandGrid, Keyboard, Selection, ColumnResizer, ColumnHider]);
       var grid = new CustomGrid({
         columns: gridOptions.columns,
+        appObj: gridOptions.appObj,
         //className     : 'dgrid-autoheight',
         collection: this.gridStore,
         selectionMode: 'single',
@@ -76,6 +82,7 @@ define([
         loadingMessage: 'Loading data...',
         noDataMessage: 'No results found.'
       });
+      this.appObj = gridOptions.appObj;
       this._handleGridEvents(grid);
       return grid;
     },
@@ -102,16 +109,43 @@ define([
     _onRowSelect: function (event) {
       //console.log( 'Row selected: ' );
       //console.log( event );
+      this.toolbar.editButton.set('disabled', false);
+      this.toolbar.deleteButton.set('disabled', false);
     },
     _onRowDeselect: function (event) {
       //console.log( 'Row de-selected: ' );
       //console.log( event );
+      this.toolbar.editButton.set('disabled', true);
+      this.toolbar.deleteButton.set('disabled', true);
     },
     toggleFilterPanel: function () {
       this.filterPanel.set('visible', this.toolbar.filterButton.get('checked'));
     },
-    refresh: function() {
+    refresh: function () {
       this.grid.refresh();
+    },
+    openNewDialog: function () {
+      if (this.editDialog && this.editDialog.get('open')) {
+        return;
+      }
+      this.editDialog = new Dialog({
+        title: "Edit Content",
+        href: 'view/editView?appObj='+this.appObj
+      });
+      this.editDialog.show();
+    },
+    openEditDialog: function () {
+      if (this.editDialog && this.editDialog.get('open')) {
+        return;
+      }
+      this.editDialog = new Dialog({
+        title: "Edit Content",
+        href: 'view/editView?appObj='+this.appObj
+      });
+      this.editDialog.show();
+    },
+    openDeleteDialog: function () {
+      console.log('not implemented');
     }
   });
   function parseGridString(gridString) {
@@ -127,7 +161,8 @@ define([
       });
     });
     return {
-      columns: columns
+      columns: columns,
+      appObj: gridOptions.appObj
     }
   }
 });
