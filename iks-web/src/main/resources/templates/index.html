@@ -31,7 +31,7 @@
   <!--</div>-->
 </div>
 <!-- libs -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js" th:src="@{https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js}"></script>
+<!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js" th:src="@{https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js}"></script>-->
 <script src="../static/assets/js/lib/lodash.js" th:src="@{assets/js/lib/lodash.js}"></script>
 
 <script>
@@ -56,9 +56,9 @@
   };
 </script>
 <script src="assets/dojo/dojo.js"></script>
+<!--<script src="//ajax.googleapis.com/ajax/libs/dojo/1.10.4/dojo/dojo.js"></script>-->
 <script>
-  require( [ "dijit/registry", "dojo/parser", "dijit/layout/BorderContainer", "dijit/layout/TabContainer",
-             "dijit/layout/ContentPane" ], function ( registry, parser ) {
+  require( [ "dojo/parser" ], function ( parser ) {
     parser.parse();
   } );
 </script>

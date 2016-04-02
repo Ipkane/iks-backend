@@ -4,9 +4,10 @@ define( [
   "dijit/tree/ObjectStoreModel", "dojo/request", "dojo/_base/array", "dijit/Tree",
   "ready!"
 ], function ( declare, dom, registry, hash, topic, Memory, Observable, ObjectStoreModel, request, arrayUtil, Tree ) {
-  return declare("app.NavTree", [ Tree ], {
+  return declare( "app.NavTree", [ Tree ], {
     showRoot      : false,
     store         : null,
+    _pageContents : {},
     postCreate    : function () {
       var self    = this;
       self.store  = new Memory( {
@@ -50,7 +51,20 @@ define( [
       }
     },
     loadPage      : function ( url ) {
-      registry.byId( 'mainContent' ).set( 'href', url );
+      // todo show loading. cancel request if switch page
+      var content;
+      var self = this;
+      if (self._pageContents[url]) {
+        content = this._pageContents[url];
+        registry.byId( 'mainContent' ).set( 'content', content );
+      } else {
+        request.get( url, {
+          handleAs: "text"
+        } ).then( function ( content ) {
+          self._pageContents[url] = content;
+          registry.byId( 'mainContent' ).set( 'content', content );
+        } );
+      }
     }
   } );
 } );
