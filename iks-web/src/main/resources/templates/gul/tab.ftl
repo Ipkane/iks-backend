@@ -2,7 +2,6 @@
 <uib-tabset id="${(element.id)!}" style="${(element.style)!}" class="${(element.cssClass)!}">
   <#list element.tabs as tabElement>
     <uib-tab heading="${tabElement.label}" index="${tabElement?index}">
-    <#--<th:block th:include="gul/tab :: tab" th:with="element=${tab}"></th:block>-->
         <@tab element=tabElement/>
     </uib-tab>
   </#list>
