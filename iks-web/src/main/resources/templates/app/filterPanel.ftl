@@ -2,6 +2,7 @@
 <div class="hbox">
   <form role="form" novalidate="novalidate" class="form" style="width: 100%">
     <#assign modelName="filter.item"/>
+    <#assign optionsMap=element.getOptionsMap()/>
       <@container element=element/>
   </form>
 </div>
