@@ -18,7 +18,7 @@
       <textbox id="doctitle" flex="1"/>
     </tab>
     <tab label="Grid">
-      <grid>
+      <gridLayout>
         <columns>
           <column flex="1"/>
           <column flex="2"/>
@@ -37,7 +37,7 @@
             <label value="Hello"/>
           </row>
         </rows>
-      </grid>
+      </gridLayout>
     </tab>
   </tabbox>
 </editView>

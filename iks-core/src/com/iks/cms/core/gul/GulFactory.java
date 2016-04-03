@@ -40,8 +40,8 @@ public class GulFactory {
         return new GulHtml();
       case GulConstant.LABEL:
         return new GulLabel();
-      case GulConstant.GRID:
-        return new GulGrid();
+      case GulConstant.GRID_LAYOUT:
+        return new GulGridLayout();
       case GulConstant.ROWS:
         return new GulRows();
       case GulConstant.ROW:

@@ -1,4 +1,3 @@
-<#import "../gul/box.ftl" as box>
+<#include "../app/all-app.ftl"/>
 <h1>${appObj.label}</h1>
-<@box.container element=listView/>
-<#--<th:block th:include="gul/box :: container" th:with="element=${listView}"/>-->
+<@container element=listView/>

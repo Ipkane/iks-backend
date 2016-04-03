@@ -1,10 +1,11 @@
-<html>
+<#include "../app/all-app.ftl"/>
 <div class="modal-header">
   <h2 class="modal-title">Edit ${appObj.label}</h2>
 </div>
 <div class="modal-body">
   <form id="${appObj.name}Form" role="form" novalidate="novalidate" class="form">
-
+    <#assign modelName="selectedItem"/>
+  <@container element=editView/>
     <#--<th:block th:each="element : ${editView.elements}">-->
       <#--<th:block th:include="${element.templatePath} :: ${element.templateName}" th:with="modelName='selectedItem'">-->
       <#--</th:block>-->
@@ -29,4 +30,3 @@
     </div>
   </div>
 </div>
-</html>

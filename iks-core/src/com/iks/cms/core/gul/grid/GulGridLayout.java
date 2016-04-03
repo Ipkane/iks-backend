@@ -13,12 +13,12 @@ import java.util.stream.*;
 /**
  * @author Igor Kaynov
  */
-public class GulGrid extends GulContainer {
+public class GulGridLayout extends GulContainer {
   private List< GulRow >    rows    = new ArrayList<>();
   private List< GulColumn > columns = new ArrayList<>();
   @Override
   public String getTag() {
-    return GulConstant.GRID;
+    return GulConstant.GRID_LAYOUT;
   }
   @Override
   public String getTemplatePath() {

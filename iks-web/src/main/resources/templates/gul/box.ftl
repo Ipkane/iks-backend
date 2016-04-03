@@ -1,7 +1,6 @@
-<#import "./element.ftl" as el>
 <#macro container element>
   <#list element.elements as childElement >
-    <@el.element element=childElement/>
+    <@gulElement element=childElement/>
   </#list>
 </#macro>
 <#macro box element>
@@ -16,10 +15,10 @@
   <@box element=element/>
 </#macro>
 <#macro fieldbox element>
-<div class="box fieldbox" style="${element.style}" class="${element.cssClass}">
+<div class="box fieldbox ${element.cssClass}" style="${element.style}">
   <#list element.elements as childElement>
     <div class="hbox form-group">
-      <@element element=childElement/>
+      <@gulElement element=childElement/>
     </div>
   </#list>
 </div>

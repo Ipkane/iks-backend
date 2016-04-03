@@ -1,15 +1,15 @@
-<#macro element element>
+<#macro gulElement element>
 <#--<th:block th:fragment="element">-->
   <#--<th:block th:include="${element.templatePath} :: ${element.templateName}"></th:block>-->
 <#--</th:block>-->
 <#assign macroName=element.templateName/>
-<@.vars[macroName]/>
+<@.vars[macroName] element=element/>
 </#macro>
 <#macro spacer element>
-<div id="${element.id}" th:classappend="${element.cssClass}" th:styleappend="${element.style}"></div>
+<div id="${(element.id)!}" th:classappend="${element.cssClass}" th:styleappend="${element.style}"></div>
 </#macro>
 <#macro label element>
-  <label id="${element.id}" th:classappend="${element.cssClass}" th:styleappend="${element.style}" th:for="${element.control}">${element.value}</label>
+  <label id="${(element.id)!}"class="${(element.cssClass)!}" style="${(element.style)!}" for="${(element.control)!}">${element.value}</label>
 </#macro>
 <#macro script element>
   <script>
@@ -17,7 +17,7 @@
   </script>
 </#macro>
 <#macro button element>
-<button id="${element.id}" class="btn btn-default"  th:classappend="${element.cssClass}" th:styleappend="${element.style}">${element.label}</button>
+<button id="${(element.id)!}" class="btn btn-default" class="${(element.cssClass)!}" style="${(element.style)!}">${element.label}</button>
 </#macro>
 <#macro markup element>
   ${element.content}

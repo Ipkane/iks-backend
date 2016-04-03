@@ -1,3 +1,4 @@
+<#include './app/all-app.ftl'/>
 <html>
 <head>
   <title>CMS</title>

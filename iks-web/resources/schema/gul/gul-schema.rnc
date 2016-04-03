@@ -1,7 +1,7 @@
 #default namespace = "http://com.iks.org/schema/gul/1.0"
 include "gul-attributes.rnc"
 
-gul.element = textbox | checkbox | tabbox | label | hbox | vbox | fieldbox | grid | select | button | referenceSelect
+gul.element = textbox | checkbox | tabbox | label | hbox | vbox | fieldbox | gridLayout | select | button | referenceSelect
 
 gul.elementType =
   attribute id {xsd:NCName }?
@@ -64,7 +64,7 @@ fieldbox = element fieldbox {
   gul.containerType
 }
 
-grid = element grid {
+gridLayout = element gridLayout {
   element columns {
     element column {
       gul.containerType
