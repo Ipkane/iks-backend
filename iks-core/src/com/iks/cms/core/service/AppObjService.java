@@ -91,12 +91,12 @@ public class AppObjService {
     CreateEditViewQuery query = new CreateEditViewQuery( App.getModel( appObj ), App.getEditView( appObj ), item );
     query.executeQuery( commonDao.getSessionFactory() );
   }
-  public void updateItem( String appObj, IDataItem item ) throws ValidationException {
+  public void updateItem( String appObj, Long itemId, IDataItem item ) throws ValidationException {
     IDataModel model = App.getModel( appObj );
     if( !model.validate( item ) ) {
       throw new ValidationException( item.getErrors() );
     }
-    UpdateEditViewQuery query = new UpdateEditViewQuery( model, App.getEditView( appObj ), item );
+    UpdateEditViewQuery query = new UpdateEditViewQuery( model, App.getEditView( appObj ), item, itemId );
     query.executeQuery( commonDao.getSessionFactory() );
   }
   public void deleteItem( String gridId, Long itemId ) {

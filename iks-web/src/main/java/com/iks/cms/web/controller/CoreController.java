@@ -55,10 +55,10 @@ public class CoreController {
   @RequestMapping( value = REQUEST_UPDATE_EDIT_DATA, method = RequestMethod.POST )
   public ResponseEntity< DefaultResponseBody< ?, ? > > updateEditData( @RequestBody RequestUpdateEditData request ) {
     try {
-      if( request.isNew() ) {
+      if( request.getItemId() == null ) {
         appObjService.saveNewItem( request.getAppObj(), request.getItem() );
       } else {
-        appObjService.updateItem( request.getAppObj(), request.getItem() );
+        appObjService.updateItem( request.getAppObj(), request.getItemId(), request.getItem() );
       }
       return ApiUtils.makeResponse( REQUEST_UPDATE_EDIT_DATA, request, new ResponseEmpty() );
     } catch( ValidationException ex ) {

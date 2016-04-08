@@ -30,7 +30,7 @@ function GridEditController( $scope, $log, payload, $uibModalInstance, CoreServi
     //}
     $scope.alerts = [];
     CoreService.updateEditData(
-      { appObj: payload.appObj, item: $scope.selectedItem, isNew: payload.isNew },
+      { appObj: payload.appObj, itemId: $scope.itemId, item: $scope.selectedItem, isNew: payload.isNew },
       function ( response ) {
         if ( response.isSuccess ) {
           $uibModalInstance.close( $scope.selectedItem );

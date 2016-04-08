@@ -152,7 +152,7 @@ function AppObjListController( $scope, $log, $uibModal, $timeout, $rootScope, Co
       $scope.orderAsc = true;
     }
     $scope.orderBy = fieldName;
-    $scope.items   = _.orderBy( $scope.items, [ $scope.orderBy ], [ $scope.orderAsc ? 'asc' : 'desc' ] );
+    reload();
   };
   vm.getField                     = function ( fieldName ) {
     return _.find( $scope.grid.fields, { fieldName: fieldName } );

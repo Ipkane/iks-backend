@@ -14,9 +14,11 @@ import org.slf4j.*;
 public class UpdateEditViewQuery extends UpdateModelQuery<UpdateEditViewQuery > {
   private static final Logger logger = LoggerFactory.getLogger( UpdateEditViewQuery.class );
   private IEditView editView;
-  public UpdateEditViewQuery( IDataModel model, IEditView editView, IDataItem item ) {
-    super( model, item );
+  private Long itemId;
+  public UpdateEditViewQuery( IDataModel model, IEditView editView, IDataItem item, Long itemId ) {
+    super( model, item, itemId );
     this.editView = editView;
+    this.itemId = itemId;
     for( IGulInputField field : editView.getFields() ) {
       if (field.getFieldName() != null) {
         addField( field.getFieldName() );

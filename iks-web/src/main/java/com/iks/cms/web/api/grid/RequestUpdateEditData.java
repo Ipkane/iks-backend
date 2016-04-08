@@ -9,25 +9,40 @@ import com.iks.cms.web.api.common.*;
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class RequestUpdateEditData extends AbstractApiRequest {
-  private String   appObj;
+  private String appObj;
+  private Long itemId;
   private DataItem item;
   private boolean isNew = false;
+
   public String getAppObj() {
     return appObj;
   }
-  public void setAppObj( String appObj ) {
+
+  public void setAppObj(String appObj) {
     this.appObj = appObj;
   }
+
   public DataItem getItem() {
     return item;
   }
-  public void setItem( DataItem item ) {
+
+  public void setItem(DataItem item) {
     this.item = item;
   }
+
   public boolean isNew() {
     return isNew;
   }
-  public void setIsNew( boolean isNew ) {
+
+  public void setIsNew(boolean isNew) {
     this.isNew = isNew;
+  }
+
+  public Long getItemId() {
+    return itemId;
+  }
+
+  public void setItemId(Long itemId) {
+    this.itemId = itemId;
   }
 }

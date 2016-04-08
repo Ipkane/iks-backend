@@ -12,20 +12,24 @@ import org.slf4j.*;
 /**
  * @author Igor Kaynov
  */
-public class UpdateModelQuery< T extends UpdateModelQuery > extends AbstractChangeModelQuery< T > {
-  private static final Logger logger = LoggerFactory.getLogger( UpdateEditViewQuery.class );
-  public UpdateModelQuery( IDataModel model, IDataItem item ) {
-    super( model, item );
+public class UpdateModelQuery<T extends UpdateModelQuery> extends AbstractChangeModelQuery<T> {
+  private static final Logger logger = LoggerFactory.getLogger(UpdateEditViewQuery.class);
+  private Long itemId;
+
+  public UpdateModelQuery(IDataModel model, IDataItem item, Long itemId) {
+    super(model, item);
+    this.itemId = itemId;
   }
+
   @Override
   protected UpdateQuery buildSqlQuery() {
     UpdateQuery sb = new UpdateQuery();
-    fillQuery( sb );
-    Table table = sb.getTable();
+    fillQuery(sb);
     sb.setCriteriaById(getItemId());
     return sb;
   }
+
   public Long getItemId() {
-    return Long.valueOf( item.getFieldValue( model.getPrimaryFieldName() ).toString() );
+    return itemId;
   }
 }
