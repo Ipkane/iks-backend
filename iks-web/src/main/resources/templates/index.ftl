@@ -35,12 +35,12 @@
 </div>
 <!-- libs -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-<script src="assets/js/lib/angular.js?timestamp=@timestamp@"></script>
+<script src="assets/bower_components/angular/angular.js?timestamp=@timestamp@"></script>
 <script src="assets/js/lib/angular-route.js?timestamp=@timestamp@"></script>
 <script src="assets/js/lib/lodash.js?timestamp=@timestamp@"></script>
 <script src="assets/js/lib/bootstrap.min.js?timestamp=@timestamp@""></script>
 <script src="assets/js/lib/angular-file-upload-shim.min.js?timestamp=@timestamp@"></script>
-<script src="assets/js/lib/angular-ui-router.js?timestamp=@timestamp@"></script>
+<script src="assets/bower_components/angular-ui-router/release/angular-ui-router.js"></script>
 <script src="assets/js/lib/angular-permission.js?timestamp=@timestamp@"></script>
 <script src="assets/js/lib/angular-animate.min.js?timestamp=@timestamp@"></script>
 <script src="assets/js/lib/angular-cookies.min.js?timestamp=@timestamp@"></script>

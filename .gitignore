@@ -6,3 +6,4 @@ out/
 *.ipr
 *.iws
 desktop.ini
+iks-web/src/main/resources/static/assets/bower_components/
