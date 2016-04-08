@@ -15,4 +15,9 @@
     <list url="iks-web/resources/appObj/role/list.xml"/>
     <edit url="iks-web/resources/appObj/role/edit.xml"/>
   </appObj>
+  <appObj name="department" label="Departments">
+    <data url="iks-web/resources/appObj/department/data.xml"/>
+    <list url="iks-web/resources/appObj/department/list.xml"/>
+    <edit url="iks-web/resources/appObj/department/edit.xml"/>
+  </appObj>
 </app>

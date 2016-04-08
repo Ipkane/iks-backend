@@ -19,6 +19,9 @@ public class ModelFactory {
       case ModelConstant.ONE_TO_ONE: {
         return new OneToOne();
       }
+      case ModelConstant.ONE_TO_MANY: {
+        return new ManyToMany();
+      }
       case ModelConstant.MANY_TO_MANY: {
         return new ManyToMany();
       }

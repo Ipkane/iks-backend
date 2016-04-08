@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<listView appObj="department" xmlns="http://com.iks.org/schema/list/1.0">
+  <appTable id="department_main_grid" appObj="department">
+    <filterPanel>
+      <hbox>
+        <textbox fieldName="name"/>
+      </hbox>
+    </filterPanel>
+    <columns>
+      <column fieldName="id"/>
+      <column fieldName="name"/>
+    </columns>
+  </appTable>
+</listView>

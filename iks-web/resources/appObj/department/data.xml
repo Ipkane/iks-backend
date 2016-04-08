@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<data appObj="department" tableName="department" xmlns="http://com.iks.org/schema/model/1.0">
+  <field tableField="id" fieldName="id" label="Id" primary="true"/>
+  <field tableField="name" fieldName="name" label="Department Name" required="true"/>
+  <oneToMany fieldName="employees" tableField="department_id" appObj="employee" label="Employees"/>
+</data>

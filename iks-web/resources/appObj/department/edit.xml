@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<editView appObj="department" xmlns="http://com.iks.org/schema/edit/1.0">
+  <fieldbox>
+    <textbox fieldName="name"/>
+  </fieldbox>
+  <tabbox>
+    <tab label="Employees">
+      <referenceTableField fieldName="employees">
+        <columns>
+          <column fieldName="employees.fio" label="Employee Name"/>
+        </columns>
+      </referenceTableField>
+    </tab>
+  </tabbox>
+</editView>

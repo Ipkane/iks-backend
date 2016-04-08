@@ -9,4 +9,5 @@
     </options>
   </selectField>
   <oneToOne fieldName="user" appObj="user" tableField="user_id"/>
+  <manyToOne fieldName="department" appObj="department" tableField="department_id"/>
 </data>

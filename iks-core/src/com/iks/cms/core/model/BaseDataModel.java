@@ -13,59 +13,74 @@ import java.util.stream.*;
 public class BaseDataModel implements IDataModel {
   private String appObj;
   private String tableName;
-  private List< IDataField > fields     = new ArrayList<>();
-  private List< IValidator > validators = new ArrayList<>();
-  public List< IDataField > getFields() {
+  private List<IDataField> fields = new ArrayList<>();
+  private List<IValidator> validators = new ArrayList<>();
+
+  public List<IDataField> getFields() {
     return fields;
   }
+
   @Override
-  public List< String > getFieldNames() {
-    return getFields().stream().map( field -> field.getFieldName() ).collect( Collectors.toList() );
+  public List<String> getFieldNames() {
+    return getFields().stream().map(field -> field.getFieldName()).collect(Collectors.toList());
   }
-  public void setFields( List< IDataField > fields ) {
+
+  public void setFields(List<IDataField> fields) {
     this.fields = fields;
   }
-  public void addField( IDataField field ) {
-    this.fields.add( field );
+
+  public void addField(IDataField field) {
+    this.fields.add(field);
   }
+
   @Override
   public String getTableName() {
     return tableName;
   }
-  public void setTableName( String tableName ) {
+
+  public void setTableName(String tableName) {
     this.tableName = tableName;
   }
+
   @Override
   public String getPrimaryFieldName() {
     return FieldConstant.DEFAULT_PRIMARY_FIELD;
   }
+
   @Override
-  public IDataField getField( String name ) {
-    return fields.stream().filter( field -> field.getFieldName().equals( name ) ).findFirst().orElse( null );
+  public IDataField getField(String name) {
+    if (name == null) {
+      throw new NullPointerException();
+    }
+    return fields.stream().filter(field -> field.getFieldName().equals(name)).findFirst().orElseThrow(IllegalArgumentException::new);
   }
+
   public String getAppObj() {
     return appObj;
   }
-  public void setAppObj( String appObj ) {
+
+  public void setAppObj(String appObj) {
     this.appObj = appObj;
   }
+
   @Override
-  public boolean validate( IDataItem item ) {
-    DataItem dataItem = ( DataItem )item;
+  public boolean validate(IDataItem item) {
+    DataItem dataItem = (DataItem) item;
     boolean valid = true;
-    for (IValidator validator: getAllValidators()) {
-      if (!validator.validate( this, item )) {
+    for (IValidator validator : getAllValidators()) {
+      if (!validator.validate(this, item)) {
         dataItem.addError(validator.getError());
         valid = false;
       }
     }
     return valid;
   }
-  protected List< IValidator > getAllValidators() {
-    List< IValidator > validators = new ArrayList<>();
-    validators.addAll( this.validators );
-    for( IDataField dataField : fields ) {
-      validators.addAll( dataField.getValidators() );
+
+  protected List<IValidator> getAllValidators() {
+    List<IValidator> validators = new ArrayList<>();
+    validators.addAll(this.validators);
+    for (IDataField dataField : fields) {
+      validators.addAll(dataField.getValidators());
     }
     return validators;
   }
