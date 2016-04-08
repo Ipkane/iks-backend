@@ -50,7 +50,8 @@ manyToMany = element manyToMany {
 }
 
 oneToMany = element oneToMany {
-  labelAttr?
-  & attribute tableField { xsd:NCName }?
+  fieldNameAttr
+  & labelAttr?
+  & attribute tableField { xsd:NCName }
   & attribute appObj { xsd:NCName }
 }

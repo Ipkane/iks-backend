@@ -22,8 +22,7 @@ public class UpdateModelQuery< T extends UpdateModelQuery > extends AbstractChan
     UpdateQuery sb = new UpdateQuery();
     fillQuery( sb );
     Table table = sb.getTable();
-    Column idColumn = table.getColumn( model.getPrimaryFieldName() );
-    sb.addCriteria( new MatchCriteria( idColumn, getItemId(), MatchType.Eq ) );
+    sb.setCriteriaById(getItemId());
     return sb;
   }
   public Long getItemId() {

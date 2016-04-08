@@ -1,5 +1,6 @@
 package com.iks.cms.core.query.grid;
 
+import com.iks.cms.core.appObj.App;
 import com.iks.cms.core.data.*;
 import com.iks.cms.core.model.*;
 import com.iks.cms.core.query.*;
@@ -13,28 +14,45 @@ import org.hibernate.*;
  */
 public class DeleteManyToManyQuery extends CommonDaoQuery {
   private IDataModel model;
-  private String     field;
+  private String field;
   // item id of current model
-  private String     parentItemId;
+  private String parentItemId;
   // item id of joined item
-  private String     itemId;
-  public DeleteManyToManyQuery( IDataModel model, String field, String parentItemId, String itemId ) {
+  private String itemId;
+
+  public DeleteManyToManyQuery(IDataModel model, String field, String parentItemId, String itemId) {
     this.model = model;
     this.field = field;
     this.parentItemId = parentItemId;
     this.itemId = itemId;
   }
-  public void execute( SessionFactory sessionFactory ) {
-    DeleteQuery deleteQuery = buildSqlQuery();
-    super.updateQuery( sessionFactory, deleteQuery.toString() );
+
+  public void execute(SessionFactory sessionFactory) {
+    SqlQuery deleteQuery = buildSqlQuery();
+    super.updateQuery(sessionFactory, deleteQuery.toString());
   }
-  private DeleteQuery buildSqlQuery() {
-    DeleteQuery query = new DeleteQuery();
-    ManyToMany dataField = ( ManyToMany )model.getField( field );
-    Table table = new Table( dataField.getJoinTable() );
-    query.setTable( table );
-    query.addCriteria( new MatchCriteria( table.getColumn( dataField.getTableField() ), parentItemId ) );
-    query.addCriteria( new MatchCriteria( table.getColumn( dataField.getInverseTableField() ), itemId ) );
-    return query;
+
+  private SqlQuery buildSqlQuery() {
+    IDataField dataField = model.getField(field);
+    if (dataField instanceof ManyToMany) {
+      ManyToMany manyToMany = (ManyToMany) dataField;
+      DeleteQuery query = new DeleteQuery();
+      Table table = new Table(manyToMany.getJoinTable());
+      query.setTable(table);
+      query.addCriteria(new MatchCriteria(table.getColumn(manyToMany.getTableField()), parentItemId));
+      query.addCriteria(new MatchCriteria(table.getColumn(manyToMany.getInverseTableField()), itemId));
+      return query;
+    } else if (dataField instanceof OneToMany) {
+      UpdateQuery query = new UpdateQuery();
+      OneToMany oneToMany = (OneToMany) model.getField(field);
+      IDataModel otherModel = App.getModel(oneToMany.getAppObj());
+      Table table = new Table(otherModel.getTableName());
+      query.setTable(table);
+      query.addUpdateColumn(table.getColumn(oneToMany.getTableField()), null);
+      query.setCriteriaById(Long.valueOf(itemId));
+      return query;
+    } else {
+      throw new IllegalArgumentException("field must be oneToMany or manyToMany");
+    }
   }
 }

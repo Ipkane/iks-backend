@@ -1,5 +1,8 @@
 package com.iks.cms.core.sql.query;
 
+import com.iks.cms.core.constant.ModelConstant;
+import com.iks.cms.core.data.FieldConstant;
+import com.iks.cms.core.query.MatchType;
 import com.iks.cms.core.sql.*;
 
 import java.util.*;
@@ -22,5 +25,8 @@ public class UpdateQuery extends AbstractChangeQuery {
     appendList( sql, updateColumns, "", ", ", " " );
     appendList( sql, criterias, " where ", " and ", " " );
     return sql.toString();
+  }
+  public void setCriteriaById(Long itemId) {
+    criterias.add(new MatchCriteria(table.getColumn(FieldConstant.DEFAULT_PRIMARY_FIELD), itemId, MatchType.Eq ) );
   }
 }

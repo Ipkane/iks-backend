@@ -95,7 +95,12 @@ public class SelectModelQuery<T extends SelectModelQuery> extends CommonModelQue
 
   protected IDataItem parseResult(Object rawData) {
     DataItem resultItem = new DataItem();
-    Object[] data = (Object[]) rawData;
+    Object[] data;
+    if (rawData instanceof Object[]) {
+      data = (Object[]) rawData;
+    } else {
+      data = new Object[] {rawData};
+    }
     if (ModelUtils.isEmptyArray(data)) {
       return null;
     }

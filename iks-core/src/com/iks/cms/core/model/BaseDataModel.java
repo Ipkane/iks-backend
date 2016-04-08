@@ -2,6 +2,7 @@ package com.iks.cms.core.model;
 
 import com.iks.cms.core.data.*;
 import com.iks.cms.core.grid.*;
+import com.iks.cms.core.utils.ModelUtils;
 import com.iks.cms.core.validation.*;
 
 import java.util.*;
@@ -52,7 +53,8 @@ public class BaseDataModel implements IDataModel {
     if (name == null) {
       throw new NullPointerException();
     }
-    return fields.stream().filter(field -> field.getFieldName().equals(name)).findFirst().orElseThrow(IllegalArgumentException::new);
+    String baseFieldName = ModelUtils.getBaseField(name);
+    return fields.stream().filter(field -> field.getFieldName().equals(baseFieldName)).findFirst().orElseThrow(IllegalArgumentException::new);
   }
 
   public String getAppObj() {

@@ -20,7 +20,7 @@ public class ModelFactory {
         return new OneToOne();
       }
       case ModelConstant.ONE_TO_MANY: {
-        return new ManyToMany();
+        return new OneToMany();
       }
       case ModelConstant.MANY_TO_MANY: {
         return new ManyToMany();
