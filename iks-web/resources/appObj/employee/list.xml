@@ -17,7 +17,7 @@
       <column fieldName="fio" label="First/Last Name Name"/>
       <column fieldName="gender"/>
       <column fieldName="user.username" label="Username"/>
-      <column fieldName="user.password" label="Password"/>
+      <column fieldName="department.name" label="Department"/>
     </columns>
   </appTable>
 </listView>

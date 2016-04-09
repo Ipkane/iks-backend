@@ -23,8 +23,6 @@ public abstract class BaseGrid extends GulElement implements IBaseGrid {
   protected String       appObj;
   private   IFilterPanel filterPanel;
   @JsonView( JsonViews.Normal.class )
-  protected Boolean             showToolbar = true;
-  @JsonView( JsonViews.Normal.class )
   private   List< IGridColumn > columns     = new ArrayList<>();
   @Override
   public List< IGridColumn > getColumns() {
@@ -90,11 +88,5 @@ public abstract class BaseGrid extends GulElement implements IBaseGrid {
   @Override
   public void setId( String id ) {
     this.id = id;
-  }
-  public Boolean getShowToolbar() {
-    return showToolbar;
-  }
-  public void setShowToolbar( Boolean showToolbar ) {
-    this.showToolbar = showToolbar;
   }
 }

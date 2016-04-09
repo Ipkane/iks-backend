@@ -5,7 +5,7 @@
     <textbox id="fio" fieldName="fio" label="First/Last fieldName"/>
     <select fieldName="gender"/>
     <referenceSelect fieldName="user" displayField="username"/>
-    <referenceSelect fieldName="department" displayField="name"/>
+    <referenceField fieldName="department" displayField="name" referenceGrid="department_main_grid"/>
   </fieldbox>
   <tabbox>
     <tab label="Tab 1">

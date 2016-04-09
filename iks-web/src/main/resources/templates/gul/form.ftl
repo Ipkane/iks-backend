@@ -40,3 +40,10 @@
   </#if>
 </select>
 </#macro>
+<#macro referenceField element>
+<label for="${element.fieldName}" class="control-label">${element.label}</label>
+<reference-field reference-grid="${(element.referenceGrid)!}" model="${modelName}" field-name="${element.fieldName}" display-field="${element.displayField}">
+  <input type="hidden"/>
+
+</reference-field>
+</#macro>

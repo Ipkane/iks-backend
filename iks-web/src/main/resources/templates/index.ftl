@@ -72,5 +72,6 @@
 <script src="assets/app/cms/appObj/edit.controller.js"></script>
 <script src="assets/app/cms/appObj/referenceList.controller.js"></script>
 <script src="assets/app/cms/appObj/data.service.js"></script>
+<script src="assets/app/ui/referenceField.js"></script>
 </body>
 </html>

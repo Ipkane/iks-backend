@@ -23,6 +23,7 @@ public interface GulConstant {
   String ATTR_VALUE = "value";
   String ATTR_CONTROL = "control";
   String ATTR_CHECKED = "checked";
+  String ATTR_REFERENCE_GRID = "referenceGrid";
   // element names
   String TEXTBOX = "textbox";
   String CHECKBOX = "checkbox";

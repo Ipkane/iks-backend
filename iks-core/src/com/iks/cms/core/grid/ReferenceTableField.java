@@ -21,7 +21,7 @@ public class ReferenceTableField extends BaseGrid {
   private String fieldName;
   @JsonView(JsonViews.Normal.class)
   private String label;
-  private SearchGrid searchGrid;
+  private String referenceGrid;
 
   public ReferenceTableField() {
     id = UUID.randomUUID().toString();
@@ -54,24 +54,7 @@ public class ReferenceTableField extends BaseGrid {
     if (xmlElement.hasAttribute(GulConstant.ATTR_LABEL)) {
       setLabel(xmlElement.getAttribute(GulConstant.ATTR_LABEL));
     }
-    // create extra search field
-    SearchGrid searchGrid = new SearchGrid();
-    searchGrid.setId(id + "_search_grid");
-    IDataField dataField = App.getModel(appObj).getField(fieldName);
-    if (dataField instanceof ManyToMany) {
-      searchGrid.setAppObj(((ManyToMany) dataField).getAppObj());
-    } else if (dataField instanceof OneToMany) {
-      searchGrid.setAppObj(((OneToMany) dataField).getAppObj());
-    } else {
-      throw new IllegalArgumentException("Data field " + dataField.getFieldName() + " must be either oneToMany or manyToMany field");
-    }
-    for (IGridColumn column : getColumns()) {
-      GridColumn newColumn = new GridColumn(column);
-      newColumn.setFieldName(ModelUtils.getFinalField(column.getFieldName()));
-      searchGrid.addColumn(newColumn);
-    }
-    App.addGrid(searchGrid.getId(), searchGrid);
-    setSearchGrid(searchGrid);
+    setReferenceGrid(xmlElement.getAttribute(GulConstant.ATTR_REFERENCE_GRID));
   }
 
   @Override
@@ -84,11 +67,11 @@ public class ReferenceTableField extends BaseGrid {
     return ListConstant.REFERENCE_TABLE_FIELD;
   }
 
-  public SearchGrid getSearchGrid() {
-    return searchGrid;
+  public String getReferenceGrid() {
+    return referenceGrid;
   }
 
-  public void setSearchGrid(SearchGrid searchGrid) {
-    this.searchGrid = searchGrid;
+  public void setReferenceGrid(String referenceGrid) {
+    this.referenceGrid = referenceGrid;
   }
 }

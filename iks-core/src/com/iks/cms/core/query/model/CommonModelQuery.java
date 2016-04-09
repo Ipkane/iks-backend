@@ -22,7 +22,9 @@ public class CommonModelQuery< T extends CommonModelQuery > extends CommonDaoQue
   }
   public T setFields( List< String > fieldsList ) {
     this.fields.clear();
-    this.fields.addAll( fieldsList );
+    for (String field: fieldsList) {
+      addField(field);
+    }
     return ( T )this;
   }
   public T addField( String field ) {

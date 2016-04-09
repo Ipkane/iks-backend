@@ -1,6 +1,6 @@
 <#macro referenceTableField element>
   <div class="reference-table"  id="${(element.id)!}" class="${(element.cssClass)!}" style="${(element.style)!}" ng-controller="AppObjListController as vm">
-    <div ng-init='grid = "${element.toJson()}"; searchGridId="${(element.searchGrid.id)!}"' style="display: none"></div>
+    <div ng-init='grid = "${element.toJson()}"; referenceGridId="${(element.referenceGrid)!}"' style="display: none"></div>
     <div class="panel-heading app-table-toolbar">
       <div class="hbox">
         <div class="btn btn-primary" ng-click="openOneToManyModal()">Add</div>

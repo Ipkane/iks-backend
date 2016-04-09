@@ -1,152 +1,170 @@
 'use strict';
-angular.module( 'app.cms' )//
-  .controller( 'AppObjListController', AppObjListController )
+angular.module('app.cms')//
+    .controller('AppObjListController', AppObjListController)
 ;//
-function AppObjListController( $scope, $log, $uibModal, $timeout, $rootScope, CoreService, GridHelper, ModalHelper, _ ) {
+function AppObjListController($scope, $log, $uibModal, $timeout, $rootScope, CoreService, GridHelper, ModalHelper, _) {
   var vm = this;
-  angular.extend( $scope, {
-    filter      : {
+  angular.extend($scope, {
+    filter: {
       item: {}
     },
-    grid        : null,
+    grid: null,
     selectedItem: null,
-    searchGridId: null, // for  reference field
-    orderBy     : 'id',
-    orderAsc    : true,
-    items       : [],
+    referenceGridId: null, // for  reference field
+    orderBy: 'id',
+    orderAsc: true,
+    items: [],
     itemsPerPage: 10,
-    currentPage : 1,
+    currentPage: 1,
     parentItemId: null,
-    totalItems  : 0
-  } );
+    totalItems: 0
+  });
   function init() {
-    if ( angular.isString( $scope.grid ) ) {
-      $scope.grid = angular.fromJson( $scope.grid );
+    if (angular.isString($scope.grid)) {
+      $scope.grid = angular.fromJson($scope.grid);
     }
-    $rootScope.grids[ $scope.grid[ 'id' ] ] = $scope;
+    $rootScope.grids[$scope.grid['id']] = $scope;
     reload();
   }
 
   function reload() {
-    if ( $scope.$parent.itemId ) {
+    if ($scope.$parent.itemId) {
       $scope.parentItemId = $scope.$parent.itemId;
     }
-    CoreService.getGridData( {
-      gridId  : $scope.grid.id, filter: $scope.filter.item, orderBy: ($scope.orderAsc ? '' : '-') + $scope.orderBy,
+    CoreService.getGridData({
+      gridId: $scope.grid.id, filter: $scope.filter.item, orderBy: ($scope.orderAsc ? '' : '-') + $scope.orderBy,
       parentId: $scope.parentItemId,
-      page    : $scope.currentPage, limit: $scope.itemsPerPage
-    } ).$promise.then(
-      function ( response ) {
-        if ( !response.isSuccess ) {
-          ModalHelper.showErrorModal( response );
-          return;
-        }
-        $scope.items          = response.success.result.items;
-        $scope.totalItems     = response.success.result.totalItems;
-        var foundSelectedItem = false;
-        if ( $scope.selectedItem ) {
-          _.each( $scope.items, function ( item ) {
-            if ( item.id == $scope.selectedItem.id ) {
-              $scope.selectedItem = item;
-              foundSelectedItem   = true;
-            }
-          } );
-          if ( !foundSelectedItem ) {
-            $scope.selectedItem = null;
+      page: $scope.currentPage, limit: $scope.itemsPerPage
+    }).$promise.then(
+        function (response) {
+          if (!response.isSuccess) {
+            ModalHelper.showErrorModal(response);
+            return;
           }
-        }
-      } ).catch( function ( response ) {
-                   ModalHelper.showErrorModal( response );
-                 } );
+          $scope.items = response.success.result.items;
+          $scope.totalItems = response.success.result.totalItems;
+          var foundSelectedItem = false;
+          if ($scope.selectedItem) {
+            _.each($scope.items, function (item) {
+              if (item.id == $scope.selectedItem.id) {
+                $scope.selectedItem = item;
+                foundSelectedItem = true;
+              }
+            });
+            if (!foundSelectedItem) {
+              $scope.selectedItem = null;
+            }
+          }
+        }).catch(function (response) {
+      ModalHelper.showErrorModal(response);
+    });
   }
-  $scope.pageChanged       = function () {
+
+  $scope.pageChanged = function () {
     reload();
   };
   $scope.toggleFilterPanel = function () {
     $scope.showFilterPanel = !$scope.showFilterPanel;
   };
-  $scope.search            = function () {
+  $scope.search = function () {
     reload();
   };
-  $scope.refresh           = function () {
+  $scope.refresh = function () {
     reload();
   };
-  $scope.selectItem        = function ( item ) {
+  $scope.selectItem = function (item) {
     $scope.selectedItem = item;
   };
-  $scope.openEditModal     = function () {
-    openEditModal( false );
+  $scope.openEditModal = function () {
+    openEditModal(false);
   };
-  $scope.openAddModal      = function () {
-    openEditModal( true );
+  $scope.openAddModal = function () {
+    openEditModal(true);
   };
-  function openEditModal( isNew ) {
+  function openEditModal(isNew) {
     // open modal
     $uibModal.open(
-      {
-        animation   : true,
-        templateUrl : 'view/editView?appObj=' + $scope.grid.appObj,
-        controller  : 'GridEditController',
-        controllerAs: 'vm',
-        backdrop    : 'static',
-        resolve     : {
-          payload: { appObj: $scope.grid.appObj, itemId: isNew ? null : $scope.selectedItem.id, isNew: isNew }
+        {
+          animation: true,
+          templateUrl: 'view/editView?appObj=' + $scope.grid.appObj,
+          controller: 'GridEditController',
+          controllerAs: 'vm',
+          backdrop: 'static',
+          resolve: {
+            payload: {appObj: $scope.grid.appObj, itemId: isNew ? null : $scope.selectedItem.id, isNew: isNew}
+          }
         }
-      }
-    ).result.then( function ( updatedItem ) {
-                     reload();
-                   }, function () {
-                   } );
+    ).result.then(function (updatedItem) {
+      reload();
+    }, function () {
+    });
   }
 
-  $scope.openOneToManyModal       = function () {
+  $scope.openOneToManyModal = function () {
     // open modal
     $uibModal.open(
-      {
-        animation   : true,
-        templateUrl : 'view/referenceView?gridId=' + $scope.searchGridId,
-        controller  : 'ReferenceListModalController',
-        controllerAs: 'vm',
-        backdrop    : 'static',
-        resolve     : {
-          payload: { parentGridId: $scope.grid.id, parentItemId: $scope.parentItemId }
+        {
+          animation: true,
+          templateUrl: 'view/referenceView?gridId=' + $scope.referenceGridId,
+          controller: 'ReferenceListModalController',
+          controllerAs: 'vm',
+          backdrop: 'static',
+          resolve: {
+            payload: {parentGridId: $scope.grid.id, parentItemId: $scope.parentItemId}
+          }
         }
-      }
-    ).result.then( function ( selectedItem ) {
-                     reload();
-                   }, function () {
-                   } );
+    ).result.then(function (selectedItem) {
+      CoreService.addGridItem({
+        gridId: $scope.grid.id,
+        parentItemId: $scope.parentItemId,
+        itemId: selectedItem.id
+      }, function (response) {
+        if (response.isSuccess) {
+          reload();
+        } else {
+          ModalHelper.showErrorModal(response);
+        }
+      }, function (response) {
+        ModalHelper.showErrorModal(response);
+      });
+    }, function (response) {
+      ModalHelper.showErrorModal(response);
+    });
   };
-  $scope.openDeleteModal          = function () {
+  $scope.openDeleteModal = function () {
     ModalHelper.openConfirmModal(
-      {
-        title    : "Confirm deletion",
-        message  : "Are you sure, you want to delete item " + $scope.selectedItem.id,
-        onConfirm: function () {
-          return CoreService.deleteItem( { gridId: $scope.grid.id, itemId: $scope.selectedItem.id } ).$promise;
-        },
-        onSuccess: reload
-      }
+        {
+          title: "Confirm deletion",
+          message: "Are you sure, you want to delete item " + $scope.selectedItem.id,
+          onConfirm: function () {
+            return CoreService.deleteItem({gridId: $scope.grid.id, itemId: $scope.selectedItem.id}).$promise;
+          },
+          onSuccess: reload
+        }
     );
   };
   $scope.openDeleteOneToManyModal = function () {
     var selectedItemId;
-    if ( $scope.grid.fieldName ) {
-      selectedItemId = $scope.selectedItem[ $scope.grid.fieldName ][ 'id' ];
+    if ($scope.grid.fieldName) {
+      selectedItemId = $scope.selectedItem[$scope.grid.fieldName]['id'];
     }
     ModalHelper.openConfirmModal(
-      {
-        title    : "Confirm deletion",
-        message  : "Are you sure, you want to delete item " + selectedItemId,
-        onConfirm: function () {
-          return CoreService.deleteOneToManyItem( { gridId: $scope.grid.id, parentItemId: $scope.parentItemId, itemId: selectedItemId } ).$promise;
-        },
-        onSuccess: reload
-      }
+        {
+          title: "Confirm deletion",
+          message: "Are you sure, you want to delete item " + selectedItemId,
+          onConfirm: function () {
+            return CoreService.deleteOneToManyItem({
+              gridId: $scope.grid.id,
+              parentItemId: $scope.parentItemId,
+              itemId: selectedItemId
+            }).$promise;
+          },
+          onSuccess: reload
+        }
     );
   };
-  $scope.setOrderBy               = function ( fieldName ) {
-    if ( fieldName == $scope.orderBy ) {
+  $scope.setOrderBy = function (fieldName) {
+    if (fieldName == $scope.orderBy) {
       $scope.orderAsc = !$scope.orderAsc;
     } else {
       $scope.orderAsc = true;
@@ -154,26 +172,26 @@ function AppObjListController( $scope, $log, $uibModal, $timeout, $rootScope, Co
     $scope.orderBy = fieldName;
     reload();
   };
-  vm.getField                     = function ( fieldName ) {
-    return _.find( $scope.grid.fields, { fieldName: fieldName } );
+  vm.getField = function (fieldName) {
+    return _.find($scope.grid.fields, {fieldName: fieldName});
   };
-  $scope.formatItemValue          = function ( item, field ) {
-    var parts = _.split( field.fieldName, '.' );
-    if ( parts.length == 1 ) {
-      return item[ field.fieldName ];
-    } else if ( parts.length == 2 ) {
-      return item[ parts[ 0 ] ][ parts[ 1 ] ];
+  $scope.formatItemValue = function (item, field) {
+    var parts = _.split(field.fieldName, '.');
+    if (parts.length == 1) {
+      return item[field.fieldName];
+    } else if (parts.length == 2) {
+      return item[parts[0]][parts[1]];
     }
   };
-  vm.getHeaderClass               = function ( fieldName ) {
-    if ( fieldName == $scope.orderBy ) {
+  vm.getHeaderClass = function (fieldName) {
+    if (fieldName == $scope.orderBy) {
       return $scope.orderAsc ? 'asc' : 'desc';
     }
     return null;
   };
-  $scope.clearFilter              = function () {
+  $scope.clearFilter = function () {
     $scope.filter.item = {};
     reload();
   };
-  $timeout( init, 0 );
+  $timeout(init, 0);
 };
