@@ -8,7 +8,7 @@
   </fieldbox>
   <tabbox>
     <tab label="Roles">
-      <referenceTableField fieldName="roles">
+      <referenceTableField fieldName="roles" referenceGrid="role_grid">
         <columns>
           <column fieldName="roles.id" label="Role Id"/>
           <column fieldName="roles.name" label="Name"/>

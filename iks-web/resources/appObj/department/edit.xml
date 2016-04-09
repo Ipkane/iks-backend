@@ -5,7 +5,7 @@
   </fieldbox>
   <tabbox>
     <tab label="Employees">
-      <referenceTableField fieldName="employees">
+      <referenceTableField fieldName="employees" referenceGrid="employee_grid">
         <columns>
           <column fieldName="employees.id" label="Employee Id"/>
           <column fieldName="employees.fio" label="Employee Name"/>

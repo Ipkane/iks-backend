@@ -8,7 +8,7 @@
       </hbox>
       <hbox>
         <select fieldName="gender"/>
-        <referenceSelect fieldName="user" displayField="username"/>
+        <referenceField fieldName="user" displayField="username" referenceGrid="user_grid"/>
         <button label="Push the button" id="button_1"/>
       </hbox>
     </filterPanel>
@@ -17,7 +17,7 @@
       <column fieldName="fio" label="First/Last Name Name"/>
       <column fieldName="gender"/>
       <column fieldName="user.username" label="Username"/>
-      <column fieldName="user.password" label="Password"/>
+      <column fieldName="department.name" label="Department"/>
     </columns>
   </appTable>
 </listView>

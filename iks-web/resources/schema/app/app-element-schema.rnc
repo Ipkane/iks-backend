@@ -1,8 +1,10 @@
 include "../gul/gul-schema.rnc"
 
-gul.element |= appTable | referenceTableField
+gul.element |= appTable | referenceTableField | referenceSelect | referenceField
 
 appObjAttr = attribute appObj { xsd:NCName }
+referenceGridAttr = attribute referenceGrid { xsd:NCName }
+displayFieldAttr = attribute displayField { xsd:NCName }
 
 appTable = element appTable {
   idAttr
@@ -18,8 +20,7 @@ filterPanel = element filterPanel {
 column = element column {
   fieldNameAttr?
   & labelAttr?
-  & attribute displayField { text }?
-}+
+}
 
 columns = element columns {
   column+
@@ -30,4 +31,17 @@ referenceTableField = element referenceTableField {
   & nameAttr?
   & labelAttr?
   & columns
+  & referenceGridAttr
+}
+
+
+referenceSelect = element referenceSelect {
+  gul.fieldType
+  & attribute displayField { xsd:NCName }
+}
+
+referenceField = element referenceField {
+  gul.fieldType
+  & displayFieldAttr
+  & referenceGridAttr
 }

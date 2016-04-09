@@ -56,6 +56,8 @@ public class GulFactory {
         return new GulTab();
       case ListConstant.APP_TABLE:
         return new AppGrid();
+      case GulConstant.REFERENCE_FIELD:
+        return new GulReferenceField();
       case ListConstant.REFERENCE_TABLE_FIELD:
         return new ReferenceTableField();
       default:
