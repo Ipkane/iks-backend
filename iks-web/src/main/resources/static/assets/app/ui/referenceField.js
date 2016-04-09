@@ -6,22 +6,20 @@ function ReferenceField() {
   return {
     restrict: 'E',
     templateUrl: 'assets/app/ui/templates/referenceField.html',
-    //replace: true,
+    replace: true,
     scope: {
       referenceGrid: '=',
       model: '=',
       fieldName: '=',
       displayField: '='
     },
-    transclude: true,
     link: function (scope, element, attrs) {
       scope.referenceGrid = attrs['referenceGrid'];
-      scope.model = attrs['model'];
+      //scope.model = attrs['model'];
       scope.fieldName = attrs['fieldName'];
       scope.displayField = attrs['displayField'];
     },
     controller: function ($scope, $log, $uibModal) {
-      $log.debug($scope.model);
       $scope.openReferenceGrid = function () {
         $uibModal.open(
             {
@@ -38,6 +36,9 @@ function ReferenceField() {
           $scope.model[$scope.fieldName] = selectedItem;
         }, function () {
         });
+      };
+      $scope.clear = function() {
+        $scope.model[$scope.fieldName] = null;
       }
     }
   }

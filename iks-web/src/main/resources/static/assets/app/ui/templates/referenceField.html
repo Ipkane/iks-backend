@@ -1,6 +1,5 @@
-<div class="input-group">
-  display: {{model[fieldName][displayField]}}
-  <div ng-transclude>
-  </div>
-  <button ng-click="openReferenceGrid()">...</button>
+<div class="input-group hbox">
+  <input class="form-control" readonly="true" value="{{model[fieldName][displayField]}}" style="flex: 1"/>
+  <button title="Select" class="input-group-addon" ng-click="openReferenceGrid()">...</button>
+  <button title="Clear" class="input-group-addon" ng-click="clear()">x</button>
 </div>

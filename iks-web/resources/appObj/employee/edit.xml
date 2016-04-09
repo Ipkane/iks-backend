@@ -4,7 +4,8 @@
     <textbox fieldName="id" readonly="true"/>
     <textbox id="fio" fieldName="fio" label="First/Last fieldName"/>
     <select fieldName="gender"/>
-    <referenceSelect fieldName="user" displayField="username"/>
+    <!--<referenceSelect fieldName="user" displayField="username"/>-->
+    <referenceField fieldName="user" displayField="username" referenceGrid="user_grid"/>
     <referenceField fieldName="department" displayField="name" referenceGrid="department_main_grid"/>
   </fieldbox>
   <tabbox>
