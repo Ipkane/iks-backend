@@ -17,7 +17,7 @@
   </script>
 </#macro>
 <#macro button element>
-<button id="${(element.id)!}" class="btn btn-default" class="${(element.cssClass)!}" style="${(element.style)!}">${element.label}</button>
+<kendo-button id="${(element.id)!}" class="" class="${(element.cssClass)!}" style="${(element.style)!}">${element.label}</kendo-button>
 </#macro>
 <#macro markup element>
   ${element.content}

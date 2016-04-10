@@ -6,10 +6,10 @@
 <div>
   <div class="row">
     <div class="col-xs-3 col-xs-offset-3">
-      <button class="btn btn-danger btn-block" ng-click="ok()">Select</button>
+      <kendo-button ng-click="ok()">Select</kendo-button>
     </div>
     <div class="col-xs-3">
-      <button class="btn btn-success btn-block" ng-click="cancel()">Cancel</button>
+      <kendo-button ng-click="cancel()">Cancel</kendo-button>
     </div>
   </div>
 </div>

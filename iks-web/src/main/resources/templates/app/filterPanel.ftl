@@ -7,7 +7,7 @@
   </form>
 </div>
 <div class="hbox">
-  <div class="btn btn-primary" ng-click="search()">Search</div>
-  <div class="btn btn-success" ng-click="clearFilter()">Clear</div>
+  <kendo-button ng-click="search()">Search</kendo-button>
+  <kendo-button ng-click="clearFilter()">Clear</kendo-button>
 </div>
 </#macro>

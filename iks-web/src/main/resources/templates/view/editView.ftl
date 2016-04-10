@@ -19,10 +19,10 @@
 
   <div class="row">
     <div class="col-xs-3 col-xs-offset-3">
-      <button type="submit" class="btn btn-danger btn-block" ng-click="save(${appObj.name}Form.$valid)">Save</button>
+      <kendo-button type="submit" class="" ng-click="save(${appObj.name}Form.$valid)">Save</kendo-button>
     </div>
     <div class="col-xs-3">
-      <button class="btn btn-success btn-block" ng-click="cancel()">Cancel</button>
+      <kendo-button class="" ng-click="cancel()">Cancel</kendo-button>
     </div>
   </div>
 </div>

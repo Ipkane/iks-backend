@@ -3,7 +3,7 @@
 <head>
   <title>CMS</title>
 
-  <link href="assets/css/bootstrap.min.css" rel="stylesheet"/>
+  <#--<link href="assets/css/bootstrap.min.css" rel="stylesheet"/>-->
   <#--<link href="assets/css/bootstrap-theme.min.css" rel="stylesheet"/>-->
 <#--<link rel="stylesheet" href="http://kendo.cdn.telerik.com/2016.1.406/styles/kendo.common.min.css"/>-->
 <#--<link rel="stylesheet" href="http://kendo.cdn.telerik.com/2016.1.406/styles/kendo.rtl.min.css"/>-->
@@ -16,13 +16,13 @@
   <link href="assets/css/dev.css" rel="stylesheet"/>
 </head>
 <body ng-app="app">
-<div class="dev-panel" ng-controller="DevPanelController">
-  <div ng-include="'assets/app/dev/dev-panel.html'"></div>
-</div>
-<div class="container demo-section k-content" style="height: 100%">
+<#--<div class="dev-panel" ng-controller="DevPanelController">-->
+  <#--<div ng-include="'assets/app/dev/dev-panel.html'"></div>-->
+<#--</div>-->
+<div class="demo-section k-content" style="height: 100%">
   <div kendo-splitter k-orientation="'horizontal'" k-rebind="'horizontal'" k-panes="[
-       { collapsible: true },
-  { collapsible: true }
+       { collapsible: true, size: 200 },
+  { collapsible: false }
   ]" style="height: 100%">
     <div style="width: 200px">
       <nav class="sidebar-nav">
