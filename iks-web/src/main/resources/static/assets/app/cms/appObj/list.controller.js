@@ -2,7 +2,7 @@
 angular.module('app.cms')//
     .controller('AppGridController', AppGridController)
 ;//
-function AppGridController($scope, $log, $kWindow, $timeout, $rootScope, CoreService, GridHelper, ModalHelper, _) {
+function AppGridController($scope, $log, $kWindow, $timeout, $q, $rootScope, CoreService, GridHelper, ModalHelper, _) {
   var vm = this;
   angular.extend($scope, {
     filter: {
@@ -17,23 +17,59 @@ function AppGridController($scope, $log, $kWindow, $timeout, $rootScope, CoreSer
     itemsPerPage: 10,
     currentPage: 1,
     parentItemId: null,
-    totalItems: 0
+    totalItems: 0,
+    gridOptions: null,
+    dataSource: null
   });
-  $scope.toolbarOptions ={
+  $scope.toolbarOptions = {
     //items: [
     //  {type:"button",text:"New", click:"openAddModal()"},
     //  {type:"button",text:"Edit", click:"openEditModal()"}
     //]
   };
+
+  function setGridOptions(grid) {
+    var columns = [];
+    $scope.grid = grid;
+    _.each(grid.columns, function (column) {
+      columns.push({
+        field: column.fieldName,
+        title: column.label
+      })
+    });
+    $scope.dataSource = new kendo.data.DataSource({
+      pageSize: 5,
+      transport: {
+        read: function (e) {
+          _reload().then(function (items) {
+            e.success(items);
+          });
+        }
+      }
+    });
+
+    $scope.gridOptions = {
+      sortable: true,
+      selectable: true,
+      columns: columns,
+      dataSource: $scope.dataSource
+    };
+  }
+
   function init() {
     if (angular.isString($scope.grid)) {
-      $scope.grid = angular.fromJson($scope.grid);
+      var grid = angular.fromJson($scope.grid);
+      setGridOptions(grid);
     }
-    $rootScope.grids[$scope.grid['id']] = $scope;
-    reload();
+    //reload();
   }
 
   function reload() {
+    $scope.dataSource.read();
+  }
+
+  function _reload() {
+    var deferred = $q.defer();
     if ($scope.$parent.itemId) {
       $scope.parentItemId = $scope.$parent.itemId;
     }
@@ -61,9 +97,12 @@ function AppGridController($scope, $log, $kWindow, $timeout, $rootScope, CoreSer
               $scope.selectedItem = null;
             }
           }
+          deferred.resolve($scope.items);
         }).catch(function (response) {
       ModalHelper.showErrorModal(response);
+      deferred.reject(response);
     });
+    return deferred.promise;
   }
 
   $scope.pageChanged = function () {
@@ -78,8 +117,8 @@ function AppGridController($scope, $log, $kWindow, $timeout, $rootScope, CoreSer
   $scope.refresh = function () {
     reload();
   };
-  $scope.selectItem = function (item) {
-    $scope.selectedItem = item;
+  $scope.itemSelected = function (data, dataItem, columns) {
+    $scope.selectedItem = dataItem;
   };
   $scope.openEditModal = function () {
     openEditModal(false);

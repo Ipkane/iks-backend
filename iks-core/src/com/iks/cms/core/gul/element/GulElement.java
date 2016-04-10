@@ -17,6 +17,7 @@ import java.util.*;
  * @author Igor Kaynov
  */
 public abstract class GulElement implements IGulElement {
+  @JsonView( JsonViews.Normal.class )
   protected String        id;
   private   String        style;
   private   String        cssClass;

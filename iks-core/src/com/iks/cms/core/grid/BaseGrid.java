@@ -19,10 +19,10 @@ import java.util.*;
  * @author Igor Kaynov
  */
 public abstract class BaseGrid extends GulElement implements IBaseGrid {
-  @JsonView( JsonViews.Normal.class )
+  @JsonView( JsonViews.Internal.class )
   protected String       appObj;
   private   IFilterPanel filterPanel;
-  @JsonView( JsonViews.Normal.class )
+  @JsonView( JsonViews.Internal.class )
   private   List< IGridColumn > columns     = new ArrayList<>();
   @Override
   public List< IGridColumn > getColumns() {
@@ -79,6 +79,7 @@ public abstract class BaseGrid extends GulElement implements IBaseGrid {
   }
   public String toJson() throws JsonProcessingException {
     ObjectMapper objectMapper = new ObjectMapper();
+    objectMapper.disable(MapperFeature.DEFAULT_VIEW_INCLUSION);
     return objectMapper.writerWithView( JsonViews.Internal.class ).writeValueAsString( this ).replace( "\"", "\\\"" );
   }
   @Override
