@@ -3,13 +3,13 @@
               ng-controller="AppGridController as vm">
   <div ng-init='grid = "${element.toJson()}"' style="display: none"></div>
   <div kendo-toolbar k-options="toolbarOptions">
-    <kendo-button ng-click="openAddModal()">New</kendo-button>
-    <kendo-button ng-click="openEditModal()" ng-disabled="!selectedItem">Edit</kendo-button>
-    <kendo-button ng-click="openDeleteModal()" ng-disabled="!selectedItem">Delete</kendo-button>
+    <kendo-button k-icon="'plus'" ng-click="openAddModal()">New</kendo-button>
+    <kendo-button k-icon="'pencil'" ng-click="openEditModal()" ng-disabled="!selectedItem">Edit</kendo-button>
+    <kendo-button k-icon="'trash'" ng-click="openDeleteModal()" ng-disabled="!selectedItem">Delete</kendo-button>
     <#if element.filterPanel??>
-      <kendo-button ng-click="toggleFilterPanel()">Filter</kendo-button>
+      <kendo-button k-icon="'funnel'" ng-click="toggleFilterPanel()">Filter</kendo-button>
     </#if>
-    <kendo-button ng-click="refresh()">Refresh</kendo-button>
+    <kendo-button k-icon="'refresh'" ng-click="refresh()">Refresh</kendo-button>
   </div>
   <#if element.filterPanel??>
     <div class="panel-body app-table-filter-panel" ng-show="showFilterPanel">
