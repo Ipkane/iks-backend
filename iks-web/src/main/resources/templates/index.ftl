@@ -9,7 +9,7 @@
 <#--<link rel="stylesheet" href="http://kendo.cdn.telerik.com/2016.1.406/styles/kendo.rtl.min.css"/>-->
 <#--<link rel="stylesheet" href="http://kendo.cdn.telerik.com/2016.1.406/styles/kendo.default.min.css"/>-->
   <link href="assets/css/kendo/kendo.common.min.css" rel="stylesheet"/>
-  <link href="assets/css/kendo/kendo.default.min.css" rel="stylesheet"/>
+  <link href="assets/css/kendo/kendo.silver.min.css" rel="stylesheet"/>
   <link href="assets/css/kendo/kendo.rtl.min.css" rel="stylesheet"/>
   <link href="assets/css/gul.css" rel="stylesheet"/>
   <link href="assets/css/main.css" rel="stylesheet"/>

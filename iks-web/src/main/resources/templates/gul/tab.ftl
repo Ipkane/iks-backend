@@ -1,11 +1,16 @@
 <#macro tabbox element>
-<uib-tabset id="${(element.id)!}" style="${(element.style)!}" class="${(element.cssClass)!}">
+<div kendo-tab-strip id="${(element.id)!}" style="${(element.style)!}" class="${(element.cssClass)!}" k-animation="false">
+  <ul>
+    <#list element.tabs as tabElement>
+      <li <#if tabElement?index == 0>class="k-state-active"</#if>>${tabElement.label}</li>
+    </#list>
+  </ul>
   <#list element.tabs as tabElement>
-    <uib-tab heading="${tabElement.label}" index="${tabElement?index}">
-        <@tab element=tabElement/>
-    </uib-tab>
+    <div>
+      <@tab element=tabElement/>
+    </div>
   </#list>
-</uib-tabset>
+</div>
 </#macro>
 <#macro tab element>
 <div class="vbox" id="${(element.id)!}" style="${(element.style)!}" class="${(element.cssClass)!}">
