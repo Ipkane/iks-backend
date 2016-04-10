@@ -1,5 +1,5 @@
 <#include "../app/all-app.ftl"/>
-<div>
+<div class="k-edit-form-container" style="width: 100%">
   <form id="${appObj.name}Form" role="form" novalidate="novalidate" class="form">
   <#assign modelName="selectedItem"/>
   <@container element=editView/>
@@ -17,12 +17,8 @@
     </div>
   </div>
 
-  <div class="row">
-    <div class="col-xs-3 col-xs-offset-3">
+  <div class="k-edit-buttons">
       <kendo-button type="submit" class="" ng-click="save(${appObj.name}Form.$valid)">Save</kendo-button>
-    </div>
-    <div class="col-xs-3">
       <kendo-button class="" ng-click="cancel()">Cancel</kendo-button>
-    </div>
   </div>
 </div>

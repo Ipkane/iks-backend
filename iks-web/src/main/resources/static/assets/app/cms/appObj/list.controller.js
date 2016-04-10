@@ -14,7 +14,7 @@ function AppGridController($scope, $log, $kWindow, $timeout, $q, $rootScope, Cor
     orderBy: 'id',
     orderAsc: true,
     items: [],
-    itemsPerPage: 10,
+    itemsPerPage: 50,
     currentPage: 1,
     parentItemId: null,
     totalItems: 0,
@@ -38,7 +38,9 @@ function AppGridController($scope, $log, $kWindow, $timeout, $q, $rootScope, Cor
       })
     });
     $scope.dataSource = new kendo.data.DataSource({
-      pageSize: 5,
+      pageSize: $scope.itemsPerPage,
+      serverSorting: true,
+      serverPaging: true,
       transport: {
         read: function (e) {
           _reload().then(function (items) {
@@ -51,6 +53,10 @@ function AppGridController($scope, $log, $kWindow, $timeout, $q, $rootScope, Cor
     $scope.gridOptions = {
       sortable: true,
       selectable: true,
+      //scrollable: {
+      //  virtual: true
+      //},
+      resizable: true,
       columns: columns,
       dataSource: $scope.dataSource
     };

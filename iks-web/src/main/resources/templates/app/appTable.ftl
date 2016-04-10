@@ -16,18 +16,18 @@
       <@filterPanel element=element.filterPanel/>
     </div>
   </#if>
-  <div class="hbox">
-    <div class="spacer" style="flex:1"/>
-    <uib-pagination total-items="totalItems" ng-model="currentPage" ng-change="pageChanged()"
-                    items-per-page="itemsPerPage"></uib-pagination>
-  </div>
+  <#--<div class="hbox">-->
+    <#--<div class="spacer" style="flex:1"/>-->
+    <#--<uib-pagination total-items="totalItems" ng-model="currentPage" ng-change="pageChanged()"-->
+                    <#--items-per-page="itemsPerPage"></uib-pagination>-->
+  <#--</div>-->
   <div class="table">
     <@table element=element/>
   </div>
-  <div class="hbox">
-    <div class="spacer" style="flex:1"/>
-    <uib-pagination total-items="totalItems" ng-model="currentPage" ng-change="pageChanged()"
-                    items-per-page="itemsPerPage"></uib-pagination>
-  </div>
+  <#--<div class="hbox">-->
+    <#--<div class="spacer" style="flex:1"/>-->
+    <#--<uib-pagination total-items="totalItems" ng-model="currentPage" ng-change="pageChanged()"-->
+                    <#--items-per-page="itemsPerPage"></uib-pagination>-->
+  <#--</div>-->
 </div>
 </#macro>
