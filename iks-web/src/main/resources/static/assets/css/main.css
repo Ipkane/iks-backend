@@ -9,6 +9,7 @@
 
 html {
   /*line-height: 1;*/
+  font:75% 'Lucida Sans Unicode','Lucida Grande',arial,helvetica,sans-serif;
 }
 
 ol, ul {
@@ -63,7 +64,9 @@ ol, ul {
 
 }
 
-.hbox > .form-control, .hbox > .input-group, .hbox > .k-input {
+.hbox > .form-control, .hbox > .input-group, .hbox > .k-textbox {
+  min-width: 10px;
+  width: auto;
   flex: 1 0 0;
 }
 
@@ -71,6 +74,9 @@ ol, ul {
   align-self: stretch;
 }
 
+.hbox > label {
+  flex-shrink: 0;
+}
 /*.form-group .input-group {*/
   /*width: 100%;*/
 /*}*/
@@ -88,6 +94,9 @@ ol, ul {
   word-break: break-all;
 }
 
+.k-button {
+  height: 2.13em;
+}
 /*.k-toolbar .k-overflow-anchor {*/
   /*float: none;*/
 /*}*/

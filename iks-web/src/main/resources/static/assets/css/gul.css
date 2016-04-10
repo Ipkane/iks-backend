@@ -23,6 +23,7 @@
   width: 100%;
   flex-direction: row;
   flex-wrap: nowrap;
+  flex-shrink: 1;
 }
 
 .vbox {

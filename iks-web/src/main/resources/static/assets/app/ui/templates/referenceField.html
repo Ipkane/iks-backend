@@ -1,5 +1,9 @@
-<div class="input-group hbox">
-  <input class="form-control" readonly="true" value="{{model[fieldName][displayField]}}" style="flex: 1"/>
-  <button title="Select" class="input-group-addon" ng-click="openReferenceGrid()">...</button>
-  <button title="Clear" class="input-group-addon" ng-click="clear()">x</button>
+<div class="hbox">
+  <input class="k-textbox" readonly="true" value="{{model[fieldName][displayField]}}" style="flex: 1"/>
+  <button title="Select" class="k-button" ng-click="openReferenceGrid()">
+    <span class="k-icon k-i-search"></span>
+  </button>
+  <button title="Clear" class="k-button" ng-click="clear()">
+    <span class="k-icon k-i-x"></span>
+  </button>
 </div>

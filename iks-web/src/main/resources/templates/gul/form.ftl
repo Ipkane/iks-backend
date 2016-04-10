@@ -1,6 +1,6 @@
 <#macro textbox element>
 <label for="${(element.fieldName)!}" class="control-label">${(element.label)!}</label>
-<input type="text" class="k-input k-textbox" id="${(element.id)!}" name="${(element.fieldName)!}"
+<input type="text" class="k-textbox" id="${(element.id)!}" name="${(element.fieldName)!}"
        ng-readonly="${element.readonly?c}"
        ng-required="${element.required?c}" class="${(element.cssClass)!}" style="${(element.style)!}"
        <#if element.fieldName??>ng-model="${modelName}.${element.fieldName}"</#if>/>
