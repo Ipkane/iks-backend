@@ -1,8 +1,8 @@
 (function () {
   'use strict';
-  angular.module( 'app.cms', [] );
-  angular.module( 'app.dev', [] );
-  angular.module( 'app', [//
+  angular.module('app.cms', []);
+  angular.module('app.dev', []);
+  angular.module('app', [//
     'ngRoute'
     , 'ngCookies' //
     , 'ngResource'
@@ -11,6 +11,7 @@
     , 'ngMessages' //
     , 'ngSanitize' //
     , 'app.cms',
-    , 'app.dev'
-  ] );
+    , 'app.dev',
+    , 'kendo.directives'
+  ]);
 })();

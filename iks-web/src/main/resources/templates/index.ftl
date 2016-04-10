@@ -3,8 +3,14 @@
 <head>
   <title>CMS</title>
 
-  <link href="assets/css/bootstrap.min.css" rel="stylesheet"/>
-  <link href="assets/css/bootstrap-theme.min.css" rel="stylesheet"/>
+  <#--<link href="assets/css/bootstrap.min.css" rel="stylesheet"/>-->
+  <#--<link href="assets/css/bootstrap-theme.min.css" rel="stylesheet"/>-->
+<#--<link rel="stylesheet" href="http://kendo.cdn.telerik.com/2016.1.406/styles/kendo.common.min.css"/>-->
+<#--<link rel="stylesheet" href="http://kendo.cdn.telerik.com/2016.1.406/styles/kendo.rtl.min.css"/>-->
+<#--<link rel="stylesheet" href="http://kendo.cdn.telerik.com/2016.1.406/styles/kendo.default.min.css"/>-->
+  <link href="assets/css/kendo/kendo.common.min.css" rel="stylesheet"/>
+  <link href="assets/css/kendo/kendo.default.min.css" rel="stylesheet"/>
+  <link href="assets/css/kendo/kendo.rtl.min.css" rel="stylesheet"/>
   <link href="assets/css/gul.css" rel="stylesheet"/>
   <link href="assets/css/main.css" rel="stylesheet"/>
   <link href="assets/css/dev.css" rel="stylesheet"/>
@@ -13,32 +19,36 @@
 <div class="dev-panel" ng-controller="DevPanelController">
   <div ng-include="'assets/app/dev/dev-panel.html'"></div>
 </div>
-<div class="container">
-  <div class="row">
-    <div class="col-xs-2">
+<div class="container demo-section k-content" style="height: 100%">
+  <div kendo-splitter k-orientation="'horizontal'" k-rebind="'horizontal'" k-panes="[
+       { collapsible: true },
+  { collapsible: true }
+  ]" style="height: 100%">
+    <div style="width: 200px">
       <nav class="sidebar-nav">
-        <ul class="nav nav-pills nav-stacked">
+        <ul kendo-tree-view>
         <#list appObjList as appObj>
-          <li ui-sref-active="active">
-            <a ui-sref="appObjListView({appObj:'${appObj.name}'})">${appObj.label}</a>
+          <li>
+            <a ui-sref="appObjListView({appObj:'${appObj.name}'})" ui-sref-active="k-state-selected">${appObj.label}</a>
           </li>
         </#list>
         </ul>
       </nav>
     </div>
-    <div class="col-md-10" ui-view="">
+    <div>
+      <div ui-view="">
+      </div>
     </div>
   </div>
-  <footer>
-    <p>&copy; IKaynov.ru 2016</p>
-  </footer>
 </div>
 <!-- libs -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="assets/bower_components/angular/angular.js?timestamp=@timestamp@"></script>
+<#--<script src="http://kendo.cdn.telerik.com/2016.1.406/js/kendo.all.min.js"></script>-->
+<script src="assets/js/lib/kendo/kendo.all.min.js"></script>
 <script src="assets/js/lib/angular-route.js?timestamp=@timestamp@"></script>
 <script src="assets/js/lib/lodash.js?timestamp=@timestamp@"></script>
-<script src="assets/js/lib/bootstrap.min.js?timestamp=@timestamp@""></script>
+<script src="assets/js/lib/bootstrap.min.js?timestamp=@timestamp@"></script>
 <script src="assets/js/lib/angular-file-upload-shim.min.js?timestamp=@timestamp@"></script>
 <script src="assets/bower_components/angular-ui-router/release/angular-ui-router.js"></script>
 <script src="assets/js/lib/angular-permission.js?timestamp=@timestamp@"></script>

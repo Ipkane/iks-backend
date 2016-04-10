@@ -1,8 +1,8 @@
 'use strict';
 angular.module('app.cms')//
-    .controller('AppObjListController', AppObjListController)
+    .controller('AppGridController', AppGridController)
 ;//
-function AppObjListController($scope, $log, $uibModal, $timeout, $rootScope, CoreService, GridHelper, ModalHelper, _) {
+function AppGridController($scope, $log, $uibModal, $timeout, $rootScope, CoreService, GridHelper, ModalHelper, _) {
   var vm = this;
   angular.extend($scope, {
     filter: {
@@ -19,6 +19,12 @@ function AppObjListController($scope, $log, $uibModal, $timeout, $rootScope, Cor
     parentItemId: null,
     totalItems: 0
   });
+  $scope.toolbarOptions ={
+    //items: [
+    //  {type:"button",text:"New", click:"openAddModal()"},
+    //  {type:"button",text:"Edit", click:"openEditModal()"}
+    //]
+  };
   function init() {
     if (angular.isString($scope.grid)) {
       $scope.grid = angular.fromJson($scope.grid);
@@ -76,10 +82,12 @@ function AppObjListController($scope, $log, $uibModal, $timeout, $rootScope, Cor
     $scope.selectedItem = item;
   };
   $scope.openEditModal = function () {
-    openEditModal(false);
+    //openEditModal(false);
+    $scope.editWindow.open();
   };
   $scope.openAddModal = function () {
-    openEditModal(true);
+    //openEditModal(true);
+    $scope.editWindow.open();
   };
   function openEditModal(isNew) {
     // open modal

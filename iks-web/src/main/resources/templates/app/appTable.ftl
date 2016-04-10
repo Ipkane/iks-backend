@@ -1,17 +1,15 @@
 <#macro appTable element>
 <div class="app-table" id="${element.id}" class="${element.cssClass}" style="${element.style}"
-     ng-controller="AppObjListController as vm">
+              ng-controller="AppGridController as vm">
   <div ng-init='grid = "${element.toJson()}"' style="display: none"></div>
-  <div class="panel-heading app-table-toolbar">
-    <div class="hbox">
-      <div class="btn btn-primary" ng-click="openAddModal()">New</div>
-      <div class="btn btn-primary" ng-click="openEditModal()" ng-disabled="!selectedItem">Edit</div>
-      <div class="btn btn-primary" ng-click="openDeleteModal()" ng-disabled="!selectedItem">Delete</div>
-      <#if element.filterPanel??>
-        <div class="btn btn-success" ng-click="toggleFilterPanel()">Filter</div>
-      </#if>
-      <div class="btn btn-success" ng-click="refresh()">Refresh</div>
-    </div>
+  <div kendo-toolbar k-options="toolbarOptions">
+    <kendo-button ng-click="openAddModal()">New</kendo-button>
+    <kendo-button ng-click="openEditModal()" ng-disabled="!selectedItem">Edit</kendo-button>
+    <kendo-button ng-click="openDeleteModal()" ng-disabled="!selectedItem">Delete</kendo-button>
+    <#if element.filterPanel??>
+      <kendo-button ng-click="toggleFilterPanel()">Filter</kendo-button>
+    </#if>
+    <kendo-button ng-click="refresh()">Refresh</kendo-button>
   </div>
   <#if element.filterPanel??>
     <div class="panel-body app-table-filter-panel" ng-show="showFilterPanel">
@@ -31,5 +29,8 @@
     <uib-pagination total-items="totalItems" ng-model="currentPage" ng-change="pageChanged()"
                     items-per-page="itemsPerPage"></uib-pagination>
   </div>
+  <div kendo-window="editWindow" k-title="'Edit Content'"
+       k-width="600" k-height="200" k-visible="false"
+       k-content="{ url: 'view/editView?appObj=${element.appObj}' }"></div>
 </div>
 </#macro>
