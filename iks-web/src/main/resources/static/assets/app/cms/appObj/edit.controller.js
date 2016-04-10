@@ -3,7 +3,7 @@ angular.module( 'app.cms' )//
   .controller( 'GridEditController', GridEditController )
 ;//
 var formScope;
-function GridEditController( $scope, $log, payload, $uibModalInstance, CoreService, ModalHelper ) {
+function GridEditController( $scope, $log, payload, $windowInstance, CoreService, ModalHelper ) {
   formScope = $scope;
   angular.extend( $scope, {
     itemId      : payload.itemId,
@@ -12,7 +12,7 @@ function GridEditController( $scope, $log, payload, $uibModalInstance, CoreServi
     selectedItem: {}
   } );
   function init() {
-    CoreService.getEditData( { appObj: payload.appObj, itemId: $scope.itemId }, function ( response ) {
+    CoreService.getEditData( { appObj: $scope.appObj, itemId: $scope.itemId }, function ( response ) {
       if ( response.isSuccess ) {
         $scope.selectedItem = response.success.item || {};
       } else {
@@ -33,7 +33,7 @@ function GridEditController( $scope, $log, payload, $uibModalInstance, CoreServi
       { appObj: payload.appObj, itemId: $scope.itemId, item: $scope.selectedItem, isNew: payload.isNew },
       function ( response ) {
         if ( response.isSuccess ) {
-          $uibModalInstance.close( $scope.selectedItem );
+          $windowInstance.close( $scope.selectedItem );
         } else {
           if ( response.failure.status == '400' ) {
             _.each( response.failure.error.errors, function ( error ) {
@@ -50,7 +50,7 @@ function GridEditController( $scope, $log, payload, $uibModalInstance, CoreServi
     ;
   };
   $scope.cancel     = function () {
-    $uibModalInstance.dismiss( 'Cancel' );
+    $windowInstance.dismiss( 'Cancel' );
   };
   $scope.addAlert   = function ( msg, params ) {
     $scope.alerts.push( {

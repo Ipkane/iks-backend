@@ -5,7 +5,7 @@ angular.module('app.cms')//
 /**
  * Modal with reference grid
  */
-function ReferenceListModalController($scope, $log, $uibModalInstance, $timeout, $rootScope, payload, CoreService, GridHelper, ModalHelper, _) {
+function ReferenceListModalController($scope, $log, $windowInstance, $timeout, $rootScope, payload, CoreService, GridHelper, ModalHelper, _) {
   var vm = this;
   angular.extend($scope, {
     parentGridId: payload.parentGridId,
@@ -18,10 +18,10 @@ function ReferenceListModalController($scope, $log, $uibModalInstance, $timeout,
   }
 
   $scope.ok = function () {
-    $uibModalInstance.close($scope.childGridScope.selectedItem);
+    $windowInstance.close($scope.childGridScope.selectedItem);
   };
   $scope.cancel = function () {
-    $uibModalInstance.dismiss('Cancel');
+    $windowInstance.dismiss('Cancel');
   };
   $timeout(init, 0);
 }

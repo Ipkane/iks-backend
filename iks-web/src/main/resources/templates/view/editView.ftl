@@ -1,10 +1,7 @@
 <#include "../app/all-app.ftl"/>
-<div class="modal-header">
-  <h2 class="modal-title">Edit ${appObj.label}</h2>
-</div>
-<div class="modal-body">
+<div>
   <form id="${appObj.name}Form" role="form" novalidate="novalidate" class="form">
-    <#assign modelName="selectedItem"/>
+  <#assign modelName="selectedItem"/>
   <@container element=editView/>
     <#--<th:block th:each="element : ${editView.elements}">-->
       <#--<th:block th:include="${element.templatePath} :: ${element.templateName}" th:with="modelName='selectedItem'">-->
@@ -19,8 +16,7 @@
       </uib-alert>
     </div>
   </div>
-</div>
-<div class="modal-footer">
+
   <div class="row">
     <div class="col-xs-3 col-xs-offset-3">
       <button type="submit" class="btn btn-danger btn-block" ng-click="save(${appObj.name}Form.$valid)">Save</button>

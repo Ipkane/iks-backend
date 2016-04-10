@@ -2,7 +2,7 @@
 angular.module('app.cms')//
     .controller('AppGridController', AppGridController)
 ;//
-function AppGridController($scope, $log, $uibModal, $timeout, $rootScope, CoreService, GridHelper, ModalHelper, _) {
+function AppGridController($scope, $log, $kWindow, $timeout, $rootScope, CoreService, GridHelper, ModalHelper, _) {
   var vm = this;
   angular.extend($scope, {
     filter: {
@@ -82,22 +82,25 @@ function AppGridController($scope, $log, $uibModal, $timeout, $rootScope, CoreSe
     $scope.selectedItem = item;
   };
   $scope.openEditModal = function () {
-    //openEditModal(false);
-    $scope.editWindow.open();
+    openEditModal(false);
   };
   $scope.openAddModal = function () {
-    //openEditModal(true);
-    $scope.editWindow.open();
+    openEditModal(true);
   };
   function openEditModal(isNew) {
     // open modal
-    $uibModal.open(
+    $kWindow.open(
         {
-          animation: true,
+          options: {
+            modal: true,
+            title: 'Edit Content',
+            resizable: true,
+            height: 300,
+            width: 600,
+            visible: false
+          },
           templateUrl: 'view/editView?appObj=' + $scope.grid.appObj,
-          controller: 'GridEditController',
-          controllerAs: 'vm',
-          backdrop: 'static',
+          controller: 'GridEditController as vm',
           resolve: {
             payload: {appObj: $scope.grid.appObj, itemId: isNew ? null : $scope.selectedItem.id, isNew: isNew}
           }
@@ -110,13 +113,18 @@ function AppGridController($scope, $log, $uibModal, $timeout, $rootScope, CoreSe
 
   $scope.openOneToManyModal = function () {
     // open modal
-    $uibModal.open(
+    $kWindow.open(
         {
-          animation: true,
+          options: {
+            modal: true,
+            title: 'Select item',
+            resizable: true,
+            height: 300,
+            width: 600,
+            visible: false
+          },
           templateUrl: 'view/referenceView?gridId=' + $scope.referenceGridId,
           controller: 'ReferenceListModalController',
-          controllerAs: 'vm',
-          backdrop: 'static',
           resolve: {
             payload: {parentGridId: $scope.grid.id, parentItemId: $scope.parentItemId}
           }

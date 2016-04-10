@@ -3,7 +3,7 @@
 <head>
   <title>CMS</title>
 
-  <#--<link href="assets/css/bootstrap.min.css" rel="stylesheet"/>-->
+  <link href="assets/css/bootstrap.min.css" rel="stylesheet"/>
   <#--<link href="assets/css/bootstrap-theme.min.css" rel="stylesheet"/>-->
 <#--<link rel="stylesheet" href="http://kendo.cdn.telerik.com/2016.1.406/styles/kendo.common.min.css"/>-->
 <#--<link rel="stylesheet" href="http://kendo.cdn.telerik.com/2016.1.406/styles/kendo.rtl.min.css"/>-->
@@ -43,30 +43,31 @@
 </div>
 <!-- libs -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<#--<script src="assets/js/lib/jquery-ui.min.js?timestamp=@timestamp@"></script>-->
 <script src="assets/bower_components/angular/angular.js?timestamp=@timestamp@"></script>
 <#--<script src="http://kendo.cdn.telerik.com/2016.1.406/js/kendo.all.min.js"></script>-->
 <script src="assets/js/lib/kendo/kendo.all.min.js"></script>
+<script src="assets/bower_components/angular-kendo-window/angular-kendo-window.js"></script>
 <script src="assets/js/lib/angular-route.js?timestamp=@timestamp@"></script>
 <script src="assets/js/lib/lodash.js?timestamp=@timestamp@"></script>
-<script src="assets/js/lib/bootstrap.min.js?timestamp=@timestamp@"></script>
-<script src="assets/js/lib/angular-file-upload-shim.min.js?timestamp=@timestamp@"></script>
+<#--<script src="assets/js/lib/bootstrap.min.js?timestamp=@timestamp@"></script>-->
+<#--<script src="assets/js/lib/angular-file-upload-shim.min.js?timestamp=@timestamp@"></script>-->
 <script src="assets/bower_components/angular-ui-router/release/angular-ui-router.js"></script>
-<script src="assets/js/lib/angular-permission.js?timestamp=@timestamp@"></script>
-<script src="assets/js/lib/angular-animate.min.js?timestamp=@timestamp@"></script>
-<script src="assets/js/lib/angular-cookies.min.js?timestamp=@timestamp@"></script>
+<#--<script src="assets/js/lib/angular-permission.js?timestamp=@timestamp@"></script>-->
+<#--<script src="assets/js/lib/angular-animate.min.js?timestamp=@timestamp@"></script>-->
+<#--<script src="assets/js/lib/angular-cookies.min.js?timestamp=@timestamp@"></script>-->
 <script src="assets/js/lib/angular-resource.min.js?timestamp=@timestamp@"></script>
 <script src="assets/js/lib/angular-messages.min.js?timestamp=@timestamp@"></script>
 <script src="assets/js/lib/angular-translate.min.js?timestamp=@timestamp@"></script>
 <script src="assets/js/lib/angular-translate-loader-url.min.js?timestamp=@timestamp@"></script>
-<script src="assets/js/lib/ui-bootstrap-tpls.min.js?timestamp=@timestamp@"></script>
+<#--<script src="assets/js/lib/ui-bootstrap-tpls.min.js?timestamp=@timestamp@"></script>-->
 <!--<script src="assets/js/lib/ui-bootstrap.min.js?timestamp=@timestamp@"></script>-->
 <script src="assets/js/lib/angular-file-upload.min.js?timestamp=@timestamp@"></script>
 <script src="assets/js/lib/angular-sanitize.min.js?timestamp=@timestamp@"></script>
 <script src="assets/js/lib/angular-confirm.js?timestamp=@timestamp@"></script>
 <script src="assets/js/lib/angular-slider.js?timestamp=@timestamp@"></script>
-<script src="assets/js/lib/bootstrap-slider.min.js?timestamp=@timestamp@"></script>
-<script src="assets/js/lib/spin.min.js?timestamp=@timestamp@"></script>
-<script src="assets/js/lib/jquery-ui.min.js?timestamp=@timestamp@"></script>
+<#--<script src="assets/js/lib/bootstrap-slider.min.js?timestamp=@timestamp@"></script>-->
+<#--<script src="assets/js/lib/spin.min.js?timestamp=@timestamp@"></script>-->
 <script src="assets/js/lib/angular-ui-numeric.js?timestamp=@timestamp@"></script>
 <script src="assets/app/app.module.js"></script>
 <script src="assets/app/app.js"></script>

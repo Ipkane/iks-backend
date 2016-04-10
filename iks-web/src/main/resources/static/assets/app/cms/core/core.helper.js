@@ -41,19 +41,20 @@
     }
   }
 
-  function ModalHelper( $uibModal ) {
+  function ModalHelper( $kWindow ) {
     return {
       openConfirmModal: openConfirmModal,
       showErrorModal  : showErrorModal
     };
     function openConfirmModal( params ) {
-      $uibModal.open(
+      $kWindow.open(
         {
-          animation   : true,
+          options: {
+            modal: true,
+            title: params.title
+          },
           templateUrl : 'assets/app/cms/common/templates/confirm-modal.html',
-          controller  : 'ConfirmModalController',
-          controllerAs: 'vm',
-          backdrop    : 'static',
+          controller  : 'ConfirmModalController as vm',
           resolve     : {
             title    : function () {
               return params.title
@@ -78,13 +79,18 @@
     }
 
     function showErrorModal( response ) {
-      $uibModal.open(
+      $kWindow.open(
         {
-          animation   : true,
+          options: {
+            modal: true,
+            title: 'Error',
+            resizable: true,
+            height: 300,
+            width: 300,
+            visible: false
+          },
           templateUrl : 'assets/app/cms/common/templates/error-modal.html',
-          controller  : 'ErrorModalController',
-          controllerAs: 'vm',
-          backdrop    : 'static',
+          controller  : 'ErrorModalController as vm',
           resolve     : {
             response: response
           }

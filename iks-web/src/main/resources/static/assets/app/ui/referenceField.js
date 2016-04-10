@@ -19,15 +19,13 @@ function ReferenceField() {
       scope.fieldName = attrs['fieldName'];
       scope.displayField = attrs['displayField'];
     },
-    controller: function ($scope, $log, $uibModal) {
+    controller: function ($scope, $log, $kWindow) {
       $scope.openReferenceGrid = function () {
-        $uibModal.open(
+        $kWindow.open(
             {
-              animation: true,
               templateUrl: 'view/referenceView?gridId=' + $scope.referenceGrid,
               controller: 'ReferenceListModalController',
               controllerAs: 'vm',
-              backdrop: 'static',
               resolve: {
                 payload: {}
               }

@@ -1,15 +1,10 @@
-<div class="modal-header">
-  <h2 class="modal-title">Error</h2>
-</div>
 <div class="modal-body modal-error">
   <div class="status">Status: {{status}} {{reason}}</div>
   <div class="exception">{{ exception }}</div>
   <div class="message">Caused by: {{message }}</div>
 </div>
-<div class="modal-footer">
-  <div class="row">
-    <div class="col-xs-4 col-xs-offset-4">
-      <button class="btn btn-danger btn-block" ng-click="ok()">Ok</button>
-    </div>
+<div class="row">
+  <div class="col-xs-4 col-xs-offset-4">
+    <button class="btn btn-danger btn-block" ng-click="ok()">Ok</button>
   </div>
 </div>

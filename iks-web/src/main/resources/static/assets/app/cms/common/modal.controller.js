@@ -3,7 +3,7 @@ angular.module( 'app.cms' )//
   .controller( 'ConfirmModalController', ConfirmModalController )
   .controller( 'ErrorModalController', ErrorModalController )
 ;//
-function ConfirmModalController( $scope, $log, title, message, onConfirm, $uibModalInstance, ModalHelper ) {
+function ConfirmModalController( $scope, $log, title, message, onConfirm, $windowInstance, ModalHelper ) {
   angular.extend($scope, {
     title: title,
     message: message
@@ -12,7 +12,7 @@ function ConfirmModalController( $scope, $log, title, message, onConfirm, $uibMo
     $scope.alerts = [];
     onConfirm().then(function(response) {
       if ( response.isSuccess ) {
-        $uibModalInstance.close( response );
+        $windowInstance.close( response );
       } else {
         ModalHelper.showErrorModal(response);
       }
@@ -21,10 +21,10 @@ function ConfirmModalController( $scope, $log, title, message, onConfirm, $uibMo
     });
   };
   $scope.cancel = function () {
-    $uibModalInstance.dismiss( 'Cancel' );
+    $windowInstance.dismiss( 'Cancel' );
   };
 }
-function ErrorModalController( $scope, $log, response, $uibModalInstance ) {
+function ErrorModalController( $scope, $log, response, $windowInstance ) {
   angular.extend($scope, {
     message: null
   });
@@ -44,7 +44,7 @@ function ErrorModalController( $scope, $log, response, $uibModalInstance ) {
     }
   }
   $scope.ok = function () {
-    $uibModalInstance.close(  );
+    $windowInstance.close(  );
   };
   init();
 }

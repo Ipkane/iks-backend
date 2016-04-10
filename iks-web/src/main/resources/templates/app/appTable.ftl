@@ -29,8 +29,5 @@
     <uib-pagination total-items="totalItems" ng-model="currentPage" ng-change="pageChanged()"
                     items-per-page="itemsPerPage"></uib-pagination>
   </div>
-  <div kendo-window="editWindow" k-title="'Edit Content'"
-       k-width="600" k-height="200" k-visible="false"
-       k-content="{ url: 'view/editView?appObj=${element.appObj}' }"></div>
 </div>
 </#macro>

@@ -33,6 +33,7 @@
     "angular-bootstrap": "angular-ui-bootstrap-bower#^1.2.4",
     "angular-ui-slider": "^0.2.1",
     "angular-i18n": "^1.5.1",
-    "angular-confirm-modal": "^1.2.3"
+    "angular-confirm-modal": "^1.2.3",
+    "angular-kendo-window": "^2.2.2"
   }
 }
