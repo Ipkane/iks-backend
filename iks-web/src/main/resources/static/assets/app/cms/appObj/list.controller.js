@@ -147,7 +147,7 @@ function AppGridController($scope, $log, $kWindow, $timeout, $q, $rootScope, Cor
           templateUrl: 'view/editView?appObj=' + $scope.grid.appObj,
           controller: 'GridEditController as vm',
           resolve: {
-            payload: {appObj: $scope.grid.appObj, itemId: isNew ? null : $scope.selectedItem.id, isNew: isNew}
+            payload: {appObj: $scope.grid.appObj, itemId: isNew ? -1 : $scope.selectedItem.id, isNew: isNew}
           }
         }
     ).result.then(function (updatedItem) {

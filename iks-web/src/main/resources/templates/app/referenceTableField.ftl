@@ -5,7 +5,7 @@
        style="display: none"></div>
   <div kendo-toolbar>
     <kendo-button k-icon="'plus'" ng-click="openOneToManyModal()">Add</kendo-button>
-    <kendo-button k-icon="'trash'" ng-click="openDeleteOneToManyModal()" ng-disabled="!selectedItem">Delete</kendo-button>
+    <kendo-button k-icon="'cancel'" ng-click="openDeleteOneToManyModal()" ng-disabled="!selectedItem">Delete</kendo-button>
     <#if element.filterPanel??>
       <kendo-button k-icon="'funnel'" ng-click="toggleFilterPanel()">Filter</kendo-button>
     </#if>

@@ -10,8 +10,9 @@
 <#--<link rel="stylesheet" href="http://kendo.cdn.telerik.com/2016.1.406/styles/kendo.default.min.css"/>-->
   <link href="assets/bower_components/foundation-apps/dist/css/foundation-apps.min.css" rel="stylesheet"/>
   <link href="assets/css/kendo/kendo.common.min.css" rel="stylesheet"/>
-  <link href="assets/css/kendo/kendo.silver.min.css" rel="stylesheet"/>
+  <link href="assets/css/kendo/kendo.default.min.css" rel="stylesheet"/>
   <link href="assets/css/kendo/kendo.rtl.min.css" rel="stylesheet"/>
+  <link href="assets/css/icon-font.css" rel="stylesheet"/>
   <link href="assets/css/gul.css" rel="stylesheet"/>
   <link href="assets/css/main.css" rel="stylesheet"/>
   <link href="assets/css/dev.css" rel="stylesheet"/>
@@ -43,23 +44,30 @@
 <#--</div>-->
 <#--</div>-->
 <div class="grid-frame vertical">
-  <div class="grid-content shrink">
+  <div class="grid-block shrink">
     <div class="dev-panel" ng-controller="DevPanelController">
       <div ng-include="'assets/app/dev/dev-panel.html'"></div>
     </div>
   </div>
-  <div class="grid-block">
-    <div class="grid-block small-4 medium-3 large-2 ">
-      <ul kendo-tree-view>
-      <#list appObjList as appObj>
-        <li>
-          <a ui-sref="appObjListView({appObj:'${appObj.name}'})" ui-sref-active="k-state-selected">${appObj.label}</a>
-        </li>
-      </#list>
-      </ul>
+  <div kendo-splitter k-orientation="'horizontal'"
+       k-panes="[
+{ collapsible: true, size: 200 },
+{ collapsible: false }]"
+       style="height: 100% !important">
+    <div class="grid-block" style="border-radius: 0">
+      <div class="grid-block k-content">
+        <ul kendo-tree-view>
+        <#list appObjList as appObj>
+          <li>
+            <a ui-sref="appObjListView({appObj:'${appObj.name}'})"
+               ui-sref-active="k-state-selected">${appObj.label}</a>
+          </li>
+        </#list>
+        </ul>
+      </div>
     </div>
     <div class="grid-block">
-      <div class="grid-block vertical" ui-view=""></div>
+      <div class="grid-block vertical" ui-view="" style="border-radius: 0"></div>
     </div>
   </div>
 </div>

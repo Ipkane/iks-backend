@@ -20,8 +20,8 @@
   </div>
   <div class="grid-block shrink">
     <div class="k-edit-buttons" style="">
-      <kendo-button type="submit" class="" ng-click="save(${appObj.name}Form.$valid)">Save</kendo-button>
-      <kendo-button class="" ng-click="cancel()">Cancel</kendo-button>
+      <kendo-button k-icon="'tick'" type="submit" class="" ng-click="save(${appObj.name}Form.$valid)">Save</kendo-button>
+      <kendo-button k-icon="'cancel'" class="" ng-click="cancel()">Cancel</kendo-button>
     </div>
   </div>
 </div>

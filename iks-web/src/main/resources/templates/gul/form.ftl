@@ -7,10 +7,10 @@
 </#macro>
 <#--ng-model="${element.fieldName} ? |${modelName}.${element.fieldName}| : ''"-->
 <#macro checkbox element>
-<label for="${(element.fieldName)!}" class="control-label k-label k-checkbox-label">${element.label}</label>
 <input type="checkbox" id="${(element.id)!}" name="${(element.fieldName)!}" ng-readonly="${element.readonly?c}"
-       class="checkbox k-checkbox ${(element.cssClass)!}" style="${(element.style)!}"
+       class="k-checkbox ${(element.cssClass)!}" style="${(element.style)!}"
        <#if element.fieldName??>ng-model="${modelName}.${element.fieldName}"</#if> checked="${element.checked?c}"/>
+<label for="${(element.fieldName)!}" class="k-checkbox-label">${element.label}</label>
 </#macro>
 <#macro select element>
 <label for="${(element.fieldName)!}" class="control-label">${element.label}</label>

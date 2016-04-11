@@ -21,10 +21,6 @@ ol, ul {
   list-style: none;
 }
 
-.k-button {
-  margin: 0 0 1px 1px;
-}
-
 input {
   margin: 0 0 1px 1px !important;
 }
@@ -104,6 +100,28 @@ input.k-textbox {
   padding: 2px .3em;
   border: 1px solid #dbdbde;
   border-radius: 4px;
+}
+
+.input-group .k-textbox {
+  border-right: none;
+  border-radius: 4px 0 0 4px;
+}
+
+.input-group .k-button {
+  border-right-width: 0;
+  border-radius: 0;
+}
+.input-group .k-button:last-child {
+  border-radius: 0 4px 4px 0;
+  border-right-width: 1px;
+}
+
+.k-dropdown .k-select {
+  padding-top: 4px;
+}
+
+.k-toolbar > .k-button {
+  border: none;
 }
 
 

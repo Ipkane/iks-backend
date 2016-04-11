@@ -5,8 +5,8 @@
   </div>
   <div class="grid-block shrink">
     <div class="k-edit-buttons">
-      <kendo-button ng-click="ok()" k-ng-disabled="!childGridScope.selectedItem">Select</kendo-button>
-      <kendo-button ng-click="cancel()">Cancel</kendo-button>
+      <kendo-button k-icon="'tick'" ng-click="ok()" k-ng-disabled="!childGridScope.selectedItem">Select</kendo-button>
+      <kendo-button k-icon="'cancel'" ng-click="cancel()">Cancel</kendo-button>
     </div>
   </div>
 </div>
