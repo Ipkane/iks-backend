@@ -23,6 +23,14 @@ function ReferenceField() {
       $scope.openReferenceGrid = function () {
         $kWindow.open(
             {
+              options: {
+                modal: true,
+                title: 'Select item',
+                resizable: true,
+                height: 300,
+                width: 600,
+                visible: false
+              },
               templateUrl: 'view/referenceView?gridId=' + $scope.referenceGrid,
               controller: 'ReferenceListModalController',
               controllerAs: 'vm',

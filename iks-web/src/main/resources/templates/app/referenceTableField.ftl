@@ -1,5 +1,5 @@
 <#macro referenceTableField element>
-<div class="reference-table" id="${(element.id)!}" class="${(element.cssClass)!}" style="${(element.style)!}"
+<div class="reference-table grid-block vertical" id="${(element.id)!}" class="${(element.cssClass)!}" style="${(element.style)!}"
      ng-controller="AppGridController as vm">
   <div ng-init='grid = "${element.toJson()}"; referenceGridId="${(element.referenceGrid)!}"'
        style="display: none"></div>
@@ -16,18 +16,8 @@
       <@filterPanel element=element.filterPanel/>
     </div>
   </#if>
-  <div class="hbox">
-    <div class="spacer" style="flex:1"/>
-    <uib-pagination total-items="totalItems" ng-model="currentPage" ng-change="pageChanged()"
-                    items-per-page="itemsPerPage"></uib-pagination>
-  </div>
-  <div>
+  <div class="grid-block">
     <@table element=element/>
-  </div>
-  <div class="hbox">
-    <div class="spacer" style="flex:1"/>
-    <uib-pagination total-items="totalItems" ng-model="currentPage" ng-change="pageChanged()"
-                    items-per-page="itemsPerPage"></uib-pagination>
   </div>
 </div>
 </#macro>

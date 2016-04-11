@@ -6,14 +6,14 @@
     </#list>
   </ul>
   <#list element.tabs as tabElement>
-    <div>
+    <div class="grid-block">
       <@tab element=tabElement/>
     </div>
   </#list>
 </div>
 </#macro>
 <#macro tab element>
-<div class="vbox" id="${(element.id)!}" style="${(element.style)!}" class="${(element.cssClass)!}">
+<div class="grid-block" id="${(element.id)!}">
   <@container element=element/>
 </div>
 </#macro>

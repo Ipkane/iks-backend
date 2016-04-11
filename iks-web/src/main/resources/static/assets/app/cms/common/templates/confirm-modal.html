@@ -1,9 +1,5 @@
 <div class="message">{{ message }}</div>
-<div class="row">
-  <div class="col-xs-3 col-xs-offset-3">
-    <button type="submit" class="btn btn-danger btn-block" ng-click="confirm()">Confirm</button>
-  </div>
-  <div class="col-xs-3">
-    <button class="btn btn-success btn-block" ng-click="cancel()">Cancel</button>
-  </div>
+<div class="k-edit-buttons">
+    <kendo-button type="submit" ng-click="confirm()">Confirm</kendo-button>
+    <kendo-button ng-click="cancel()">Cancel</kendo-button>
 </div>

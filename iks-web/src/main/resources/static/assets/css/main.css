@@ -21,8 +21,12 @@ ol, ul {
   list-style: none;
 }
 
+.k-button {
+  margin: 0 0 1px 1px;
+}
+
 input {
-  margin: 0 !important;
+  margin: 0 0 1px 1px !important;
 }
 
 .grid-table th, .grid-table td {
@@ -58,11 +62,13 @@ input {
 .k-tabstrip-wrapper {
   flex: 1;
   display: flex;
+  margin-left:1px;
 }
 
 .k-tabstrip-wrapper > .k-tabstrip {
   display: flex;
   flex-direction: column;
+  width: 100%;
 }
 
 .k-tabstrip-wrapper > .k-tabstrip > .k-content {
@@ -71,12 +77,23 @@ input {
   overflow: auto;
 }
 
+.k-tabstrip-wrapper > .k-tabstrip > .k-content.k-state-active {
+  display: flex !important;
+}
+
 .k-grid {
   display: flex;
   flex-direction: column;
+  width: 100%;
 }
 .k-grid-content {
   flex: 1;
+  height: auto;
+}
+
+.k-edit-buttons {
+  padding-top: 10px;
+  width: 100%;
 }
 
 
