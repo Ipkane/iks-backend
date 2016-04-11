@@ -1,5 +1,11 @@
-<div class="message">{{ message }}</div>
-<div class="k-edit-buttons">
-    <kendo-button type="submit" ng-click="confirm()">Confirm</kendo-button>
-    <kendo-button ng-click="cancel()">Cancel</kendo-button>
+<div class="grid-block vertical" style="height: 100%">
+  <div class="grid-block vertical">
+    <div class="message">{{ message }}</div>
+  </div>
+  <div class="grid-block shrink">
+    <div class="k-edit-buttons">
+      <kendo-button type="submit" ng-click="confirm()">Confirm</kendo-button>
+      <kendo-button ng-click="cancel()">Cancel</kendo-button>
+    </div>
+  </div>
 </div>

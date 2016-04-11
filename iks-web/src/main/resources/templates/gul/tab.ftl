@@ -13,7 +13,7 @@
 </div>
 </#macro>
 <#macro tab element>
-<div class="grid-block" id="${(element.id)!}">
+<div class="grid-block" id="${(element.id)!}" style="padding: 1px;">
   <@container element=element/>
 </div>
 </#macro>

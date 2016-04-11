@@ -8,10 +8,10 @@
 <#--<link rel="stylesheet" href="http://kendo.cdn.telerik.com/2016.1.406/styles/kendo.common.min.css"/>-->
 <#--<link rel="stylesheet" href="http://kendo.cdn.telerik.com/2016.1.406/styles/kendo.rtl.min.css"/>-->
 <#--<link rel="stylesheet" href="http://kendo.cdn.telerik.com/2016.1.406/styles/kendo.default.min.css"/>-->
+  <link href="assets/bower_components/foundation-apps/dist/css/foundation-apps.min.css" rel="stylesheet"/>
   <link href="assets/css/kendo/kendo.common.min.css" rel="stylesheet"/>
   <link href="assets/css/kendo/kendo.silver.min.css" rel="stylesheet"/>
   <link href="assets/css/kendo/kendo.rtl.min.css" rel="stylesheet"/>
-  <link href="assets/bower_components/foundation-apps/dist/css/foundation-apps.min.css" rel="stylesheet"/>
   <link href="assets/css/gul.css" rel="stylesheet"/>
   <link href="assets/css/main.css" rel="stylesheet"/>
   <link href="assets/css/dev.css" rel="stylesheet"/>

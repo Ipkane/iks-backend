@@ -100,4 +100,10 @@ input {
   padding-left: 1px;
 }
 
+input.k-textbox {
+  padding: 2px .3em;
+  border: 1px solid #dbdbde;
+  border-radius: 4px;
+}
+
 
