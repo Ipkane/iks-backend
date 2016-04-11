@@ -13,6 +13,7 @@
     'app.cms',
     'app.dev',
     'kendo.window',
-    'kendo.directives'
+    'kendo.directives',
+    'foundation'
   ]);
 })();

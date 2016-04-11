@@ -4,7 +4,7 @@
   </#list>
 </#macro>
 <#macro box element>
-<div class="box" style="${element.style}" class="${element.cssClass}">
+<div class="grid-block" style="${element.style}" class="${element.cssClass}">
   <@container element=element/>
 </div>
 </#macro>
@@ -15,7 +15,7 @@
   <@box element=element/>
 </#macro>
 <#macro fieldbox element>
-<div class="box fieldbox ${element.cssClass}" style="${element.style}">
+<div class="fieldbox ${element.cssClass}" style="${element.style}">
   <#list element.elements as childElement>
     <div class="hbox form-group">
       <@gulElement element=childElement/>

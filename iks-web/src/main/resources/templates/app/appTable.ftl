@@ -1,5 +1,5 @@
 <#macro appTable element>
-<div class="app-table" id="${element.id}" class="${element.cssClass}" style="${element.style}"
+<div class="app-table grid-block vertical" id="${element.id}" class="${element.cssClass}" style="${element.style}"
               ng-controller="AppGridController as vm">
   <div ng-init='grid = "${element.toJson()}"' style="display: none"></div>
   <div kendo-toolbar k-options="toolbarOptions">
@@ -21,7 +21,7 @@
     <#--<uib-pagination total-items="totalItems" ng-model="currentPage" ng-change="pageChanged()"-->
                     <#--items-per-page="itemsPerPage"></uib-pagination>-->
   <#--</div>-->
-  <div class="table">
+  <div class="grid-block">
     <@table element=element/>
   </div>
   <#--<div class="hbox">-->

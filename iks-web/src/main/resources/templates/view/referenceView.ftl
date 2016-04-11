@@ -1,9 +1,12 @@
 <#include "../app/all-app.ftl"/>
-<div ng-init='childGridId = "${grid.id!}"'>
-  <@appTable element=grid/>
-  <#--<th:block th:include="app/appTable :: appTable" th:with="element=${grid}"/>-->
-</div>
-<div class="k-edit-buttons">
-     <kendo-button ng-click="ok()">Select</kendo-button>
+<div class="grid-block vertical" style="height: 100%">
+  <div class="grid-block" ng-init='childGridId = "${grid.id!}"'>
+    <@appTable element=grid/>
+  </div>
+  <div class="grid-block shrink">
+    <div class="k-edit-buttons">
+      <kendo-button ng-click="ok()">Select</kendo-button>
       <kendo-button ng-click="cancel()">Cancel</kendo-button>
+    </div>
+  </div>
 </div>

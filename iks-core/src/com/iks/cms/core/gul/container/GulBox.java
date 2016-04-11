@@ -55,7 +55,7 @@ public class GulBox extends GulContainer {
   @Override
   public List< String > getCssClasses() {
     List< String > cssClasses = super.getCssClasses();
-    cssClasses.add( Objects.equals( orient, "horizontal" ) ? "hbox" : "vbox" );
+    cssClasses.add( Objects.equals( orient, "horizontal" ) ? "" : "vertical" );
     cssClasses.add( "pack-" + pack.getValue() );
     cssClasses.add( "align-" + align.getValue() );
     return cssClasses;

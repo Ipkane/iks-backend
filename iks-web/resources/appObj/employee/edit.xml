@@ -8,7 +8,7 @@
     <referenceField fieldName="user" displayField="username" referenceGrid="user_grid"/>
     <referenceField fieldName="department" displayField="name" referenceGrid="department_main_grid"/>
   </fieldbox>
-  <tabbox>
+  <tabbox flex="1">
     <tab label="Tab 1">
       <hbox>
         <textbox id="docpath"/>
@@ -17,7 +17,7 @@
     </tab>
     <tab label="Tab 2">
       <label control="doctitle" value="Document Title:"/>
-      <textbox id="doctitle" flex="1"/>
+      <textbox id="doctitle"/>
     </tab>
     <tab label="Grid">
       <gridLayout>
@@ -28,11 +28,11 @@
         <rows>
           <row>
             <label control="doctitle" value="Document Title:"/>
-            <textbox id="doctitle" flex="1"/>
+            <textbox id="doctitle"/>
           </row>
           <row>
             <label control="docpath" value="Path:"/>
-            <hbox flex="1">
+            <hbox>
               <textbox id="docpath"/>
               <button label="Browse..."/>
             </hbox>

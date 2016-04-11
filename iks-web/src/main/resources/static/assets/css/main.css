@@ -10,7 +10,7 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
 
 html {
   /*line-height: 1;*/
-  font:75% 'Lucida Sans Unicode','Lucida Grande',arial,helvetica,sans-serif;
+  font: 75% 'Lucida Sans Unicode', 'Lucida Grande', arial, helvetica, sans-serif;
 }
 
 table {
@@ -21,45 +21,9 @@ ol, ul {
   list-style: none;
 }
 
-/*table {*/
-  /*border-collapse: collapse;*/
-  /*border-spacing: 0;*/
-/*}*/
-
-/*caption, th, td {*/
-  /*text-align: left;*/
-  /*font-weight: normal;*/
-  /*vertical-align: middle;*/
-/*}*/
-
-/*q, blockquote {*/
-  /*quotes: none;*/
-/*}*/
-
-/*q:before, q:after, blockquote:before, blockquote:after {*/
-  /*content: "";*/
-  /*content: none;*/
-/*}*/
-
-/*a img {*/
-  /*border: none;*/
-/*}*/
-
-/*article, aside, details, figcaption, figure, footer, header, menu, nav, section, summary {*/
-  /*display: block;*/
-/*}*/
-
-/*.nav {*/
-  /*list-style: none;*/
-/*}*/
-
-/*input.form-control.ng-invalid {*/
-  /*border-color: red;*/
-/*}*/
-
-/*.grid-table {*/
-  /*table-layout: fixed;*/
-/*}*/
+input {
+  margin: 0 !important;
+}
 
 .grid-table th, .grid-table td {
   cursor: default;
@@ -82,19 +46,7 @@ ol, ul {
 .hbox > label {
   flex-shrink: 0;
 }
-/*.form-group .input-group {*/
-  /*width: 100%;*/
-/*}*/
 
-/*.input-group-addon {*/
-  /*height: 34px;*/
-  /*min-width: 34px;*/
-/*}*/
-
-/*.form-control[readonly] {*/
-  /*background: #fff;*/
-  /*opacity: 0.8;*/
-/*}*/
 .modal-error .message {
   word-break: break-all;
 }
@@ -103,10 +55,28 @@ ol, ul {
   height: 2.13em;
 }
 
-/*.k-grid-header .k-header {*/
-  /*font-weight: bold;*/
-/*}*/
-/*.k-toolbar .k-overflow-anchor {*/
-  /*float: none;*/
-/*}*/
+.k-tabstrip-wrapper {
+  flex: 1;
+  display: flex;
+}
+
+.k-tabstrip-wrapper > .k-tabstrip {
+  display: flex;
+  flex-direction: column;
+}
+
+.k-tabstrip-wrapper > .k-tabstrip > .k-content {
+  flex: 1;
+  height: 100%;
+  overflow: auto;
+}
+
+.k-grid {
+  display: flex;
+  flex-direction: column;
+}
+.k-grid-content {
+  flex: 1;
+}
+
 

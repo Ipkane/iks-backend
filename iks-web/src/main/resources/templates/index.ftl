@@ -3,41 +3,63 @@
 <head>
   <title>CMS</title>
 
-  <#--<link href="assets/css/bootstrap.min.css" rel="stylesheet"/>-->
-  <#--<link href="assets/css/bootstrap-theme.min.css" rel="stylesheet"/>-->
+<#--<link href="assets/css/bootstrap.min.css" rel="stylesheet"/>-->
+<#--<link href="assets/css/bootstrap-theme.min.css" rel="stylesheet"/>-->
 <#--<link rel="stylesheet" href="http://kendo.cdn.telerik.com/2016.1.406/styles/kendo.common.min.css"/>-->
 <#--<link rel="stylesheet" href="http://kendo.cdn.telerik.com/2016.1.406/styles/kendo.rtl.min.css"/>-->
 <#--<link rel="stylesheet" href="http://kendo.cdn.telerik.com/2016.1.406/styles/kendo.default.min.css"/>-->
   <link href="assets/css/kendo/kendo.common.min.css" rel="stylesheet"/>
   <link href="assets/css/kendo/kendo.silver.min.css" rel="stylesheet"/>
   <link href="assets/css/kendo/kendo.rtl.min.css" rel="stylesheet"/>
+  <link href="assets/bower_components/foundation-apps/dist/css/foundation-apps.min.css" rel="stylesheet"/>
   <link href="assets/css/gul.css" rel="stylesheet"/>
   <link href="assets/css/main.css" rel="stylesheet"/>
   <link href="assets/css/dev.css" rel="stylesheet"/>
 </head>
 <body ng-app="app">
 <#--<div class="dev-panel" ng-controller="DevPanelController">-->
-  <#--<div ng-include="'assets/app/dev/dev-panel.html'"></div>-->
+<#--<div ng-include="'assets/app/dev/dev-panel.html'"></div>-->
 <#--</div>-->
-<div class="demo-section k-content" style="height: 100%">
-  <div kendo-splitter k-orientation="'horizontal'" k-rebind="'horizontal'" k-panes="[
-       { collapsible: true, size: 200 },
-  { collapsible: false }
-  ]" style="height: 100%">
-    <div style="width: 200px">
-      <nav class="sidebar-nav">
-        <ul kendo-tree-view>
-        <#list appObjList as appObj>
-          <li>
-            <a ui-sref="appObjListView({appObj:'${appObj.name}'})" ui-sref-active="k-state-selected">${appObj.label}</a>
-          </li>
-        </#list>
-        </ul>
-      </nav>
+<#--<div class="demo-section k-content" style="height: 100%">-->
+<#--<div kendo-splitter k-orientation="'horizontal'" k-rebind="'horizontal'" k-panes="[-->
+<#--{ collapsible: true, size: 200 },-->
+<#--{ collapsible: false }-->
+<#--]" style="height: 100%">-->
+<#--<div style="width: 200px">-->
+<#--<nav class="sidebar-nav">-->
+<#--<ul kendo-tree-view>-->
+<#--<#list appObjList as appObj>-->
+<#--<li>-->
+<#--<a ui-sref="appObjListView({appObj:'${appObj.name}'})" ui-sref-active="k-state-selected">${appObj.label}</a>-->
+<#--</li>-->
+<#--</#list>-->
+<#--</ul>-->
+<#--</nav>-->
+<#--</div>-->
+<#--<div>-->
+<#--<div ui-view="">-->
+<#--</div>-->
+<#--</div>-->
+<#--</div>-->
+<#--</div>-->
+<div class="grid-frame vertical">
+  <div class="grid-content shrink">
+    <div class="dev-panel" ng-controller="DevPanelController">
+      <div ng-include="'assets/app/dev/dev-panel.html'"></div>
     </div>
-    <div>
-      <div ui-view="">
-      </div>
+  </div>
+  <div class="grid-block">
+    <div class="grid-block small-4 medium-3 large-2 ">
+      <ul kendo-tree-view>
+      <#list appObjList as appObj>
+        <li>
+          <a ui-sref="appObjListView({appObj:'${appObj.name}'})" ui-sref-active="k-state-selected">${appObj.label}</a>
+        </li>
+      </#list>
+      </ul>
+    </div>
+    <div class="grid-block">
+      <div class="grid-block vertical" ui-view=""></div>
     </div>
   </div>
 </div>
@@ -48,6 +70,12 @@
 <#--<script src="http://kendo.cdn.telerik.com/2016.1.406/js/kendo.all.min.js"></script>-->
 <script src="assets/js/lib/kendo/kendo.all.min.js"></script>
 <script src="assets/bower_components/angular-kendo-window/angular-kendo-window.js"></script>
+<script src="assets/bower_components/foundation-apps/dist/js/foundation-apps.js"></script>
+<#--<script src="assets/bower_components/foundation-apps/dist/js/foundation-apps.min.js"></script>-->
+<script src="assets/bower_components/foundation-apps/dist/js/foundation-apps-templates.js"></script>
+<#--<script src="assets/bower_components/foundation-apps/dist/js/foundation-apps-templates.min.js"></script>-->
+
+
 <script src="assets/js/lib/angular-route.js?timestamp=@timestamp@"></script>
 <script src="assets/js/lib/lodash.js?timestamp=@timestamp@"></script>
 <#--<script src="assets/js/lib/bootstrap.min.js?timestamp=@timestamp@"></script>-->
