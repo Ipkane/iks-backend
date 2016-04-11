@@ -86,17 +86,17 @@
 <#--<script src="assets/js/lib/angular-cookies.min.js?timestamp=@timestamp@"></script>-->
 <script src="assets/js/lib/angular-resource.min.js?timestamp=@timestamp@"></script>
 <script src="assets/js/lib/angular-messages.min.js?timestamp=@timestamp@"></script>
-<script src="assets/js/lib/angular-translate.min.js?timestamp=@timestamp@"></script>
-<script src="assets/js/lib/angular-translate-loader-url.min.js?timestamp=@timestamp@"></script>
+<#--<script src="assets/js/lib/angular-translate.min.js?timestamp=@timestamp@"></script>-->
+<#--<script src="assets/js/lib/angular-translate-loader-url.min.js?timestamp=@timestamp@"></script>-->
 <#--<script src="assets/js/lib/ui-bootstrap-tpls.min.js?timestamp=@timestamp@"></script>-->
 <!--<script src="assets/js/lib/ui-bootstrap.min.js?timestamp=@timestamp@"></script>-->
-<script src="assets/js/lib/angular-file-upload.min.js?timestamp=@timestamp@"></script>
+<#--<script src="assets/js/lib/angular-file-upload.min.js?timestamp=@timestamp@"></script>-->
 <script src="assets/js/lib/angular-sanitize.min.js?timestamp=@timestamp@"></script>
-<script src="assets/js/lib/angular-confirm.js?timestamp=@timestamp@"></script>
-<script src="assets/js/lib/angular-slider.js?timestamp=@timestamp@"></script>
+<#--<script src="assets/js/lib/angular-confirm.js?timestamp=@timestamp@"></script>-->
+<#--<script src="assets/js/lib/angular-slider.js?timestamp=@timestamp@"></script>-->
 <#--<script src="assets/js/lib/bootstrap-slider.min.js?timestamp=@timestamp@"></script>-->
 <#--<script src="assets/js/lib/spin.min.js?timestamp=@timestamp@"></script>-->
-<script src="assets/js/lib/angular-ui-numeric.js?timestamp=@timestamp@"></script>
+<#--<script src="assets/js/lib/angular-ui-numeric.js?timestamp=@timestamp@"></script>-->
 <script src="assets/app/app.module.js"></script>
 <script src="assets/app/app.js"></script>
 <script src="assets/app/app.config.js"></script>
@@ -109,8 +109,7 @@
 <script src="assets/app/cms/common/modal.controller.js"></script>
 <script src="assets/app/cms/appObj/list.controller.js"></script>
 <script src="assets/app/cms/appObj/edit.controller.js"></script>
-<script src="assets/app/cms/appObj/referenceList.controller.js"></script>
-<script src="assets/app/cms/appObj/data.service.js"></script>
+<script src="assets/app/cms/appObj/referenceGrid.controller.js"></script>
 <script src="assets/app/ui/referenceField.js"></script>
 </body>
 </html>

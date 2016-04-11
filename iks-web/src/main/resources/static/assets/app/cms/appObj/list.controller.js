@@ -169,7 +169,7 @@ function AppGridController($scope, $log, $kWindow, $timeout, $q, $rootScope, Cor
             visible: false
           },
           templateUrl: 'view/referenceView?gridId=' + $scope.referenceGridId,
-          controller: 'ReferenceListModalController',
+          controller: 'ReferenceGridModalController',
           resolve: {
             payload: {parentGridId: $scope.grid.id, parentItemId: $scope.parentItemId}
           }
@@ -188,8 +188,6 @@ function AppGridController($scope, $log, $kWindow, $timeout, $q, $rootScope, Cor
       }, function (response) {
         ModalHelper.showErrorModal(response);
       });
-    }, function (response) {
-      ModalHelper.showErrorModal(response);
     });
   };
   $scope.openDeleteModal = function () {

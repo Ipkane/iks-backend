@@ -32,7 +32,7 @@ function ReferenceField() {
                 visible: false
               },
               templateUrl: 'view/referenceView?gridId=' + $scope.referenceGrid,
-              controller: 'ReferenceListModalController',
+              controller: 'ReferenceGridModalController',
               controllerAs: 'vm',
               resolve: {
                 payload: {}

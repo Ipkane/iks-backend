@@ -1,11 +1,11 @@
 'use strict';
 angular.module('app.cms')//
-    .controller('ReferenceListModalController', ReferenceListModalController)
+    .controller('ReferenceGridModalController', ReferenceGridModalController)
 ;//
 /**
  * Modal with reference grid
  */
-function ReferenceListModalController($scope, $log, $windowInstance, $timeout, $rootScope, payload, CoreService, GridHelper, ModalHelper, _) {
+function ReferenceGridModalController($scope, $log, $windowInstance, $timeout, $rootScope, payload, CoreService, GridHelper, ModalHelper, _) {
   var vm = this;
   angular.extend($scope, {
     parentGridId: payload.parentGridId,
