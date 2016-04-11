@@ -11,8 +11,8 @@ function AppGridController($scope, $log, $kWindow, $timeout, $q, $rootScope, Cor
     grid: null,
     selectedItem: null,
     referenceGridId: null, // for  reference field
-    orderBy: 'id',
-    orderAsc: true,
+    sortField: 'id',
+    sortDir: 'asc',
     items: [],
     itemsPerPage: 50,
     currentPage: 1,
@@ -21,12 +21,6 @@ function AppGridController($scope, $log, $kWindow, $timeout, $q, $rootScope, Cor
     gridOptions: null,
     dataSource: null
   });
-  $scope.toolbarOptions = {
-    //items: [
-    //  {type:"button",text:"New", click:"openAddModal()"},
-    //  {type:"button",text:"Edit", click:"openEditModal()"}
-    //]
-  };
 
   function setGridOptions(grid) {
     var columns = [];
@@ -43,6 +37,9 @@ function AppGridController($scope, $log, $kWindow, $timeout, $q, $rootScope, Cor
       serverPaging: true,
       transport: {
         read: function (e) {
+          var sort = e.data.sort;
+          $scope.sortField = sort && sort[0] ? sort[0].field : 'id';
+          $scope.sortDir = sort && sort[0] ? sort[0].dir : 'asc';
           _reload().then(function (items) {
             e.success(items);
           });
@@ -53,12 +50,15 @@ function AppGridController($scope, $log, $kWindow, $timeout, $q, $rootScope, Cor
     $scope.gridOptions = {
       sortable: true,
       selectable: true,
-      //scrollable: {
-      //  virtual: true
-      //},
+      scrollable: {
+        virtual: true
+      },
       resizable: true,
       columns: columns,
-      dataSource: $scope.dataSource
+      dataSource: $scope.dataSource,
+      dataBound: function (e) {
+        //$log.debug($scope.dataSource);
+      }
     };
   }
 
@@ -80,7 +80,7 @@ function AppGridController($scope, $log, $kWindow, $timeout, $q, $rootScope, Cor
       $scope.parentItemId = $scope.$parent.itemId;
     }
     CoreService.getGridData({
-      gridId: $scope.grid.id, filter: $scope.filter.item, orderBy: ($scope.orderAsc ? '' : '-') + $scope.orderBy,
+      gridId: $scope.grid.id, filter: $scope.filter.item, sortField: $scope.sortField, sortDir: $scope.sortDir,
       parentId: $scope.parentItemId,
       page: $scope.currentPage, limit: $scope.itemsPerPage
     }).$promise.then(
@@ -221,15 +221,6 @@ function AppGridController($scope, $log, $kWindow, $timeout, $q, $rootScope, Cor
           onSuccess: reload
         }
     );
-  };
-  $scope.setOrderBy = function (fieldName) {
-    if (fieldName == $scope.orderBy) {
-      $scope.orderAsc = !$scope.orderAsc;
-    } else {
-      $scope.orderAsc = true;
-    }
-    $scope.orderBy = fieldName;
-    reload();
   };
   vm.getField = function (fieldName) {
     return _.find($scope.grid.fields, {fieldName: fieldName});

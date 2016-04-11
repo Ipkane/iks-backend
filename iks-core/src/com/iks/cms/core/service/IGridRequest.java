@@ -8,7 +8,8 @@ import java.util.*;
 public interface IGridRequest {
   String getGridId();
   Map< String, Object > getFilter();
-  String getOrderBy();
+  String getSortField();
+  String getSortDir();
   Integer getPage();
   Integer getLimit();
   String getParentId();

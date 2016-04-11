@@ -11,6 +11,7 @@ import com.iks.cms.core.sql.query.ColumnOrder;
 import com.iks.cms.core.sql.query.EColumnOrder;
 import com.iks.cms.core.sql.query.SelectQuery;
 import com.iks.cms.core.utils.ModelUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.hibernate.SessionFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,7 +28,7 @@ import java.util.Map;
 public class SelectModelQuery<T extends SelectModelQuery> extends CommonModelQuery<T> {
   private static final Logger logger = LoggerFactory.getLogger(SelectModelQuery.class);
   private String orderBy;
-  private boolean orderAsc = true;
+  private String orderDir = "asc";
   private Map<String, Object> filters = new HashMap<>();
   private Integer offset;
   private Integer limit;
@@ -99,7 +100,7 @@ public class SelectModelQuery<T extends SelectModelQuery> extends CommonModelQue
     if (rawData instanceof Object[]) {
       data = (Object[]) rawData;
     } else {
-      data = new Object[] {rawData};
+      data = new Object[]{rawData};
     }
     if (ModelUtils.isEmptyArray(data)) {
       return null;
@@ -130,7 +131,7 @@ public class SelectModelQuery<T extends SelectModelQuery> extends CommonModelQue
     }
     if (orderBy != null) {
       IDataField dataField = model.getField(ModelUtils.getBaseField(orderBy));
-      dataField.setSelectQueryOrder(sb, orderBy, orderAsc ? EColumnOrder.ASC : EColumnOrder.DESC);
+      dataField.setSelectQueryOrder(sb, orderBy, EColumnOrder.valueOf(StringUtils.upperCase(orderDir)));
     } else {
       sb.orderBy(new ColumnOrder(table.getColumn(model.getPrimaryFieldName(), null), EColumnOrder.ASC));
     }
@@ -147,13 +148,6 @@ public class SelectModelQuery<T extends SelectModelQuery> extends CommonModelQue
     this.orderBy = orderBy;
   }
 
-  public boolean isOrderAsc() {
-    return orderAsc;
-  }
-
-  public void setOrderAsc(boolean orderAsc) {
-    this.orderAsc = orderAsc;
-  }
 
   public Map<String, Object> getFilters() {
     return filters;
@@ -183,5 +177,13 @@ public class SelectModelQuery<T extends SelectModelQuery> extends CommonModelQue
 
   public void setOffset(Integer offset) {
     this.offset = offset;
+  }
+
+  public String getOrderDir() {
+    return orderDir;
+  }
+
+  public void setOrderDir(String orderDir) {
+    this.orderDir = orderDir;
   }
 }
