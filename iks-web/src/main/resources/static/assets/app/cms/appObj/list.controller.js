@@ -140,8 +140,8 @@ function AppGridController($scope, $log, $kWindow, $timeout, $q, $rootScope, Cor
             modal: true,
             title: 'Edit Content',
             resizable: true,
-            height: 300,
-            width: 600,
+            width: $scope.grid.editView.width || 600,
+            height: $scope.grid.editView.height || 400,
             visible: false
           },
           templateUrl: 'view/editView?appObj=' + $scope.grid.appObj,

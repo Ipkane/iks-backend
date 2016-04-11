@@ -1,5 +1,5 @@
 <#include "../app/all-app.ftl"/>
-<div class="grid-block vertical" style="height: 100%">
+<div class="grid-block vertical" style="height: 100%;${(editView.style)!}">
   <div class="grid-block">
     <form id="${appObj.name}Form" role="form" novalidate="novalidate" class="form grid-block vertical">
     <#assign modelName="selectedItem"/>

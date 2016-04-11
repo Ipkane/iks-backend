@@ -4,5 +4,7 @@ include "app/app-element-schema.rnc"
 start =
   element editView {
     attribute appObj { xsd:NCName }
+    & attribute width { xsd:integer }?
+    & attribute height { xsd:integer }?
     & gul.element*
   }

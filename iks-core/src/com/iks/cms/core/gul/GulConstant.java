@@ -21,6 +21,8 @@ public interface GulConstant {
   String ATTR_CSS_CLASS = "cssClass";
   String ATTR_SRC = "src";
   String ATTR_VALUE = "value";
+  String ATTR_WIDTH = "width";
+  String ATTR_HEIGHT = "height";
   String ATTR_CONTROL = "control";
   String ATTR_CHECKED = "checked";
   String ATTR_REFERENCE_GRID = "referenceGrid";

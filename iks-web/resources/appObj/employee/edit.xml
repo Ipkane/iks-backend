@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<editView appObj="employee" xmlns="http://com.iks.org/schema/edit/1.0">
+<editView appObj="employee" xmlns="http://com.iks.org/schema/edit/1.0" width="600" height="400">
   <fieldbox>
     <textbox fieldName="id" readonly="true"/>
     <textbox id="fio" fieldName="fio" label="First/Last fieldName"/>
