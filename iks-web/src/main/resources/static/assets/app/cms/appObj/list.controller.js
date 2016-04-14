@@ -21,6 +21,7 @@ function AppGridController($scope, $log, $kWindow, $timeout, $q, $rootScope, Cor
     gridOptions: null,
     dataSource: null
   });
+  $scope.toolbarOptions = {};
 
   function setGridOptions(grid) {
     var columns = [];
@@ -138,7 +139,7 @@ function AppGridController($scope, $log, $kWindow, $timeout, $q, $rootScope, Cor
         {
           options: {
             modal: true,
-            title: 'Edit Content',
+            title: (isNew ? 'New ' : 'Edit ') + $scope.grid.appObjLabel,
             resizable: true,
             width: $scope.grid.editView.width || 600,
             height: $scope.grid.editView.height || 400,

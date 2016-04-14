@@ -72,15 +72,48 @@
   align-items: baseline;
 }
 
-.fieldbox > .hbox {
+.field-group {
   margin-bottom: 10px;
+  margin-right: 10px;
 }
 
-.form-group > label {
+.field-group > label {
+  display: block;
+}
+
+.field-group .k-textbox, .field-group .k-dropdown, .field-group .input-group {
+  width: 100%;
+}
+
+.fieldbox {
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+}
+
+.fieldbox > .field-group {
+  display: flex;
+  margin-right: 0;
+  width: 100%;
+  flex-shrink: 0;
+}
+
+.fieldbox > .field-group > .field {
+  flex: 1;
+}
+
+.fieldbox > .field-group > label {
   width: 150px;
   margin-right: 10px;
+  display: block;
+  flex-shrink: 0;
+  vertical-align: middle;
 }
 
 .grid {
   width: 100%;
+}
+
+.filter-panel {
+  padding: 10px;
 }

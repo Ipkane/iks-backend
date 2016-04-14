@@ -6,7 +6,7 @@
       <@container element=element/>
   </form>
 </div>
-<div class="hbox">
+<div class="k-edit-buttons">
   <kendo-button ng-click="search()">Search</kendo-button>
   <kendo-button ng-click="clearFilter()">Clear</kendo-button>
 </div>

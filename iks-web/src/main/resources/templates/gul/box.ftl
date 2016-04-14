@@ -17,9 +17,7 @@
 <#macro fieldbox element>
 <div class="fieldbox ${element.cssClass}" style="${element.style}">
   <#list element.elements as childElement>
-    <div class="hbox form-group">
       <@gulElement element=childElement/>
-    </div>
   </#list>
 </div>
 </#macro>

@@ -14,6 +14,6 @@
     'app.dev',
     'kendo.window',
     'kendo.directives',
-    'foundation'
+    //'foundation'
   ]);
 })();

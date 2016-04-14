@@ -5,11 +5,8 @@
       <hbox>
         <textbox fieldName="id"/>
         <textbox fieldName="fio"/>
-      </hbox>
-      <hbox>
         <select fieldName="gender"/>
         <referenceField fieldName="user" displayField="username" referenceGrid="user_grid"/>
-        <button label="Push the button" id="button_1"/>
       </hbox>
     </filterPanel>
     <columns>
