@@ -51,6 +51,8 @@
         {
           options: {
             modal: true,
+            width: 300,
+            height: 150,
             title: params.title
           },
           templateUrl : 'assets/app/cms/common/templates/confirm-modal.html',
@@ -85,8 +87,8 @@
             modal: true,
             title: 'Error',
             resizable: true,
-            height: 300,
-            width: 300,
+            height: 400,
+            width: 400,
             visible: false
           },
           templateUrl : 'assets/app/cms/common/templates/error-modal.html',

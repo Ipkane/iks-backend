@@ -49,4 +49,8 @@ public class GulReferenceField extends GulTextbox {
   public void setReferenceGrid(String referenceGrid) {
     this.referenceGrid = referenceGrid;
   }
+
+  public String getReferenceAppObjLabel() {
+    return App.getAppObj(App.getGrid(referenceGrid).getAppObj()).getLabel();
+  }
 }

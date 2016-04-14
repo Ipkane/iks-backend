@@ -94,4 +94,8 @@ public abstract class BaseGrid extends GulElement implements IBaseGrid {
   public IEditView getEditView() {
     return App.getEditView(appObj);
   }
+  @JsonView( JsonViews.Normal.class )
+  public String getAppObjLabel() {
+    return App.getAppObj(appObj).getLabel();
+  }
 }

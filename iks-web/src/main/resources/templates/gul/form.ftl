@@ -52,7 +52,7 @@
 <#macro referenceField element>
 <div class="field-group ${(element.cssClass)!}" style="${(element.style)!}">
   <label for="${element.fieldName}" class="control-label">${element.label}</label>
-  <reference-field reference-grid="${(element.referenceGrid)!}" model="${modelName}" field-name="${element.fieldName}"
+  <reference-field reference-grid="${(element.referenceGrid)!}" app-obj-label="${element.getReferenceAppObjLabel()}" model="${modelName}" field-name="${element.fieldName}"
                    display-field="${element.displayField}" class="field">
   </reference-field>
 </div>

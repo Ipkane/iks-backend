@@ -11,13 +11,15 @@ function ReferenceField() {
       referenceGrid: '=',
       model: '=',
       fieldName: '=',
-      displayField: '='
+      displayField: '=',
+      appObjLabel: '='
     },
     link: function (scope, element, attrs) {
       scope.referenceGrid = attrs['referenceGrid'];
       //scope.model = attrs['model'];
       scope.fieldName = attrs['fieldName'];
       scope.displayField = attrs['displayField'];
+      scope.appObjLabel = attrs['appObjLabel'];
     },
     controller: function ($scope, $log, $kWindow) {
       $scope.openReferenceGrid = function () {
@@ -25,7 +27,7 @@ function ReferenceField() {
             {
               options: {
                 modal: true,
-                title: 'Select item',
+                title: 'Select ' + $scope.appObjLabel,
                 resizable: true,
                 height: 300,
                 width: 600,

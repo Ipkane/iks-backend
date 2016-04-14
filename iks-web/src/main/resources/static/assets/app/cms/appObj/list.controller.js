@@ -163,7 +163,7 @@ function AppGridController($scope, $log, $kWindow, $timeout, $q, $rootScope, Cor
         {
           options: {
             modal: true,
-            title: 'Select item',
+            title: 'Select' + $scope.grid.appObjLabel,
             resizable: true,
             height: 300,
             width: 600,
@@ -192,10 +192,11 @@ function AppGridController($scope, $log, $kWindow, $timeout, $q, $rootScope, Cor
     });
   };
   $scope.openDeleteModal = function () {
+    var objLabel = $scope.grid.appObjLabel;
     ModalHelper.openConfirmModal(
         {
-          title: "Confirm deletion",
-          message: "Are you sure, you want to delete item " + $scope.selectedItem.id,
+          title:  "Delete " + objLabel,
+          message:  "Are you sure, you want to delete " + objLabel + " " + $scope.selectedItem.id,
           onConfirm: function () {
             return CoreService.deleteItem({gridId: $scope.grid.id, itemId: $scope.selectedItem.id}).$promise;
           },
@@ -208,10 +209,11 @@ function AppGridController($scope, $log, $kWindow, $timeout, $q, $rootScope, Cor
     if ($scope.grid.fieldName) {
       selectedItemId = $scope.selectedItem[$scope.grid.fieldName]['id'];
     }
+    var objLabel = $scope.grid.appObjLabel;
     ModalHelper.openConfirmModal(
         {
-          title: "Confirm deletion",
-          message: "Are you sure, you want to delete item " + selectedItemId,
+          title: "Delete " + objLabel,
+          message: "Are you sure, you want to delete " + objLabel + " " + selectedItemId,
           onConfirm: function () {
             return CoreService.deleteOneToManyItem({
               gridId: $scope.grid.id,

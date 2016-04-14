@@ -1,7 +1,7 @@
 <#macro appTable element>
 <div class="app-table grid-block vertical" id="${element.id}" class="${element.cssClass}" style="${element.style}"
               ng-controller="AppGridController as vm">
-  <div ng-init='grid = "${element.toJson()}""' style="display: none"></div>
+  <div ng-init='grid = "${element.toJson()}"' style="display: none"></div>
   <div kendo-toolbar k-options="toolbarOptions">
     <kendo-button k-icon="'plus'" ng-click="openAddModal()">New</kendo-button>
     <kendo-button k-icon="'pencil'" ng-click="openEditModal()" ng-disabled="!selectedItem">Edit</kendo-button>
