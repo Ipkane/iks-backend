@@ -30,10 +30,9 @@ public class DeleteModelQuery extends CommonModelQuery< DeleteModelQuery > {
     if( itemId == null ) {
       throw new IllegalArgumentException( "Item id is null" );
     }
-    DeleteQuery sb = new DeleteQuery();
     Table table = new Table( model.getTableName() );
-    sb.setTable( table );
-    Column idColumn = new Column( table, model.getPrimaryFieldName() );
+    DeleteQuery sb = new DeleteQuery(table);
+    Column idColumn = new Column( table, model.getPrimaryFieldName(), null );
     sb.addCriteria( new MatchCriteria( idColumn, itemId, MatchType.Eq ) );
     return sb;
   }

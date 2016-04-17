@@ -36,18 +36,16 @@ public class DeleteManyToManyQuery extends CommonDaoQuery {
     IDataField dataField = model.getField(field);
     if (dataField instanceof ManyToMany) {
       ManyToMany manyToMany = (ManyToMany) dataField;
-      DeleteQuery query = new DeleteQuery();
       Table table = new Table(manyToMany.getJoinTable());
-      query.setTable(table);
+      DeleteQuery query = new DeleteQuery(table);
       query.addCriteria(new MatchCriteria(table.getColumn(manyToMany.getTableField()), parentItemId));
       query.addCriteria(new MatchCriteria(table.getColumn(manyToMany.getInverseTableField()), itemId));
       return query;
     } else if (dataField instanceof OneToMany) {
-      UpdateQuery query = new UpdateQuery();
       OneToMany oneToMany = (OneToMany) model.getField(field);
       IDataModel otherModel = App.getModel(oneToMany.getAppObj());
       Table table = new Table(otherModel.getTableName());
-      query.setTable(table);
+      UpdateQuery query = new UpdateQuery(table);
       query.addUpdateColumn(table.getColumn(oneToMany.getTableField()), null);
       query.setCriteriaById(Long.valueOf(itemId));
       return query;

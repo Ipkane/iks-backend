@@ -1,9 +1,9 @@
-package com.iks.cms.core.sql.join;
+package com.iks.cms.core.sql.join
 
 /**
  * @author Igor Kaynov
  */
-public enum JoinType {
+enum class JoinType {
   Left,
   Right,
   Inner

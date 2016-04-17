@@ -23,7 +23,7 @@ public class UpdateModelQuery<T extends UpdateModelQuery> extends AbstractChange
 
   @Override
   protected UpdateQuery buildSqlQuery() {
-    UpdateQuery sb = new UpdateQuery();
+    UpdateQuery sb = new UpdateQuery(new Table(model.getTableName()));
     fillQuery(sb);
     sb.setCriteriaById(getItemId());
     return sb;

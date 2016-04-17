@@ -10,13 +10,13 @@ class Column(val name: String) {
   var alias: String? = null
   var type = ColumnType.String
 
-  constructor(table: Table, name: String) : this(table.alias, name, null) {
+  constructor(table: Table, name: String) : this(table, name, null) {
   }
 
-  constructor(table: Table, name: String, alias: String?) : this(table.alias, name, alias) {
+  constructor(table: Table, name: String, alias: String? = null) : this(table.alias, name, alias) {
   }
 
-  constructor(tableAlias: String?, name: String, alias: String?) : this(name) {
+  constructor(tableAlias: String?, name: String, alias: String? = null) : this(name) {
     this.tableAlias = tableAlias
     this.alias = alias
   }

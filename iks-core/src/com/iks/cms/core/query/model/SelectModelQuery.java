@@ -78,7 +78,7 @@ public class SelectModelQuery<T extends SelectModelQuery> extends CommonModelQue
     //    if (filters == null || filters.size() == 0) {
     //      query.getLeftJoins().clear();
     //    }
-    query.addProjection(Projections.rowCount());
+    query.addProjection(Projections.INSTANCE.rowCount());
     query.setLimit(0);
     query.setOffset(0);
     String sqlQuery = query.toString();
@@ -117,8 +117,8 @@ public class SelectModelQuery<T extends SelectModelQuery> extends CommonModelQue
   }
 
   protected SelectQuery buildSqlQuery() {
-    SelectQuery sb = new SelectQuery();
     Table table = new Table(model.getTableName(), model.getAppObj());
+    SelectQuery sb = new SelectQuery();
     sb.from(table);
     for (String field : getFields()) {
       IDataField dataField = model.getField(ModelUtils.getBaseField(field));

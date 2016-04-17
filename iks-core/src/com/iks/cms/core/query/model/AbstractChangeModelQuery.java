@@ -34,8 +34,7 @@ public abstract class AbstractChangeModelQuery< T extends AbstractChangeModelQue
   }
   protected abstract AbstractChangeQuery buildSqlQuery();
   protected void fillQuery(AbstractChangeQuery query) {
-    Table table = new Table( model.getTableName() );
-    query.setTable( table );
+    Table table = query.getTable();
     for( String field : getFields() ) {
       if( field.equals( model.getPrimaryFieldName() ) ) {
         continue;
@@ -53,7 +52,7 @@ public abstract class AbstractChangeModelQuery< T extends AbstractChangeModelQue
           query.addUpdateColumn(table.getColumn(dataField.getTableField()), value);
         }
       } else {
-        query.addUpdateColumn( new Column( table, dataField.getTableField() ), item.getFieldValue( dataField.getFieldName() ) );
+        query.addUpdateColumn( new Column(table, dataField.getTableField(), null ), item.getFieldValue( dataField.getFieldName() ) );
       }
     }
   }

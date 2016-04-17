@@ -3,13 +3,13 @@
               ng-controller="AppGridController as vm">
   <div ng-init='grid = "${element.toJson()}"' style="display: none"></div>
   <div kendo-toolbar k-options="toolbarOptions">
-    <kendo-button k-icon="'plus'" ng-click="openAddModal()">New</kendo-button>
-    <kendo-button k-icon="'pencil'" ng-click="openEditModal()" ng-disabled="!selectedItem">Edit</kendo-button>
-    <kendo-button k-icon="'cancel'" ng-click="openDeleteModal()" ng-disabled="!selectedItem">Delete</kendo-button>
+    <kendo-button k-icon="'plus'" ng-click="openAddModal()" title="New">New</kendo-button>
+    <kendo-button k-icon="'pencil'" ng-click="openEditModal()" ng-disabled="!selectedItem" title="Edit">Edit</kendo-button>
+    <kendo-button k-icon="'cancel'" ng-click="openDeleteModal()" ng-disabled="!selectedItem" title="Delete">Delete</kendo-button>
     <#if element.filterPanel??>
-      <kendo-button k-icon="'funnel'" ng-click="toggleFilterPanel()">Filter</kendo-button>
+      <kendo-button k-icon="'funnel'" ng-click="toggleFilterPanel()" title="Filter">Filter</kendo-button>
     </#if>
-    <kendo-button k-icon="'refresh'" ng-click="refresh()">Refresh</kendo-button>
+    <kendo-button k-icon="'refresh'" ng-click="refresh()" title="Refresh">Refresh</kendo-button>
   </div>
   <#if element.filterPanel??>
     <div class="panel-body filter-panel" ng-show="showFilterPanel">

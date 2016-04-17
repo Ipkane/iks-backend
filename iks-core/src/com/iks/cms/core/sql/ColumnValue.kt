@@ -5,19 +5,12 @@ import org.apache.commons.lang3.*
 /**
  * @author Igor Kaynov
  */
-class ColumnValue(value: Any) {
-  var value: Any? = null
-  var type = ColumnType.String
-
-  init {
-    this.value = value
-  }
-
-  constructor(value: Any, type: ColumnType) : this(value) {
-    this.type = type
-  }
+class ColumnValue(var value: Any?, var type: ColumnType = ColumnType.String) {
 
   override fun toString(): String {
-    return value?.toString() ?: "null"
+    return if (type == ColumnType.String)
+      value?.toString().valueQuote()
+    else
+      value?.toString() ?: "null"
   }
 }

@@ -5,15 +5,10 @@ import java.util.*
 /**
  * @author Igor Kaynov
  */
-class Table(name: String) {
-  var name: String
+class Table(val name: String) {
   var alias: String? = null
   private val columns = HashMap<String, Column>()
 
-  init {
-    this.name = name;
-  }
-  
   constructor(name: String, alias: String) : this(name) {
     this.alias = alias
   }
