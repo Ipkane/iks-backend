@@ -1,9 +1,9 @@
-package com.iks.cms.core.sql;
+package com.iks.cms.core.sql
 
 /**
  * @author Igor Kaynov
  */
-public enum ColumnType {
+enum class ColumnType {
   String,
   Number,
   Date,
