@@ -17,6 +17,7 @@
          ng-readonly="${element.readonly?c}"
          ng-required="${element.required?c}"
          style="width: 100%;"
+         k-parse-formats="['yyyy-MM-dd']"
          <#if element.fieldName??>k-ng-model="${modelName}.${element.fieldName}"</#if>/>
 </div>
 </#macro>
@@ -29,6 +30,7 @@
          ng-readonly="${element.readonly?c}"
          ng-required="${element.required?c}"
          style="width: 100%;"
+         k-parse-formats="['HH:mm:ss']"
          <#if element.fieldName??>k-ng-model="${modelName}.${element.fieldName}"</#if>/>
 </div>
 </#macro>

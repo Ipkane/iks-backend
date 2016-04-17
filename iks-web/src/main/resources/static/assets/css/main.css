@@ -112,6 +112,10 @@ input.k-textbox {
   width: 25px;
 }
 
+.k-ff input.k-textbox {
+  height: 2.13em;
+}
+
 .input-group .k-button:last-child {
   border-radius: 0 4px 4px 0;
   border-right-width: 1px;

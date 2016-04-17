@@ -60,6 +60,10 @@ function AppGridController($scope, $log, $kWindow, $timeout, $q, $rootScope, Cor
       dataSource: $scope.dataSource,
       dataBound: function (e) {
         //$log.debug($scope.dataSource);
+        $log.debug(e);
+        //if ($scope.selectedItem) {
+          //$scope.dataSource.select($scope.selectedItem.id);
+        //}
       }
     };
   }
