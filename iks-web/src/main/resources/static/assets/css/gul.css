@@ -110,6 +110,20 @@
   vertical-align: middle;
 }
 
+.fieldbox > .field-group > input[type="checkbox"] {
+  margin-left: 160px;
+  flex-shrink: 0;
+}
+
+.k-checkbox-label, .fieldbox > .field-group > .k-checkbox-label {
+  display: inline;
+  flex-shrink: 1;
+}
+
+.field-group > .k-checkbox-label {
+  display: inline;
+}
+
 .grid {
   width: 100%;
 }

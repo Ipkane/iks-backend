@@ -216,4 +216,8 @@ input.k-textbox {
   padding: 2px;
 }
 
+input[type="checkbox"] {
+  margin: 2px 5px 0 0;
+}
+
 
