@@ -11,6 +11,7 @@ function AppGridController($scope, $log, $kWindow, $timeout, $q, $rootScope, Cor
     grid: null,
     selectedItem: null,
     referenceGridId: null, // for  reference field
+    referenceAppObjLabel: null,
     sortField: 'id',
     sortDir: 'asc',
     items: [],
@@ -163,7 +164,7 @@ function AppGridController($scope, $log, $kWindow, $timeout, $q, $rootScope, Cor
         {
           options: {
             modal: true,
-            title: 'Select' + $scope.grid.appObjLabel,
+            title: 'Select ' + $scope.referenceAppObjLabel,
             resizable: true,
             height: 300,
             width: 600,
@@ -209,7 +210,7 @@ function AppGridController($scope, $log, $kWindow, $timeout, $q, $rootScope, Cor
     if ($scope.grid.fieldName) {
       selectedItemId = $scope.selectedItem[$scope.grid.fieldName]['id'];
     }
-    var objLabel = $scope.grid.appObjLabel;
+    var objLabel = $scope.referenceAppObjLabel;
     ModalHelper.openConfirmModal(
         {
           title: "Delete " + objLabel,

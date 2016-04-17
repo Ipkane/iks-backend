@@ -87,8 +87,8 @@
             modal: true,
             title: 'Error',
             resizable: true,
-            height: 400,
-            width: 400,
+            height: 300,
+            width: 500,
             visible: false
           },
           templateUrl : 'assets/app/cms/common/templates/error-modal.html',

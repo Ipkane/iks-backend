@@ -74,4 +74,8 @@ public class ReferenceTableField extends BaseGrid {
   public void setReferenceGrid(String referenceGrid) {
     this.referenceGrid = referenceGrid;
   }
+
+  public String getReferenceAppObjLabel() {
+    return App.getAppObj(App.getGrid(referenceGrid).getAppObj()).getLabel();
+  }
 }

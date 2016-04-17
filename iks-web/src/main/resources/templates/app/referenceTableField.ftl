@@ -1,7 +1,7 @@
 <#macro referenceTableField element>
 <div class="reference-table grid-block vertical" id="${(element.id)!}" class="${(element.cssClass)!}" style="${(element.style)!}"
      ng-controller="AppGridController as vm">
-  <div ng-init='grid = "${element.toJson()}"; referenceGridId="${(element.referenceGrid)!}"'
+  <div ng-init='grid = "${element.toJson()}"; referenceGridId="${(element.referenceGrid)!}"; referenceAppObjLabel="${element.referenceAppObjLabel}"'
        style="display: none"></div>
   <div kendo-toolbar>
     <kendo-button k-icon="'plus'" ng-click="openOneToManyModal()">Add</kendo-button>
