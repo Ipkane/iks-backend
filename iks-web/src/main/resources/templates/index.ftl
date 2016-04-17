@@ -32,11 +32,9 @@
       <div class="grid-block k-content">
         <ul kendo-tree-view>
         <#list appObjList as appObj>
-          <li>${appObj.label}
-            <ul>
-              <li><a ui-sref="appObjListView({appObj:'${appObj.name}'})"
-                     ui-sref-active="k-state-selected">${appObj.label}</a></li>
-            </ul>
+          <li>
+            <a ui-sref="appObjListView({appObj:'${appObj.name}'})"
+                     ui-sref-active="k-state-selected">${appObj.label}</a>
           </li>
         </#list>
         </ul>

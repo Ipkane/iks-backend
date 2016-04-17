@@ -72,6 +72,10 @@ public abstract class AbstractDataField implements IDataField {
   public Object parseValue( String value ) {
     return value;
   }
+  @Override
+  public Object formatValue( Object value ) {
+    return value;
+  }
   public void setValidators( List< IValidator > validators ) {
     this.validators = validators;
   }

@@ -108,6 +108,8 @@ input.k-textbox {
 .input-group .k-button {
   border-right-width: 0;
   border-radius: 0;
+  padding: 2px 0;
+  width: 25px;
 }
 
 .input-group .k-button:last-child {
@@ -115,7 +117,7 @@ input.k-textbox {
   border-right-width: 1px;
 }
 
-.k-dropdown .k-select {
+.k-select {
   padding-top: 4px;
 }
 

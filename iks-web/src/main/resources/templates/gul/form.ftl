@@ -1,3 +1,4 @@
+<#--texbox -->
 <#macro textbox element>
 <div class="field-group ${(element.cssClass)!}" style="${(element.style)!}">
   <label for="${(element.id)!}" class="control-label">${(element.label)!}</label>
@@ -7,7 +8,32 @@
          <#if element.fieldName??>ng-model="${modelName}.${element.fieldName}"</#if>/>
 </div>
 </#macro>
-<#--ng-model="${element.fieldName} ? |${modelName}.${element.fieldName}| : ''"-->
+
+<#--datebox-->
+<#macro datebox element>
+<div class="field-group ${(element.cssClass)!}" style="${(element.style)!}">
+  <label for="${(element.id)!}" class="control-label">${(element.label)!}</label>
+  <input kendo-date-picker type="date" class="field" id="${(element.id)!}" name="${(element.fieldName)!}"
+         ng-readonly="${element.readonly?c}"
+         ng-required="${element.required?c}"
+         style="width: 100%;"
+         <#if element.fieldName??>k-ng-model="${modelName}.${element.fieldName}"</#if>/>
+</div>
+</#macro>
+
+<#--Timebox-->
+<#macro timebox element>
+<div class="field-group ${(element.cssClass)!}" style="${(element.style)!}">
+  <label for="${(element.id)!}" class="control-label">${(element.label)!}</label>
+  <input kendo-time-picker class="field" id="${(element.id)!}" name="${(element.fieldName)!}"
+         ng-readonly="${element.readonly?c}"
+         ng-required="${element.required?c}"
+         style="width: 100%;"
+         <#if element.fieldName??>k-ng-model="${modelName}.${element.fieldName}"</#if>/>
+</div>
+</#macro>
+
+<#--Checkbox-->
 <#macro checkbox element>
 <div class="field-group">
   <input type="checkbox" id="${(element.id)!}" name="${(element.fieldName)!}" ng-readonly="${element.readonly?c}"
@@ -16,6 +42,8 @@
   <label for="${(element.id)!}" class="k-checkbox-label">${element.label}</label>
 </div>
 </#macro>
+
+<#--Select-->
 <#macro select element>
 <div class="field-group ${(element.cssClass)!}" style="${(element.style)!}">
   <label for="${(element.id)!}" class="control-label">${element.label}</label>
@@ -32,6 +60,8 @@
   </select>
 </div>
 </#macro>
+
+<#--ReferenceSelect-->
 <#macro referenceSelect element>
 <div class="field-group ${(element.cssClass)!}" style="${(element.style)!}">
   <label for="${element.id}" class="control-label">${element.label}</label>
@@ -49,6 +79,8 @@
   </select>
 </div>
 </#macro>
+
+<#--ReferenceField-->
 <#macro referenceField element>
 <div class="field-group ${(element.cssClass)!}" style="${(element.style)!}">
   <label for="${element.id}" class="control-label">${element.label}</label>

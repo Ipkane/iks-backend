@@ -17,7 +17,7 @@ dataFieldType =
 
 field = element field {
   dataFieldType
-  & attribute type { "string" | "boolean" | "integer" | "float" }?
+  & attribute type { "string" | "boolean" | "integer" | "float" | "date" | "datetime" | "time" }?
   & attribute primary { xsd:boolean }?
   & attribute required { xsd:boolean }?
 }

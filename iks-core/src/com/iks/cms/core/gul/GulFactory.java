@@ -16,6 +16,10 @@ public class GulFactory {
     switch( tagName ) {
       case GulConstant.TEXTBOX:
         return new GulTextbox();
+      case GulConstant.DATEBOX:
+        return new GulDatebox();
+      case GulConstant.TIMEBOX:
+        return new GulTimebox();
       case GulConstant.CHECKBOX:
         return new GulCheckbox();
       case GulConstant.SELECT:

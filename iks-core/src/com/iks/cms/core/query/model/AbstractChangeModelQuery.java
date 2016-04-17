@@ -49,10 +49,10 @@ public abstract class AbstractChangeModelQuery< T extends AbstractChangeModelQue
             query.addUpdateColumn(table.getColumn(dataField.getTableField()), joinedItem.get(manyToOne.getReferenceField()));
           }
         } else {
-          query.addUpdateColumn(table.getColumn(dataField.getTableField()), value);
+          query.addUpdateColumn(table.getColumn(dataField.getTableField()), dataField.formatValue(value));
         }
       } else {
-        query.addUpdateColumn( new Column(table, dataField.getTableField(), null ), item.getFieldValue( dataField.getFieldName() ) );
+        query.addUpdateColumn( new Column(table, dataField.getTableField(), null ), dataField.formatValue(item.getFieldValue( dataField.getFieldName() )) );
       }
     }
   }

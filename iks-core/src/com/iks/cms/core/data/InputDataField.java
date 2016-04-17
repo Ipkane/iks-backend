@@ -6,13 +6,15 @@ import org.apache.commons.lang3.*;
 import org.w3c.dom.*;
 
 import java.text.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 /**
  * @author Igor Kaynov
  */
 public class InputDataField extends SimpleDataField {
   private boolean isPrimaryKey = false;
-  private EDataType          type       = EDataType.String;
+  private EDataType          type       = EDataType.STRING;
   public boolean isPrimaryKey() {
     return isPrimaryKey;
   }
@@ -22,10 +24,23 @@ public class InputDataField extends SimpleDataField {
   @Override
   public Object parseValue( String value ) {
     switch( type ) {
-      case String:
+      case STRING:
         return value;
-      case Boolean:
+      case BOOLEAN:
         return BooleanUtils.toBoolean( value );
+      default:
+        return value;
+    }
+  }
+  @Override
+  public Object formatValue( Object value ) {
+    if (value == null) {
+      return null;
+    }
+    switch( type ) {
+      case TIME:
+        LocalDateTime dateTime = LocalDateTime.parse((String)value);
+        return dateTime.format(DateTimeFormatter.ISO_TIME);
       default:
         return value;
     }
@@ -43,7 +58,7 @@ public class InputDataField extends SimpleDataField {
       setIsPrimaryKey( BooleanUtils.toBoolean( xmlElement.getAttribute( ModelConstant.PRIMARY_KEY_ATTR ) ) );
     }
     if( xmlElement.hasAttribute( ModelConstant.TYPE_ATTR ) ) {
-      setType( EDataType.getByValue( xmlElement.getAttribute( ModelConstant.TYPE_ATTR ) ) );
+      setType( EDataType.valueOf( xmlElement.getAttribute( ModelConstant.TYPE_ATTR ).toUpperCase() ) );
     }
   }
 }

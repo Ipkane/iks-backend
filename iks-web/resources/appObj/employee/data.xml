@@ -8,6 +8,8 @@
       <option value="female">Female</option>
     </options>
   </selectField>
+  <field tableField="hired_date" fieldName="hiredDate" label="Hired" type="date"/>
+  <field tableField="hired_time" fieldName="hiredTime" label="Hired Time" type="time"/>
   <oneToOne fieldName="user" appObj="user" tableField="user_id"/>
   <manyToOne fieldName="department" appObj="department" tableField="department_id"/>
 </data>

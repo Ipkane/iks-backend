@@ -4,6 +4,8 @@
     <textbox fieldName="id" readonly="true"/>
     <textbox id="fio" fieldName="fio" label="First/Last fieldName"/>
     <select fieldName="gender"/>
+    <datebox fieldName="hiredDate"/>
+    <timebox fieldName="hiredTime"/>
     <!--<referenceSelect fieldName="user" displayField="username"/>-->
     <referenceField fieldName="user" displayField="username" referenceGrid="user_grid"/>
     <referenceField fieldName="department" displayField="name" referenceGrid="department_main_grid"/>

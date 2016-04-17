@@ -28,6 +28,8 @@ public interface GulConstant {
   String ATTR_REFERENCE_GRID = "referenceGrid";
   // element names
   String TEXTBOX = "textbox";
+  String DATEBOX = "datebox";
+  String TIMEBOX = "timebox";
   String CHECKBOX = "checkbox";
   String SELECT = "select";
   String REFERENCE_FIELD = "referenceField";
