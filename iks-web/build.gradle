@@ -2,6 +2,7 @@ apply plugin: 'java'
 apply plugin: 'idea'
 apply plugin: 'war'
 //apply plugin: 'org.akhikhl.gretty'
+apply plugin: "kotlin"
 
 ext {
   projectName = 'iks-web'
@@ -47,6 +48,7 @@ buildscript {
 
   dependencies {
     classpath("org.springframework.boot:spring-boot-gradle-plugin:1.3.3.RELEASE")
+    classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
   }
 }
 
