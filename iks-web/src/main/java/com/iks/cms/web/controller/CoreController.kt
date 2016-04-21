@@ -26,14 +26,14 @@ class CoreController {
   fun getGridData(@RequestBody request: RequestGetGridData): ResponseEntity<DefaultResponseBody<*, *>> {
     val response = ResponseGetGridData()
     response.result = appObjService.getGridData(request)
-    return ApiUtils.makeResponse(REQUEST_GET_GRID_DATA, request, response)
+    return ApiUtils.makeResponse(response)
   }
 
   @RequestMapping(value = REQUEST_GET_EDIT_DATA, method = arrayOf(RequestMethod.GET))
   fun getEditData(request: RequestGetEditData): ResponseEntity<DefaultResponseBody<*, *>> {
     val response = ResponseGetEditData()
     response.item = appObjService.getEditData(request.appObj, request.itemId)
-    return ApiUtils.makeResponse(REQUEST_GET_EDIT_DATA, request, response)
+    return ApiUtils.makeResponse(response)
   }
 
   @RequestMapping(value = REQUEST_UPDATE_EDIT_DATA, method = arrayOf(RequestMethod.POST))
@@ -46,39 +46,39 @@ class CoreController {
       } else {
         appObjService.updateItem(request.appObj, request.itemId, request.item)
       }
-      return ApiUtils.makeResponse(REQUEST_UPDATE_EDIT_DATA, request, ResponseEmpty())
+      return ApiUtils.makeResponse(ResponseEmpty())
     } catch (ex: ValidationException) {
       logger.error(RESPONSE_ERROR_UPDATE_EDIT_DATA, ex)
       val response = ResponseValidationException(ex)
-      return ApiUtils.makeClientErrorResponse(REQUEST_UPDATE_EDIT_DATA, RESPONSE_ERROR_UPDATE_EDIT_DATA, response, request)
+      return ApiUtils.makeClientErrorResponse(RESPONSE_ERROR_UPDATE_EDIT_DATA, response)
     }
   }
 
   @RequestMapping(value = REQUEST_ADD_GRID_ITEM, method = arrayOf(RequestMethod.POST))
   fun addGridItem(@RequestBody request: RequestAddGridItem): ResponseEntity<DefaultResponseBody<*, *>> {
     appObjService.addReferenceGridItem(request.gridId, request.parentItemId, request.itemId)
-    return ApiUtils.makeResponse(REQUEST_UPDATE_EDIT_DATA, request, ResponseEmpty())
+    return ApiUtils.makeResponse(ResponseEmpty())
   }
 
   @RequestMapping(value = REQUEST_DELETE_ITEM, method = arrayOf(RequestMethod.POST))
   fun deleteItem(@RequestBody request: RequestDeleteItem): ResponseEntity<DefaultResponseBody<*, *>> {
     appObjService.deleteItem(request.gridId, request.itemId)
-    return ApiUtils.makeResponse(REQUEST_DELETE_ITEM, request, ResponseEmpty())
+    return ApiUtils.makeResponse(ResponseEmpty())
   }
 
   @RequestMapping(value = REQUEST_DELETE_ONE_TO_MANY_ITEM, method = arrayOf(RequestMethod.POST))
   fun deleteOneToManyItem(@RequestBody request: RequestDeleteManyToManyItem): ResponseEntity<DefaultResponseBody<*, *>> {
     appObjService.deleteOneToManyItem(request.gridId, request.parentItemId, request.itemId)
-    return ApiUtils.makeResponse(REQUEST_DELETE_ONE_TO_MANY_ITEM, request, ResponseEmpty())
+    return ApiUtils.makeResponse(ResponseEmpty())
   }
 
   @RequestMapping(value = REQUEST_GET_NAV, method = arrayOf(RequestMethod.GET))
-  fun getNav(@RequestBody request: RequestDeleteManyToManyItem): ResponseEntity<DefaultResponseBody<*, *>> {
+  fun getNav(): ResponseEntity<DefaultResponseBody<*, *>> {
     val appObjList = ArrayList<String>()
     for (appObj in App.getAppObjList()) {
       appObjList.add(appObj.name)
     }
-    return ApiUtils.makeResponse(REQUEST_GET_NAV, null, ResponseNav(appObjList))
+    return ApiUtils.makeResponse(ResponseNav(appObjList))
   }
 
   companion object {

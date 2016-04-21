@@ -24,9 +24,9 @@ public class DevApi {
   public ResponseEntity< DefaultResponseBody< ?, ? > > reloadAppObj() {
     try {
       parseService.loadApp();
-      return ApiUtils.makeResponse( REQUEST_RELOAD_APP, null, new ResponseEmpty() );
+      return ApiUtils.makeResponse( new ResponseEmpty() );
     } catch( Exception ex ) {
-      return ApiUtils.makeErrorResponse( REQUEST_RELOAD_APP, "Error reloading app", null, ex );
+      return ApiUtils.makeErrorResponse( "Error reloading app", ex );
     }
   }
 }

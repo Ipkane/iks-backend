@@ -7,10 +7,6 @@ import org.springframework.http.*;
 public class DefaultResponseBody< TRequest extends AbstractApiRequest, TResponse extends AbstractApiResponse > {
   private static final String VALUE_UNKNOWN = "unknown";
   @JsonIgnore
-  private String     apiEndpoint;
-  @JsonIgnore
-  private TRequest   request;
-  @JsonIgnore
   private TResponse  response;
   @JsonIgnore
   private HttpStatus status;
@@ -20,22 +16,14 @@ public class DefaultResponseBody< TRequest extends AbstractApiRequest, TResponse
   private AbstractApiResponse     error;
   @JsonIgnore
   private boolean success = true;
-  public DefaultResponseBody( String apiEndpoint, TRequest request, TResponse response ) {
-    this.apiEndpoint = apiEndpoint;
-    this.request = request;
+  public DefaultResponseBody( TResponse response ) {
     this.response = response;
   }
-  public DefaultResponseBody( String apiEndpoint, TRequest request, HttpStatus status, String message, AbstractApiResponse error ) {
+  public DefaultResponseBody( HttpStatus status, String message, AbstractApiResponse error ) {
     this.success = false;
-    this.apiEndpoint = apiEndpoint;
-    this.request = request;
     this.status = status;
     this.message = message;
     this.error = error;
-  }
-  @JsonProperty( "inResponseTo" )
-  public CInResponseTo inResponseTo() {
-    return new CInResponseTo( request, apiEndpoint );
   }
   @JsonProperty( "success" )
   public boolean isSuccess() {
@@ -44,26 +32,6 @@ public class DefaultResponseBody< TRequest extends AbstractApiRequest, TResponse
   @JsonProperty( "data" )
   public TResponse success() {
     return response;
-  }
-  @JsonProperty( "failure" )
-  public ErrorInfo failure() {
-    return isSuccess() ? null : new ErrorInfo( status, message, error );
-  }
-  @SuppressWarnings( "unused" )
-  private class CInResponseTo {
-    private TRequest request;
-    @JsonProperty( "method" )
-    private String   apiEndpoint;
-    CInResponseTo( TRequest request, String apiEndpoint ) {
-      this.request = request;
-      this.apiEndpoint = apiEndpoint;
-    }
-    public TRequest getRequest() {
-      return request;
-    }
-    public String getApiEndpoint() {
-      return apiEndpoint;
-    }
   }
 
   @SuppressWarnings( "unused" )
