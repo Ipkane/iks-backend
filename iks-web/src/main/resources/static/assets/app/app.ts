@@ -9,7 +9,7 @@ import {NavService} from "./nav.service";
     templateUrl: 'assets/app/app.html',
     //template: '<div><ng-content></ng-content></div>',
     providers: [HTTP_PROVIDERS, NavService],
-    //directives: [Panel, Tree, TreeNode],
+    directives: [Tree],
 })
 export class App implements OnInit {
     constructor(private _navService:NavService) {
@@ -18,9 +18,8 @@ export class App implements OnInit {
     navs:any[];
 
     ngOnInit() {
-        this._navService.getNavs().subscribe(navs=> {
+        this._navService.getNavs().then(navs=> {
             this.navs = navs;
-        }, error=> {
         });
     }
 }

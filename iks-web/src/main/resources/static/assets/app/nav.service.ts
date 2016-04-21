@@ -1,18 +1,27 @@
 import {Injectable} from 'angular2/core';
 import {Http, Response} from 'angular2/http';
-import {Observable}     from 'rxjs/Observable';
+import {Observable}     from 'rxjs/Rx';
+import {Tree} from 'primeng/primeng';
+import {TreeNode} from 'primeng/primeng';
 
 @Injectable()
 export class NavService {
     constructor(private http:Http) {
     }
 
-    private _navUrl = 'api/getNavs';  // URL to web api
+    private _navUrl = 'api/core/getNav';  // URL to web api
 
     getNavs():Observable<any[]> {
         return this.http.get(this._navUrl)
-            .map(this.extractData)
-            .catch(this.handleError);
+            .toPromise()
+            .then(res => <any[]> res.json().data.nav)
+            .then(nav=>{
+                var nodes = [];
+                for (var i in nav) {
+                    nodes.push({label:nav[i], data: nav[i]});
+                }
+                return nodes;
+            });
     }
 
     private extractData(res:Response) {
