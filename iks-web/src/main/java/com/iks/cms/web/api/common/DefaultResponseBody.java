@@ -37,11 +37,11 @@ public class DefaultResponseBody< TRequest extends AbstractApiRequest, TResponse
   public CInResponseTo inResponseTo() {
     return new CInResponseTo( request, apiEndpoint );
   }
-  @JsonProperty( "isSuccess" )
+  @JsonProperty( "success" )
   public boolean isSuccess() {
     return success;
   }
-  @JsonProperty( "success" )
+  @JsonProperty( "data" )
   public TResponse success() {
     return response;
   }

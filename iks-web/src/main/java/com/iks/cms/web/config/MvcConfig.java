@@ -68,6 +68,7 @@ public class MvcConfig extends WebMvcAutoConfiguration.WebMvcAutoConfigurationAd
   @Override
   public void addResourceHandlers(ResourceHandlerRegistry registry) {
     registry.addResourceHandler("/assets/**").addResourceLocations("classpath:/static/assets/");
+    registry.addResourceHandler("/node_modules/**").addResourceLocations("classpath:/static/node_modules/");
   }
 
   @Bean

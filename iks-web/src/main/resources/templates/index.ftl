@@ -1,7 +1,11 @@
 <#include './app/all-app.ftl'/>
 <html>
 <head>
+  <base href="/">
   <title>CMS</title>
+  <link rel="stylesheet" type="text/css" href="node_modules/primeui/themes/delta/theme.css"/>
+  <link rel="stylesheet" type="text/css" href="PATH/font-awesome.min.css"/>
+  <link rel="stylesheet" type="text/css" href="node_modules/primeui/primeui-ng-all.css"/>
 
   <link href="assets/css/gul.css" rel="stylesheet"/>
   <link href="assets/css/main.css" rel="stylesheet"/>
@@ -9,33 +13,6 @@
 </head>
 <body>
 <app></app>
-<div class="grid-frame vertical">
-  <div class="grid-block shrink">
-    <div class="dev-panel" ng-controller="DevPanelController">
-      <div ng-include="'assets/app/dev/dev-panel.html'"></div>
-    </div>
-  </div>
-  <div kendo-splitter k-orientation="'horizontal'"
-       k-panes="[{ collapsible: true, size: 200 },
-                { collapsible: false }]"
-       style="height: 100% !important">
-    <div class="grid-block" style="border-radius: 0">
-      <div class="grid-block k-content">
-        <ul kendo-tree-view>
-        <#list appObjList as appObj>
-          <li>
-            <a ui-sref="appObjListView({appObj:'${appObj.name}'})"
-                     ui-sref-active="k-state-selected">${appObj.label}</a>
-          </li>
-        </#list>
-        </ul>
-      </div>
-    </div>
-    <div class="grid-block">
-      <div class="grid-block vertical" ui-view="" style="border-radius: 0"></div>
-    </div>
-  </div>
-</div>
 <!-- libs -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <!-- 1. Load libraries -->
@@ -47,18 +24,28 @@
 <script src="https://code.angularjs.org/tools/typescript.js"></script>
 <script src="https://code.angularjs.org/2.0.0-beta.15/angular2-polyfills.js"></script>
 <script src="https://code.angularjs.org/2.0.0-beta.15/Rx.js"></script>
+<script src="assets/js/lib/lodash.js"></script>
 <script src="https://code.angularjs.org/2.0.0-beta.15/angular2.dev.js"></script>
-<script src="assets/js/lib/lodash.js?timestamp=@timestamp@"></script>
-
+<script src="node_modules/angular2/bundles/router.dev.js"></script>
+<script src="node_modules/angular2/bundles/http.dev.js"></script>
+<!-- JS for PrimeUI -->
+<script src="node_modules/primeui/primeui-ng-all.min.js"></script>
 <!-- 2. Configure SystemJS -->
 <script>
   System.config({
     transpiler: 'typescript',
-    typescriptOptions: { emitDecoratorMetadata: true },
-    packages: {'assets/app': {defaultExtension: 'ts',
-    }}
+    typescriptOptions: {emitDecoratorMetadata: true},
+    packages: {
+      'app': {defaultExtension: 'ts'},
+      'primeng': {defaultExtension: 'js'}
+    },
+    map: {
+//      "angular2": "node_modules/angular2",
+      "primeng": "node_modules/primeng",
+      "app": "assets/app"
+    }
   });
-  System.import('assets/app/main')
+  System.import('app/boot')
       .then(null, console.error.bind(console));
 </script>
 

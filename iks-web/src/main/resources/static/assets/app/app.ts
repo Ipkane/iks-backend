@@ -1,12 +1,26 @@
-//noinspection TypeScriptCheckImport
-import {Component} from 'angular2/core';
+import {Component,OnInit} from 'angular2/core';
+import { RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from 'angular2/router';
+import { HTTP_PROVIDERS } from 'angular2/http';
+import {Panel, Tree, TreeNode} from 'primeng/primeng';
+import {NavService} from "./nav.service";
+
 @Component({
-    // Declare the tag name in index.html to where the component attaches
     selector: 'app',
-    // Location of the template for this component
-    templateUrl: 'assets/app/hello_world.html'
+    templateUrl: 'assets/app/app.html',
+    //template: '<div><ng-content></ng-content></div>',
+    providers: [HTTP_PROVIDERS, NavService],
+    //directives: [Panel, Tree, TreeNode],
 })
-export class App {
-    // Declaring the variable for binding with initial value
-    yourName: string = '';
+export class App implements OnInit {
+    constructor(private _navService:NavService) {
+    }
+
+    navs:any[];
+
+    ngOnInit() {
+        this._navService.getNavs().subscribe(navs=> {
+            this.navs = navs;
+        }, error=> {
+        });
+    }
 }
